@@ -158,7 +158,7 @@
 		<NavMenu
 			conversations={data.conversations}
 			user={data.user}
-			canLogin={data.user === undefined && data.requiresLogin}
+			canLogin={true}
 			bind:loginModalVisible
 			on:shareConversation={(ev) => shareConversation(ev.detail.id, ev.detail.title)}
 			on:deleteConversation={(ev) => deleteConversation(ev.detail)}
@@ -170,7 +170,7 @@
 		<NavMenu
 			conversations={data.conversations}
 			user={data.user}
-			canLogin={data.user === undefined && data.requiresLogin}
+			canLogin={true}
 			bind:loginModalVisible
 			on:shareConversation={(ev) => shareConversation(ev.detail.id, ev.detail.title)}
 			on:deleteConversation={(ev) => deleteConversation(ev.detail)}
