@@ -34,9 +34,7 @@
 			</p>
 		{/if}
 		<p class="text-base text-gray-800">
-			Disclaimer: AI is an area of active research with known problems such as biased generation and
-			misinformation. Do not use this application for high-stakes decisions or advice.
-		</p>
+			Login using your Email and Password</p>
 		{#if PUBLIC_APP_DATA_SHARING}
 			<p class="px-2 text-sm text-gray-500">
 				Your conversations will be shared with model authors unless you disable it from your
