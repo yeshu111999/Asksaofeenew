@@ -68,7 +68,7 @@
 					type="submit"
 					class="mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500"
 				>
-					Start chatting
+					Login
 				</button>
 			{/if}
 		</form>
