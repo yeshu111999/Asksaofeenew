@@ -34,7 +34,11 @@
 			</p>
 		{/if}
 		<p class="text-base text-gray-800">
-			Login using your Email and Password</p>
+			<strong>Welcome</strong></p>
+			<label for="username">Username:
+		<input type="text" id="username" name="Email " /> </label>
+		<label for="Password">Password:
+		<input type="text" id="password" pass="password" /></label>
 		{#if PUBLIC_APP_DATA_SHARING}
 			<p class="px-2 text-sm text-gray-500">
 				Your conversations will be shared with model authors unless you disable it from your
