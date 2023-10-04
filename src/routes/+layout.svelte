@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from "svelte";
+	import { onDestroy, onMount } from "svelte";
 	import { goto, invalidate } from "$app/navigation";
 	import { page } from "$app/stores";
 	import "../styles/main.css";
@@ -9,6 +9,7 @@
 	import { shareConversation } from "$lib/shareConversation";
 	import { UrlDependency } from "$lib/types/UrlDependency";
 	import { error } from "$lib/stores/errors";
+	import Cookies from "js-cookie";
 
 	import MobileNav from "$lib/components/MobileNav.svelte";
 	import NavMenu from "$lib/components/NavMenu.svelte";
@@ -101,6 +102,13 @@
 			: !data.settings.ethicsModalAcceptedAt && !!PUBLIC_APP_DISCLAIMER);
 
 	let loginModalVisible = false;
+
+	onMount(() => {
+		let token = Cookies.get("token");
+		if (!token) {
+			loginModalVisible = true;
+		}
+	});
 </script>
 
 <svelte:head>
