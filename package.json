@@ -16,6 +16,7 @@
 	"devDependencies": {
 		"@iconify-json/carbon": "^1.1.16",
 		"@iconify-json/eos-icons": "^1.1.6",
+		"@smui/textfield": "^7.0.0-beta.15",
 		"@sveltejs/adapter-node": "^1.2.4",
 		"@sveltejs/kit": "^1.15.10",
 		"@tailwindcss/typography": "^0.5.9",
@@ -46,6 +47,7 @@
 		"@xenova/transformers": "^2.6.0",
 		"autoprefixer": "^10.4.14",
 		"aws4fetch": "^1.0.17",
+		"axios": "^1.5.1",
 		"date-fns": "^2.29.3",
 		"dotenv": "^16.0.3",
 		"handlebars": "^4.7.8",
