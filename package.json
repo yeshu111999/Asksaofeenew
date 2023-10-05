@@ -46,6 +46,8 @@
 	"dependencies": {
 		"@huggingface/hub": "^0.5.1",
 		"@huggingface/inference": "^2.2.0",
+		"@svelteuidev/composables": "^0.15.3",
+		"@svelteuidev/core": "^0.15.3",
 		"@xenova/transformers": "^2.6.0",
 		"autoprefixer": "^10.4.14",
 		"aws4fetch": "^1.0.17",

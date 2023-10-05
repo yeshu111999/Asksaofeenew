@@ -17,6 +17,7 @@
 	import SettingsModal from "$lib/components/SettingsModal.svelte";
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
+	import { SvelteUIProvider } from "@svelteuidev/core";
 
 	export let data;
 
@@ -199,5 +200,7 @@
 	{#if (requiresLogin && data.messagesBeforeLogin === 0) || loginModalVisible}
 		<LoginModal settings={data.settings} />
 	{/if}
-	<slot />
+	<SvelteUIProvider>
+		<slot />
+	</SvelteUIProvider>
 </div>
