@@ -64,6 +64,7 @@
 		"openid-client": "^5.4.2",
 		"parquetjs": "^0.11.2",
 		"postcss": "^8.4.21",
+		"radix-icons-svelte": "^1.2.1",
 		"serpapi": "^1.1.1",
 		"svelte-materialify": "^0.3.11",
 		"tailwind-scrollbar": "^3.0.0",

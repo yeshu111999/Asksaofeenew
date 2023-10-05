@@ -47,16 +47,28 @@
 		bind:this={backdropEl}
 		on:click={handleBackdropClick}
 		transition:fade={{ easing: cubicOut, duration: 300 }}
-		class="fixed inset-0 z-40 flex items-center justify-center bg-black/80 p-8 backdrop-blur-sm dark:bg-black/50"
+		class="scrollbar-hide fixed inset-0 z-40 flex items-center justify-center bg-black/80 p-8 backdrop-blur-sm dark:bg-black/50"
 	>
 		<div
 			role="dialog"
 			tabindex="-1"
 			bind:this={modalEl}
 			on:keydown={handleKeydown}
-			class="max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl outline-none sm:-mt-10 sm:max-h-screen {width}"
+			class="scrollbar-hide max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl outline-none sm:-mt-10 sm:max-h-screen {width}"
 		>
 			<slot />
 		</div>
 	</div>
 </Portal>
+
+<style>
+	.scrollbar-hide::-webkit-scrollbar {
+		width: 0 !important;
+	}
+	.scrollbar-hide {
+		overflow: -moz-scrollbars-none;
+	}
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+	}
+</style>

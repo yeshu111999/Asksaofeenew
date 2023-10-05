@@ -8,9 +8,9 @@
 	import type { LayoutData } from "../../routes/$types";
 	import Logo from "./icons/Logo.svelte";
 	export let settings: LayoutData["settings"];
-	// import Textfield from "@smui/textfield";
-	import { MaterialApp, TextField } from "svelte-materialify";
 	import Cookies from "js-cookie";
+	import { TextInput, Button, PasswordInput } from "@svelteuidev/core";
+	import { EnvelopeClosed } from "radix-icons-svelte";
 
 	const isIframe = browser && window.self !== window.parent;
 	let valueA = "";
@@ -28,6 +28,60 @@
 	let cnfPassword = "";
 	let firstName = "";
 	let lastName = "";
+
+	let firstDigit = "";
+	let secondDigit = "";
+	let thirdDigit = "";
+	let fourthDigit = "";
+	let fifthDigit = "";
+	let sixthDigit = "";
+
+	let currentDigit = 0;
+	let timer = 60;
+	let isTimerRunning = false;
+	let inputs: any;
+	let showOtpInputs = false;
+
+	let OTPVerified = false;
+
+	function startTimer() {
+		if (!isTimerRunning) {
+			isTimerRunning = true;
+			const countdown = setInterval(() => {
+				timer -= 1;
+				if (timer === 0) {
+					clearInterval(countdown);
+					isTimerRunning = false;
+				}
+			}, 1000);
+		}
+	}
+
+	function OTPInput() {
+		inputs = document.querySelectorAll("#otp > *[id]");
+		console.log("testing", inputs);
+		for (let i = 0; i < inputs.length; i++) {
+			inputs[i].addEventListener("keydown", function (event: any) {
+				if (event.key === "Backspace") {
+					inputs[i].value = "";
+					if (i !== 0) inputs[i - 1].focus();
+				} else {
+					if (i === inputs.length - 1 && inputs[i].value !== "") {
+						return true;
+					} else if (event.keyCode > 47 && event.keyCode < 58) {
+						inputs[i].value = event.key;
+						if (i !== inputs.length - 1) inputs[i + 1].focus();
+						event.preventDefault();
+					} else if (event.keyCode > 64 && event.keyCode < 91) {
+						inputs[i].value = String.fromCharCode(event.keyCode);
+						if (i !== inputs.length - 1) inputs[i + 1].focus();
+						event.preventDefault();
+					}
+				}
+			});
+		}
+	}
+
 	$: isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(emailId);
 
 	// Computed property to check mobile number validity
@@ -38,13 +92,14 @@
 		!emailId ||
 		!isEmailValid ||
 		!isMobileValid ||
-		!mobileNumber ||
+		!emailId ||
 		!password ||
 		!cnfPassword ||
 		!firstName ||
 		!lastName ||
 		!passwordsMatch;
-
+	$: isOTPVerifyEnabled =
+		!OTPVerified && emailId && mobileNumber && isMobileValid && isEmailValid && showOtpInputs;
 	async function Login() {
 		try {
 			isLoading = true; // Set loading flag while making the API call
@@ -79,21 +134,27 @@
 				body: JSON.stringify(loginData),
 			})
 				.then(async (response) => {
-					let data = await response.json();
-					Cookies.set("token", data.token);
-					window.location.href = "/";
+					console.log("response", response);
+					if (response.status == 200) {
+						let data = await response.json();
+						Cookies.set("token", data.token);
+						window.location.href = "/";
+					} else if (response.status === 401) {
+						loginError = true;
+						password = "";
+					}
 				})
 				.catch((error) => {
-					console.log("error.response", error.response.status == 401);
-					if (error.response.status == 401) {
-						loginError = true;
-					}
-					responseData = `Error: ${error.message}`;
-					isLoading = false;
+					console.log("error.response1", error);
+					// if (error.response.status == 401) {
+					// 	loginError = true;
+					// }
+					// responseData = `Error: ${error.message}`;
+					// isLoading = false;
 				});
 		} catch (error: any) {
 			// Handle any network or other errors;
-			console.log("error.response", error.response.status == 401);
+			console.log("error.response", error);
 			if (error.response.status == 401) {
 				loginError = true;
 			}
@@ -165,6 +226,16 @@
 			isLoading = false; // Reset loading flag whether the request succeeds or fails
 		}
 	}
+
+	function sendOtp() {
+		showOtpInputs = true;
+		startTimer();
+		setTimeout(() => {
+			OTPInput();
+		}, 1000);
+	}
+
+	function resendOtp() {}
 </script>
 
 <Modal>
@@ -192,7 +263,7 @@
 			<strong>Welcome</strong>
 		</p>
 		{#if !showSignUp}
-			<div class="columns margins">
+			<div class="columns margins text-left">
 				<div>
 					<!-- <TextField
 						variant="outlined"
@@ -202,7 +273,7 @@
 						label="Email"
 						required
 					/> -->
-					<TextField bind:value={emailId} outlined>Email</TextField>
+					<TextInput bind:value={emailId} label="Email" placeholder="Your email" />
 				</div>
 				{#if emailId && !isEmailValid}
 					<p class="error">Enter a valid Email Id</p>
@@ -217,112 +288,135 @@
 						label="Password"
 						required
 					/> -->
-					<TextField bind:value={password} type="password" outlined>Password</TextField>
+					<PasswordInput
+						bind:value={password}
+						type="password"
+						label="Password"
+						placeholder="Password"
+					/>
 				</div>
-				<button
-					type="submit"
-					class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isLoginBtnDisabled
-						? 'disabled'
-						: ''}"
-					on:click={Login}
-					disabled={isLoginBtnDisabled}
-				>
-					{isLoading ? "Loading..." : "Login"}
-				</button>
+				<div class="login-button">
+					<!-- <button
+						type="submit"
+						class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isLoginBtnDisabled
+							? 'disabled'
+							: ''}"
+						on:click={Login}
+						disabled={isLoginBtnDisabled}
+					>
+						{isLoading ? "Loading..." : "Login"}
+					</button> -->
+					<Button
+						bind:loading={isLoading}
+						color="#3b82f6"
+						on:click={Login}
+						disabled={isLoginBtnDisabled}
+						ripple>Login</Button
+					>
+				</div>
 				<div class="signin-text">
 					<p class="no-account-text">Don't have an account?</p>
 					<button class="signup-text" on:click={toggleSignup}>Sign up</button>
 				</div>
 			</div>
 		{:else}
-			<div class="columns margins">
+			<div class="columns margins text-left">
 				<div>
-					<!-- <Textfield
-						variant="outlined"
-						bind:value={emailId}
-						id="username"
-						name="Email "
-						label="Email"
-						required
-					/> -->
-					<TextField bind:value={emailId} outlined>Email</TextField>
+					<TextInput bind:value={emailId} label="Email" placeholder="Email" />
 				</div>
 				{#if emailId && !isEmailValid}
 					<p class="error">Enter a valid Email Id</p>
 				{/if}
-				<div>
-					<!-- <Textfield
-						variant="outlined"
-						bind:value={mobileNumber}
-						id="mobilenumber"
-						name="mobilenumber"
-						label="Mobile Number"
-						required
-					/> -->
-					<TextField bind:value={mobileNumber} outlined>Mobile Number</TextField>
+				<div class="sendOTP">
+					<TextInput bind:value={mobileNumber} label="Mobile Number" placeholder="Mobile Number" />
+					{#if mobileNumber && !isMobileValid}
+						<p class="error">Enter a valid mobile number</p>
+					{/if}
+					<Button size="xs" color="#3b82f6" on:click={sendOtp}>send OTP</Button>
 				</div>
-				{#if mobileNumber && !isMobileValid}
-					<p class="error">Enter a valid mobile number</p>
+				{#if showOtpInputs}
+					<div class="otp-body">
+						<p class="enter-otp-small">Enter OTP</p>
+						<div id="otp" class="inputs">
+							<input bind:value={firstDigit} class="rounded" type="text" id="first" maxlength="1" />
+							<input
+								bind:value={secondDigit}
+								class="rounded"
+								type="text"
+								id="second"
+								maxlength="1"
+							/>
+							<input bind:value={thirdDigit} class="rounded" type="text" id="third" maxlength="1" />
+							<input
+								bind:value={fourthDigit}
+								class="rounded"
+								type="text"
+								id="fourth"
+								maxlength="1"
+							/>
+							<input bind:value={fifthDigit} class="rounded" type="text" id="fifth" maxlength="1" />
+							<input bind:value={sixthDigit} class="rounded" type="text" id="sixth" maxlength="1" />
+						</div>
+						{#if isTimerRunning}
+							<p class="timer-text">
+								Resend OTP in <span class="gold-text">{timer} s</span>
+							</p>
+						{/if}
+						<!-- <button
+						type="submit"
+						disabled={isSubmitButtonDisabled}
+						on:click={validateOtp}
+						class="verify-btn {isSubmitButtonDisabled ? 'disabled' : ''}"
+						>Verify & Create Account</button
+					> -->
+					</div>
 				{/if}
-				<div>
-					<!-- <Textfield
-						variant="outlined"
-						bind:value={firstName}
-						id="first-name"
-						name="firstName"
-						label="First Name"
-						required
-					/> -->
-					<TextField bind:value={firstName} outlined>First Name</TextField>
-				</div>
-				<div>
-					<!-- <Textfield
-						variant="outlined"
-						bind:value={lastName}
-						id="last-name"
-						name="lastName"
-						label="Last Name"
-						required
-					/> -->
-					<TextField bind:value={lastName} outlined>Last Name</TextField>
-				</div>
-				<div>
-					<!-- <Textfield
-						variant="outlined"
-						type="password"
-						bind:value={password}
-						id="password"
-						name="Password"
-						label="Password"
-						required
-					/> -->
-					<TextField bind:value={password} type="password" outlined>Password</TextField>
-				</div>
-				<div>
-					<!-- <Textfield
-						variant="outlined"
-						type="password"
-						bind:value={cnfPassword}
-						id="cnf-password"
-						name="Password"
-						label="Confirm Password"
-						required
-					/> -->
-					<TextField bind:value={cnfPassword} type="password" outlined>Confirm Password</TextField>
-				</div>
-				{#if password && cnfPassword && !passwordsMatch}
-					<p class="error">Passwords do not match</p>
+				{#if OTPVerified}
+					<div>
+						<TextInput bind:value={firstName} label="First Name" placeholder="First Name" />
+					</div>
+					<div>
+						<TextInput bind:value={lastName} label="Last Name" placeholder="Last Name" />
+					</div>
+					<div>
+						<PasswordInput
+							bind:value={password}
+							type="password"
+							label="Password"
+							placeholder="Password"
+						/>
+					</div>
+					<div>
+						<TextInput
+							bind:value={cnfPassword}
+							type="password"
+							label="Confirm Password"
+							placeholder="Confirm Password"
+						/>
+					</div>
+					{#if password && cnfPassword && !passwordsMatch}
+						<p class="error">Passwords do not match</p>
+					{/if}
 				{/if}
-				<button
-					type="submit"
-					class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isSignupBtnDisabled
-						? 'disabled'
-						: ''}"
-					on:click={handleSignUp}
-					disabled={isSignupBtnDisabled}
-				>
-					{isLoading ? "Loading..." : "Sign up"}
-				</button>
+				<div class="login-button">
+					<!-- <button
+						type="submit"
+						class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isSignupBtnDisabled
+							? 'disabled'
+							: ''}"
+						on:click={handleSignUp}
+						disabled={isSignupBtnDisabled}
+					>
+						{isLoading ? "Loading..." : "Sign up"}
+					</button> -->
+					<Button
+						bind:loading={isLoading}
+						color="#3b82f6"
+						on:click={handleSignUp}
+						disabled={OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled}
+						ripple>{OTPVerified ? "Sign up" : "Verify"}</Button
+					>
+				</div>
 				<div class="signin-text">
 					<p class="no-account-text">Already have an account?</p>
 					<button on:click={toggleLogin} class="signup-text">Login</button>
@@ -397,5 +491,38 @@
 
 	.login-popup {
 		min-width: 400px;
+	}
+	.login-button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 16px;
+	}
+	.otp-body {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	#otp {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	#otp .rounded {
+		width: 50px;
+		height: 50px;
+		border: 2px solid #ccc;
+		/* border-radius: 50%; */
+		font-size: 16px;
+		text-align: center;
+		outline: none;
+		padding: 0;
+	}
+	.sendOTP {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 	}
 </style>
