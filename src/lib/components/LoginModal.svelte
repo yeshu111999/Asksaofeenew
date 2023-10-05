@@ -42,7 +42,7 @@
 	let inputs: any;
 	let showOtpInputs = false;
 
-	let OTPVerified = false;
+	let OTPVerified = true;
 
 	function startTimer() {
 		if (!isTimerRunning) {
