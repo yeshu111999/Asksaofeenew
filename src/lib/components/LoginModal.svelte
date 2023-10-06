@@ -159,7 +159,7 @@
 			await fetch("https://backend.immigpt.net/login", {
 				method: "POST",
 				headers: {
-					"Content-Type": "application/json",
+					"Content-Type": "application/json"
 				},
 				body: JSON.stringify(loginData),
 			})
@@ -168,6 +168,9 @@
 					if (response.status == 200) {
 						let data = await response.json();
 						Cookies.set("token", data.token);
+						let payload = parseJwt(data.token);
+						Cookies.set("name", payload.username);
+						Cookies.set("email", payload.email);
 						window.location.href = "/";
 					} else if (response.status === 401) {
 						loginError = true;
@@ -565,11 +568,11 @@
 							<p class="error">{signUpError}</p>
 						</div>
 					{/if}
-					<div class="signin-text">
-						<p class="no-account-text">Already have an account?</p>
-						<button on:click={toggleLogin} class="signup-text">Login</button>
-					</div>
 				{/if}
+				<div class="signin-text">
+					<p class="no-account-text">Already have an account?</p>
+					<button on:click={toggleLogin} class="signup-text">Login</button>
+				</div>
 			</div>
 		{/if}
 		{#if loginError}

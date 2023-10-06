@@ -1,7 +1,8 @@
 <!-- src/routes/Profile.svelte -->
 <script>
 	import { Card, TextInput, Button, PasswordInput } from "@svelteuidev/core";
-
+	import Cookies from "js-cookie";
+	import { onMount } from "svelte";
 	let editing = false;
 	let oldValues = []; // Store the original values
 	let fields = [
@@ -10,9 +11,27 @@
 		{ name: "Mobile", value: "123-456-7890" },
 		{ name: "Password", value: "hello" },
 	];
+	let name = "";
+	let oldName = "";
+	let oldPassword = "";
+	let newPassword = "";
+	let confirmPassword = "";
+	let mobileNumber = "+91 7095240734";
+	let email = "";
+	let token = "";
+	let saveChangesLoader = false;
 
+	$: isDisableUpdate =
+		oldName != name ||
+		(oldPassword && newPassword && confirmPassword && newPassword == confirmPassword);
 	let profileImageUrl = "https://picsum.photos/200/300";
 
+	onMount(() => {
+		name = Cookies.get("name");
+		email = Cookies.get("email");
+		token = Cookies.get("token");
+		oldName = name;
+	});
 	function toggleEditing() {
 		editing = !editing;
 
@@ -22,8 +41,60 @@
 		}
 	}
 
-	function saveChanges() {
-		editing = false;
+	async function saveChanges() {
+		saveChangesLoader = true;
+		if (oldName != name) {
+			let updateNameReq = {
+				email: email,
+				username: name,
+			};
+			await fetch("https://backend.immigpt.net/updateUserProfile", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify(updateNameReq),
+			})
+				.then(async (response) => {
+					console.log("response", response);
+					if (response.status == 200) {
+						Cookies.set("name", name);
+						oldName = name;
+						saveChangesLoader = false;
+						editing = false;
+					}
+				})
+				.catch((error) => {
+					console.log("error.response1", error);
+				});
+		} else {
+			let updatePasswordReq = {
+				newPassword: newPassword,
+				oldPassword: oldPassword,
+			};
+			await fetch("https://backend.immigpt.net/updatePassword", {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify(updatePasswordReq),
+			})
+				.then(async (response) => {
+					console.log("response", response);
+					if (response.status == 200) {
+						oldPassword = "";
+						newPassword = "";
+						confirmPassword = "";
+						saveChangesLoader = false;
+						editing = false;
+					}
+				})
+				.catch((error) => {
+					console.log("error.response1", error);
+				});
+		}
 	}
 </script>
 
@@ -40,27 +111,35 @@
 								<PasswordInput
 									type="text"
 									placeholder="Old Password"
-									bind:value={field.value}
+									bind:value={oldPassword}
 									id="oldPassword"
 								/>
 								<PasswordInput
 									type="text"
 									placeholder="New Password"
-									bind:value={field.value}
+									bind:value={newPassword}
 									id="newPassword"
 								/>
 								<PasswordInput
 									type="text"
 									placeholder="Confirm Password"
-									bind:value={field.value}
+									bind:value={confirmPassword}
 									id="confirmPassword"
 								/>
+							</div>
+						{:else if field.name === "Email"}
+							<div>
+								<span>{email}</span>
+							</div>
+						{:else if field.name === "Mobile"}
+							<div>
+								<span>{mobileNumber}</span>
 							</div>
 						{:else}
 							<TextInput
 								placeholder={field.name}
 								type="text"
-								bind:value={field.value}
+								bind:value={name}
 								id={field.name.toLowerCase()}
 							/>
 						{/if}
@@ -68,28 +147,32 @@
 				{/each}
 				<div class="button-container">
 					<Button
-						variant="gradient"
+						loading={saveChangesLoader}
+						color="#3b82f6"
 						gradient={{ from: "grape", to: "pink", deg: 35 }}
-						on:click={saveChanges}>Save Changes</Button
+						on:click={saveChanges}
+						disabled={!isDisableUpdate}>Save Changes</Button
 					>
 				</div>
 			{:else}
 				<div class="profile-image-container">
 					<img src={profileImageUrl} alt="Profile" class="profile-image" />
 				</div>
-				{#each fields as field (field.name)}
-					<div>
-						<label>{field.name}:</label>
-						{#if field.name == "Password"}
-							<span>******</span>
-						{:else}
-							<span>{field.value}</span>
-						{/if}
-					</div>
-				{/each}
+				<div>
+					<p class="title">Name:</p>
+					<span>{name}</span>
+				</div>
+				<div>
+					<p class="title">Email:</p>
+					<span>{email}</span>
+				</div>
+				<div>
+					<p class="title">Mobile Number:</p>
+					<span>{mobileNumber}</span>
+				</div>
 				<div class="button-container">
 					<Button
-						variant="gradient"
+						color="#3b82f6"
 						gradient={{ from: "grape", to: "pink", deg: 35 }}
 						on:click={toggleEditing}>Update Profile</Button
 					>
@@ -104,7 +187,7 @@
 		width: 100%;
 		padding: 5%;
 		border-radius: 6px;
-		background-color: #2e5984;
+		background-color: rgb(31 41 55 / 0.3);
 	}
 
 	.card-body {
