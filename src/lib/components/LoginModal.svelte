@@ -9,8 +9,8 @@
 	import Logo from "./icons/Logo.svelte";
 	export let settings: LayoutData["settings"];
 	import Cookies from "js-cookie";
-	import { TextInput, Button, PasswordInput } from "@svelteuidev/core";
-	import { EnvelopeClosed } from "radix-icons-svelte";
+	import { TextInput, Button, PasswordInput, NativeSelect } from "@svelteuidev/core";
+	import { EnvelopeClosed, ChevronDown } from "radix-icons-svelte";
 
 	const isIframe = browser && window.self !== window.parent;
 	let valueA = "";
@@ -41,12 +41,22 @@
 	let isTimerRunning = false;
 	let inputs: any;
 	let showOtpInputs = false;
+	let hideSendOtpBtn = false;
+	let showVerifyOtpBtn = false;
+	let countryCode = "";
 
 	let OTPVerified = false;
+	let countryCodes = ["+1", "+91", "+5", "+12"];
+	$: isSentOtpBtnDisabled = !emailId || !isEmailValid || !mobileNumber || !isMobileValid;
+
+	let showSignupError = false;
+	let signUpError = "";
 
 	function startTimer() {
 		if (!isTimerRunning) {
+			hideSendOtpBtn = true;
 			isTimerRunning = true;
+			showVerifyOtpBtn = true;
 			const countdown = setInterval(() => {
 				timer -= 1;
 				if (timer === 0) {
@@ -111,6 +121,15 @@
 		!passwordsMatch;
 	$: isOTPVerifyEnabled =
 		!OTPVerified && emailId && mobileNumber && isMobileValid && isEmailValid && showOtpInputs;
+
+	$: isVerifyOtpBtnDisabled =
+		!inputs ||
+		!inputs[0].value ||
+		!inputs[1].value ||
+		!inputs[2].value ||
+		!inputs[3].value ||
+		!inputs[4].value ||
+		!inputs[5].value;
 	async function Login() {
 		try {
 			isLoading = true; // Set loading flag while making the API call
@@ -177,6 +196,15 @@
 
 	function toggleSignup() {
 		showSignUp = true;
+		timer = 60;
+		isTimerRunning = false;
+		showOtpInputs = false;
+		hideSendOtpBtn = false;
+		showVerifyOtpBtn = false;
+
+		OTPVerified = false;
+		emailId = "";
+		mobileNumber = "";
 	}
 
 	function toggleLogin() {
@@ -211,19 +239,24 @@
 				body: JSON.stringify(signUpData),
 			})
 				.then(async (response) => {
-					let data = await response.json();
-					Cookies.set("token", data.token);
-					let payload = parseJwt(data.token);
-					Cookies.set("name", payload.username);
-					Cookies.set("email", payload.email);
-					window.location.href = "/";
+					if (response.status == 200) {
+						let data = await response.json();
+						Cookies.set("token", data.token);
+						let payload = parseJwt(data.token);
+						Cookies.set("name", payload.username);
+						Cookies.set("email", payload.email);
+						window.location.href = "/";
+					} else {
+						showSignupError = true;
+						signUpError = response ? response.message : "Unable to sign up..";
+					}
 				})
 				.catch((error) => {
 					console.log("error.response", error.response.status == 401);
-					if (error.response.status == 401) {
-						loginError = true;
+					if (error.response.status == 400 || error.response.status == 401) {
+						showSignupError = true;
+						signUpError = error.message;
 					}
-					responseData = `Error: ${error.message}`;
 					isLoading = false;
 				});
 		} catch (error: any) {
@@ -238,15 +271,76 @@
 		}
 	}
 
-	function sendOtp() {
-		showOtpInputs = true;
-		startTimer();
-		setTimeout(() => {
-			OTPInput();
-		}, 1000);
+	async function sendOtp() {
+		try {
+			let otpData = {
+				phoneNumber: countryCode + mobileNumber,
+			};
+			await fetch("https://backend.immigpt.net/generateOTP", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(otpData),
+			})
+				.then(async (response) => {
+					if (response.status == 200) {
+						showOtpInputs = true;
+						startTimer();
+						setTimeout(() => {
+							OTPInput();
+						}, 1000);
+					} else {
+						console.log("error", response);
+					}
+				})
+				.catch((error) => {
+					console.log("error.response", error.response.status == 401);
+				});
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
-	function resendOtp() {}
+	function resendOtp() {
+		sendOtp();
+		timer = 60;
+		startTimer();
+	}
+
+	async function verifyOtp() {
+		try {
+			let otpData = {
+				phoneNumber: countryCode + mobileNumber,
+				otp:
+					inputs[0].value +
+					inputs[1].value +
+					inputs[2].value +
+					inputs[3].value +
+					inputs[4].value +
+					inputs[5].value,
+			};
+			await fetch("https://backend.immigpt.net/verifyOTP", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(otpData),
+			})
+				.then(async (response) => {
+					if (response.status == 200) {
+						OTPVerified = true;
+					} else {
+						console.log("error", response);
+					}
+				})
+				.catch((error) => {
+					console.log("error.response", error.response.status == 401);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	}
 </script>
 
 <Modal>
@@ -331,21 +425,51 @@
 				</div>
 			</div>
 		{:else}
-			<div class="columns margins text-left">
+			<div class="container-2 columns margins text-left">
 				<div>
-					<TextInput bind:value={emailId} label="Email" placeholder="Email" />
+					<TextInput
+						bind:value={emailId}
+						disabled={showOtpInputs || OTPVerified}
+						label="Email"
+						placeholder="Email"
+					/>
 				</div>
 				{#if emailId && !isEmailValid}
 					<p class="error">Enter a valid Email Id</p>
 				{/if}
 				<div class="sendOTP">
-					<TextInput bind:value={mobileNumber} label="Mobile Number" placeholder="Mobile Number" />
+					<p>Mobile Number</p>
+					<div class="mobile-number-section">
+						<NativeSelect
+							bind:value={countryCode}
+							data={countryCodes}
+							disabled={showOtpInputs || OTPVerified}
+						>
+							<svelte:component this={ChevronDown} slot="rightSection" />
+						</NativeSelect>
+						<TextInput
+							bind:value={mobileNumber}
+							placeholder="Mobile Number"
+							disabled={showOtpInputs || OTPVerified}
+						/>
+					</div>
+
 					{#if mobileNumber && !isMobileValid}
 						<p class="error">Enter a valid mobile number</p>
 					{/if}
-					<Button size="xs" color="#3b82f6" on:click={sendOtp}>send OTP</Button>
+					{#if !hideSendOtpBtn}
+						<div class="login-button">
+							<Button
+								size="xs"
+								disabled={isSentOtpBtnDisabled}
+								ripple
+								color="#3b82f6"
+								on:click={sendOtp}>Send OTP</Button
+							>
+						</div>
+					{/if}
 				</div>
-				{#if showOtpInputs}
+				{#if showOtpInputs && !OTPVerified}
 					<div class="otp-body">
 						<p class="enter-otp-small">Enter OTP</p>
 						<div id="otp" class="inputs">
@@ -369,17 +493,26 @@
 							<input bind:value={sixthDigit} class="rounded" type="text" id="sixth" maxlength="1" />
 						</div>
 						{#if isTimerRunning}
+							<div class="login-button">
+								<Button
+									ripple
+									size="xs"
+									disabled={isVerifyOtpBtnDisabled}
+									color="#3b82f6"
+									on:click={verifyOtp}>Verify OTP</Button
+								>
+							</div>
+						{/if}
+						{#if isTimerRunning}
 							<p class="timer-text">
 								Resend OTP in <span class="gold-text">{timer} s</span>
 							</p>
 						{/if}
-						<!-- <button
-						type="submit"
-						disabled={isSubmitButtonDisabled}
-						on:click={validateOtp}
-						class="verify-btn {isSubmitButtonDisabled ? 'disabled' : ''}"
-						>Verify & Create Account</button
-					> -->
+						{#if !isTimerRunning}
+							<div class="login-button">
+								<Button size="xs" color="#3b82f6" on:click={resendOtp}>Resend OTP</Button>
+							</div>
+						{/if}
 					</div>
 				{/if}
 				{#if OTPVerified}
@@ -408,30 +541,35 @@
 					{#if password && cnfPassword && !passwordsMatch}
 						<p class="error">Passwords do not match</p>
 					{/if}
+					<div class="login-button">
+						<!-- <button
+							type="submit"
+							class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isSignupBtnDisabled
+								? 'disabled'
+								: ''}"
+							on:click={handleSignUp}
+							disabled={isSignupBtnDisabled}
+						>
+							{isLoading ? "Loading..." : "Sign up"}
+						</button> -->
+						<Button
+							bind:loading={isLoading}
+							color="#3b82f6"
+							on:click={handleSignUp}
+							disabled={OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled}
+							ripple>{OTPVerified ? "Sign up" : "Verify"}</Button
+						>
+					</div>
+					{#if showSignupError}
+						<div class="signup-error">
+							<p class="error">{signUpError}</p>
+						</div>
+					{/if}
+					<div class="signin-text">
+						<p class="no-account-text">Already have an account?</p>
+						<button on:click={toggleLogin} class="signup-text">Login</button>
+					</div>
 				{/if}
-				<div class="login-button">
-					<!-- <button
-						type="submit"
-						class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isSignupBtnDisabled
-							? 'disabled'
-							: ''}"
-						on:click={handleSignUp}
-						disabled={isSignupBtnDisabled}
-					>
-						{isLoading ? "Loading..." : "Sign up"}
-					</button> -->
-					<Button
-						bind:loading={isLoading}
-						color="#3b82f6"
-						on:click={handleSignUp}
-						disabled={OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled}
-						ripple>{OTPVerified ? "Sign up" : "Verify"}</Button
-					>
-				</div>
-				<div class="signin-text">
-					<p class="no-account-text">Already have an account?</p>
-					<button on:click={toggleLogin} class="signup-text">Login</button>
-				</div>
 			</div>
 		{/if}
 		{#if loginError}
@@ -535,5 +673,16 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.mobile-number-section {
+		display: flex;
+		gap: 8px;
+	}
+
+	.container-2 {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
 	}
 </style>
