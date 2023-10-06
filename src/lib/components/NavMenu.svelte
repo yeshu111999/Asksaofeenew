@@ -65,7 +65,7 @@
 			</button>
 		</form>
 	{/if}
-	{#if canLogin}
+	<!-- {#if canLogin}
 		<button
 			on:click={() => (loginModalVisible = true)}
 			type="button"
@@ -73,7 +73,7 @@
 		>
 			Login
 		</button>
-	{/if}
+	{/if} -->
 	<button
 		on:click={switchTheme}
 		type="button"

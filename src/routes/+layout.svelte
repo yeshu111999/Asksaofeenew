@@ -107,7 +107,7 @@
 	onMount(() => {
 		let token = Cookies.get("token");
 		if (!token) {
-			loginModalVisible = true;
+			loginModalVisible = false;
 		}
 	});
 </script>
