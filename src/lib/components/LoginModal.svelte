@@ -42,7 +42,7 @@
 	let inputs: any;
 	let showOtpInputs = false;
 
-	let OTPVerified = true;
+	let OTPVerified = false;
 
 	function startTimer() {
 		if (!isTimerRunning) {
@@ -61,18 +61,29 @@
 		inputs = document.querySelectorAll("#otp > *[id]");
 		console.log("testing", inputs);
 		for (let i = 0; i < inputs.length; i++) {
+			console.log("index", i, inputs[i].value);
 			inputs[i].addEventListener("keydown", function (event: any) {
 				if (event.key === "Backspace") {
+					console.log("backspace");
+
 					inputs[i].value = "";
 					if (i !== 0) inputs[i - 1].focus();
 				} else {
+					console.log("key", event.keyCode);
 					if (i === inputs.length - 1 && inputs[i].value !== "") {
+						console.log("a");
+
 						return true;
-					} else if (event.keyCode > 47 && event.keyCode < 58) {
+					} else if (
+						(event.keyCode > 47 && event.keyCode < 58) ||
+						(event.keyCode > 95 && event.keyCode < 106)
+					) {
+						console.log("b");
 						inputs[i].value = event.key;
 						if (i !== inputs.length - 1) inputs[i + 1].focus();
 						event.preventDefault();
 					} else if (event.keyCode > 64 && event.keyCode < 91) {
+						console.log("c");
 						inputs[i].value = String.fromCharCode(event.keyCode);
 						if (i !== inputs.length - 1) inputs[i + 1].focus();
 						event.preventDefault();
