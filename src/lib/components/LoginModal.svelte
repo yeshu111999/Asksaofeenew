@@ -11,14 +11,14 @@
 	import Cookies from "js-cookie";
 	import { TextInput, Button, PasswordInput, NativeSelect } from "@svelteuidev/core";
 	import { EnvelopeClosed, ChevronDown } from "radix-icons-svelte";
-	import { AES } from "crypto-js";
+	//import { AES } from "crypto-js";
 
 	const isIframe = browser && window.self !== window.parent;
 	let valueA = "";
 	let valueB = "";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import { onMount } from "svelte";
+	import { afterUpdate, onMount } from "svelte";
 	let responseData = ""; // Store the response data here
 	let isLoading = false;
 	let loginError = false;
@@ -48,7 +48,6 @@
 	let countryCode = "";
 
 	let googleLoginBtn;
-	let encryptionKey = import.meta.env.VITE_APP_ENCRYPTION_KEY;
 	let clientId = "885560999939-uv51l6cgtbt9t7063r7bahmf74hem9e3.apps.googleusercontent.com";
 
 	let OTPVerified = false;
@@ -165,6 +164,19 @@
 		window.location.href = "/";
 	}
 
+	function onSignIn(googleUser) {
+		let profile = googleUser.getBasicProfile();
+		let fullName = profile.getName();
+		let email = profile.getEmail();
+		let imageUrl = profile.getImageUrl();
+		Cookies.set("token", profile);
+		Cookies.set("email", email);
+		Cookies.set("name", fullName);
+		Cookies.set("imageUrl", imageUrl);
+		console.log("email id", email);
+		window.location.href = "/";
+	}
+
 	async function Login() {
 		try {
 			isLoading = true; // Set loading flag while making the API call
@@ -247,6 +259,7 @@
 
 	function toggleLogin() {
 		showSignUp = false;
+		renderSignInButton();
 	}
 
 	function parseJwt(token: any) {
@@ -380,7 +393,7 @@
 		}
 	}
 
-	onMount(() => {
+	afterUpdate(() => {
 		renderSignInButton();
 	});
 </script>
@@ -460,9 +473,6 @@
 						disabled={isLoginBtnDisabled}
 						ripple>Login</Button
 					>
-				</div>
-				<div class="google-button">
-					<div bind:this={googleLoginBtn} />
 				</div>
 				<div class="signin-text">
 					<p class="no-account-text">Don't have an account?</p>
@@ -615,6 +625,12 @@
 					<p class="no-account-text">Already have an account?</p>
 					<button on:click={toggleLogin} class="signup-text">Login</button>
 				</div>
+			</div>
+		{/if}
+		{#if !showSignUp}
+			<div class="google-button">
+				<div bind:this={googleLoginBtn} />
+				<!-- <div class="g-signin2" data-onsuccess={onSignIn} data-onfailure="onSignInFailure" /> -->
 			</div>
 		{/if}
 		{#if loginError}
