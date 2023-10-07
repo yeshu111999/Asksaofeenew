@@ -20,6 +20,7 @@
 	let email = "";
 	let token = "";
 	let saveChangesLoader = false;
+	let initial = "";
 
 	$: isDisableUpdate =
 		oldName != name ||
@@ -31,6 +32,7 @@
 		email = Cookies.get("email");
 		token = Cookies.get("token");
 		oldName = name;
+		initial = oldName[0];
 	});
 	function toggleEditing() {
 		editing = !editing;
@@ -39,6 +41,10 @@
 		if (editing) {
 			oldValues = fields.map((field) => ({ ...field }));
 		}
+	}
+
+	function closeProfile() {
+		window.location.href = "/";
 	}
 
 	async function saveChanges() {
@@ -101,6 +107,11 @@
 <main class="container">
 	<div class="card">
 		<p class="title">Profile</p>
+		<div class="close">
+			<button class="close-btn" on:click={closeProfile}
+				><img src="/chatui/close-icon.png" alt="close" /></button
+			>
+		</div>
 		<div class="card-body">
 			{#if editing}
 				{#each fields as field, index (field.name)}
@@ -156,7 +167,10 @@
 				</div>
 			{:else}
 				<div class="profile-image-container">
-					<img src={profileImageUrl} alt="Profile" class="profile-image" />
+					<!-- <img src={profileImageUrl} alt="Profile" class="profile-image" /> -->
+					<div class="profile-image">
+						<span class="initial">{initial}</span>
+					</div>
 				</div>
 				<div>
 					<p class="title">Name:</p>
@@ -188,6 +202,7 @@
 		padding: 5%;
 		border-radius: 6px;
 		background-color: rgb(31 41 55 / 0.3);
+		position: relative;
 	}
 
 	.card-body {
@@ -229,12 +244,12 @@
 		justify-content: center;
 	}
 
-	.profile-image {
+	/* .profile-image {
 		width: 150px;
 		height: 150px;
 		border-radius: 50%;
 		object-fit: cover;
-	}
+	} */
 
 	.profile-image-container {
 		display: flex;
@@ -245,5 +260,28 @@
 	.title {
 		font-size: 18px;
 		font-weight: bold;
+	}
+
+	.profile-image {
+		width: 150px;
+		height: 150px;
+		background-color: #3498db; /* Background color for the image */
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 48px;
+		color: #ffffff; /* Text color */
+	}
+
+	.close {
+		position: absolute;
+		right: 25px;
+		top: 25px;
+	}
+
+	.close-btn {
+		width: 20px;
+		height: 20px;
 	}
 </style>

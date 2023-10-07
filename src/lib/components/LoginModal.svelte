@@ -255,6 +255,7 @@
 		OTPVerified = false;
 		emailId = "";
 		mobileNumber = "";
+		renderSignInButton();
 	}
 
 	function toggleLogin() {
@@ -393,7 +394,7 @@
 		}
 	}
 
-	afterUpdate(() => {
+	onMount(() => {
 		renderSignInButton();
 	});
 </script>
@@ -627,12 +628,12 @@
 				</div>
 			</div>
 		{/if}
-		{#if !showSignUp}
-			<div class="google-button">
-				<div bind:this={googleLoginBtn} />
-				<!-- <div class="g-signin2" data-onsuccess={onSignIn} data-onfailure="onSignInFailure" /> -->
-			</div>
-		{/if}
+		<!-- {#if !showSignUp} -->
+		<div class="google-button">
+			<div bind:this={googleLoginBtn} />
+			<!-- <div class="g-signin2" data-onsuccess={onSignIn} data-onfailure="onSignInFailure" /> -->
+		</div>
+		<!-- {/if} -->
 		{#if loginError}
 			<p class="error">Failed while logging in</p>
 			<!-- Display the error message in red -->
