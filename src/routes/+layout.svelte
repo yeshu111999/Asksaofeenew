@@ -25,6 +25,7 @@
 	let isSettingsOpen = false;
 	let errorToastTimeout: ReturnType<typeof setTimeout>;
 	let currentError: string | null;
+	let canLogin = true;
 
 	async function onError() {
 		// If a new different error comes, wait for the current error to hide first
@@ -109,6 +110,9 @@
 		if (!token) {
 			loginModalVisible = true;
 		}
+		if (token) {
+			canLogin = false;
+		}
 	});
 </script>
 
@@ -167,7 +171,7 @@
 		<NavMenu
 			conversations={data.conversations}
 			user={data.user}
-			canLogin={true}
+			{canLogin}
 			bind:loginModalVisible
 			on:shareConversation={(ev) => shareConversation(ev.detail.id, ev.detail.title)}
 			on:deleteConversation={(ev) => deleteConversation(ev.detail)}
@@ -179,7 +183,7 @@
 		<NavMenu
 			conversations={data.conversations}
 			user={data.user}
-			canLogin={true}
+			{canLogin}
 			bind:loginModalVisible
 			on:shareConversation={(ev) => shareConversation(ev.detail.id, ev.detail.title)}
 			on:deleteConversation={(ev) => deleteConversation(ev.detail)}

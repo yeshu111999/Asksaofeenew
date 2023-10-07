@@ -11,12 +11,14 @@
 	import Cookies from "js-cookie";
 	import { TextInput, Button, PasswordInput, NativeSelect } from "@svelteuidev/core";
 	import { EnvelopeClosed, ChevronDown } from "radix-icons-svelte";
+	import { AES } from "crypto-js";
 
 	const isIframe = browser && window.self !== window.parent;
 	let valueA = "";
 	let valueB = "";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 	let responseData = ""; // Store the response data here
 	let isLoading = false;
 	let loginError = false;
@@ -44,6 +46,10 @@
 	let hideSendOtpBtn = false;
 	let showVerifyOtpBtn = false;
 	let countryCode = "";
+
+	let googleLoginBtn;
+	let encryptionKey = import.meta.env.VITE_APP_ENCRYPTION_KEY;
+	let clientId = "885560999939-uv51l6cgtbt9t7063r7bahmf74hem9e3.apps.googleusercontent.com";
 
 	let OTPVerified = false;
 	let countryCodes = ["+1", "+91", "+5", "+12"];
@@ -130,6 +136,35 @@
 		!inputs[3].value ||
 		!inputs[4].value ||
 		!inputs[5].value;
+
+	function renderSignInButton() {
+		window.google.accounts.id.initialize({
+			client_id: clientId,
+			callback: onGoogleAuthSuccess,
+			prompt: "select_by",
+			scope: "email",
+		});
+		window.google.accounts.id.renderButton(googleLoginBtn, {
+			text: "signin",
+			shape: "square",
+			size: "large",
+			width: 300,
+			theme: "white",
+		});
+
+		window.google.accounts.id.prompt();
+	}
+
+	async function onGoogleAuthSuccess(jwtCredentials) {
+		const profileData = JSON.parse(atob(jwtCredentials.credential.split(".")[1]));
+		var idToken = jwtCredentials.credential;
+		Cookies.set("token", idToken);
+		Cookies.set("email", profileData.email);
+		Cookies.set("name", profileData.name);
+		console.log("email id", profileData.email);
+		window.location.href = "/";
+	}
+
 	async function Login() {
 		try {
 			isLoading = true; // Set loading flag while making the API call
@@ -159,7 +194,7 @@
 			await fetch("https://backend.immigpt.net/login", {
 				method: "POST",
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
 				body: JSON.stringify(loginData),
 			})
@@ -344,6 +379,10 @@
 			console.log(error);
 		}
 	}
+
+	onMount(() => {
+		renderSignInButton();
+	});
 </script>
 
 <Modal>
@@ -421,6 +460,9 @@
 						disabled={isLoginBtnDisabled}
 						ripple>Login</Button
 					>
+				</div>
+				<div class="google-button">
+					<div bind:this={googleLoginBtn} />
 				</div>
 				<div class="signin-text">
 					<p class="no-account-text">Don't have an account?</p>
