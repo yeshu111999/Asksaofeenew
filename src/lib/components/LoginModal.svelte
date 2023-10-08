@@ -45,13 +45,14 @@
 	let showOtpInputs = false;
 	let hideSendOtpBtn = false;
 	let showVerifyOtpBtn = false;
-	let countryCode = "";
-
+	
 	let googleLoginBtn;
 	let clientId = "885560999939-uv51l6cgtbt9t7063r7bahmf74hem9e3.apps.googleusercontent.com";
 
 	let OTPVerified = false;
 	let countryCodes = ["+1", "+91", "+5", "+12"];
+	let countryCode = countryCodes[0];
+
 	$: isSentOtpBtnDisabled = !emailId || !isEmailValid || !mobileNumber || !isMobileValid;
 
 	let showSignupError = false;
@@ -218,6 +219,7 @@
 						let payload = parseJwt(data.token);
 						Cookies.set("name", payload.username);
 						Cookies.set("email", payload.email);
+						Cookies.set("phoneNumber", payload.phoneNumber);
 						window.location.href = "/";
 					} else if (response.status === 401) {
 						loginError = true;
@@ -268,6 +270,7 @@
 		// var payload = Buffer.from(base64Payload, 'base64');
 		// return JSON.parse(payload.toString());
 		var payload = JSON.parse(atob(base64Payload));
+		console.log(payload);
 		return payload;
 	}
 
@@ -281,7 +284,7 @@
 				firstName: firstName,
 				lastName: lastName,
 				username: firstName + " " + lastName,
-				phoneNumber: mobileNumber,
+				phoneNumber: countryCode + mobileNumber,
 			};
 			await fetch("https://backend.immigpt.net/signup", {
 				method: "POST",
@@ -297,6 +300,7 @@
 						let payload = parseJwt(data.token);
 						Cookies.set("name", payload.username);
 						Cookies.set("email", payload.email);
+						Cookies.set("phoneNumber", payload.phoneNumber);
 						window.location.href = "/";
 					} else {
 						showSignupError = true;

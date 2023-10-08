@@ -126,8 +126,7 @@
 					target="_blank"
 					rel="noreferrer"
 					class="hover:underline">{currentModel.displayName}</a
-				> <span class="max-sm:hidden">·</span><br class="sm:hidden" /> Generated content may be inaccurate
-				or false.
+				> <span class="max-sm:hidden">·</span><br class="sm:hidden" /> Generated content should be evaluated for accuracy and content when used legally.
 			</p>
 			{#if messages.length}
 				<button

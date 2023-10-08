@@ -16,7 +16,7 @@
 	let oldPassword = "";
 	let newPassword = "";
 	let confirmPassword = "";
-	let mobileNumber = "+91 7095240734";
+	let mobileNumber = "";
 	let email = "";
 	let token = "";
 	let saveChangesLoader = false;
@@ -28,9 +28,12 @@
 	let profileImageUrl = "https://picsum.photos/200/300";
 
 	onMount(() => {
+		
 		name = Cookies.get("name");
 		email = Cookies.get("email");
 		token = Cookies.get("token");
+		console.log(token);
+		mobileNumber = Cookies.get("phoneNumber");
 		oldName = name;
 		initial = oldName[0];
 	});
