@@ -1,24 +1,45 @@
 <script>
 	import { createEventDispatcher } from "svelte";
+	let dispatch = createEventDispatcher();
 	export let cardData;
+
+	function chatSelected() {
+		dispatch("chatSelected", cardData);
+	}
 </script>
 
-<div class="container">
+<div class="container" on:click={chatSelected}>
 	<div class="person">
-		<img src={cardData.imageUrl} alt="" />
-		<span class="name">{cardData.name}</span>
-		<span class="time">{cardData.time}</span>
-		<span class="preview">{cardData.chat}</span>
+		{#if cardData.imageUrl}
+			<img src={cardData.imageUrl} alt="" />
+		{:else}
+			<div class="profile-image">
+				<span class="initial">{cardData.userName[0].toUpperCase()}</span>
+			</div>
+		{/if}
+		<div class="name-and-chat">
+			<span class="name">{cardData.userName}</span>
+			<!-- <span class="preview">{cardData.chat}</span> -->
+		</div>
+
+		<!-- <span class="time">{cardData.time}</span> -->
 	</div>
 </div>
 
 <style>
+	.container {
+		padding: 0px 12px;
+	}
 	.person {
 		position: relative;
 		width: 100%;
-		padding: 12px 10% 16px;
 		cursor: pointer;
-		background-color: white;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid white;
+		/* padding-bottom: 10px; */
+		padding: 10px 0;
+		gap: 8px;
 	}
 
 	img {
@@ -32,7 +53,6 @@
 	.name {
 		font-size: 14px;
 		line-height: 22px;
-		color: black;
 	}
 	.time {
 		font-size: 14px;
@@ -51,5 +71,22 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		color: var(--grey);
+	}
+
+	.name-and-chat {
+		/* display: flex;
+		flex-direction: column;
+		color: grey; */
+	}
+	.profile-image {
+		width: 30px;
+		height: 30px;
+		background-color: #3498db; /* Background color for the image */
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 18px;
+		color: #ffffff; /* Text color */
 	}
 </style>
