@@ -29,6 +29,10 @@
 		goto("/profile");
 	}
 
+	function gotoChats() {
+		goto("/chats");
+	}
+
 	function logOut() {
 		var cookiesToRemove = ["token", "name", "email"];
 
@@ -44,6 +48,7 @@
 		<Logo classNames="mr-1" />
 		{PUBLIC_APP_NAME}
 	</a>
+	<button class="chat-btn" on:click={gotoChats}><img src="/chatui/chat-icon.svg" alt="" /></button>
 	<a
 		href={`${base}/`}
 		class="flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700"
@@ -137,3 +142,10 @@
 		</a>
 	{/if}
 </div>
+
+<style>
+	.chat-btn {
+		width: 24px;
+		height: 24px;
+	}
+</style>

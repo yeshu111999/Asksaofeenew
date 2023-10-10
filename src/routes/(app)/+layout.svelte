@@ -2,7 +2,7 @@
 	import { onDestroy, onMount } from "svelte";
 	import { goto, invalidate } from "$app/navigation";
 	import { page } from "$app/stores";
-	import "../styles/main.css";
+	import "../../styles/main.css";
 	import { base } from "$app/paths";
 	import { PUBLIC_ORIGIN, PUBLIC_APP_DISCLAIMER } from "$env/static/public";
 
@@ -161,9 +161,9 @@
 </svelte:head>
 
 <div
-	class="grid h-full w-screen grid-cols-1 grid-rows-[auto,1fr] overflow-hidden text-smd dark:text-gray-300 "
+	class="grid h-full w-screen grid-cols-1 grid-rows-[auto,1fr] overflow-hidden text-smd dark:text-gray-300 md:grid-cols-[280px,1fr] md:grid-rows-[1fr]"
 >
-	<!-- <MobileNav
+	<MobileNav
 		isOpen={isNavOpen}
 		on:toggle={(ev) => (isNavOpen = ev.detail)}
 		title={data.conversations.find((conv) => conv.id === $page.params.id)?.title}
@@ -203,7 +203,7 @@
 	{/if}
 	{#if (requiresLogin && data.messagesBeforeLogin === 0) || loginModalVisible}
 		<LoginModal settings={data.settings} />
-	{/if} -->
+	{/if}
 	<SvelteUIProvider>
 		<slot />
 	</SvelteUIProvider>

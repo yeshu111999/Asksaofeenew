@@ -9,9 +9,13 @@
 	import CarbonSendAltFilled from "~icons/carbon/send-alt-filled";
 	import CarbonStopFilledAlt from "~icons/carbon/stop-filled-alt";
 	import EosIconsLoading from "~icons/eos-icons/loading";
+	import Logo from "$lib/components/icons/Logo.svelte";
+	import { goto } from "$app/navigation";
 
 	let searchInput = "";
 	let chatSection;
+
+	$: selected = selectedChat;
 
 	$: {
 		if (chatSection) {
@@ -232,6 +236,8 @@
 		userId = Cookies.get("email");
 		let token = Cookies.get("token");
 
+		console.log(userId, token);
+
 		await fetch("https://backend.immigpt.net/users/myContacts?length=100", {
 			method: "GET",
 			headers: {
@@ -252,6 +258,10 @@
 			});
 	});
 
+	function gotoHomePage() {
+		goto("/");
+	}
+
 	afterUpdate(() => {
 		if (chatSection) {
 			chatSection.scrollTop = chatSection.scrollHeight;
@@ -262,48 +272,58 @@
 <div class="wrapper">
 	<div class="container">
 		<div class="left-container">
-			<p class="title">Messages</p>
-			<Input
-				icon={MagnifyingGlass}
-				placeholder="Search friends"
-				rightSectionWidth={70}
-				styles={{ rightSection: { pointerEvents: "none" } }}
-				bind:value={searchInput}
-			/>
+			<div class="chat-top">
+				<p class="title">Messages</p>
+				<button class="logo-btn" on:click={gotoHomePage}>
+					<Logo classNames="mr-1" />
+				</button>
+			</div>
+			<div class="search-input">
+				<Input
+					icon={MagnifyingGlass}
+					placeholder="Search friends"
+					rightSectionWidth={70}
+					styles={{ rightSection: { pointerEvents: "none" } }}
+					bind:value={searchInput}
+				/>
+			</div>
 			<div class="list-of-friends">
 				{#each friendCards as friendCard}
-					<ChatCard on:chatSelected={onChatSelected} cardData={friendCard} />
+					<div class="chat-card {selected.emailId == friendCard.emailId ? 'active-chat' : ''}">
+						<ChatCard on:chatSelected={onChatSelected} cardData={friendCard} />
+					</div>
 				{/each}
 			</div>
 		</div>
 		<div class="right-container">
-			{#if selectedChat}
-				<div class="top">
-					{#if selectedChat.imageUrl}
-						<img class="chat-img" src={selectedChat.imageUrl} alt="" />
-					{:else}
-						<div class="profile-image">
-							<span class="initial">{selectedChat.userName[0].toUpperCase()}</span>
+			<div class="right-wrapper">
+				{#if selectedChat}
+					<div class="top">
+						{#if selectedChat.imageUrl}
+							<img class="chat-img" src={selectedChat.imageUrl} alt="" />
+						{:else}
+							<div class="profile-image">
+								<span class="initial">{selectedChat.userName[0].toUpperCase()}</span>
+							</div>
+						{/if}
+						<div class="name-and-chat">
+							<span class="name">{selectedChat.userName}</span>
+							<!-- <span class="preview">{cardData.chat}</span> -->
 						</div>
-					{/if}
-					<div class="name-and-chat">
-						<span class="name">{selectedChat.userName}</span>
-						<!-- <span class="preview">{cardData.chat}</span> -->
 					</div>
-				</div>
-				<div class="chat-section" bind:this={chatSection}>
-					{#each chats as chat}
-						<span class="bubble {chat.sender == userId ? 'me' : 'you'}">{chat.message}</span>
-					{/each}
-				</div>
-				<div class="chat-wrapper">
-					<form
-						on:submit|preventDefault={sendMsg}
-						class="relative flex w-full max-w-4xl flex-1 items-center rounded-xl border bg-gray-100 focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
+					<div class="chat-section" bind:this={chatSection}>
+						{#each chats as chat}
+							<span class="bubble {chat.sender == userId ? 'me' : 'you'}">{chat.message}</span>
+						{/each}
+					</div>
+					<div class="chat-wrapper">
+						<form
+							on:submit|preventDefault={sendMsg}
+							class="relative flex w-full max-w-4xl flex-1 items-center rounded-xl border bg-gray-100 focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
 			{isReadOnly ? 'opacity-30' : ''}"
-					>
-						<div class="flex w-full flex-1 border-none bg-transparent">
-							<!-- <Input
+						>
+							<div class="flex w-full flex-1 border-none bg-transparent">
+								<!-- <Input
 						class="chat-msg"
 						variant="default"
 						bind:value={chatMsg}
@@ -312,61 +332,75 @@
 					<button on:click={sendMsg}
 						><img class="icon" src="/chatui/send-msg-icon.svg" alt="" /></button
 					> -->
-							<ChatInput
-								placeholder="Type your message"
-								bind:value={chatMsg}
-								on:submit={sendMsg}
-								maxRows={4}
-								disabled={isReadOnly}
-							/>
-							{#if loading}
-								<button
-									class="btn mx-1 my-1 inline-block h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:hidden"
-								>
-									<CarbonStopFilledAlt />
-								</button>
-								<div
-									class="mx-1 my-1 hidden h-[2.4rem] items-center p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:flex"
-								>
-									<EosIconsLoading />
-								</div>
-							{:else}
-								<button
-									class="btn mx-1 my-1 h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100"
-									disabled={!chatMsg || isReadOnly}
-									type="submit"
-								>
-									<CarbonSendAltFilled />
-								</button>
-							{/if}
-						</div>
-					</form>
-				</div>
-			{/if}
+								<ChatInput
+									placeholder="Type your message"
+									bind:value={chatMsg}
+									on:submit={sendMsg}
+									maxRows={4}
+									disabled={isReadOnly}
+								/>
+								{#if loading}
+									<button
+										class="btn mx-1 my-1 inline-block h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:hidden"
+									>
+										<CarbonStopFilledAlt />
+									</button>
+									<div
+										class="mx-1 my-1 hidden h-[2.4rem] items-center p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:flex"
+									>
+										<EosIconsLoading />
+									</div>
+								{:else}
+									<button
+										class="btn mx-1 my-1 h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100"
+										disabled={!chatMsg || isReadOnly}
+										type="submit"
+									>
+										<CarbonSendAltFilled />
+									</button>
+								{/if}
+							</div>
+						</form>
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 </div>
 
 <style>
-	/* .wrapper {
-		padding: 20px;
-	} */
+	.wrapper {
+		padding: 35px 100px;
+		max-height: 100vh;
+	}
 
 	.container {
 		display: flex;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		min-height: 85vh;
+	}
+
+	.title {
+		font-size: 22px;
+	}
+
+	.chat-card.active-chat {
+		background-color: #5e7278;
+		border-radius: 8px;
 	}
 
 	.left-container {
-		padding: 20px;
-		border: 1px solid;
+		/* padding: 20px; */
+		/* border-right: 1px solid #e5e7eb; */
+		box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
 	}
 
 	.left-container {
-		padding: 20px;
+		/* padding: 20px; */
 		gap: 15px;
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
+		/* height: 100vh; */
 
 		width: 350px;
 	}
@@ -376,25 +410,40 @@
 		position: relative;
 	}
 
+	.chat-top {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px;
+	}
+
+	.search-input {
+		padding: 0 20px;
+	}
+
+	.logo-btn {
+		border: none;
+		background: none;
+	}
+
 	.top {
 		width: 100%;
 		/* height: 47px; */
 		padding: 15px 29px;
-		background-color: #eceff1;
+		/* border-bottom: 1px solid #e5e7eb; */
+		box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.15);
 		display: flex;
 		align-items: center;
 		gap: 8px;
 	}
 
 	.top span {
-		font-size: 15px;
+		font-size: 18px;
 		color: grey;
 	}
 
 	.chat-section {
-		padding: 20px;
-		padding: 20px;
-		height: 80vh;
+		padding: 20px 50px;
+		height: 75vh;
 		overflow-y: auto;
 	}
 
@@ -409,7 +458,7 @@
 	}
 
 	.bubble {
-		font-size: 16px;
+		font-size: 18px;
 		position: relative;
 		display: inline-block;
 		clear: both;
@@ -430,7 +479,7 @@
 	}
 	.bubble.you {
 		float: left;
-		color: var(--white);
+		color: white;
 		background-color: #3b82f6;
 		align-self: flex-start;
 		-webkit-animation-name: slideFromLeft;
@@ -443,18 +492,23 @@
 	.bubble.me {
 		float: right;
 		color: black;
-		background-color: #eceff1;
+		background-color: #e5e7eb;
 		align-self: flex-end;
 		-webkit-animation-name: slideFromRight;
 		animation-name: slideFromRight;
 	}
 	.bubble.me:before {
 		right: -3px;
-		background-color: #eceff1;
+		background-color: #e5e7eb;
 	}
 
 	.chat-wrapper {
-		padding: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 70px;
+		/* border-top: 1px solid #e5e7eb; */
+		box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.15);
 	}
 
 	.chat-img {

@@ -28,7 +28,7 @@
 
 <style>
 	.container {
-		padding: 0px 12px;
+		padding: 5px 20px;
 	}
 	.person {
 		position: relative;
@@ -36,7 +36,7 @@
 		cursor: pointer;
 		display: flex;
 		align-items: center;
-		border-bottom: 1px solid white;
+		/* border-bottom: 1px solid white; */
 		/* padding-bottom: 10px; */
 		padding: 10px 0;
 		gap: 8px;
@@ -51,7 +51,7 @@
 		object-fit: cover;
 	}
 	.name {
-		font-size: 14px;
+		font-size: 18px;
 		line-height: 22px;
 	}
 	.time {
