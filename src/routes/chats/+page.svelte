@@ -11,6 +11,7 @@
 	import EosIconsLoading from "~icons/eos-icons/loading";
 	import Logo from "$lib/components/icons/Logo.svelte";
 	import { goto } from "$app/navigation";
+	import { Tooltip } from "@svelteuidev/core";
 
 	let searchInput = "";
 	let chatSection;
@@ -274,9 +275,11 @@
 		<div class="left-container">
 			<div class="chat-top">
 				<p class="title">Messages</p>
-				<button class="logo-btn" on:click={gotoHomePage}>
-					<Logo classNames="mr-1" />
-				</button>
+				<Tooltip withArrow transitionDuration={200} label="ImmiGPT" position="bottom">
+					<button class="logo-btn" on:click={gotoHomePage}>
+						<Logo classNames="mr-1" />
+					</button>
+				</Tooltip>
 			</div>
 			<div class="search-input">
 				<Input
@@ -285,6 +288,9 @@
 					rightSectionWidth={70}
 					styles={{ rightSection: { pointerEvents: "none" } }}
 					bind:value={searchInput}
+					size="lg"
+					className="search-box"
+					style="background-color:#343a40;border:none;border-radius:8px;"
 				/>
 			</div>
 			<div class="list-of-friends">
@@ -372,12 +378,16 @@
 	.wrapper {
 		padding: 35px 100px;
 		max-height: 100vh;
+		background-color: #343a40;
 	}
 
 	.container {
 		display: flex;
 		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 		min-height: 85vh;
+		--tw-bg-opacity: 1;
+		background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+		border-radius: 8px;
 	}
 
 	.title {
@@ -385,7 +395,7 @@
 	}
 
 	.chat-card.active-chat {
-		background-color: #5e7278;
+		background-color: #343a40;
 		border-radius: 8px;
 	}
 
@@ -509,6 +519,7 @@
 		height: 70px;
 		/* border-top: 1px solid #e5e7eb; */
 		box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.15);
+		padding: 12px;
 	}
 
 	.chat-img {
@@ -543,5 +554,9 @@
 
 	.top .initial {
 		color: white;
+	}
+	.search-box {
+		background-color: #343a40 !important;
+		border: none !important;
 	}
 </style>

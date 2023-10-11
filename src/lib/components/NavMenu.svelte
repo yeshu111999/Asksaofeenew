@@ -8,6 +8,7 @@
 	import NavConversationItem from "./NavConversationItem.svelte";
 	import type { LayoutData } from "../../routes/$types";
 	import { goto } from "$app/navigation";
+	import { Tooltip } from "@svelteuidev/core";
 
 	const dispatch = createEventDispatcher<{
 		shareConversation: { id: string; title: string };
@@ -48,7 +49,11 @@
 		<Logo classNames="mr-1" />
 		{PUBLIC_APP_NAME}
 	</a>
-	<button class="chat-btn" on:click={gotoChats}><img src="/chatui/chat-icon.svg" alt="" /></button>
+
+	<Tooltip withArrow transitionDuration={200} label="Messages">
+		<button class="chat-btn" on:click={gotoChats}><img src="/chatui/chat-icon.svg" alt="" /></button
+		>
+	</Tooltip>
 	<a
 		href={`${base}/`}
 		class="flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700"
