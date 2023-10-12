@@ -1,4 +1,5 @@
 <script>
+	import { base } from "$app/paths";
 	import { Input } from "@svelteuidev/core";
 	import { MagnifyingGlass } from "radix-icons-svelte";
 	import ChatCard from "$lib/components/ChatCard.svelte";
@@ -14,11 +15,13 @@
 	import { Tooltip } from "@svelteuidev/core";
 	import { ActionIcon } from "@svelteuidev/core";
 	import { PlusCircled } from "radix-icons-svelte";
-	import { SvelteUIProvider, Modal } from "@svelteuidev/core";
+	import { SvelteUIProvider, Modal, Button, Loader } from "@svelteuidev/core";
+	import { Checkbox } from "@svelteuidev/core";
 
 	let searchInput = "";
 	let chatSection;
-	let openSearchFriends = true;
+	let openSearchFriends = false;
+	let searchFriendsInput = "";
 
 	$: selected = selectedChat;
 
@@ -34,12 +37,16 @@
 	let chatMsg = "";
 	let chats = [];
 	let userId;
+	let searchResults;
 
 	let isReadOnly = false;
 	let loading = false;
 	let themeVariable = localStorage.getItem("theme");
 
 	let activeClassVariable = "active-chat";
+	let addFriendsLoading = false;
+	let noMatches = false;
+	let token;
 
 	async function sendMsg() {
 		loading = true;
@@ -98,159 +105,9 @@
 		selectedChat = event.detail;
 		console.log("selected chat", selectedChat);
 		getMessages(selectedChat);
-		// chats = [
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1694027587109",
-		// 		message: "Hello",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1694027611765",
-		// 		message: "Tell me",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1694027689736",
-		// 		message: "ooh god!",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1694027702710",
-		// 		message: "Nice",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1694027709481",
-		// 		message: "No No",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1694027718251",
-		// 		message: "okay",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1694027731365",
-		// 		message: "Don't worry!",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695320218394",
-		// 		message: "Hello",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695320229067",
-		// 		message: "Tell me",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695571472614",
-		// 		message: "Hii",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695745561750",
-		// 		message: "Hello",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695752587679",
-		// 		message: "Namasthe",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695752659425",
-		// 		message: "Tell me your name?",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695752942850",
-		// 		message: "ok",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695753086195",
-		// 		message: "you are rocking!",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695753124109",
-		// 		message: "Excellent work?",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695753238038",
-		// 		message: "Nice Job Bro",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695753285757",
-		// 		message: "Nie",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695753293472",
-		// 		message: "Hello man",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695753301447",
-		// 		message: "No way ?",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695753315786",
-		// 		message: "Hello man",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "murugeshraja2000@gmail.com",
-		// 		createdAt: "1695753358696",
-		// 		message: "hi",
-		// 		recipient: "tamatammadan@gmail.com",
-		// 	},
-		// 	{
-		// 		sender: "tamatammadan@gmail.com",
-		// 		createdAt: "1695753366373",
-		// 		message: "New",
-		// 		recipient: "murugeshraja2000@gmail.com",
-		// 	},
-		// ];
 	}
 
-	onMount(async () => {
-		console.log("check", localStorage.getItem("theme"));
-		userId = Cookies.get("email");
-		let token = Cookies.get("token");
-
-		themeVariable == "light"
-			? (activeClassVariable = "active-chat-light")
-			: (activeClassVariable = "active-chat");
-
-		console.log(userId, token);
-
+	async function getContacts() {
 		await fetch("https://backend.immigpt.net/users/myContacts?length=100", {
 			method: "GET",
 			headers: {
@@ -269,10 +126,97 @@
 			.catch((error) => {
 				console.log("error", error);
 			});
+	}
+
+	onMount(async () => {
+		console.log("check", localStorage.getItem("theme"));
+		userId = Cookies.get("email");
+		token = Cookies.get("token");
+
+		themeVariable == "light"
+			? (activeClassVariable = "active-chat-light")
+			: (activeClassVariable = "active-chat");
+
+		console.log(userId, token);
+		getContacts();
 	});
+
+	async function searchFriends(event) {
+		if (event.key === "Enter") {
+			if (searchFriendsInput != "") {
+				console.log("search friends", searchFriendsInput);
+				await fetch(
+					`https://backend.immigpt.net/users/searchUsers?searchValue=${searchFriendsInput}&length=10`,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				)
+					.then(async (response) => {
+						if (response.status == 200) {
+							let data = await response.json();
+							searchResults = data.users;
+							noMatches = false;
+						} else {
+							console.log("error", response);
+							noMatches = true;
+						}
+					})
+					.catch((error) => {
+						console.log("error", error);
+						noMatches = true;
+					});
+			}
+		}
+	}
 
 	function gotoHomePage() {
 		goto("/");
+	}
+
+	let selectedItems = [];
+
+	function toggleSelection(item) {
+		if (selectedItems.includes(item)) {
+			selectedItems = selectedItems.filter((selected) => selected !== item);
+		} else {
+			selectedItems = [...selectedItems, item];
+		}
+	}
+
+	async function addFriends() {
+		addFriendsLoading = true;
+		console.log("add member!! clicked");
+		let usersData = selectedItems.map((item) => item.id);
+		let users = {
+			users: usersData,
+		};
+
+		await fetch(`https://backend.immigpt.net/users/sendFriendRequest`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(users),
+		})
+			.then(async (response) => {
+				if (response.status == 200) {
+					console.log("Friend requests have been sent");
+					openSearchFriends = false;
+					getContacts();
+				} else {
+					console.log("error", response);
+				}
+				addFriendsLoading = false;
+			})
+			.catch((error) => {
+				console.log("error", error);
+				addFriendsLoading = false;
+			});
 	}
 
 	afterUpdate(() => {
@@ -281,7 +225,11 @@
 		}
 	});
 	async function openSearchFriendsModal() {
-		openSearchFriends = true;
+		openSearchFriends = !openSearchFriends;
+		searchResults = [];
+		selectedItems = [];
+		addFriendsLoading = false;
+		searchFriendsInput = "";
 		console.log("reached", openSearchFriends);
 	}
 </script>
@@ -305,7 +253,7 @@
 			<div class="search-input">
 				<Input
 					icon={MagnifyingGlass}
-					placeholder="Search friends"
+					placeholder="Search Chats"
 					rightSectionWidth={70}
 					styles={{ rightSection: { pointerEvents: "none" } }}
 					bind:value={searchInput}
@@ -328,74 +276,134 @@
 			</div>
 		</div>
 		<div class="right-container">
-			<div class="right-wrapper">
-				{#if selectedChat}
-					<div class="top">
-						{#if selectedChat.imageUrl}
-							<img class="chat-img" src={selectedChat.imageUrl} alt="" />
-						{:else}
-							<div class="profile-image">
-								<span class="initial">{selectedChat.userName[0].toUpperCase()}</span>
+			{#if !openSearchFriends}
+				<div class="right-wrapper">
+					{#if selectedChat}
+						<div class="top">
+							{#if selectedChat.imageUrl}
+								<img class="chat-img" src={selectedChat.imageUrl} alt="" />
+							{:else}
+								<div class="profile-image">
+									<span class="initial">{selectedChat.userName[0].toUpperCase()}</span>
+								</div>
+							{/if}
+							<div class="name-and-chat">
+								<span class="name">{selectedChat.userName}</span>
+								<!-- <span class="preview">{cardData.chat}</span> -->
 							</div>
-						{/if}
-						<div class="name-and-chat">
-							<span class="name">{selectedChat.userName}</span>
-							<!-- <span class="preview">{cardData.chat}</span> -->
 						</div>
-					</div>
-					<div class="chat-section" bind:this={chatSection}>
-						{#each chats as chat}
-							<span class="bubble {chat.sender == userId ? 'me' : 'you'}">{chat.message}</span>
-						{/each}
-					</div>
-					<div class="chat-wrapper">
-						<form
-							on:submit|preventDefault={sendMsg}
-							class="relative flex w-full max-w-4xl flex-1 items-center rounded-xl border bg-gray-100 focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
-			{isReadOnly ? 'opacity-30' : ''}"
-						>
-							<div class="flex w-full flex-1 border-none bg-transparent">
-								<!-- <Input
-						class="chat-msg"
-						variant="default"
-						bind:value={chatMsg}
-						placeholder="Enter your message.."
+						<div class="chat-section" bind:this={chatSection}>
+							{#each chats as chat}
+								<span class="bubble {chat.sender == userId ? 'me' : 'you'}">{chat.message}</span>
+							{/each}
+						</div>
+						<div class="chat-wrapper">
+							<form
+								on:submit|preventDefault={sendMsg}
+								class="relative flex w-full max-w-4xl flex-1 items-center rounded-xl border bg-gray-100 focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
+				{isReadOnly ? 'opacity-30' : ''}"
+							>
+								<div class="flex w-full flex-1 border-none bg-transparent">
+									<!-- <Input
+							class="chat-msg"
+							variant="default"
+							bind:value={chatMsg}
+							placeholder="Enter your message.."
+						/>
+						<button on:click={sendMsg}
+							><img class="icon" src="/chatui/send-msg-icon.svg" alt="" /></button
+						> -->
+									<ChatInput
+										placeholder="Type your message"
+										bind:value={chatMsg}
+										on:submit={sendMsg}
+										maxRows={4}
+										disabled={isReadOnly}
+									/>
+									{#if loading}
+										<button
+											class="btn mx-1 my-1 inline-block h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:hidden"
+										>
+											<CarbonStopFilledAlt />
+										</button>
+										<div
+											class="mx-1 my-1 hidden h-[2.4rem] items-center p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:flex"
+										>
+											<EosIconsLoading />
+										</div>
+									{:else}
+										<button
+											class="btn mx-1 my-1 h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100"
+											disabled={!chatMsg || isReadOnly}
+											type="submit"
+										>
+											<CarbonSendAltFilled />
+										</button>
+									{/if}
+								</div>
+							</form>
+						</div>
+					{/if}
+				</div>
+			{:else}
+				<!-- <div class="right-wrapper"> -->
+				<div class={themeVariable != "light" ? "search-friends-light" : "search-friends"}>
+					<Input
+						icon={MagnifyingGlass}
+						placeholder="Search friends"
+						rightSectionWidth={70}
+						styles={{ rightSection: { pointerEvents: "none" } }}
+						bind:value={searchFriendsInput}
+						on:keydown={searchFriends}
+						size="lg"
+						className="search-box"
+						style={themeVariable == "light"
+							? "border-radius:8px;color:#222;"
+							: "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"}
 					/>
-					<button on:click={sendMsg}
-						><img class="icon" src="/chatui/send-msg-icon.svg" alt="" /></button
-					> -->
-								<ChatInput
-									placeholder="Type your message"
-									bind:value={chatMsg}
-									on:submit={sendMsg}
-									maxRows={4}
-									disabled={isReadOnly}
-								/>
-								{#if loading}
-									<button
-										class="btn mx-1 my-1 inline-block h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:hidden"
-									>
-										<CarbonStopFilledAlt />
-									</button>
-									<div
-										class="mx-1 my-1 hidden h-[2.4rem] items-center p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100 md:flex"
-									>
-										<EosIconsLoading />
+				</div>
+				<div class="search-results">
+					{#if searchResults}
+						{#each searchResults as result}
+							<div class="friend-card" on:click={() => toggleSelection(result)}>
+								<div class="card-left">
+									<Checkbox checked={selectedItems.includes(result)} size="sm" />
+									<div class="profile-image search">
+										{#if result.userName}
+											<span class="initial">{result.userName[0].toUpperCase()}</span>
+										{:else if result.emailId}
+											<span class="initial">{result.emailId[0].toUpperCase()}</span>
+										{:else}
+											<span class="initial">?</span>
+										{/if}
 									</div>
-								{:else}
-									<button
-										class="btn mx-1 my-1 h-[2.4rem] self-end rounded-lg bg-transparent p-1 px-[0.7rem] text-gray-400 disabled:opacity-60 enabled:hover:text-gray-700 dark:disabled:opacity-40 enabled:dark:hover:text-gray-100"
-										disabled={!chatMsg || isReadOnly}
-										type="submit"
-									>
-										<CarbonSendAltFilled />
-									</button>
-								{/if}
+								</div>
+								<div class="center">
+									<p class="friend-name">{result.userName}</p>
+									<p class="friend-email">{result.emailId}</p>
+								</div>
 							</div>
-						</form>
-					</div>
-				{/if}
-			</div>
+						{/each}
+					{:else if noMatches}
+						<h1>No Matches Found!!</h1>
+					{/if}
+				</div>
+				<div class={themeVariable != "light" ? "search-footer-dark" : "search-footer"}>
+					{#if !addFriendsLoading}
+						<Button
+							disabled={!selectedItems || !selectedItems.length > 0}
+							style={themeVariable != "light" && (!selectedItems || !selectedItems.length > 0)
+								? "width:100%; background-color: rgba(255, 255, 255, 0.2);"
+								: "width:100%;"}
+							on:click={addFriends}
+							>Add Member
+						</Button>
+					{:else}
+						<Button disabled style="width:100%;"><Loader /></Button>
+					{/if}
+				</div>
+				<!-- </div> -->
+			{/if}
 		</div>
 	</div>
 	<div>
@@ -469,6 +477,11 @@
 	.right-container {
 		width: calc(100% - 350px);
 		position: relative;
+	}
+
+	.list-of-friends {
+		min-height: 72vh;
+		overflow-y: auto;
 	}
 
 	.chat-top {
@@ -609,5 +622,64 @@
 	.search-box {
 		background-color: #343a40 !important;
 		border: none !important;
+	}
+
+	.search-friends {
+		padding: 20px;
+		background-color: #e7ebf0;
+	}
+	.search-friends-light {
+		padding: 20px;
+		/* background-color: #e7ebf0; */
+	}
+
+	.friend-card {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 16px;
+		cursor: pointer;
+	}
+
+	.friend-name {
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.friend-email {
+		font-size: 16px;
+	}
+
+	.card-left {
+		display: flex;
+		gap: 16px;
+	}
+
+	.search-results {
+		height: 71vh;
+		overflow-y: auto;
+	}
+
+	.search-footer {
+		padding: 20px;
+		background-color: #e7ebf0;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+	}
+	.search-footer-dark {
+		padding: 20px;
+		/* background-color: #e7ebf0; */
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+	}
+
+	.profile-image.search {
+		height: 45px;
+		width: 45px;
+	}
+	.add-friends {
+		background-color: rgb(52, 58, 64);
 	}
 </style>
