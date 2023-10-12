@@ -392,7 +392,9 @@
 					{#if !addFriendsLoading}
 						<Button
 							disabled={!selectedItems || !selectedItems.length > 0}
-							style="width:100%;"
+							style={themeVariable != "light" && (!selectedItems || !selectedItems.length > 0)
+								? "width:100%; background-color: rgba(255, 255, 255, 0.2);"
+								: "width:100%;"}
 							on:click={addFriends}
 							>Add Member
 						</Button>
@@ -676,5 +678,8 @@
 	.profile-image.search {
 		height: 45px;
 		width: 45px;
+	}
+	.add-friends {
+		background-color: rgb(52, 58, 64);
 	}
 </style>
