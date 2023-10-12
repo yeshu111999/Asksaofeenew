@@ -29,6 +29,7 @@
 <style>
 	.container {
 		padding: 5px 20px;
+		/* background-color: #ffffff; */
 	}
 	.person {
 		position: relative;

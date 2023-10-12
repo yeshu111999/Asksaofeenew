@@ -12,9 +12,13 @@
 	import Logo from "$lib/components/icons/Logo.svelte";
 	import { goto } from "$app/navigation";
 	import { Tooltip } from "@svelteuidev/core";
+	import { ActionIcon } from "@svelteuidev/core";
+	import { PlusCircled } from "radix-icons-svelte";
+	import { SvelteUIProvider, Modal } from "@svelteuidev/core";
 
 	let searchInput = "";
 	let chatSection;
+	let openSearchFriends = true;
 
 	$: selected = selectedChat;
 
@@ -33,6 +37,9 @@
 
 	let isReadOnly = false;
 	let loading = false;
+	let themeVariable = localStorage.getItem("theme");
+
+	let activeClassVariable = "active-chat";
 
 	async function sendMsg() {
 		loading = true;
@@ -234,8 +241,13 @@
 	}
 
 	onMount(async () => {
+		console.log("check", localStorage.getItem("theme"));
 		userId = Cookies.get("email");
 		let token = Cookies.get("token");
+
+		themeVariable == "light"
+			? (activeClassVariable = "active-chat-light")
+			: (activeClassVariable = "active-chat");
 
 		console.log(userId, token);
 
@@ -268,13 +280,22 @@
 			chatSection.scrollTop = chatSection.scrollHeight;
 		}
 	});
+	async function openSearchFriendsModal() {
+		openSearchFriends = true;
+		console.log("reached", openSearchFriends);
+	}
 </script>
 
-<div class="wrapper">
-	<div class="container">
+<div class={themeVariable != "light" ? "wrapper" : "wrapper-light"}>
+	<div class={themeVariable != "light" ? "container" : "container-light"}>
 		<div class="left-container">
 			<div class="chat-top">
 				<p class="title">Messages</p>
+				<Tooltip withArrow transitionDuration={200} label="Add Friends" position="bottom">
+					<ActionIcon on:click={openSearchFriendsModal}>
+						<PlusCircled size={24} />
+					</ActionIcon>
+				</Tooltip>
 				<Tooltip withArrow transitionDuration={200} label="ImmiGPT" position="bottom">
 					<button class="logo-btn" on:click={gotoHomePage}>
 						<Logo classNames="mr-1" />
@@ -290,12 +311,17 @@
 					bind:value={searchInput}
 					size="lg"
 					className="search-box"
-					style="background-color:#343a40;border:none;border-radius:8px;"
+					style={themeVariable == "light"
+						? "border-radius:8px;color:#222;"
+						: "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"}
 				/>
+				<!-- style="background-color:#343a40;border:none;border-radius:8px;color:#FFF;" -->
 			</div>
 			<div class="list-of-friends">
 				{#each friendCards as friendCard}
-					<div class="chat-card {selected.emailId == friendCard.emailId ? 'active-chat' : ''}">
+					<div
+						class="chat-card {selected.emailId == friendCard.emailId ? activeClassVariable : ''}"
+					>
 						<ChatCard on:chatSelected={onChatSelected} cardData={friendCard} />
 					</div>
 				{/each}
@@ -372,6 +398,13 @@
 			</div>
 		</div>
 	</div>
+	<div>
+		<SvelteUIProvider>
+			<Modal {openSearchFriends} centered title="Introduce yourself!">
+				<p>GET</p>
+			</Modal>
+		</SvelteUIProvider>
+	</div>
 </div>
 
 <style>
@@ -379,6 +412,11 @@
 		padding: 35px 100px;
 		max-height: 100vh;
 		background-color: #343a40;
+	}
+	.wrapper-light {
+		padding: 35px 100px;
+		max-height: 100vh;
+		/* background-color: #fff; */
 	}
 
 	.container {
@@ -389,6 +427,14 @@
 		background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 		border-radius: 8px;
 	}
+	.container-light {
+		display: flex;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		min-height: 85vh;
+		--tw-bg-opacity: 1;
+		/* background-color: rgb(17 24 39 / var(--tw-bg-opacity)); */
+		border-radius: 8px;
+	}
 
 	.title {
 		font-size: 22px;
@@ -396,6 +442,11 @@
 
 	.chat-card.active-chat {
 		background-color: #343a40;
+		border-radius: 8px;
+	}
+
+	.chat-card.active-chat-light {
+		background-color: #e7ebf0;
 		border-radius: 8px;
 	}
 
