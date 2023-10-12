@@ -2,7 +2,7 @@
 	import { PUBLIC_APP_NAME, PUBLIC_VERSION } from "$env/static/public";
 	import { PUBLIC_ANNOUNCEMENT_BANNERS } from "$env/static/public";
 	import Logo from "$lib/components/icons/Logo.svelte";
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 	import IconChevron from "$lib/components/icons/IconChevron.svelte";
 	import CarbonArrowUpRight from "~icons/carbon/arrow-up-right";
 	import AnnouncementBanner from "../AnnouncementBanner.svelte";
@@ -11,6 +11,7 @@
 	import ModelCardMetadata from "../ModelCardMetadata.svelte";
 	import type { LayoutData } from "../../../routes/$types";
 	import { findCurrentModel } from "$lib/utils/models";
+	import { createStyles, Tabs } from "@svelteuidev/core";
 
 	export let currentModel: Model;
 	export let settings: LayoutData["settings"];
@@ -20,11 +21,48 @@
 
 	$: currentModelMetadata = findCurrentModel(models, settings.activeModel);
 
+	let renderedText = "";
+
+	const renderDescriptionTab = (event) => {
+		const { index, key } = event.detail;
+		renderedText = "";
+		let textlist = [
+			"A Statement of Purpose or SOP lives up to its name by clearly outlining the student's purpose of applying to a particular university for admission into a specific course.",
+			"Yes, you will have to meet the H1B visa requirements for Indian citizens and provide the required documents.",
+			"Dallas is known for being the home base of the Dallas Cowboys, its delectable southern cuisines, major global companies, and its vibrant art and music scene.",
+		];
+		let words = textlist[index].split(" ");
+		let i = 0;
+		// for (i = 0; i < 10; i++) {
+		setInterval(() => {
+			if (i < words.length) {
+				renderedText += words[i] + " ";
+				console.log("words[i]", words[i], i);
+				i += 1;
+			}
+		}, 100);
+		// i += 1;
+		// }
+	};
+
+	const useStyles = createStyles((theme) => ({
+		root: {
+			"&.active": {
+				backgroundColor: "rgba(255, 255, 255, 0.2)",
+				borderRadius: 8,
+			},
+		},
+	}));
+	$: ({ classes } = useStyles());
+
 	const announcementBanners = PUBLIC_ANNOUNCEMENT_BANNERS
 		? JSON.parse(PUBLIC_ANNOUNCEMENT_BANNERS)
 		: [];
 
 	const dispatch = createEventDispatcher<{ message: string }>();
+	onMount(() => {
+		renderDescriptionTab({ detail: { index: 1, key: "hi" } });
+	});
 </script>
 
 <div class="my-auto grid gap-8 lg:grid-cols-3">
@@ -45,6 +83,69 @@
 		</div>
 	</div>
 	<div class="lg:col-span-2 lg:pl-24">
+		<div class="tabBodyWrap">
+			<div class="tabDetailsWrap">
+				<span class="tabDetailsTitle">What immiGPT will do for</span>
+			</div>
+			<div class="tabWrap">
+				<!-- <Tabs variant="unstyled" position="apart"> -->
+				<Tabs
+					variant="pills"
+					color="rgba(255, 255, 255, 0.2)"
+					position="apart"
+					orientation="vertical"
+					on:change={renderDescriptionTab}
+				>
+					<Tabs.Tab label="Student" class={classes.root}>
+						<div class="tabDetailsWrapInternal">
+							<span class="tabDetailsDescription">
+								ImmiGPT provides a comprehensive guide on student visa requirements, assist in
+								document generation, and interactive interview preparation using our custom AI model
+								for various countries across the globe.
+							</span>
+							<span class="tabDetailsSubTitle"> What is SOP ? </span>
+							<span class="tabDetailsDescription">
+								<!-- A Statement of Purpose or SOP lives up to its name by clearly outlining the
+								student's purpose of applying to a particular university for admission into a
+								specific course. -->
+								{renderedText}
+							</span>
+						</div>
+					</Tabs.Tab>
+					<Tabs.Tab label="Professional" class={classes.root}>
+						<div class="tabDetailsWrapInternal">
+							<span class="tabDetailsDescription">
+								ImmiGPT offers detailed guidance on work visa options, eligibility, and application
+								processes like US H1B for over 10 countries.
+							</span>
+							<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
+							<span class="tabDetailsDescription">
+								<!-- Yes, you will have to meet the H1B visa requirements for Indian citizens and provide
+								the required documents. -->
+								{renderedText}
+							</span>
+						</div>
+					</Tabs.Tab>
+					<Tabs.Tab label="Tourist" class={classes.root}>
+						<div class="tabDetailsWrapInternal">
+							<span class="tabDetailsDescription">
+								ImmiGPT provides a detailed breakdown of family-sponsored visa requirements,business
+								immigration options for entrepreneurs, investors, artists, entertainers and
+								performers etc., guiding users through each step and ensuring all criteria is met.
+							</span>
+							<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
+							<span class="tabDetailsDescription">
+								<!-- Dallas is known for being the home base of the Dallas Cowboys, its delectable
+								southern cuisines, major global companies, and its vibrant art and music scene. -->
+								{renderedText}
+							</span>
+						</div>
+					</Tabs.Tab>
+				</Tabs>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="lg:col-span-2 lg:pl-24">
 		{#each announcementBanners as banner}
 			<AnnouncementBanner classNames="mb-4" title={banner.title}>
 				<a
@@ -76,7 +177,7 @@
 			</div>
 			<ModelCardMetadata variant="dark" model={currentModel} />
 		</div>
-	</div>
+	</div> -->
 	{#if currentModelMetadata.promptExamples}
 		<div class="lg:col-span-3 lg:mt-6">
 			<p class="mb-3 text-gray-600 dark:text-gray-300">Examples</p>
@@ -93,3 +194,56 @@
 			</div>
 		</div>{/if}
 </div>
+
+<style>
+	.tabWrap {
+		/* border: #fff solid 2px; */
+		border-radius: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 10px 8px 0px 8px;
+		/* width: fit-content; */
+		width: 100%;
+	}
+
+	.tabBodyWrap {
+		border: #fff solid 2px;
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 16px;
+	}
+
+	.tabDetailsWrap {
+		display: flex;
+		justify-content: left;
+		width: 100%;
+		padding: 8px;
+	}
+
+	.tabDetailsTitle {
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	.tabDetailsWrapInternal {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding: 8px;
+		gap: 8px;
+	}
+
+	.tabDetailsSubTitle {
+		font-weight: 600;
+		font-size: 16px;
+	}
+
+	.tabDetailsDescription {
+		font-size: 14px;
+	}
+</style>
