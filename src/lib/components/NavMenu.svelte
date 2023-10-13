@@ -37,7 +37,7 @@
 	}
 
 	function logOut() {
-		var cookiesToRemove = ["token", "name", "email"];
+		var cookiesToRemove = ["token", "name", "email", "userId"];
 
 		cookiesToRemove.forEach(function (cookieName) {
 			document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
