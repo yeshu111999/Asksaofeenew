@@ -1,20 +1,26 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
+	import { Switch } from "@svelteuidev/core";
 
 	import Modal from "$lib/components/Modal.svelte";
 	import CarbonClose from "~icons/carbon/close";
-	import Switch from "$lib/components/Switch.svelte";
+	// import Switch from "$lib/components/Switch.svelte";
 	import { enhance } from "$app/forms";
 	import { base } from "$app/paths";
 	import { PUBLIC_APP_DATA_SHARING } from "$env/static/public";
 	import type { Model } from "$lib/types/Model";
 	import type { LayoutData } from "../../routes/$types";
+	import { switchTheme } from "$lib/switchTheme";
 
 	export let settings: LayoutData["settings"];
 	export let models: Array<Model>;
 
 	let shareConversationsWithModelAuthors = settings.shareConversationsWithModelAuthors;
 	let isConfirmingDeletion = false;
+
+	const themePanda = (event) => {
+		console.log("evenst", event);
+	};
 
 	const dispatch = createEventDispatcher<{ close: void }>();
 </script>
@@ -75,14 +81,23 @@
 					</ul>
 				</div>
 			{/if}
+			<div class="themeButtonWrap">
+				<span class="themeText">Theme</span>
+				<Switch onLabel="Dark" offLabel="Light" size="md" on:click={switchTheme} />
+			</div>
 			<form
 				method="post"
 				action="{base}/conversations?/delete"
 				on:submit|preventDefault={() => (isConfirmingDeletion = true)}
 			>
-				<button type="submit" class="underline decoration-gray-300 hover:decoration-gray-700">
-					Delete all conversations
-				</button>
+				<div style="display: flex; flex-direction: column; align-items:flex-start">
+					<button type="submit" class="underline decoration-gray-300 hover:decoration-gray-700">
+						Delete account
+					</button>
+					<button type="submit" class="underline decoration-gray-300 hover:decoration-gray-700">
+						Delete all conversations
+					</button>
+				</div>
 			</form>
 			<button
 				type="submit"
@@ -122,3 +137,11 @@
 		{/if}
 	</div>
 </Modal>
+
+<style>
+	.themeButtonWrap {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+</style>
