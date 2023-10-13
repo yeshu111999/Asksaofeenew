@@ -452,6 +452,7 @@
 						let payload = parseJwt(data.token);
 						Cookies.set("name", payload.username);
 						Cookies.set("email", payload.email);
+						Cookies.set("userId", payload.userId);
 						Cookies.set("phoneNumber", payload.phoneNumber);
 						window.location.href = "/";
 					} else if (response.status === 401) {
@@ -534,6 +535,7 @@
 						Cookies.set("name", payload.username);
 						Cookies.set("email", payload.email);
 						Cookies.set("phoneNumber", payload.phoneNumber);
+						Cookies.set("userId", payload.userId);
 						window.location.href = "/";
 					} else {
 						showSignupError = true;

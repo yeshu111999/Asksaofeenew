@@ -11,12 +11,16 @@ import { base } from "$app/paths";
 import { refreshSessionCookie, requiresUser } from "$lib/server/auth";
 import { ERROR_MESSAGES } from "$lib/stores/errors";
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle: Handle = async ({ event, resolve}) => {
 	const token = event.cookies.get(COOKIE_NAME);
 
 	event.locals.sessionId = token || crypto.randomUUID();
 
 	const user = await collections.users.findOne({ sessionId: event.locals.sessionId });
+	const userId =  event.cookies.get("userId");
+	if(userId){
+		event.locals.userId = userId;
+	}
 
 	if (user) {
 		event.locals.user = user;

@@ -35,8 +35,8 @@ export function refreshSessionCookie(cookies: Cookies, sessionId: string) {
 }
 
 export const authCondition = (locals: App.Locals) => {
-	return locals.user
-		? { userId: locals.user._id }
+	return locals.userId
+		? { userId: locals.userId }
 		: { sessionId: locals.sessionId, userId: { $exists: false } };
 };
 

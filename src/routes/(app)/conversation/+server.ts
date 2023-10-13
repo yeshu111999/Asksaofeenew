@@ -8,7 +8,7 @@ import type { Message } from "$lib/types/Message";
 import { models, validateModel } from "$lib/server/models";
 import { authCondition } from "$lib/server/auth";
 
-export const POST: RequestHandler = async ({ locals, request }) => {
+export const POST: RequestHandler = async ({ locals, request , cookies}) => {
 	const body = await request.text();
 
 	let title = "";
@@ -44,7 +44,7 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 		model: values.model,
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		...(locals.user ? { userId: locals.user._id } : { sessionId: locals.sessionId }),
+		...(locals.userId ? { userId: locals.userId } : { sessionId: locals.sessionId }),
 		...(values.fromShare ? { meta: { fromShareId: values.fromShare } } : {}),
 	});
 

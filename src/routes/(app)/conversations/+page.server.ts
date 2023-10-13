@@ -6,7 +6,7 @@ import { redirect } from "@sveltejs/kit";
 export const actions = {
 	delete: async function ({ locals }) {
 		// double check we have a user to delete conversations for
-		if (locals.user?._id || locals.sessionId) {
+		if (locals.userId || locals.sessionId) {
 			await collections.conversations.deleteMany({
 				...authCondition(locals),
 			});
