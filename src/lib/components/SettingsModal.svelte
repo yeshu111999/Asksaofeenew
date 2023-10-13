@@ -21,7 +21,7 @@
 	const themePanda = (event) => {
 		console.log("evenst", event);
 	};
-
+	let themeVariable = localStorage.getItem("theme") == "dark" ? true : false;
 	const dispatch = createEventDispatcher<{ close: void }>();
 </script>
 
@@ -83,7 +83,13 @@
 			{/if}
 			<div class="themeButtonWrap">
 				<span class="themeText">Theme</span>
-				<Switch onLabel="Dark" offLabel="Light" size="md" on:click={switchTheme} />
+				<Switch
+					checked={themeVariable}
+					onLabel="Dark"
+					offLabel="Light"
+					size="md"
+					on:click={switchTheme}
+				/>
 			</div>
 			<form
 				method="post"
