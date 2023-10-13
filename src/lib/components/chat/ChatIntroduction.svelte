@@ -12,6 +12,7 @@
 	import type { LayoutData } from "../../../routes/$types";
 	import { findCurrentModel } from "$lib/utils/models";
 	import { createStyles, Tabs } from "@svelteuidev/core";
+	import { theme } from "$lib/stores/theme";
 
 	export let currentModel: Model;
 	export let settings: LayoutData["settings"];
@@ -45,6 +46,8 @@
 		// }
 	};
 
+	let themeVariable = "light";
+
 	const useStyles = createStyles((theme) => ({
 		root: {
 			"&.active": {
@@ -65,7 +68,7 @@
 	});
 </script>
 
-<div class="my-auto grid gap-8 lg:grid-cols-3">
+<div class="my-auto grid gap-8 lg:grid-cols-3" style="display:flex;flex-direction:column;">
 	<div class="lg:col-span-1">
 		<div>
 			<div class="mb-3 flex items-center text-2xl font-semibold">
@@ -83,20 +86,24 @@
 		</div>
 	</div>
 	<div class="lg:col-span-2 lg:pl-24">
-		<div class="tabBodyWrap">
+		<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
 			<div class="tabDetailsWrap">
 				<span class="tabDetailsTitle">What immiGPT will do for</span>
 			</div>
-			<div class="tabWrap">
+			<div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
 				<!-- <Tabs variant="unstyled" position="apart"> -->
 				<Tabs
 					variant="pills"
-					color="rgba(255, 255, 255, 0.2)"
+					color={$theme == "dark"
+						? "rgba(255, 255, 255, 0.2)"
+						: "black" + themeVariable == "dark"
+						? "rgba(255, 255, 255, 0.2)"
+						: "black"}
 					position="apart"
 					orientation="vertical"
 					on:change={renderDescriptionTab}
 				>
-					<Tabs.Tab label="Student" class={classes.root}>
+					<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
 								ImmiGPT provides a comprehensive guide on student visa requirements, assist in
@@ -216,6 +223,10 @@
 		justify-content: center;
 		align-items: center;
 		padding: 16px;
+	}
+
+	.tabBodyWrap.light {
+		border: black solid 1px;
 	}
 
 	.tabDetailsWrap {
