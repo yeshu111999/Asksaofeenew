@@ -127,7 +127,7 @@
 			Profile
 		</button>
 	{/if}
-	<button
+	<!-- <button
 		on:click={switchTheme}
 		type="button"
 		class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
@@ -136,7 +136,7 @@
 		style={$theme == "light" ? "color:white;background-color:#0b4374;" : ""}
 	>
 		Theme
-	</button>
+	</button> -->
 	<button
 		on:click={() => dispatch("clickSettings")}
 		type="button"
