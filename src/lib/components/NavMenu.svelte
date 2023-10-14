@@ -64,6 +64,10 @@
 		goto("/chats");
 	}
 
+	function gotoBlogs() {
+		goto("/blogs");
+	}
+
 	function logOut() {
 		var cookiesToRemove = ["token", "name", "email", "userId"];
 
@@ -259,6 +263,7 @@
 				FAQs
 			</button>
 			<button
+				on:click={gotoBlogs}
 				type="button"
 				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
 					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"

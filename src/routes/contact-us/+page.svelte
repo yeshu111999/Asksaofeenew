@@ -3,7 +3,7 @@
 </script>
 
 <div class="container">
-	<SectionWrapper header={"About Us"}>
+	<SectionWrapper header={"Contact Us"}>
 		<div>
 			<section>
 				<p>

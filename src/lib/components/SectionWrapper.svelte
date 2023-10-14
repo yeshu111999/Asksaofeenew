@@ -62,6 +62,8 @@
 
 	.content {
 		padding: 40px;
+		max-height: 80vh;
+		overflow-y: auto;
 	}
 	.top-bar {
 		padding: 12px 40px;
