@@ -29,6 +29,7 @@
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
 		console.log("index", index);
+		activeHomeTabIndex = index;
 		renderedText = "";
 		let textlist = [
 			"A Statement of Purpose or SOP lives up to its name by clearly outlining the student's purpose of applying to a particular university for admission into a specific course.",
@@ -103,10 +104,11 @@
 						? "rgba(255, 255, 255, 0.2)"
 						: "black"}
 					position="apart"
+					orientation="vertical"
 					on:change={renderDescriptionTab}
 				>
-					{#if activeHomeTabIndex == 0}
-						<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
+					<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
+						{#if activeHomeTabIndex == 0}
 							<div class="tabDetailsWrapInternal">
 								<span class="tabDetailsDescription">
 									ImmiGPT provides a comprehensive guide on student visa requirements, assist in
@@ -121,10 +123,10 @@
 									{renderedText}
 								</span>
 							</div>
-						</Tabs.Tab>
-					{/if}
-					{#if activeHomeTabIndex == 1}
-						<Tabs.Tab label="Professional" class={classes.root}>
+						{/if}
+					</Tabs.Tab>
+					<Tabs.Tab label="Professional" class={classes.root}>
+						{#if activeHomeTabIndex == 1}
 							<div class="tabDetailsWrapInternal">
 								<span class="tabDetailsDescription">
 									ImmiGPT offers detailed guidance on work visa options, eligibility, and
@@ -137,10 +139,10 @@
 									{renderedText}
 								</span>
 							</div>
-						</Tabs.Tab>
-					{/if}
-					{#if activeHomeTabIndex == 2}
-						<Tabs.Tab label="Tourist" class={classes.root}>
+						{/if}
+					</Tabs.Tab>
+					<Tabs.Tab label="Tourist" class={classes.root}>
+						{#if activeHomeTabIndex == 2}
 							<div class="tabDetailsWrapInternal">
 								<span class="tabDetailsDescription">
 									ImmiGPT provides a detailed breakdown of family-sponsored visa
@@ -155,8 +157,8 @@
 									{renderedText}
 								</span>
 							</div>
-						</Tabs.Tab>
-					{/if}
+						{/if}
+					</Tabs.Tab>
 				</Tabs>
 			</div>
 		</div>

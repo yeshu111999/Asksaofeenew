@@ -9,7 +9,7 @@
 	import NavConversationItem from "./NavConversationItem.svelte";
 	import type { LayoutData } from "../../routes/$types";
 	import { goto } from "$app/navigation";
-	import { Tooltip } from "@svelteuidev/core";
+	import { Divider, Tooltip, ThemeIcon } from "@svelteuidev/core";
 
 	import { theme } from "$lib/stores/theme";
 	import {
@@ -19,6 +19,8 @@
 		ChevronUp,
 		DropdownMenu,
 		Gear,
+		Plus,
+		PlusCircled,
 	} from "radix-icons-svelte";
 	import { createStyles, Tabs, Collapse } from "@svelteuidev/core";
 
@@ -105,7 +107,7 @@
 </div> -->
 <div
 	class={$theme == "dark"
-		? "scrollbar-custom flex flex-col gap-1 overflow-y-auto rounded-r-xl bg-gradient-to-l from-gray-50 px-3 pb-3 pt-2 dark:from-gray-800/30 "
+		? "scrollbar-custom flex flex-col gap-1 overflow-y-auto rounded-r-xl bg-gradient-to-l from-gray-50 pb-3 pt-2 dark:from-gray-800/30 "
 		: "scrollbar-custom light-backround flex flex-col gap-1 overflow-y-auto rounded-r-xl"}
 	style={$theme == "light" ? "background-color:#0b4374;color:white" : ""}
 >
@@ -116,14 +118,23 @@
 		</Tabs>
 	</div>
 	<div>
+		<Divider style="width:100%" />
 		<a
 			href={`${base}/`}
-			class="flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700"
+			class={"flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700" +
+				$theme ==
+			"dark"
+				? "new-chat-outer"
+				: "new-chat-outer-light"}
 		>
-			New Chat
+			New Chat &nbsp;
+			<ThemeIcon>
+				<Plus />
+			</ThemeIcon>
 		</a>
+		<Divider />
 	</div>
-	<div>
+	<div style="min-height:auto">
 		{#each conversations as conv (conv.id)}
 			<NavConversationItem on:editConversationTitle on:deleteConversation {conv} />
 		{/each}
@@ -313,6 +324,13 @@
 </div>
 
 <style>
+	.new-chat-outer {
+	}
+
+	.new-chat-outer-light {
+		display: flex;
+		justify-content: center;
+	}
 	.chat-btn {
 		width: 24px;
 		height: 24px;
