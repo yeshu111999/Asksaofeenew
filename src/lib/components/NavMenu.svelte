@@ -10,6 +10,7 @@
 	import type { LayoutData } from "../../routes/$types";
 	import { goto } from "$app/navigation";
 	import { Tooltip } from "@svelteuidev/core";
+	import ConfirmationModal from "./ConfirmationModal.svelte";
 
 	import { theme } from "$lib/stores/theme";
 	import {
@@ -21,6 +22,8 @@
 		Gear,
 	} from "radix-icons-svelte";
 	import { createStyles, Tabs, Collapse } from "@svelteuidev/core";
+
+	let logoutConfirmationModal = false;
 
 	const useStyles = createStyles((theme) => ({
 		root: {
@@ -54,6 +57,8 @@
 	export let user: LayoutData["user"];
 
 	export let loginModalVisible;
+
+	let confirMationPopUp = false;
 	let openMore = false;
 
 	function gotoProfile() {
@@ -218,6 +223,13 @@
 			{/if}
 		</button>
 	{/if}
+	{#if logoutConfirmationModal}
+		<ConfirmationModal
+			on:close={() => (logoutConfirmationModal = false)}
+			on:confirm={logOut}
+			confirmationText="Click confirm to logout"
+		/>
+	{/if}
 	{#if !canLogin}
 		<Collapse open={openMore}>
 			<button
@@ -277,9 +289,10 @@
 			</button>
 		</Collapse>
 	{/if}
+	<!-- on:click={logOut} -->
 	{#if !canLogin}
 		<button
-			on:click={logOut}
+			on:click={() => (logoutConfirmationModal = true)}
 			type="button"
 			class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
 				? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
