@@ -35,7 +35,7 @@
 		}
 		axios
 			.post("https://backend.immigpt.net/deleteAccount", {}, { headers: headers })
-			.then((response: AnyBulkWriteOperation) => {
+			.then((response: any) => {
 				console.log("response", response);
 			})
 			.catch((error: any) => {
@@ -59,6 +59,7 @@
 			<!-- on:confirm={logOut} -->
 			<ConfirmationModal
 				on:close={() => (logoutConfirmationModal = false)}
+				on:confirm={deleteAccount}
 				confirmationText="Click confirm to Delete account"
 			/>
 		{/if}
