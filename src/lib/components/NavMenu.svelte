@@ -3,6 +3,7 @@
 	import { createEventDispatcher } from "svelte";
 
 	import Logo from "$lib/components/icons/Logo.svelte";
+	import LogoSmall from "$lib/components/icons/LogoSmall.svelte";
 	import { switchTheme } from "$lib/switchTheme";
 	import { PUBLIC_APP_NAME, PUBLIC_ORIGIN } from "$env/static/public";
 	import NavConversationItem from "./NavConversationItem.svelte";
@@ -11,6 +12,25 @@
 	import { Tooltip } from "@svelteuidev/core";
 
 	import { theme } from "$lib/stores/theme";
+	import { Camera, ChatBubble, Gear } from "radix-icons-svelte";
+	import { createStyles, Tabs } from "@svelteuidev/core";
+
+	const useStyles = createStyles((theme) => ({
+		root: {
+			padding: "8px 16px", // Add your desired styles for the root class here
+			borderRadius: "4px", // For example, you can set padding and border radius
+			display: "flex",
+			alignItems: "center",
+			gap: "8px", // Add any other desired styles
+
+			"&.active": {
+				background: "lightblue", // Add your active styles here
+				// Add more active styles as needed
+			},
+		},
+	}));
+
+	$: ({ classes } = useStyles());
 
 	const dispatch = createEventDispatcher<{
 		shareConversation: { id: string; title: string };
@@ -44,9 +64,17 @@
 		});
 		window.location.href = "/";
 	}
+
+	function onActiveChange(event) {
+		const { index, key } = event.detail;
+		if (index == 0) {
+		} else {
+			gotoChats();
+		}
+	}
 </script>
 
-<div class="sticky top-0 flex flex-none items-center justify-between px-3 py-3.5 max-sm:pt-0">
+<!-- <div class="sticky top-0 flex flex-none items-center justify-between px-3 py-3.5 max-sm:pt-0">
 	<a class="flex items-center rounded-xl text-lg font-semibold" href="{PUBLIC_ORIGIN}{base}/">
 		<Logo classNames="mr-1" />
 		{PUBLIC_APP_NAME}
@@ -62,16 +90,32 @@
 	>
 		New Chat
 	</a>
-</div>
+</div> -->
 <div
 	class={$theme == "dark"
 		? "scrollbar-custom flex flex-col gap-1 overflow-y-auto rounded-r-xl bg-gradient-to-l from-gray-50 px-3 pb-3 pt-2 dark:from-gray-800/30 "
 		: "scrollbar-custom light-backround flex flex-col gap-1 overflow-y-auto rounded-r-xl"}
 	style={$theme == "light" ? "background-color:#0b4374;color:white" : ""}
 >
-	{#each conversations as conv (conv.id)}
-		<NavConversationItem on:editConversationTitle on:deleteConversation {conv} />
-	{/each}
+	<div>
+		<Tabs on:change={onActiveChange} variant="pills">
+			<Tabs.Tab label={PUBLIC_APP_NAME} icon={LogoSmall} />
+			<Tabs.Tab label="Chats" icon={ChatBubble} />
+		</Tabs>
+	</div>
+	<div>
+		<a
+			href={`${base}/`}
+			class="flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700"
+		>
+			New Chat
+		</a>
+	</div>
+	<div>
+		{#each conversations as conv (conv.id)}
+			<NavConversationItem on:editConversationTitle on:deleteConversation {conv} />
+		{/each}
+	</div>
 </div>
 <div
 	class={$theme == "dark"
