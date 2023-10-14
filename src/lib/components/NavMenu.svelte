@@ -68,6 +68,14 @@
 		goto("/blogs");
 	}
 
+	function gotoContactUs() {
+		goto("/contact-us");
+	}
+
+	function gotoHelp() {
+		goto("/help");
+	}
+
 	function logOut() {
 		var cookiesToRemove = ["token", "name", "email", "userId"];
 
@@ -241,6 +249,7 @@
 				About Us
 			</button>
 			<button
+				on:click={gotoHelp}
 				type="button"
 				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
 					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
@@ -250,6 +259,18 @@
 					: "width:100%;"}
 			>
 				Help
+			</button>
+			<button
+				on:click={gotoContactUs}
+				type="button"
+				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+					: "button-light-theme"}
+				style={$theme == "light"
+					? "color:white;background-color:#0b4374;width:100%;"
+					: "width:100%;"}
+			>
+				Contact us
 			</button>
 			<button
 				type="button"

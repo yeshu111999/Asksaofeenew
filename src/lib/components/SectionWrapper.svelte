@@ -45,7 +45,7 @@
 		--tw-bg-opacity: 1;
 		background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 		border-radius: 8px;
-
+		width: 100%;
 		color: white;
 		flex-direction: column;
 	}
@@ -58,6 +58,7 @@
 		border-radius: 8px;
 		color: black;
 		flex-direction: column;
+		width: 100%;
 	}
 
 	.content {
