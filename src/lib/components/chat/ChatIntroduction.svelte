@@ -20,12 +20,15 @@
 
 	let isModelsModalOpen = false;
 
+	let activeHomeTabIndex = 0;
+
 	$: currentModelMetadata = findCurrentModel(models, settings.activeModel);
 
 	let renderedText = "";
 
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
+		console.log("index", index);
 		renderedText = "";
 		let textlist = [
 			"A Statement of Purpose or SOP lives up to its name by clearly outlining the student's purpose of applying to a particular university for admission into a specific course.",
@@ -64,7 +67,7 @@
 
 	const dispatch = createEventDispatcher<{ message: string }>();
 	onMount(() => {
-		renderDescriptionTab({ detail: { index: 1, key: "hi" } });
+		renderDescriptionTab({ detail: { index: activeHomeTabIndex, key: "hi" } });
 	});
 </script>
 
@@ -100,54 +103,60 @@
 						? "rgba(255, 255, 255, 0.2)"
 						: "black"}
 					position="apart"
-					orientation="vertical"
 					on:change={renderDescriptionTab}
 				>
-					<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
-						<div class="tabDetailsWrapInternal">
-							<span class="tabDetailsDescription">
-								ImmiGPT provides a comprehensive guide on student visa requirements, assist in
-								document generation, and interactive interview preparation using our custom AI model
-								for various countries across the globe.
-							</span>
-							<span class="tabDetailsSubTitle"> What is SOP ? </span>
-							<span class="tabDetailsDescription">
-								<!-- A Statement of Purpose or SOP lives up to its name by clearly outlining the
-								student's purpose of applying to a particular university for admission into a
-								specific course. -->
-								{renderedText}
-							</span>
-						</div>
-					</Tabs.Tab>
-					<Tabs.Tab label="Professional" class={classes.root}>
-						<div class="tabDetailsWrapInternal">
-							<span class="tabDetailsDescription">
-								ImmiGPT offers detailed guidance on work visa options, eligibility, and application
-								processes like US H1B for over 10 countries.
-							</span>
-							<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
-							<span class="tabDetailsDescription">
-								<!-- Yes, you will have to meet the H1B visa requirements for Indian citizens and provide
-								the required documents. -->
-								{renderedText}
-							</span>
-						</div>
-					</Tabs.Tab>
-					<Tabs.Tab label="Tourist" class={classes.root}>
-						<div class="tabDetailsWrapInternal">
-							<span class="tabDetailsDescription">
-								ImmiGPT provides a detailed breakdown of family-sponsored visa requirements,business
-								immigration options for entrepreneurs, investors, artists, entertainers and
-								performers etc., guiding users through each step and ensuring all criteria is met.
-							</span>
-							<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
-							<span class="tabDetailsDescription">
-								<!-- Dallas is known for being the home base of the Dallas Cowboys, its delectable
-								southern cuisines, major global companies, and its vibrant art and music scene. -->
-								{renderedText}
-							</span>
-						</div>
-					</Tabs.Tab>
+					{#if activeHomeTabIndex == 0}
+						<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
+							<div class="tabDetailsWrapInternal">
+								<span class="tabDetailsDescription">
+									ImmiGPT provides a comprehensive guide on student visa requirements, assist in
+									document generation, and interactive interview preparation using our custom AI
+									model for various countries across the globe.
+								</span>
+								<span class="tabDetailsSubTitle"> What is SOP ? </span>
+								<span class="tabDetailsDescription">
+									<!-- A Statement of Purpose or SOP lives up to its name by clearly outlining the
+									student's purpose of applying to a particular university for admission into a
+									specific course. -->
+									{renderedText}
+								</span>
+							</div>
+						</Tabs.Tab>
+					{/if}
+					{#if activeHomeTabIndex == 1}
+						<Tabs.Tab label="Professional" class={classes.root}>
+							<div class="tabDetailsWrapInternal">
+								<span class="tabDetailsDescription">
+									ImmiGPT offers detailed guidance on work visa options, eligibility, and
+									application processes like US H1B for over 10 countries.
+								</span>
+								<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
+								<span class="tabDetailsDescription">
+									<!-- Yes, you will have to meet the H1B visa requirements for Indian citizens and provide
+									the required documents. -->
+									{renderedText}
+								</span>
+							</div>
+						</Tabs.Tab>
+					{/if}
+					{#if activeHomeTabIndex == 2}
+						<Tabs.Tab label="Tourist" class={classes.root}>
+							<div class="tabDetailsWrapInternal">
+								<span class="tabDetailsDescription">
+									ImmiGPT provides a detailed breakdown of family-sponsored visa
+									requirements,business immigration options for entrepreneurs, investors, artists,
+									entertainers and performers etc., guiding users through each step and ensuring all
+									criteria is met.
+								</span>
+								<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
+								<span class="tabDetailsDescription">
+									<!-- Dallas is known for being the home base of the Dallas Cowboys, its delectable
+									southern cuisines, major global companies, and its vibrant art and music scene. -->
+									{renderedText}
+								</span>
+							</div>
+						</Tabs.Tab>
+					{/if}
 				</Tabs>
 			</div>
 		</div>

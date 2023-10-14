@@ -12,8 +12,15 @@
 	import { Tooltip } from "@svelteuidev/core";
 
 	import { theme } from "$lib/stores/theme";
-	import { Camera, ChatBubble, Gear } from "radix-icons-svelte";
-	import { createStyles, Tabs } from "@svelteuidev/core";
+	import {
+		Camera,
+		ChatBubble,
+		ChevronDown,
+		ChevronUp,
+		DropdownMenu,
+		Gear,
+	} from "radix-icons-svelte";
+	import { createStyles, Tabs, Collapse } from "@svelteuidev/core";
 
 	const useStyles = createStyles((theme) => ({
 		root: {
@@ -24,7 +31,7 @@
 			gap: "8px", // Add any other desired styles
 
 			"&.active": {
-				background: "lightblue", // Add your active styles here
+				backgroundColor: "rgba(255, 255, 255, 0.2)", // Add your active styles here
 				// Add more active styles as needed
 			},
 		},
@@ -47,6 +54,7 @@
 	export let user: LayoutData["user"];
 
 	export let loginModalVisible;
+	let openMore = false;
 
 	function gotoProfile() {
 		goto("/profile");
@@ -99,8 +107,8 @@
 >
 	<div>
 		<Tabs on:change={onActiveChange} variant="pills">
-			<Tabs.Tab label={PUBLIC_APP_NAME} icon={LogoSmall} />
-			<Tabs.Tab label="Chats" icon={ChatBubble} />
+			<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
+			<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
 		</Tabs>
 	</div>
 	<div>
@@ -119,8 +127,8 @@
 </div>
 <div
 	class={$theme == "dark"
-		? "mt-0.5 flex flex-col gap-1 rounded-r-xl bg-gradient-to-l from-gray-50 p-3 text-sm dark:from-gray-800/30 "
-		: "mt-0.5 flex flex-col gap-1 rounded-r-xl"}
+		? "mt-0.5 flex flex-col justify-end gap-1 rounded-r-xl bg-gradient-to-l from-gray-50 p-3 text-sm dark:from-gray-800/30 "
+		: "mt-0.5 flex flex-col justify-end gap-1 rounded-r-xl"}
 	style={$theme == "light" ? "background-color:#0b4374;color:white;" : ""}
 >
 	{#if user?.username || user?.email}
@@ -181,16 +189,94 @@
 	>
 		Theme
 	</button> -->
-	<button
-		on:click={() => dispatch("clickSettings")}
-		type="button"
-		class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
-			? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-			: "button-light-theme"}
-		style={$theme == "light" ? "color:white;background-color:#0b4374;" : ""}
-	>
-		Settings
-	</button>
+	{#if !canLogin}
+		<button
+			on:click={() => dispatch("clickSettings")}
+			type="button"
+			class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+				? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+				: "button-light-theme"}
+			style={$theme == "light" ? "color:white;background-color:#0b4374;" : ""}
+		>
+			Settings
+		</button>
+	{/if}
+	{#if !canLogin}
+		<button
+			on:click={() => (openMore = !openMore)}
+			type="button"
+			class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+				? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+				: "button-light-theme"}
+			style={$theme == "light" ? "color:white;background-color:#0b4374;" : ""}
+		>
+			More
+			{#if openMore}
+				<ChevronUp slot="rightIcon" />
+			{:else}
+				<ChevronDown slot="rightIcon" />
+			{/if}
+		</button>
+	{/if}
+	{#if !canLogin}
+		<Collapse open={openMore}>
+			<button
+				type="button"
+				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2" + $theme == "dark"
+					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+					: "button-light-theme"}
+				style={$theme == "light"
+					? "color:white;background-color:#0b4374;width:100%;"
+					: "width:100%;"}
+			>
+				About Us
+			</button>
+			<button
+				type="button"
+				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+					: "button-light-theme"}
+				style={$theme == "light"
+					? "color:white;background-color:#0b4374;width:100%;"
+					: "width:100%;"}
+			>
+				Help
+			</button>
+			<button
+				type="button"
+				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+					: "button-light-theme"}
+				style={$theme == "light"
+					? "color:white;background-color:#0b4374;width:100%;"
+					: "width:100%;"}
+			>
+				FAQs
+			</button>
+			<button
+				type="button"
+				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+					: "button-light-theme"}
+				style={$theme == "light"
+					? "color:white;background-color:#0b4374;width:100%;"
+					: "width:100%;"}
+			>
+				Blogs
+			</button>
+			<button
+				type="button"
+				class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+					? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+					: "button-light-theme"}
+				style={$theme == "light"
+					? "color:white;background-color:#0b4374;width:100%;"
+					: "width:100%;"}
+			>
+				News
+			</button>
+		</Collapse>
+	{/if}
 	{#if !canLogin}
 		<button
 			on:click={logOut}
