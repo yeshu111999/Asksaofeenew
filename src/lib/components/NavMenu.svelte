@@ -31,9 +31,10 @@
 			display: "flex",
 			alignItems: "center",
 			gap: "8px", // Add any other desired styles
+			color: "#000",
 
 			"&.active": {
-				backgroundColor: "rgba(255, 255, 255, 0.2)", // Add your active styles here
+				backgroundColor: "blue", // Add your active styles here
 				// Add more active styles as needed
 			},
 		},
