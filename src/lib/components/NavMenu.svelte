@@ -321,7 +321,7 @@
 					? "color:white;background-color:#0b4374;width:100%;"
 					: "width:100%;"}
 			>
-				News
+				Policies
 			</button>
 		</Collapse>
 	{/if}
