@@ -7,6 +7,7 @@
 	import CarbonTrashCan from "~icons/carbon/trash-can";
 	import CarbonClose from "~icons/carbon/close";
 	import CarbonEdit from "~icons/carbon/edit";
+	import { theme } from "$lib/stores/theme";
 
 	export let conv: { id: string; title: string };
 
@@ -16,6 +17,18 @@
 		deleteConversation: string;
 		editConversationTitle: { id: string; title: string };
 	}>();
+
+	let color = "#FFF"; // Default text color
+	let isMouseOver = false;
+
+	function changeTextColor(shouldChangeColor) {
+		if ($theme == "dark") return;
+		if (shouldChangeColor) {
+			color = "#000"; // Change the text color to #000 on mouseover
+		} else {
+			color = "#FFF"; // Change it back to #FFF on mouseout
+		}
+	}
 </script>
 
 <a
@@ -33,7 +46,13 @@
 		{#if confirmDelete}
 			<span class="font-semibold"> Delete </span>
 		{/if}
-		{conv.title}
+		<div
+			on:mouseover={() => changeTextColor(true)}
+			on:mouseout={() => changeTextColor(false)}
+			style="color:{color}"
+		>
+			{conv.title}
+		</div>
 	</div>
 
 	{#if confirmDelete}
