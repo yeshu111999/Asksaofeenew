@@ -255,6 +255,13 @@
 			Settings
 		</button>
 	{/if}
+	{#if logoutConfirmationModal}
+		<ConfirmationModal
+			on:close={() => (logoutConfirmationModal = false)}
+			on:confirm={logOut}
+			confirmationText="Click confirm to logout"
+		/>
+	{/if}
 	<!-- {#if !canLogin}
 		<button
 			on:click={() => (openMore = !openMore)}

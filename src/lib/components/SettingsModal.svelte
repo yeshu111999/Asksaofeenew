@@ -24,6 +24,9 @@
 	let shareConversationsWithModelAuthors = settings.shareConversationsWithModelAuthors;
 	let isConfirmingDeletion = false;
 
+	let confirmationFunction: any;
+	let confirmationText = "";
+
 	const deleteAccount = () => {
 		let headers = {
 			Authorization: "Bearer " + this.token,
@@ -59,17 +62,29 @@
 			<!-- on:confirm={logOut} -->
 			<ConfirmationModal
 				on:close={() => (logoutConfirmationModal = false)}
-				on:confirm={deleteAccount}
-				confirmationText="Click confirm to Delete account"
+				on:confirm={confirmationFunction}
+				{confirmationText}
 			/>
 		{/if}
 		<!-- <div class="column flex items-start justify-between text-xl font-semibold text-gray-800"> -->
 		<div style="display: flex; flex-direction: column; align-items: baseline;">
-			<button type="button" class="group" on:click={() => (logoutConfirmationModal = true)}
-				><span class="buttonText">Delete account</span></button
+			<button
+				type="button"
+				class="group"
+				on:click={() => {
+					logoutConfirmationModal = true;
+					confirmationText = "Click confirm to Delete account";
+					confirmationFunction = deleteAccount;
+				}}><span class="buttonText">Delete account</span></button
 			>
-			<button type="button" class="group" on:click={() => alert("Hello")}
-				><span class="buttonText">Delete all conversations</span></button
+			<button
+				type="button"
+				class="group"
+				on:click={() => {
+					logoutConfirmationModal = true;
+					confirmationText = "Click confirm to Delete all conversations";
+					confirmationFunction = deleteAccount;
+				}}><span class="buttonText">Delete all conversations</span></button
 			>
 			<!-- <h2>Confirm</h2>
 			<button type="button" class="group" on:click={() => dispatch("close")}>
