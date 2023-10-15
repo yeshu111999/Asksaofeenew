@@ -22,6 +22,7 @@
 	let token = "";
 	let saveChangesLoader = false;
 	let initial = "";
+	let selectedImage;
 
 	$: isDisableUpdate =
 		oldName != name ||
@@ -37,6 +38,8 @@
 		oldName = name;
 		initial = oldName[0];
 	});
+
+	let fileInput;
 	function toggleEditing() {
 		editing = !editing;
 
@@ -49,6 +52,34 @@
 	function closeProfile() {
 		goto("/");
 	}
+
+	const handleImageSelect = (event) => {
+		const file = event.target.files[0];
+
+		if (file) {
+			const imageURL = URL.createObjectURL(file);
+			selectedImage = imageURL;
+
+			// Create a FormData object and send the image to the backend
+			const formData = new FormData();
+			formData.append("image", file);
+
+			fetch("/your-backend-endpoint", {
+				method: "POST",
+				body: formData,
+			})
+				.then((response) => {
+					if (response.ok) {
+						console.log("Image uploaded successfully.");
+					} else {
+						console.error("Error uploading image.");
+					}
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
+		}
+	};
 
 	async function saveChanges() {
 		saveChangesLoader = true;
@@ -171,8 +202,29 @@
 			{:else}
 				<div class="profile-image-container">
 					<!-- <img src={profileImageUrl} alt="Profile" class="profile-image" /> -->
-					<div class="profile-image">
-						<span class="initial">{initial}</span>
+					<div class="profile-image-wrap">
+						{#if selectedImage}
+							<img
+								src={selectedImage}
+								alt="Selected Image"
+								style="width: 150px; height:150px;  object-fit: cover; border-radius: 75px"
+							/>
+						{/if}
+						{#if !selectedImage}
+							<div class="profile-image">
+								<span class="initial">{initial}</span>
+							</div>
+						{/if}
+						<input
+							type="file"
+							accept="image/*"
+							on:change={handleImageSelect}
+							style="display: none"
+							bind:this={fileInput}
+						/>
+						<button on:click={() => fileInput.click()} class="profile-image-edit-wrap"
+							>Edit profile</button
+						>
 					</div>
 				</div>
 				<div>
@@ -276,6 +328,18 @@
 		align-items: center;
 		font-size: 48px;
 		color: #ffffff; /* Text color */
+	}
+
+	.profile-image-edit-wrap {
+		/* position: absolute; */
+	}
+
+	.profile-image-wrap {
+		display: flex;
+		flex-direction: column;
+		/* justify-content: right;
+		align-items: flex-end; */
+		width: fit-content;
 	}
 
 	.close {
