@@ -67,7 +67,7 @@
 			/>
 		{/if}
 		<!-- <div class="column flex items-start justify-between text-xl font-semibold text-gray-800"> -->
-		<div style="display: flex; flex-direction: column; align-items: baseline;">
+		<div style="display: flex; flex-direction: column; align-items: baseline; gap: 8px">
 			<div class="themeButtonWrap">
 				<span class="themeText">Theme</span>
 				<Switch
@@ -80,21 +80,21 @@
 			</div>
 			<button
 				type="button"
-				class="group"
-				on:click={() => {
-					logoutConfirmationModal = true;
-					confirmationText = "Click confirm to Delete account";
-					confirmationFunction = deleteAccount;
-				}}><span class="buttonText">Delete account</span></button
-			>
-			<button
-				type="button"
-				class="group"
+				class="groupd"
 				on:click={() => {
 					logoutConfirmationModal = true;
 					confirmationText = "Click confirm to Delete all conversations";
 					confirmationFunction = deleteAccount;
 				}}><span class="buttonText">Delete all conversations</span></button
+			>
+			<button
+				type="button"
+				class="groupd"
+				on:click={() => {
+					logoutConfirmationModal = true;
+					confirmationText = "Click confirm to Delete account";
+					confirmationFunction = deleteAccount;
+				}}><span class="buttonText">Delete account</span></button
 			>
 			<!-- <h2>Confirm</h2>
 			<button type="button" class="group" on:click={() => dispatch("close")}>
@@ -214,8 +214,14 @@
 		justify-content: space-between;
 		width: 100%;
 	}
+	.groupd {
+		padding: 8px;
+		background-color: rgb(243, 64, 64);
+		border-radius: 8px;
+	}
 	.buttonText {
 		font-size: 14px;
-		font-weight: 400;
+		font-weight: 600;
+		color: #fff;
 	}
 </style>
