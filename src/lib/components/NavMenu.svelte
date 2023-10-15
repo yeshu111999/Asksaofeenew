@@ -26,15 +26,22 @@
 
 	const useStyles = createStyles((theme) => ({
 		root: {
-			padding: "8px 16px", // Add your desired styles for the root class here
-			borderRadius: "4px", // For example, you can set padding and border radius
-			display: "flex",
-			alignItems: "center",
-			gap: "8px", // Add any other desired styles
-			color: "#000",
+			// padding: "8px 16px", // Add your desired styles for the root class here
+			// borderRadius: "4px", // For example, you can set padding and border radius
+			// display: "flex",
+			// alignItems: "center",
+			// gap: "8px", // Add any other desired styles
+			// color: "#000",
+			// color: "red",
 
 			"&.active": {
-				backgroundColor: "blue", // Add your active styles here
+				// backgroundColor: "blue", // Add your active styles here
+				// backgroundColor: "red", // Add your active styles here
+				background: $theme == "light" ? "white" : "#228be6",
+				color: $theme == "light" ? "#222" : "#fff",
+				borderRadius: 8,
+				fontSize: 16,
+				fontWeight: 600,
 				// Add more active styles as needed
 			},
 		},
@@ -129,7 +136,8 @@
 	style={$theme == "light" ? "background-color:#0b4374;color:white" : ""}
 >
 	<div>
-		<Tabs on:change={onActiveChange} variant="pills">
+		<!-- <Tabs on:change={onActiveChange} variant="pills"> -->
+		<Tabs on:change={onActiveChange} variant="unstyled">
 			<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
 			<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
 		</Tabs>
@@ -151,7 +159,10 @@
 		</a>
 		<Divider />
 	</div>
-	<div style="min-height:auto">
+	<div
+		class="chgatsScroll"
+		style="min-height:auto; overflow-Y: auto; display: flex; flex-direction: column; gap: 8px"
+	>
 		{#each conversations as conv (conv.id)}
 			<NavConversationItem on:editConversationTitle on:deleteConversation {conv} />
 		{/each}
@@ -359,7 +370,26 @@
 	.new-chat-outer {
 	}
 
-	.new-chat-outer-light {
+	.chgatsScroll::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	.chgatsScroll::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 5px grey;
+		border-radius: 10px;
+	}
+
+	/* Handle */
+	.chgatsScroll::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 10px;
+	}
+
+	/* Handle on hover */
+	.chgatsScroll::-webkit-scrollbar-thumb:hover {
+		background: rgba(255, 255, 255, 0.4);
+	}
+	Z .new-chat-outer-light {
 		display: flex;
 		justify-content: center;
 	}
