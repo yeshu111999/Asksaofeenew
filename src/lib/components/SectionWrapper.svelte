@@ -63,7 +63,7 @@
 
 	.content {
 		padding: 40px;
-		max-height: 80vh;
+		height: 80vh;
 		overflow-y: auto;
 	}
 	.top-bar {

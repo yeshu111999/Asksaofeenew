@@ -83,6 +83,10 @@
 		goto("/help");
 	}
 
+	function gotoExplore() {
+		goto("/explore");
+	}
+
 	function logOut() {
 		var cookiesToRemove = ["token", "name", "email", "userId"];
 
@@ -233,7 +237,7 @@
 			Settings
 		</button>
 	{/if}
-	{#if !canLogin}
+	<!-- {#if !canLogin}
 		<button
 			on:click={() => (openMore = !openMore)}
 			type="button"
@@ -249,8 +253,8 @@
 				<ChevronDown slot="rightIcon" />
 			{/if}
 		</button>
-	{/if}
-	{#if !canLogin}
+	{/if} -->
+	<!-- {#if !canLogin}
 		<Collapse open={openMore}>
 			<button
 				on:click={gotoAboutus}
@@ -324,7 +328,17 @@
 				Policies
 			</button>
 		</Collapse>
-	{/if}
+	{/if} -->
+	<button
+		on:click={gotoExplore}
+		type="button"
+		class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
+			? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+			: "button-light-theme"}
+		style={$theme == "light" ? "color:white;background-color:#0b4374;" : ""}
+	>
+		Explore
+	</button>
 	{#if !canLogin}
 		<button
 			on:click={logOut}
