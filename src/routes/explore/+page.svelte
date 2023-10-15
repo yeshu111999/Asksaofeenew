@@ -5,6 +5,7 @@
 	import SectionFaQs from "$lib/components/SectionFAQs.svelte";
 	import SectionContactUs from "$lib/components/SectionContactUs.svelte";
 	import SectionHelp from "$lib/components/SectionHelp.svelte";
+	import SectionPolicies from "$lib/components/SectionPolicies.svelte";
 	import { theme } from "$lib/stores/theme";
 
 	let activeTab = 0;
@@ -23,6 +24,9 @@
 		},
 		{
 			label: "Help",
+		},
+		{
+			label: "Policies",
 		},
 	];
 
@@ -58,6 +62,10 @@
 				{:else if activeContent == "Contact us"}
 					<div class="section-container">
 						<SectionContactUs />
+					</div>
+				{:else if activeContent == "Policies"}
+					<div class="section-container">
+						<SectionPolicies />
 					</div>
 				{:else}
 					<div class="section-container">
