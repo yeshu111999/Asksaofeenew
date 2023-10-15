@@ -44,4 +44,10 @@
 		color: blue;
 		text-decoration: underline;
 	}
+
+	@media (max-width: 600px) {
+		* {
+			font-size: 16px !important;
+		}
+	}
 </style>

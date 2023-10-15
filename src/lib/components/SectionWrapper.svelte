@@ -78,7 +78,7 @@
 	.close-btn {
 		border-radius: 50%;
 		padding: 10px;
-		background-color: #0b4374;
+		/* background-color: #0b4374; */
 	}
 
 	.close-icon {
@@ -90,5 +90,32 @@
 		font-size: 20px;
 		color: white;
 		font-weight: 600;
+	}
+
+	@media (max-width: 600px) {
+		.wrapper,
+		.wrapper-light {
+			padding: 0;
+			width: 100%;
+		}
+
+		.section-container,
+		.section-container-light {
+			height: 100%;
+		}
+
+		.content {
+			height: 100%;
+			padding: 20px;
+		}
+
+		.top-bar {
+			border-radius: 0;
+			padding: 12px 20px;
+		}
+
+		* {
+			font-size: 16px !important;
+		}
 	}
 </style>
