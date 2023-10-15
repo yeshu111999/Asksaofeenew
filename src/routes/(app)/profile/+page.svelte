@@ -1,6 +1,7 @@
 <!-- src/routes/Profile.svelte -->
 <script>
 	import { goto } from "$app/navigation";
+	import { goto } from "$app/navigation";
 	import { Card, TextInput, Button, PasswordInput } from "@svelteuidev/core";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
@@ -47,7 +48,6 @@
 	}
 
 	function closeProfile() {
-		//window.location.href = "/";
 		goto("/");
 	}
 
