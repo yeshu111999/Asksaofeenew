@@ -148,19 +148,21 @@
 	</div>
 	<div>
 		<Divider style="width:100%" />
-		<a
-			href={`${base}/`}
-			class={"flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700" +
-				$theme ==
-			"dark"
-				? "new-chat-outer"
-				: "new-chat-outer-light"}
-		>
-			New Chat &nbsp;
-			<ThemeIcon>
-				<Plus />
-			</ThemeIcon>
-		</a>
+		<div class={"flex justify-center"}>
+			<a
+				href={`${base}/`}
+				class={"flex items-center rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700" +
+					$theme ==
+				"dark"
+					? "new-chat-outer"
+					: "new-chat-outer-light"}
+			>
+				New Chat &nbsp;
+				<ThemeIcon>
+					<Plus />
+				</ThemeIcon>
+			</a>
+		</div>
 		<Divider />
 	</div>
 	<div
