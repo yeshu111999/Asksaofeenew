@@ -1,5 +1,6 @@
 <!-- src/routes/Profile.svelte -->
 <script>
+	import { goto } from "$app/navigation";
 	import { Card, TextInput, Button, PasswordInput } from "@svelteuidev/core";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
@@ -28,7 +29,6 @@
 	let profileImageUrl = "https://picsum.photos/200/300";
 
 	onMount(() => {
-		
 		name = Cookies.get("name");
 		email = Cookies.get("email");
 		token = Cookies.get("token");
@@ -47,7 +47,7 @@
 	}
 
 	function closeProfile() {
-		window.location.href = "/";
+		goto("/");
 	}
 
 	async function saveChanges() {
@@ -286,5 +286,19 @@
 	.close-btn {
 		width: 20px;
 		height: 20px;
+	}
+
+	@media (max-width: 600px) {
+		.container {
+			width: 100%;
+			height: 100vh;
+			max-width: 100%;
+			padding: 0;
+		}
+
+		.card {
+			border-radius: 0;
+			height: 100%;
+		}
 	}
 </style>

@@ -179,7 +179,8 @@
 			on:editConversationTitle={(ev) => editConversationTitle(ev.detail.id, ev.detail.title)}
 		/>
 	</MobileNav>
-	<nav class="grid max-h-screen grid-cols-1 grid-rows-[auto,1fr,auto] max-md:hidden">
+	<!-- <nav class="grid max-h-screen grid-cols-1 grid-rows-[auto,1fr,auto] max-md:hidden"> -->
+	<nav class="grid max-h-screen max-md:hidden">
 		<NavMenu
 			conversations={data.conversations}
 			user={data.user}
