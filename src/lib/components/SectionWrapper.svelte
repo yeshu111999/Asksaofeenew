@@ -63,7 +63,7 @@
 
 	.content {
 		padding: 40px;
-		max-height: 80vh;
+		height: 80vh;
 		overflow-y: auto;
 	}
 	.top-bar {
@@ -78,7 +78,7 @@
 	.close-btn {
 		border-radius: 50%;
 		padding: 10px;
-		background-color: black;
+		background-color: #0b4374;
 	}
 
 	.close-icon {
