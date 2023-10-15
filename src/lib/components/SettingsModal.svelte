@@ -51,7 +51,7 @@
 </script>
 
 <Modal on:close>
-	<div class="flex w-full flex-col gap-5 p-6">
+	<div class="flex w-full flex-col gap-5 p-6" style="width: 300px">
 		<div class="flex items-start justify-between text-xl font-semibold text-gray-800">
 			<h2>Settings</h2>
 			<button type="button" class="group" on:click={() => dispatch("close")}>
@@ -68,6 +68,16 @@
 		{/if}
 		<!-- <div class="column flex items-start justify-between text-xl font-semibold text-gray-800"> -->
 		<div style="display: flex; flex-direction: column; align-items: baseline;">
+			<div class="themeButtonWrap">
+				<span class="themeText">Theme</span>
+				<Switch
+					checked={themeVariable}
+					onLabel="Dark"
+					offLabel="Light"
+					size="md"
+					on:click={switchTheme}
+				/>
+			</div>
 			<button
 				type="button"
 				class="group"
@@ -139,16 +149,7 @@
 					</ul>
 				</div>
 			{/if}
-			<div class="themeButtonWrap">
-				<span class="themeText">Theme</span>
-				<Switch
-					checked={themeVariable}
-					onLabel="Dark"
-					offLabel="Light"
-					size="md"
-					on:click={switchTheme}
-				/>
-			</div>
+
 			<!-- <form
 				method="post"
 				action="{base}/conversations?/delete"
@@ -211,6 +212,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		width: 100%;
 	}
 	.buttonText {
 		font-size: 14px;
