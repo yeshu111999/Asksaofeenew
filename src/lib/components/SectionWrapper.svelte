@@ -78,7 +78,7 @@
 	.close-btn {
 		border-radius: 50%;
 		padding: 10px;
-		background-color: black;
+		background-color: #0b4374;
 	}
 
 	.close-icon {

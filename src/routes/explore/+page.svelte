@@ -109,14 +109,14 @@
 
 	button.active {
 		border-radius: 500px;
-		background: var(--brand-colors-rare-red, #a3452c);
+		background: #0b4374;
 		color: white;
 		color: var(--brand-colors-pure-white, #fff);
 	}
 
 	.dark button.active {
-		background: black;
-		color: white;
+		background: white;
+		color: #0b4374;
 	}
 
 	.section-container {
