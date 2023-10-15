@@ -391,9 +391,11 @@
 	async function onGoogleAuthSuccess(jwtCredentials) {
 		const profileData = JSON.parse(atob(jwtCredentials.credential.split(".")[1]));
 		var idToken = jwtCredentials.credential;
-		Cookies.set("token", idToken);
-		Cookies.set("email", profileData.email);
-		Cookies.set("name", profileData.name);
+		const expirationTime = new Date();
+		expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
+		Cookies.set("token", idToken, { expires: expirationTime });
+		Cookies.set("email", profileData.email, { expires: expirationTime });
+		Cookies.set("name", profileData.name, { expires: expirationTime });
 		console.log("email id", profileData.email);
 		window.location.href = "/";
 	}
@@ -403,10 +405,12 @@
 		let fullName = profile.getName();
 		let email = profile.getEmail();
 		let imageUrl = profile.getImageUrl();
-		Cookies.set("token", profile);
-		Cookies.set("email", email);
-		Cookies.set("name", fullName);
-		Cookies.set("imageUrl", imageUrl);
+		const expirationTime = new Date();
+		expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
+		Cookies.set("token", profile, { expires: expirationTime });
+		Cookies.set("email", email, { expires: expirationTime });
+		Cookies.set("name", fullName, { expires: expirationTime });
+		Cookies.set("imageUrl", imageUrl, { expires: expirationTime });
 		console.log("email id", email);
 		window.location.href = "/";
 	}
@@ -448,12 +452,14 @@
 					console.log("response", response);
 					if (response.status == 200) {
 						let data = await response.json();
-						Cookies.set("token", data.token);
+						const expirationTime = new Date();
+						expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
+						Cookies.set("token", data.token, { expires: expirationTime });
 						let payload = parseJwt(data.token);
-						Cookies.set("name", payload.username);
-						Cookies.set("email", payload.email);
-						Cookies.set("userId", payload.userId);
-						Cookies.set("phoneNumber", payload.phoneNumber);
+						Cookies.set("name", payload.username, { expires: expirationTime });
+						Cookies.set("email", payload.email, { expires: expirationTime });
+						Cookies.set("userId", payload.userId, { expires: expirationTime });
+						Cookies.set("phoneNumber", payload.phoneNumber, { expires: expirationTime });
 						window.location.href = "/";
 					} else if (response.status === 401) {
 						loginError = true;
@@ -530,11 +536,13 @@
 				.then(async (response) => {
 					if (response.status == 200) {
 						let data = await response.json();
-						Cookies.set("token", data.token);
+						const expirationTime = new Date();
+						expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
+						Cookies.set("token", data.token, { expires: expirationTime });
 						let payload = parseJwt(data.token);
-						Cookies.set("name", payload.username);
-						Cookies.set("email", payload.email);
-						Cookies.set("phoneNumber", payload.phoneNumber);
+						Cookies.set("name", payload.username, { expires: expirationTime });
+						Cookies.set("email", payload.email, { expires: expirationTime });
+						Cookies.set("phoneNumber", payload.phoneNumber, { expires: expirationTime });
 						Cookies.set("userId", payload.userId);
 						window.location.href = "/";
 					} else {
