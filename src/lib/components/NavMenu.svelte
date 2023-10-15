@@ -9,6 +9,7 @@
 	import NavConversationItem from "./NavConversationItem.svelte";
 	import type { LayoutData } from "../../routes/$types";
 	import { goto } from "$app/navigation";
+	import ConfirmationModal from "./ConfirmationModal.svelte";
 	import { Divider, Tooltip, ThemeIcon } from "@svelteuidev/core";
 
 	import { theme } from "$lib/stores/theme";
@@ -23,6 +24,8 @@
 		PlusCircled,
 	} from "radix-icons-svelte";
 	import { createStyles, Tabs, Collapse } from "@svelteuidev/core";
+
+	let logoutConfirmationModal = false;
 
 	const useStyles = createStyles((theme) => ({
 		root: {
@@ -64,6 +67,8 @@
 	export let user: LayoutData["user"];
 
 	export let loginModalVisible;
+
+	let confirMationPopUp = false;
 	let openMore = false;
 
 	function gotoProfile() {
@@ -250,6 +255,13 @@
 			Settings
 		</button>
 	{/if}
+	{#if logoutConfirmationModal}
+		<ConfirmationModal
+			on:close={() => (logoutConfirmationModal = false)}
+			on:confirm={logOut}
+			confirmationText="Click confirm to logout"
+		/>
+	{/if}
 	<!-- {#if !canLogin}
 		<button
 			on:click={() => (openMore = !openMore)}
@@ -266,6 +278,15 @@
 				<ChevronDown slot="rightIcon" />
 			{/if}
 		</button>
+	{/if}
+	{#if logoutConfirmationModal}
+		<ConfirmationModal
+			on:close={() => (logoutConfirmationModal = false)}
+			on:confirm={logOut}
+			confirmationText="Click confirm to logout"
+		/>
+	{/if}
+	{#if !canLogin}
 	{/if} -->
 	<!-- {#if !canLogin}
 		<Collapse open={openMore}>
@@ -354,7 +375,7 @@
 	</button>
 	{#if !canLogin}
 		<button
-			on:click={logOut}
+			on:click={() => (logoutConfirmationModal = true)}
 			type="button"
 			class={"flex h-9 flex-none items-center gap-1.5 rounded-lg pl-3 pr-2 " + $theme == "dark"
 				? "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
