@@ -1,5 +1,4 @@
 <script>
-	import { base } from "$app/paths";
 	import { Input } from "@svelteuidev/core";
 	import { MagnifyingGlass } from "radix-icons-svelte";
 	import ChatCard from "$lib/components/ChatCard.svelte";
@@ -18,10 +17,43 @@
 	import { SvelteUIProvider, Modal, Button, Loader } from "@svelteuidev/core";
 	import { Checkbox } from "@svelteuidev/core";
 
+	import LogoSmall from "$lib/components/icons/LogoSmall.svelte";
+	import { PUBLIC_APP_NAME } from "$env/static/public";
+
+	import { theme } from "$lib/stores/theme";
+	import { ChatBubble } from "radix-icons-svelte";
+
 	let searchInput = "";
 	let chatSection;
 	let openSearchFriends = false;
 	let searchFriendsInput = "";
+
+	import { createStyles, Tabs } from "@svelteuidev/core";
+
+	const useStyles = createStyles((them) => ({
+		root: {
+			// padding: "8px 16px", // Add your desired styles for the root class here
+			// borderRadius: "4px", // For example, you can set padding and border radius
+			// display: "flex",
+			// alignItems: "center",
+			// gap: "8px", // Add any other desired styles
+			// color: "#000",
+			// color: "red",
+
+			"&.active": {
+				// backgroundColor: "blue", // Add your active styles here
+				// backgroundColor: "red", // Add your active styles here
+				background: $theme == "light" ? "#228be6" : "#228be6",
+				color: $theme == "light" ? "#fff" : "#fff",
+				borderRadius: 8,
+				fontSize: 16,
+				fontWeight: 600,
+				// Add more active styles as needed
+			},
+		},
+	}));
+
+	$: ({ classes } = useStyles());
 
 	$: selected = selectedChat;
 
@@ -38,6 +70,7 @@
 	let chats = [];
 	let userId;
 	let searchResults;
+	let active = 1;
 
 	let isReadOnly = false;
 	let loading = false;
@@ -219,6 +252,15 @@
 			});
 	}
 
+	function onActiveChange(event) {
+		const { index, key } = event.detail;
+		if (index == 0) {
+			gotoHomePage();
+		} else {
+			return;
+		}
+	}
+
 	afterUpdate(() => {
 		if (chatSection) {
 			chatSection.scrollTop = chatSection.scrollHeight;
@@ -237,6 +279,13 @@
 <div class={themeVariable != "light" ? "wrapper" : "wrapper-light"}>
 	<div class={themeVariable != "light" ? "container" : "container-light"}>
 		<div class="left-container">
+			<div class="tabs">
+				<!-- <Tabs on:change={onActiveChange} variant="pills"> -->
+				<Tabs bind:active on:change={onActiveChange} variant="unstyled">
+					<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
+					<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
+				</Tabs>
+			</div>
 			<div class="chat-top">
 				<p class="title">Messages</p>
 				<Tooltip withArrow transitionDuration={200} label="Add Friends" position="bottom">
@@ -244,11 +293,11 @@
 						<PlusCircled size={24} />
 					</ActionIcon>
 				</Tooltip>
-				<Tooltip withArrow transitionDuration={200} label="ImmiGPT" position="bottom">
+				<!-- <Tooltip withArrow transitionDuration={200} label="ImmiGPT" position="bottom">
 					<button class="logo-btn" on:click={gotoHomePage}>
 						<Logo classNames="mr-1" />
 					</button>
-				</Tooltip>
+				</Tooltip> -->
 			</div>
 			<div class="search-input">
 				<Input
@@ -480,14 +529,24 @@
 	}
 
 	.list-of-friends {
-		min-height: 72vh;
+		height: 63vh;
 		overflow-y: auto;
+	}
+
+	.list-of-friends::-webkit-scrollbar {
+		width: 0 !important;
+	}
+	.list-of-friends {
+		overflow: -moz-scrollbars-none;
+	}
+	.list-of-friends {
+		-ms-overflow-style: none;
 	}
 
 	.chat-top {
 		display: flex;
 		justify-content: space-between;
-		padding: 20px;
+		padding: 0 20px 20px 20px;
 	}
 
 	.search-input {
@@ -513,6 +572,11 @@
 	.top span {
 		font-size: 18px;
 		color: grey;
+	}
+
+	.tabs {
+		padding: 12px;
+		box-sizing: border-box;
 	}
 
 	.chat-section {
