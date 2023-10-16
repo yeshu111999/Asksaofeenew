@@ -1,9 +1,20 @@
 <!-- src/routes/Profile.svelte -->
 <script>
 	import { goto } from "$app/navigation";
-	import { Card, TextInput, Button, PasswordInput } from "@svelteuidev/core";
+	import {
+		Card,
+		TextInput,
+		Button,
+		PasswordInput,
+		createStyles,
+		Tabs,
+		NativeSelect,
+		Chip,
+		Grid,
+	} from "@svelteuidev/core";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
+	import { theme } from "$lib/stores/theme";
 	let editing = false;
 	let oldValues = []; // Store the original values
 	let fields = [
@@ -23,6 +34,17 @@
 	let saveChangesLoader = false;
 	let initial = "";
 	let selectedImage;
+	let themeVariable = "light";
+
+	const useStyles = createStyles((theme) => ({
+		root: {
+			"&.active": {
+				backgroundColor: "rgba(255, 255, 255, 0.2)",
+				borderRadius: 8,
+			},
+		},
+	}));
+	$: ({ classes } = useStyles());
 
 	$: isDisableUpdate =
 		oldName != name ||
@@ -148,57 +170,138 @@
 		</div>
 		<div class="card-body">
 			{#if editing}
-				{#each fields as field, index (field.name)}
-					<div>
-						<label for={field.name.toLowerCase()}>{field.name}:</label>
-						{#if field.name === "Password"}
-							<div class="password-fields">
-								<PasswordInput
-									type="text"
-									placeholder="Old Password"
-									bind:value={oldPassword}
-									id="oldPassword"
-								/>
-								<PasswordInput
-									type="text"
-									placeholder="New Password"
-									bind:value={newPassword}
-									id="newPassword"
-								/>
-								<PasswordInput
-									type="text"
-									placeholder="Confirm Password"
-									bind:value={confirmPassword}
-									id="confirmPassword"
-								/>
+				<Tabs
+					variant="pills"
+					color={$theme == "dark"
+						? "rgba(255, 255, 255, 0.2)"
+						: "black" + themeVariable == "dark"
+						? "rgba(255, 255, 255, 0.2)"
+						: "black"}
+				>
+					<!-- position="apart" -->
+					<!-- orientation="vertical" -->
+					<Tabs.Tab label="About" class={classes.root + $theme == "light" ? "light" : "dark"}>
+						<div>
+							{#each fields as field, index (field.name)}
+								<div>
+									<label for={field.name.toLowerCase()}>{field.name}:</label>
+									{#if field.name === "Password"}
+										<div class="password-fields">
+											<PasswordInput
+												type="text"
+												placeholder="Old Password"
+												bind:value={oldPassword}
+												id="oldPassword"
+											/>
+											<PasswordInput
+												type="text"
+												placeholder="New Password"
+												bind:value={newPassword}
+												id="newPassword"
+											/>
+											<PasswordInput
+												type="text"
+												placeholder="Confirm Password"
+												bind:value={confirmPassword}
+												id="confirmPassword"
+											/>
+										</div>
+									{:else if field.name === "Email"}
+										<div>
+											<span>{email}</span>
+										</div>
+									{:else if field.name === "Mobile"}
+										<div>
+											<span>{mobileNumber}</span>
+										</div>
+									{:else}
+										<TextInput
+											placeholder={field.name}
+											type="text"
+											bind:value={name}
+											id={field.name.toLowerCase()}
+										/>
+									{/if}
+								</div>
+							{/each}
+							<div class="button-container">
+								<Button
+									loading={saveChangesLoader}
+									color="#3b82f6"
+									gradient={{ from: "grape", to: "pink", deg: 35 }}
+									on:click={saveChanges}
+									disabled={!isDisableUpdate}>Save Changes</Button
+								>
 							</div>
-						{:else if field.name === "Email"}
-							<div>
-								<span>{email}</span>
-							</div>
-						{:else if field.name === "Mobile"}
-							<div>
-								<span>{mobileNumber}</span>
-							</div>
-						{:else}
-							<TextInput
-								placeholder={field.name}
-								type="text"
-								bind:value={name}
-								id={field.name.toLowerCase()}
+						</div>
+					</Tabs.Tab>
+					<Tabs.Tab label="Profile" class={classes.root + $theme == "light" ? "light" : "dark"}>
+						<div>
+							<NativeSelect
+								data={["Student", "Professional", "Tourist"]}
+								placeholder="Choose your category"
+								label="Choose your category"
+								size="sm"
+								required={false}
 							/>
-						{/if}
-					</div>
-				{/each}
-				<div class="button-container">
-					<Button
-						loading={saveChangesLoader}
-						color="#3b82f6"
-						gradient={{ from: "grape", to: "pink", deg: 35 }}
-						on:click={saveChanges}
-						disabled={!isDisableUpdate}>Save Changes</Button
-					>
-				</div>
+							<NativeSelect
+								data={["USA", "Canada", "UK", "Singapore", "Germany"]}
+								placeholder="Choose the country of your choice"
+								label="Choose the country of your choice"
+								size="sm"
+								required={false}
+							/>
+							<div style="display: flex; padding: 16px; gap: 8px;">
+								<span style="font-size: 16px; font-weight: 600;">Type of course interseted</span>
+								<Chip variant="filled">Bachelors</Chip>
+								<Chip variant="filled">Masters</Chip>
+								<Chip variant="filled">Ph.D</Chip>
+							</div>
+							<div class="button-container">
+								<Button
+									loading={saveChangesLoader}
+									color="#3b82f6"
+									gradient={{ from: "grape", to: "pink", deg: 35 }}
+									on:click={saveChanges}
+									disabled={!isDisableUpdate}>Save Changes</Button
+								>
+							</div>
+						</div>
+					</Tabs.Tab>
+					<Tabs.Tab label="Background" class={classes.root + $theme == "light" ? "light" : "dark"}>
+						<div class="backGroundWrap">
+							<Grid justify="space-between">
+								<Grid.Col span={4}>
+									<TextInput placeholder="Enter college name" label="College name" />
+								</Grid.Col>
+								<Grid.Col span={4}>
+									<TextInput placeholder="Enter course name" label="Course name" />
+								</Grid.Col>
+								<Grid.Col span={4}>
+									<TextInput placeholder="Enter CGPA" label="CGPA" />
+								</Grid.Col>
+								<Grid.Col span={4}>
+									<TextInput placeholder="Enter graduation year" label="Graduation year" />
+								</Grid.Col>
+								<Grid.Col span={4}>
+									<TextInput placeholder="Enter experience" label="Experience" />
+								</Grid.Col>
+								<Grid.Col span={4}>
+									<TextInput placeholder="Enter Company" label="Company" />
+								</Grid.Col>
+							</Grid>
+						</div>
+						<div class="button-container">
+							<Button
+								loading={saveChangesLoader}
+								color="#3b82f6"
+								gradient={{ from: "grape", to: "pink", deg: 35 }}
+								on:click={saveChanges}
+								disabled={!isDisableUpdate}>Save Changes</Button
+							>
+						</div>
+					</Tabs.Tab>
+				</Tabs>
 			{:else}
 				<div class="profile-image-container">
 					<!-- <img src={profileImageUrl} alt="Profile" class="profile-image" /> -->
@@ -243,8 +346,13 @@
 					<Button
 						color="#3b82f6"
 						gradient={{ from: "grape", to: "pink", deg: 35 }}
-						on:click={toggleEditing}>Update Profile</Button
+						on:click={toggleEditing}>Complete Profile</Button
 					>
+					<!-- <Button
+						color="#3b82f6"
+						gradient={{ from: "grape", to: "pink", deg: 35 }}
+						on:click={toggleEditing}>Update Profile</Button
+					> -->
 				</div>
 			{/if}
 		</div>
@@ -252,6 +360,13 @@
 </main>
 
 <style>
+	.backGroundWrap {
+		padding: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+
 	.card {
 		width: 100%;
 		padding: 5%;
@@ -268,7 +383,7 @@
 	}
 
 	.container {
-		max-width: 60%;
+		/* max-width: 60%; */
 		margin: 0 auto;
 		padding: 5vw;
 		height: 100vh;
