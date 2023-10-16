@@ -45,7 +45,7 @@
 	};
 </script>
 
-<div class="relative min-h-0 min-w-0">
+<div class="relative min-h-0 min-w-0" style="background-color:#f8f8f8;">
 	{#if loginModalOpen}
 		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
 	{/if}
