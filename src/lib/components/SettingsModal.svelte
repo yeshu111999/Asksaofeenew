@@ -11,27 +11,95 @@
 	import type { Model } from "$lib/types/Model";
 	import type { LayoutData } from "../../routes/$types";
 	import { switchTheme } from "$lib/switchTheme";
+	import ConfirmationModal from "./ConfirmationModal.svelte";
+	import Cookies from "js-cookie";
+	import type { AnyBulkWriteOperation } from "mongodb";
+	import axios from "axios";
 
 	export let settings: LayoutData["settings"];
 	export let models: Array<Model>;
 
+	let logoutConfirmationModal = false;
+
 	let shareConversationsWithModelAuthors = settings.shareConversationsWithModelAuthors;
 	let isConfirmingDeletion = false;
 
-	const themePanda = (event) => {
-		console.log("evenst", event);
+	let confirmationFunction: any;
+	let confirmationText = "";
+
+	const deleteAccount = () => {
+		let headers = {
+			Authorization: "Bearer " + this.token,
+		};
+		console.log("headers", headers);
+		let gauth = Cookies.get("gauth");
+		if (gauth) {
+			headers["Google-Auth"] = "True";
+		}
+		axios
+			.post("https://backend.immigpt.net/deleteAccount", {}, { headers: headers })
+			.then((response: any) => {
+				console.log("response", response);
+			})
+			.catch((error: any) => {
+				console.log("error", error);
+			});
 	};
+
 	let themeVariable = localStorage.getItem("theme") == "dark" ? true : false;
 	const dispatch = createEventDispatcher<{ close: void }>();
 </script>
 
 <Modal on:close>
-	<div class="flex w-full flex-col gap-5 p-6">
+	<div class="flex w-full flex-col gap-5 p-6" style="width: 300px">
 		<div class="flex items-start justify-between text-xl font-semibold text-gray-800">
 			<h2>Settings</h2>
 			<button type="button" class="group" on:click={() => dispatch("close")}>
 				<CarbonClose class="text-gray-900 group-hover:text-gray-500" />
 			</button>
+		</div>
+		{#if logoutConfirmationModal}
+			<!-- on:confirm={logOut} -->
+			<ConfirmationModal
+				on:close={() => (logoutConfirmationModal = false)}
+				on:confirm={confirmationFunction}
+				{confirmationText}
+			/>
+		{/if}
+		<!-- <div class="column flex items-start justify-between text-xl font-semibold text-gray-800"> -->
+		<div style="display: flex; flex-direction: column; align-items: baseline; gap: 8px">
+			<div class="themeButtonWrap">
+				<span class="themeText">Theme</span>
+				<Switch
+					checked={themeVariable}
+					onLabel="Dark"
+					offLabel="Light"
+					size="md"
+					on:click={switchTheme}
+				/>
+			</div>
+			<button
+				type="button"
+				class="groupd"
+				on:click={() => {
+					logoutConfirmationModal = true;
+					confirmationText = "Click confirm to Delete all conversations";
+					confirmationFunction = deleteAccount;
+				}}><span class="buttonText">Delete all conversations</span></button
+			>
+			<button
+				type="button"
+				class="groupd"
+				on:click={() => {
+					logoutConfirmationModal = true;
+					confirmationText = "Click confirm to Delete account";
+					confirmationFunction = deleteAccount;
+				}}><span class="buttonText">Delete account</span></button
+			>
+			<!-- <h2>Confirm</h2>
+			<button type="button" class="group" on:click={() => dispatch("close")}>
+				<CarbonClose class="text-gray-900 group-hover:text-gray-500" />
+			</button> -->
 		</div>
 		<form
 			class="flex flex-col gap-5"
@@ -81,31 +149,26 @@
 					</ul>
 				</div>
 			{/if}
-			<div class="themeButtonWrap">
-				<span class="themeText">Theme</span>
-				<Switch
-					checked={themeVariable}
-					onLabel="Dark"
-					offLabel="Light"
-					size="md"
-					on:click={switchTheme}
-				/>
-			</div>
-			<form
+
+			<!-- <form
 				method="post"
 				action="{base}/conversations?/delete"
 				on:submit|preventDefault={() => (isConfirmingDeletion = true)}
-			>
-				<div style="display: flex; flex-direction: column; align-items:flex-start">
+			> -->
+			<!-- <div style="display: flex; flex-direction: column; align-items:flex-start">
 					<button type="submit" class="underline decoration-gray-300 hover:decoration-gray-700">
 						Delete account
 					</button>
-					<button type="submit" class="underline decoration-gray-300 hover:decoration-gray-700">
+					<button
+						type="submit"
+						on:click={() => (logoutConfirmationModal = true)}
+						class="underline decoration-gray-300 hover:decoration-gray-700"
+					>
 						Delete all conversations
 					</button>
 				</div>
 			</form>
-			<!-- <button
+			 <button
 				type="submit"
 				class="mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 ring-gray-400 ring-offset-1 transition-all focus-visible:outline-none focus-visible:ring hover:ring"
 			>
@@ -149,5 +212,16 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		width: 100%;
+	}
+	.groupd {
+		padding: 8px;
+		background-color: rgb(243, 64, 64);
+		border-radius: 8px;
+	}
+	.buttonText {
+		font-size: 14px;
+		font-weight: 600;
+		color: #fff;
 	}
 </style>

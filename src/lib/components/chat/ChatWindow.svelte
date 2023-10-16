@@ -24,6 +24,7 @@
 	export let models: Model[];
 	export let settings: LayoutData["settings"];
 	export let webSearchMessages: WebSearchUpdate[] = [];
+	import { theme } from "$lib/stores/theme";
 
 	export let loginRequired = false;
 	$: isReadOnly = !models.some((model) => model.id === currentModel.id);
@@ -45,7 +46,7 @@
 	};
 </script>
 
-<div class="relative min-h-0 min-w-0">
+<div class="relative min-h-0 min-w-0" style={$theme == "light" ? "background-color:#f8f8f8;" : ""}>
 	{#if loginModalOpen}
 		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
 	{/if}
