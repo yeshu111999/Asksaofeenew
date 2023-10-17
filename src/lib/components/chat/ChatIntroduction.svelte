@@ -85,7 +85,7 @@
 				</div>
 			</div>
 			<p class="text-base text-gray-600 dark:text-gray-400">
-				Making the community's best AI chat models available to everyone.
+				<strong>Generative AI for Immigration & Travel</strong>
 			</p>
 		</div>
 	</div>

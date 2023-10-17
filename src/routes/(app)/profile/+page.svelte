@@ -301,6 +301,14 @@
 							>
 						</div>
 					</Tabs.Tab>
+					<Tabs.Tab label="Documents" class={classes.root + ($theme == "light" ? "light" : "dark")}>
+						<div>
+							<!-- Add content for the "Documents" tab here -->
+							<p>Upload your documents here:</p>
+							<!-- Add document upload fields or any other content you want for this tab -->
+						</div>
+					</Tabs.Tab>
+					
 				</Tabs>
 			{:else}
 				<div class="profile-image-container">
