@@ -61,6 +61,15 @@
 		initial = oldName[0];
 	});
 
+	let questions = [
+		"Help in writing LOR",
+		"Help in writing SOP",
+		"Help in writing Resume",
+		"Help in college shortlisting",
+		"Help in applying application",
+		"Help in Visa interview preparation",
+	];
+
 	let fileInput;
 	function toggleEditing() {
 		editing = !editing;
@@ -161,7 +170,7 @@
 </script>
 
 <main class="container">
-	<div class="card">
+	<div class={$theme == "dark" ? "card dark" : "light card"}>
 		<!-- <p class="title">Profile</p> -->
 		<div class="close">
 			<button class="close-btn" on:click={closeProfile}
@@ -328,8 +337,16 @@
 						<div class="tab-wrapper">
 							<!-- Add content for the "Documents" tab here -->
 							<!-- Add document upload fields or any other content you want for this tab -->
-							<label for="file">Upload your resume</label>
-							<input type="file" name="file" id="file" />
+							<div class="file-upload">
+								<label for="file">Upload your resume</label>
+								<input type="file" name="file" id="file" />
+							</div>
+							<div class="questions">
+								<p class="services-header">Choose Services you would like to have?</p>
+								{#each questions as question, i}
+									<p class="question">{i + 1 + " ) " + question}</p>
+								{/each}
+							</div>
 						</div>
 					</Tabs.Tab>
 				</Tabs>
@@ -402,8 +419,16 @@
 		width: 100%;
 		padding: 5%;
 		border-radius: 6px;
-		background-color: rgb(31 41 55 / 0.3);
+
 		position: relative;
+	}
+
+	.card.light {
+		background-color: #f8f8f8;
+	}
+
+	.card.dark {
+		background-color: rgb(31 41 55 / 0.3);
 	}
 
 	.card-body {
@@ -418,6 +443,7 @@
 		margin: 0 auto;
 		padding: 5vw;
 		height: 100vh;
+		font-size: 16px;
 	}
 
 	label {
@@ -495,8 +521,18 @@
 	}
 
 	.close-btn {
-		width: 20px;
+		width: 35px;
+		height: 35px;
+		background: black;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+	}
+
+	.close-btn img {
 		height: 20px;
+		width: 20px;
 	}
 
 	.profile-wrapper {
@@ -512,7 +548,9 @@
 	}
 
 	.tab-wrapper {
-		margin-top: 12px;
+		/* margin-top: 12px; */
+		padding-top: 12px;
+		border-top: 1px solid;
 	}
 
 	@media (max-width: 600px) {
