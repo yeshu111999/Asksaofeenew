@@ -162,7 +162,7 @@
 
 <main class="container">
 	<div class="card">
-		<p class="title">Profile</p>
+		<!-- <p class="title">Profile</p> -->
 		<div class="close">
 			<button class="close-btn" on:click={closeProfile}
 				><img src="/chatui/close-icon.png" alt="close" /></button
@@ -181,7 +181,7 @@
 					<!-- position="apart" -->
 					<!-- orientation="vertical" -->
 					<Tabs.Tab label="About" class={classes.root + $theme == "light" ? "light" : "dark"}>
-						<div>
+						<div class="tab-wrapper">
 							{#each fields as field, index (field.name)}
 								<div>
 									<label for={field.name.toLowerCase()}>{field.name}:</label>
@@ -236,21 +236,26 @@
 						</div>
 					</Tabs.Tab>
 					<Tabs.Tab label="Profile" class={classes.root + $theme == "light" ? "light" : "dark"}>
-						<div>
-							<NativeSelect
-								data={["Student", "Professional", "Tourist"]}
-								placeholder="Choose your category"
-								label="Choose your category"
-								size="sm"
-								required={false}
-							/>
-							<NativeSelect
-								data={["USA", "Canada", "UK", "Singapore", "Germany"]}
-								placeholder="Choose the country of your choice"
-								label="Choose the country of your choice"
-								size="sm"
-								required={false}
-							/>
+						<div class="profile-wrapper tab-wrapper">
+							<div class="input-wrapper">
+								<label for="">Choose your category</label>
+								<NativeSelect
+									data={["Student", "Professional", "Tourist"]}
+									placeholder="Choose your category"
+									size="sm"
+									required={false}
+								/>
+							</div>
+							<div class="input-wrapper">
+								<label for="">Choose the country of your choice</label>
+								<NativeSelect
+									data={["USA", "Canada", "UK", "Singapore", "Germany"]}
+									placeholder="Choose the country of your choice"
+									size="sm"
+									required={false}
+								/>
+							</div>
+
 							<div style="display: flex; padding: 16px; gap: 8px;">
 								<span style="font-size: 16px; font-weight: 600;">Type of course interseted</span>
 								<Chip variant="filled">Bachelors</Chip>
@@ -269,25 +274,43 @@
 						</div>
 					</Tabs.Tab>
 					<Tabs.Tab label="Background" class={classes.root + $theme == "light" ? "light" : "dark"}>
-						<div class="backGroundWrap">
+						<div class="backGroundWrap tab-wrapper">
 							<Grid justify="space-between">
 								<Grid.Col span={4}>
-									<TextInput placeholder="Enter college name" label="College name" />
+									<div class="input-wrapper">
+										<label for="">College name</label>
+										<TextInput placeholder="Enter college name" />
+									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
-									<TextInput placeholder="Enter course name" label="Course name" />
+									<div class="input-wrapper">
+										<label for="">Course name</label>
+										<TextInput placeholder="Enter course name" />
+									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
-									<TextInput placeholder="Enter CGPA" label="CGPA" />
+									<div class="input-wrapper">
+										<label for="">CGPA</label>
+										<TextInput placeholder="Enter CGPA" />
+									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
-									<TextInput placeholder="Enter graduation year" label="Graduation year" />
+									<div class="input-wrapper">
+										<label for="">Graduation year</label>
+										<TextInput placeholder="Enter graduation year" />
+									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
-									<TextInput placeholder="Enter experience" label="Experience" />
+									<div class="input-wrapper">
+										<label for="">Experience</label>
+										<TextInput placeholder="Enter experience" />
+									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
-									<TextInput placeholder="Enter Company" label="Company" />
+									<div class="input-wrapper">
+										<label for="">Company</label>
+										<TextInput placeholder="Enter Company" />
+									</div>
 								</Grid.Col>
 							</Grid>
 						</div>
@@ -301,14 +324,14 @@
 							>
 						</div>
 					</Tabs.Tab>
-					<Tabs.Tab label="Documents" class={classes.root + ($theme == "light" ? "light" : "dark")}>
-						<div>
+					<Tabs.Tab label="Resume" class={classes.root + ($theme == "light" ? "light" : "dark")}>
+						<div class="tab-wrapper">
 							<!-- Add content for the "Documents" tab here -->
-							<p>Upload your documents here:</p>
 							<!-- Add document upload fields or any other content you want for this tab -->
+							<label for="file">Upload your resume</label>
+							<input type="file" name="file" id="file" />
 						</div>
 					</Tabs.Tab>
-					
 				</Tabs>
 			{:else}
 				<div class="profile-image-container">
@@ -474,6 +497,22 @@
 	.close-btn {
 		width: 20px;
 		height: 20px;
+	}
+
+	.profile-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.input-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.tab-wrapper {
+		margin-top: 12px;
 	}
 
 	@media (max-width: 600px) {
