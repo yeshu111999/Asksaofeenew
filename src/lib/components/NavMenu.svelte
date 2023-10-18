@@ -146,9 +146,9 @@
 >
 	<div>
 		<!-- <Tabs on:change={onActiveChange} variant="pills"> -->
-		<Tabs on:change={onActiveChange} variant="unstyled">
+		<Tabs on:change={onActiveChange} variant="unstyled" grow="true">
 			<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
-			<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
+			<!-- <Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} /> -->
 		</Tabs>
 	</div>
 	<div>
