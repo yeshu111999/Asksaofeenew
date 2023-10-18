@@ -29,28 +29,29 @@
 
 	const useStyles = createStyles((theme) => ({
 		root: {
-			// padding: "8px 16px", // Add your desired styles for the root class here
-			// borderRadius: "4px", // For example, you can set padding and border radius
-			// display: "flex",
-			// alignItems: "center",
-			// gap: "8px", // Add any other desired styles
-			// color: "#000",
-			// color: "red",
-
 			"&.active": {
-				// backgroundColor: "blue", // Add your active styles here
-				// backgroundColor: "red", // Add your active styles here
-				background: $theme == "light" ? "white" : "#228be6",
-				color: $theme == "light" ? "#222" : "#fff",
+				background: "#228be6",
+				color: "#fff",
 				borderRadius: 8,
 				fontSize: 16,
 				fontWeight: 600,
-				// Add more active styles as needed
 			},
 		},
 	}));
 
-	$: ({ classes } = useStyles());
+	const useStylesLight = createStyles((theme) => ({
+		root: {
+			"&.active": {
+				background: "white",
+				color: "#222",
+				borderRadius: 8,
+				fontSize: 16,
+				fontWeight: 600,
+			},
+		},
+	}));
+
+	$: ({ classes } = $theme == "dark" ? useStyles() : useStylesLight());
 
 	const dispatch = createEventDispatcher<{
 		shareConversation: { id: string; title: string };
@@ -146,10 +147,17 @@
 >
 	<div>
 		<!-- <Tabs on:change={onActiveChange} variant="pills"> -->
-		<Tabs on:change={onActiveChange} variant="unstyled">
-			<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
-			<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
-		</Tabs>
+		{#if $theme == "dark"}
+			<Tabs on:change={onActiveChange} variant="unstyled">
+				<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
+				<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
+			</Tabs>
+		{:else if $theme == "light"}
+			<Tabs on:change={onActiveChange} variant="unstyled">
+				<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
+				<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
+			</Tabs>
+		{/if}
 	</div>
 	<div>
 		<Divider style="width:100%" />
@@ -452,4 +460,14 @@
 		background-color: white !important;
 		border-radius: 4px;
 	}
+
+	/* .dark {
+		background-color: #228be6;
+		color: #fff;
+	}
+
+	.light {
+		background-color: #fff;
+		color: #222;
+	} */
 </style>
