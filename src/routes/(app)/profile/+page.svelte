@@ -11,10 +11,13 @@
 		NativeSelect,
 		Chip,
 		Grid,
+		Checkbox,
+		ActionIcon,
 	} from "@svelteuidev/core";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
 	import { theme } from "$lib/stores/theme";
+	import { Pencil1 } from "radix-icons-svelte";
 	let editing = false;
 	let oldValues = []; // Store the original values
 	let fields = [
@@ -35,11 +38,27 @@
 	let initial = "";
 	let selectedImage;
 	let themeVariable = "light";
+	let storeTempTheme = $theme;
+	let nameEditFlag = false;
+	let mailEditFlag = false;
+	let mobileEditFlag = false;
+	let passEditFlag = false;
+	let chooseCategoryEditFlag = false;
+	let chooseCountryEditFlag = false;
 
-	const useStyles = createStyles((theme) => ({
+	let collegeEditFlag = false;
+	let courseCountryEditFlag = false;
+	let cgpaEditFlag = false;
+	let gradYearEditFlag = false;
+	let experienceEditFlag = false;
+	let companyCountryEditFlag = false;
+
+	const useStyles = createStyles((themes) => ({
 		root: {
 			"&.active": {
-				backgroundColor: "rgba(255, 255, 255, 0.2)",
+				// backgroundColor: $theme == "dark" ? "rgba(255, 255, 255, 0.2)" : "rgb(11, 67, 116)",
+				// backgroundColor: "rgba(255, 255, 255, 0.2)",
+				backgroundColor: "rgb(11, 67, 116)",
 				borderRadius: 8,
 			},
 		},
@@ -183,9 +202,9 @@
 					variant="pills"
 					color={$theme == "dark"
 						? "rgba(255, 255, 255, 0.2)"
-						: "black" + themeVariable == "dark"
+						: "rgb(11, 67, 116)" + themeVariable == "dark"
 						? "rgba(255, 255, 255, 0.2)"
-						: "black"}
+						: "rgb(11, 67, 116)"}
 				>
 					<!-- position="apart" -->
 					<!-- orientation="vertical" -->
@@ -195,41 +214,92 @@
 								<div>
 									<label for={field.name.toLowerCase()}>{field.name}:</label>
 									{#if field.name === "Password"}
-										<div class="password-fields">
-											<PasswordInput
-												type="text"
-												placeholder="Old Password"
-												bind:value={oldPassword}
-												id="oldPassword"
-											/>
-											<PasswordInput
-												type="text"
-												placeholder="New Password"
-												bind:value={newPassword}
-												id="newPassword"
-											/>
-											<PasswordInput
-												type="text"
-												placeholder="Confirm Password"
-												bind:value={confirmPassword}
-												id="confirmPassword"
-											/>
-										</div>
+										{#if !passEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>**********</span>
+												<ActionIcon variant="hover" on:click={() => (passEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if passEditFlag}
+											<div class="password-fields">
+												<PasswordInput
+													type="text"
+													placeholder="Old Password"
+													bind:value={oldPassword}
+													id="oldPassword"
+												/>
+												<PasswordInput
+													type="text"
+													placeholder="New Password"
+													bind:value={newPassword}
+													id="newPassword"
+												/>
+												<PasswordInput
+													type="text"
+													placeholder="Confirm Password"
+													bind:value={confirmPassword}
+													id="confirmPassword"
+												/>
+											</div>
+										{/if}
 									{:else if field.name === "Email"}
-										<div>
+										<!-- {#if !mailEditFlag} -->
+										<div style="display: flex; gap: 8px; align-items: center">
 											<span>{email}</span>
+											<!-- <ActionIcon variant="hover" on:click={() => (mailEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon> -->
 										</div>
+										<!-- {:else if mailEditFlag}
+											<TextInput
+												placeholder={field.name}
+												type="text"
+												bind:value={email}
+												id={field.name.toLowerCase()}
+											/> -->
+										<!-- {/if} -->
 									{:else if field.name === "Mobile"}
-										<div>
+										<!-- <div>
 											<span>{mobileNumber}</span>
-										</div>
+										</div> -->
+										{#if !mobileEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>{mobileNumber}</span>
+												<ActionIcon variant="hover" on:click={() => (mobileEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if mobileEditFlag}
+											<TextInput
+												placeholder={field.name}
+												type="text"
+												bind:value={mobileNumber}
+												id={field.name.toLowerCase()}
+											/>
+										{/if}
 									{:else}
-										<TextInput
+										<!-- <TextInput
 											placeholder={field.name}
 											type="text"
 											bind:value={name}
 											id={field.name.toLowerCase()}
-										/>
+										/> -->
+										{#if !nameEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>{name}</span>
+												<ActionIcon variant="hover" on:click={() => (nameEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if nameEditFlag}
+											<TextInput
+												placeholder={field.name}
+												type="text"
+												bind:value={name}
+												id={field.name.toLowerCase()}
+											/>
+										{/if}
 									{/if}
 								</div>
 							{/each}
@@ -248,21 +318,39 @@
 						<div class="profile-wrapper tab-wrapper">
 							<div class="input-wrapper">
 								<label for="">Choose your category</label>
-								<NativeSelect
-									data={["Student", "Professional", "Tourist"]}
-									placeholder="Choose your category"
-									size="sm"
-									required={false}
-								/>
+								{#if !chooseCategoryEditFlag}
+									<div style="display: flex; gap: 8px; align-items: center">
+										<span>Student</span>
+										<ActionIcon variant="hover" on:click={() => (chooseCategoryEditFlag = true)}>
+											<Pencil1 />
+										</ActionIcon>
+									</div>
+								{:else if chooseCategoryEditFlag}
+									<NativeSelect
+										data={["Student", "Professional", "Tourist"]}
+										placeholder="Choose your category"
+										size="sm"
+										required={false}
+									/>
+								{/if}
 							</div>
 							<div class="input-wrapper">
 								<label for="">Choose the country of your choice</label>
-								<NativeSelect
-									data={["USA", "Canada", "UK", "Singapore", "Germany"]}
-									placeholder="Choose the country of your choice"
-									size="sm"
-									required={false}
-								/>
+								{#if !chooseCountryEditFlag}
+									<div style="display: flex; gap: 8px; align-items: center">
+										<span>USA</span>
+										<ActionIcon variant="hover" on:click={() => (chooseCountryEditFlag = true)}>
+											<Pencil1 />
+										</ActionIcon>
+									</div>
+								{:else if chooseCountryEditFlag}
+									<NativeSelect
+										data={["USA", "Canada", "UK", "Singapore", "Germany"]}
+										placeholder="Choose the country of your choice"
+										size="sm"
+										required={false}
+									/>
+								{/if}
 							</div>
 
 							<div style="display: flex; padding: 16px; gap: 8px;">
@@ -288,37 +376,98 @@
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">College name</label>
-										<TextInput placeholder="Enter college name" />
+										<!-- <TextInput placeholder="Enter college name" bind:value={'SASTRA'} /> -->
+										{#if !collegeEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>SASTRA</span>
+												<ActionIcon variant="hover" on:click={() => (collegeEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if collegeEditFlag}
+											<TextInput placeholder="Enter college name" value="SASTRA" />
+										{/if}
 									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">Course name</label>
-										<TextInput placeholder="Enter course name" />
+										{#if !courseCountryEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>B.Tech CSE</span>
+												<ActionIcon variant="hover" on:click={() => (courseCountryEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if courseCountryEditFlag}
+											<TextInput placeholder="Enter course name" value="B.Tech CSE" />
+										{/if}
 									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">CGPA</label>
-										<TextInput placeholder="Enter CGPA" />
+
+										{#if !cgpaEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>9.6</span>
+												<ActionIcon variant="hover" on:click={() => (cgpaEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if cgpaEditFlag}
+											<TextInput placeholder="Enter CGPA" value="9.6" />
+										{/if}
 									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">Graduation year</label>
-										<TextInput placeholder="Enter graduation year" />
+										{#if !gradYearEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>2022</span>
+												<ActionIcon variant="hover" on:click={() => (gradYearEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if gradYearEditFlag}
+											<TextInput placeholder="Enter graduation year" value="2022" />
+										{/if}
 									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">Experience</label>
-										<TextInput placeholder="Enter experience" />
+
+										{#if !experienceEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>2 Years</span>
+												<ActionIcon variant="hover" on:click={() => (experienceEditFlag = true)}>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if experienceEditFlag}
+											<TextInput placeholder="Enter experience" value="2 Years" />
+										{/if}
 									</div>
 								</Grid.Col>
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">Company</label>
-										<TextInput placeholder="Enter Company" />
+
+										{#if !companyCountryEditFlag}
+											<div style="display: flex; gap: 8px; align-items: center">
+												<span>Amazon</span>
+												<ActionIcon
+													variant="hover"
+													on:click={() => (companyCountryEditFlag = true)}
+												>
+													<Pencil1 />
+												</ActionIcon>
+											</div>
+										{:else if companyCountryEditFlag}
+											<TextInput placeholder="Enter Company" value="Amazon" />
+										{/if}
 									</div>
 								</Grid.Col>
 							</Grid>
@@ -344,9 +493,20 @@
 							<div class="questions">
 								<p class="services-header">Choose Services you would like to have?</p>
 								{#each questions as question, i}
-									<p class="question">{i + 1 + " ) " + question}</p>
+									<div style="display: flex; gap: 8px;">
+										<Checkbox size="sm" />
+										<p class="question">{i + 1 + " ) " + question}</p>
+									</div>
+									<!-- <p class="question">{i + 1 + " ) " + question}</p> -->
 								{/each}
 							</div>
+							<Button
+								loading={saveChangesLoader}
+								color="#3b82f6"
+								gradient={{ from: "grape", to: "pink", deg: 35 }}
+								on:click={saveChanges}
+								disabled={!isDisableUpdate}>Save Changes</Button
+							>
 						</div>
 					</Tabs.Tab>
 				</Tabs>
@@ -551,6 +711,12 @@
 		/* margin-top: 12px; */
 		padding-top: 12px;
 		border-top: 1px solid;
+	}
+
+	.questions {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
 	}
 
 	@media (max-width: 600px) {
