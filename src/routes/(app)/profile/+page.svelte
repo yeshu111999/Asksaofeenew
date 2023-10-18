@@ -244,21 +244,21 @@
 											</div>
 										{/if}
 									{:else if field.name === "Email"}
-										{#if !mailEditFlag}
-											<div style="display: flex; gap: 8px; align-items: center">
-												<span>{email}</span>
-												<ActionIcon variant="hover" on:click={() => (mailEditFlag = true)}>
+										<!-- {#if !mailEditFlag} -->
+										<div style="display: flex; gap: 8px; align-items: center">
+											<span>{email}</span>
+											<!-- <ActionIcon variant="hover" on:click={() => (mailEditFlag = true)}>
 													<Pencil1 />
-												</ActionIcon>
-											</div>
-										{:else if mailEditFlag}
+												</ActionIcon> -->
+										</div>
+										<!-- {:else if mailEditFlag}
 											<TextInput
 												placeholder={field.name}
 												type="text"
 												bind:value={email}
 												id={field.name.toLowerCase()}
-											/>
-										{/if}
+											/> -->
+										<!-- {/if} -->
 									{:else if field.name === "Mobile"}
 										<!-- <div>
 											<span>{mobileNumber}</span>
