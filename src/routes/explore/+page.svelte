@@ -78,6 +78,10 @@
 </div>
 
 <style>
+	.container {
+		width: 100%;
+		height: 100%;
+	}
 	.labels {
 		display: flex;
 		gap: 20px;

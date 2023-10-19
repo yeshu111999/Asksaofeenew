@@ -24,14 +24,14 @@
 
 <style>
 	.wrapper {
-		padding: 35px 100px;
+		/* padding: 35px 100px; */
 		height: 100vh;
 		background-color: #343a40;
 		display: flex;
 		align-items: center;
 	}
 	.wrapper-light {
-		padding: 35px 100px;
+		/* padding: 35px 100px; */
 		height: 100vh;
 		background-color: #fff;
 		display: flex;
@@ -48,6 +48,7 @@
 		width: 100%;
 		color: white;
 		flex-direction: column;
+		height: 100%;
 	}
 	.section-container-light {
 		display: flex;
@@ -59,6 +60,7 @@
 		color: black;
 		flex-direction: column;
 		width: 100%;
+		height: 100%;
 	}
 
 	.content {
