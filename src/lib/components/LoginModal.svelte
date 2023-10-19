@@ -46,6 +46,10 @@
 	let hideSendOtpBtn = false;
 	let showVerifyOtpBtn = false;
 
+	let checkMail = false;
+	let sentLink = false;
+	let resetLoader = false;
+
 	let googleLoginBtn;
 	let clientId = "885560999939-uv51l6cgtbt9t7063r7bahmf74hem9e3.apps.googleusercontent.com";
 
@@ -640,6 +644,30 @@
 			console.log(error);
 		}
 	}
+	async function forgotPassword() {
+		if (!emailId) {
+			checkMail = true;
+		} else {
+			resetLoader = true;
+			await fetch("https://backend.immigpt.net/sendResetPasswordMail?email=" + emailId, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then(async (response) => {
+					if (response.status == 200) {
+						sentLink = true;
+						checkMail = false;
+						resetLoader = false;
+					}
+					resetLoader = false;
+				})
+				.catch((error) => {
+					console.log("error.response", error.response.status == 401);
+				});
+		}
+	}
 
 	onMount(() => {
 		renderSignInButton();
@@ -683,8 +711,8 @@
 					/> -->
 					<TextInput bind:value={emailId} label="Email" placeholder="Your email" />
 				</div>
-				{#if emailId && !isEmailValid}
-					<p class="error">Enter a valid Email Id</p>
+				{#if (emailId && !isEmailValid) || checkMail}
+					<p class="error">{!checkMail ? "Enter a valid Email Id" : "Email Id is mandatary"}</p>
 				{/if}
 				<div>
 					<!-- <TextField
@@ -725,6 +753,17 @@
 				<div class="signin-text">
 					<p class="no-account-text">Don't have an account?</p>
 					<button class="signup-text" on:click={toggleSignup}>Sign up</button>
+				</div>
+				<div class="signin-text">
+					{#if !sentLink && !resetLoader}
+						<button class="signup-text" on:click={forgotPassword}>Forgot password ?</button>
+					{:else if !resetLoader}
+						<p style="color: green;">
+							We have sent a reset password link <br /> to your mail. Please check
+						</p>
+					{:else}
+						<p style="color: green;">Sending..</p>
+					{/if}
 				</div>
 			</div>
 		{:else}
