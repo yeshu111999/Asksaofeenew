@@ -117,6 +117,10 @@
 		let headers = {
 			Authorization: "Bearer " + Cookies.get("token"),
 		};
+		let gauth = Cookies.get("gauth");
+		if (gauth) {
+			headers["Google-Auth"] = "True";
+		}
 		let body = {
 			name: name,
 			email: email,
@@ -139,6 +143,7 @@
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
 				saveChangesLoader = false;
+				apiSuccessFlag = true;
 			})
 			.catch((error) => {
 				console.log(error);
@@ -697,6 +702,7 @@
 							icon={Cross2}
 							color="red"
 							closeButtonProps={{ title: "Hide notification" }}
+							on:click={() => (apiErrorFlag = false)}
 						>
 							Error in updating details
 						</Notification>
@@ -706,6 +712,7 @@
 							icon={Check}
 							color="green"
 							closeButtonProps={{ title: "Hide notification" }}
+							on:click={() => (apiSuccessFlag = false)}
 						>
 							Details updated successfully
 						</Notification>
