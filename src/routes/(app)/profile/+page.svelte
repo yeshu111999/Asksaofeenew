@@ -19,7 +19,7 @@
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
 	import { theme } from "$lib/stores/theme";
-	import { Pencil1, Cross2 } from "radix-icons-svelte";
+	import { Pencil1, Cross2, Check } from "radix-icons-svelte";
 	// const FormData = require("form-data");
 	import FormData from "form-data";
 	let editing = false;
@@ -58,6 +58,7 @@
 	let experienceEditFlag = false;
 	let companyCountryEditFlag = false;
 	let apiErrorFlag = false;
+	let apiSuccessFlag = false;
 
 	const useStyles = createStyles((themes) => ({
 		root: {
@@ -692,8 +693,21 @@
 						<!-- disabled={!isDisableUpdate} -->
 					</div>
 					{#if apiErrorFlag}
-						<Notification icon={Cross2} color="red">
-							Oops, this notification has no title
+						<Notification
+							icon={Cross2}
+							color="red"
+							closeButtonProps={{ title: "Hide notification" }}
+						>
+							Error in updating details
+						</Notification>
+					{/if}
+					{#if apiSuccessFlag}
+						<Notification
+							icon={Check}
+							color="green"
+							closeButtonProps={{ title: "Hide notification" }}
+						>
+							Details updated successfully
 						</Notification>
 					{/if}
 				</div>
