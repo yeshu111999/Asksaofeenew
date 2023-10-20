@@ -400,6 +400,7 @@
 		Cookies.set("token", idToken, { expires: expirationTime });
 		Cookies.set("email", profileData.email, { expires: expirationTime });
 		Cookies.set("name", profileData.name, { expires: expirationTime });
+		Cookies.set("Google-Auth", "true", { expires: expirationTime });
 		console.log("email id", profileData.email);
 		window.location.href = "/";
 	}
