@@ -13,11 +13,15 @@
 		Grid,
 		Checkbox,
 		ActionIcon,
+		Notification,
 	} from "@svelteuidev/core";
+	import axios from "axios";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
 	import { theme } from "$lib/stores/theme";
-	import { Pencil1 } from "radix-icons-svelte";
+	import { Pencil1, Cross2 } from "radix-icons-svelte";
+	// const FormData = require("form-data");
+	import FormData from "form-data";
 	let editing = false;
 	let oldValues = []; // Store the original values
 	let fields = [
@@ -45,6 +49,7 @@
 	let passEditFlag = false;
 	let chooseCategoryEditFlag = false;
 	let chooseCountryEditFlag = false;
+	let profilePic = "";
 
 	let collegeEditFlag = false;
 	let courseCountryEditFlag = false;
@@ -52,6 +57,7 @@
 	let gradYearEditFlag = false;
 	let experienceEditFlag = false;
 	let companyCountryEditFlag = false;
+	let apiErrorFlag = false;
 
 	const useStyles = createStyles((themes) => ({
 		root: {
@@ -68,7 +74,7 @@
 	$: isDisableUpdate =
 		oldName != name ||
 		(oldPassword && newPassword && confirmPassword && newPassword == confirmPassword);
-	let profileImageUrl = "https://picsum.photos/200/300";
+	let profileImageUrl = "https://picsum.photos/300/300";
 
 	onMount(() => {
 		name = Cookies.get("name");
@@ -79,6 +85,68 @@
 		oldName = name;
 		initial = oldName[0];
 	});
+
+	const getUserDetails = async () => {
+		let headers = {
+			Authorization: "Bearer " + Cookies.get("token"),
+		};
+		let response = await axios
+			.get("https://backend.immigpt.net/getUserProfile", { headers: headers })
+			.then((response) => {
+				// console.log("response", response);
+				(name = response.data.username),
+					(email = response.data.email),
+					(profilePic = response.data.profilePic);
+
+				// 	name: name,
+				// email: email,
+				// mobileNumber: mobileNumber,
+				// oldPassword: oldPassword,
+				// newPassword: newPassword,
+				// confirmPassword: confirmPassword,
+			})
+			.catch((error) => {
+				console.log("error", error);
+			});
+		console.log("response", response);
+	};
+
+	const updateUserDetails = async () => {
+		saveChangesLoader = true;
+		let headers = {
+			Authorization: "Bearer " + Cookies.get("token"),
+		};
+		let body = {
+			name: name,
+			email: email,
+			mobileNumber: mobileNumber,
+			oldPassword: oldPassword,
+			newPassword: newPassword,
+			confirmPassword: confirmPassword,
+		};
+		let data = new FormData();
+		data.append("request", JSON.stringify(body));
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "https://backend.immigpt.net/updateUserProfile",
+			headers: headers,
+			data: data,
+		};
+		axios
+			.request(config)
+			.then((response) => {
+				console.log(JSON.stringify(response.data));
+				saveChangesLoader = false;
+			})
+			.catch((error) => {
+				console.log(error);
+				saveChangesLoader = false;
+				apiErrorFlag = true;
+			});
+	};
+
+	getUserDetails();
 
 	let questions = [
 		"Help in writing LOR",
@@ -618,10 +686,16 @@
 							loading={saveChangesLoader}
 							color="#3b82f6"
 							gradient={{ from: "grape", to: "pink", deg: 35 }}
-							on:click={saveChanges}
-							disabled={!isDisableUpdate}>Save Changes</Button
+							on:click={updateUserDetails}>Save Changes</Button
 						>
+						<!-- on:click={saveChanges}>Save Changes</Button -->
+						<!-- disabled={!isDisableUpdate} -->
 					</div>
+					{#if apiErrorFlag}
+						<Notification icon={Cross2} color="red">
+							Oops, this notification has no title
+						</Notification>
+					{/if}
 				</div>
 			{:else}
 				<div class="profile-image-container">
