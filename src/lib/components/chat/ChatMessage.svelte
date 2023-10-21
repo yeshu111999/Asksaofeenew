@@ -133,18 +133,19 @@
 
 {#if message.from === "assistant"}
 	<div
-		class="group relative -mb-8 flex items-start justify-start gap-4 pb-8 leading-relaxed"
+		class="responseChatGroup group relative -mb-8 flex items-start justify-start leading-relaxed"
 		on:click={() => (isTapped = !isTapped)}
 		on:keypress={() => (isTapped = !isTapped)}
 	>
-		<img
-			alt=""
-			src="https://huggingface.co/avatars/2edb18bd0206c16b433841a47f53fa8e.svg"
-			class="mt-5 h-3 w-3 flex-none select-none rounded-full shadow-lg"
-		/>
-		<div
+		<div style="padding: 22px 0px 16px 16px; min-width: 32px; max-width: 32px">
+			<img alt="" src="https://huggingface.co/avatars/2edb18bd0206c16b433841a47f53fa8e.svg" />
+		</div>
+		<!-- class="h-3 w-3 flex-none select-none rounded-full shadow-lg"
+			style="padding: 16px; width: 32px;" -->
+		<!-- <div
 			class="relative min-h-[calc(2rem+theme(spacing[3.5])*2)] min-w-[60px] break-words rounded-2xl border border-gray-100 bg-gradient-to-br from-gray-50 px-5 py-3.5 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300"
-		>
+		> -->
+		<div class="responseTextWrap">
 			{#if searchUpdates && searchUpdates.length > 0}
 				<OpenWebSearchResults
 					classNames={tokens.length ? "mb-3.5" : ""}
@@ -232,14 +233,15 @@
 	</div>
 {/if}
 {#if message.from === "user"}
-	<div class="group relative flex items-start justify-start gap-4 max-sm:text-sm">
-		<div class="mt-5 h-3 w-3 flex-none rounded-full" />
+	<div class="userChatGroup group relative flex items-start justify-start max-sm:text-sm">
+		<div class="profilePic">T</div>
+		<!-- <div class="max-w-full whitespace-break-spaces break-words rounded-2xl px-5 py-3.5 text-gray-500 dark:text-gray-400"> -->
 		<div
-			class="max-w-full whitespace-break-spaces break-words rounded-2xl px-5 py-3.5 text-gray-500 dark:text-gray-400"
+			class="responseTextStyle text-black-500 dark:text-black-400 max-w-full whitespace-break-spaces break-words"
 		>
 			{message.content.trim()}
 		</div>
-		{#if !loading}
+		<!-- {#if !loading}
 			<div class="absolute right-0 top-3.5 flex gap-2 lg:-right-2">
 				{#if downloadLink}
 					<a
@@ -263,6 +265,46 @@
 					</button>
 				{/if}
 			</div>
-		{/if}
+		{/if} -->
 	</div>
 {/if}
+
+<style>
+	.userChatGroup {
+		background-color: #fff;
+		border-radius: 8px;
+		border: #e1e1e1 solid 1px;
+	}
+
+	.responseChatGroup {
+		border-radius: 8px;
+		border: #e1e1e1 solid 1px;
+		background-color: rgba(225, 223, 223, 0.2);
+		margin-bottom: 0px;
+	}
+
+	.profilePic {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 32px;
+		height: 32px;
+		background-color: #e1e1e1;
+		border-radius: 16px;
+		margin: 16px;
+		min-width: 32px;
+		max-width: 32px;
+		color: #5d5c5c;
+		font-weight: 600;
+		font-size: 12px;
+	}
+
+	.responseTextStyle {
+		padding: 20px 16px 16px 0px;
+	}
+
+	.responseTextWrap {
+		padding: 16px 16px 16px 16px;
+	}
+</style>
