@@ -46,7 +46,10 @@
 	};
 </script>
 
-<div class="relative min-h-0 min-w-0" style={$theme == "light" ? "background-color:#dfdfdf;" : ""}>
+<div
+	class="wrapper relative min-h-0 min-w-0"
+	style={$theme == "light" ? "background-color:#dfdfdf;" : ""}
+>
 	{#if loginModalOpen}
 		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
 	{/if}
@@ -143,3 +146,10 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.wrapper {
+		width: 100%;
+		height: 100%;
+	}
+</style>

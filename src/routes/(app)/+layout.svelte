@@ -18,6 +18,7 @@
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
 	import { SvelteUIProvider } from "@svelteuidev/core";
+	import { bubble } from "svelte/internal";
 
 	export let data;
 
@@ -28,7 +29,6 @@
 	let canLogin = true;
 
 	async function onError() {
-		// If a new different error comes, wait for the current error to hide first
 		if ($error && currentError && $error !== currentError) {
 			clearTimeout(errorToastTimeout);
 			currentError = null;
@@ -68,6 +68,20 @@
 		}
 	}
 
+	let recentSearchItems = [
+		"What is Immigration ?",
+		"What is Visa Stamping ?",
+		"What is the immigration process for international student?",
+	];
+
+	function getRecentSearches() {
+		recentSearchItems = [
+			"What is Immigration ?",
+			"What is Visa Stamping ?",
+			"What is the immigration process for international student?",
+		];
+	}
+
 	async function editConversationTitle(id: string, title: string) {
 		try {
 			const res = await fetch(`${base}/conversation/${id}`, {
@@ -104,14 +118,29 @@
 			: !data.settings.ethicsModalAcceptedAt && !!PUBLIC_APP_DISCLAIMER);
 
 	let loginModalVisible = false;
+	let userName;
+	let userMail;
+	let profileImg;
 
 	onMount(() => {
 		let token = Cookies.get("token");
 		if (!token) {
 			loginModalVisible = true;
+			goto("/");
 		}
 		if (token) {
 			canLogin = false;
+			//getRecentSearches();
+			userName = Cookies.get("name");
+			userMail = Cookies.get("email");
+			if (userName) {
+				let nameList = userName?.split(" ");
+				if (nameList.length > 1) {
+					profileImg = nameList[0][0] + nameList[1][0];
+				} else {
+					profileImg = nameList[0][0];
+				}
+			}
 		}
 	});
 </script>
@@ -138,7 +167,6 @@
 		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/favicon.png"
 		type="image/png"
 	/>
-	<!-- Icon Support for iOS Bookmark Home Screen -->
 	<link
 		rel="apple-touch-icon"
 		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/touch-icon-ipad-retina.png"
@@ -160,7 +188,7 @@
 	/>
 </svelte:head>
 
-<div
+<!-- <div
 	class="grid h-full w-screen grid-cols-1 grid-rows-[auto,1fr] overflow-hidden text-smd dark:text-gray-300 md:grid-cols-[280px,1fr] md:grid-rows-[1fr]"
 >
 	<MobileNav
@@ -179,7 +207,6 @@
 			on:editConversationTitle={(ev) => editConversationTitle(ev.detail.id, ev.detail.title)}
 		/>
 	</MobileNav>
-	<!-- <nav class="grid max-h-screen grid-cols-1 grid-rows-[auto,1fr,auto] max-md:hidden"> -->
 	<nav class="grid max-h-screen max-md:hidden">
 		<NavMenu
 			conversations={data.conversations}
@@ -208,4 +235,261 @@
 	<SvelteUIProvider>
 		<slot />
 	</SvelteUIProvider>
+</div> -->
+
+<div class="navbar-container">
+	<div class="top-navbar">
+		<p class="title">ImmiGpt</p>
+		<div class="user-profile">
+			<div class="profile-image">
+				<p>{profileImg}</p>
+			</div>
+			<div class="user-details">
+				<p class="user-name">{userName}</p>
+				<p class="user-email">{userMail}</p>
+			</div>
+			<span class="dropdown"><img src="/assets/icons/dropdown-icon.svg" alt="" /></span>
+		</div>
+	</div>
+	<div class="navbar-body">
+		<div class="left-menu">
+			<div class="left-menu-top">
+				<button class="new-search-btn">
+					<img src="/assets/icons/search-icon-white.svg" alt="" />
+					<p>New Search</p>
+				</button>
+			</div>
+			<div class="left-menu-center">
+				<p class="recent-searches-text">Recent Searches</p>
+				<div class="recent-searches">
+					{#each recentSearchItems as item}
+						<button class="recent-search-btn">
+							<img src="/assets/icons/search-icon-black.svg" alt="" />
+							<p>{item}</p>
+						</button>
+					{/each}
+				</div>
+			</div>
+			<div class="left-menu-bottom">
+				<button class="icon-text">
+					<img src="/assets/icons/template-icon-black.svg" alt="" />
+					<p>Browse Templates</p>
+				</button>
+				<button class="icon-text">
+					<img src="/assets/icons/chat-icon-black.svg" alt="" />
+					<p>P2P Chatter</p>
+				</button>
+				<button class="icon-text">
+					<img src="/assets/icons/visa-icon-black.svg" alt="" />
+					<p>Visa Preparation</p>
+				</button>
+				<button class="icon-text">
+					<img src="/assets/icons/help-icon-black.svg" alt="" />
+					<p>Immigration Help</p>
+				</button>
+				<div class="button-wrapper">
+					<button class="upgrade-btn"> Upgrade to Pro </button>
+				</div>
+			</div>
+		</div>
+		<div class="right-body">
+			<SvelteUIProvider>
+				<slot />
+			</SvelteUIProvider>
+		</div>
+	</div>
+	{#if (requiresLogin && data.messagesBeforeLogin === 0) || loginModalVisible}
+		<LoginModal settings={data.settings} />
+	{/if}
 </div>
+
+<style>
+	.navbar-container {
+		height: 100vh;
+		width: 100vw;
+	}
+	.top-navbar {
+		display: inline-flex;
+		padding: 15px 24px 15px 16px;
+		align-items: center;
+		background: #fff;
+		box-shadow: 0px 1px 0px 0px #e1e1e1;
+		height: 70px;
+		width: 100%;
+		justify-content: space-between;
+		border-bottom: 1px solid #e1e1e1;
+	}
+
+	.title {
+		color: #131313;
+		font-family: Inter;
+		font-size: 24px;
+		font-style: normal;
+		font-weight: 700;
+		line-height: normal;
+	}
+
+	.user-profile {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.profile-image {
+		display: flex;
+		padding: 12px 10px 11px 10px;
+		justify-content: center;
+		align-items: center;
+		border-radius: 32px;
+		background: #ececec;
+	}
+
+	.profile-image p {
+		color: #5d5c5c;
+
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+		letter-spacing: 0.14px;
+	}
+
+	.user-name {
+		color: #000;
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+	}
+
+	.user-email {
+		color: rgba(0, 0, 0, 0.54);
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	.left-menu {
+		width: 240px;
+		height: calc(100%-70px);
+		flex-shrink: 0;
+		background: #fff;
+		box-shadow: 1px 0px 0px 0px #e1e1e1;
+		border-right: 1px solid #e1e1e1;
+		position: relative;
+	}
+
+	.left-menu-top {
+		padding: 20px;
+	}
+
+	.navbar-body {
+		width: 100%;
+		display: flex;
+		height: calc(100vh - 70px);
+	}
+
+	.right-body {
+		height: 100%;
+		width: 100%;
+	}
+
+	.new-search-btn {
+		display: flex;
+		width: 100%;
+		height: 38px;
+		padding: 10px 16px;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		flex-shrink: 0;
+		border-radius: 8px;
+		background: rgba(0, 0, 0, 0.87);
+	}
+	.new-search-btn p {
+		color: #fff;
+		text-align: center;
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 18px; /* 138.462% */
+	}
+
+	.icon-text {
+		display: flex;
+		width: 100%;
+		padding: 10px 16px;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.button-wrapper {
+		padding: 0 20px 0 20px;
+		margin-top: 10px;
+	}
+
+	.upgrade-btn {
+		display: flex;
+		width: 100%;
+		padding: 10px 16px;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		border-radius: 8px;
+		background: rgba(0, 0, 0, 0.87);
+		color: white;
+	}
+
+	.left-menu-bottom {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		/* padding: 20px; */
+		height: 250px;
+		height: 250px;
+		padding-bottom: 20px;
+	}
+
+	.recent-searches-text {
+		color: #555;
+		font-family: Inter;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 16px;
+		padding: 0 20px 12px 20px;
+	}
+
+	.recent-search-btn {
+		display: flex;
+		width: 100%;
+		padding: 10px 16px;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.left-menu-center {
+		height: 350px;
+		overflow-y: auto;
+	}
+
+	.recent-search-btn p {
+		overflow: hidden;
+		color: rgba(0, 0, 0, 0.87);
+		text-overflow: ellipsis;
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 16px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
+		flex: 1 0 0;
+	}
+</style>

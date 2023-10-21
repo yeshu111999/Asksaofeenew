@@ -208,3 +208,7 @@
 		<slot />
 	</SvelteUIProvider>
 </div>
+
+<style>
+	@import "../global.css";
+</style>
