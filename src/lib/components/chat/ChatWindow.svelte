@@ -46,10 +46,7 @@
 	};
 </script>
 
-<div
-	class="wrapper relative min-h-0 min-w-0"
-	style={$theme == "light" ? "background-color:#dfdfdf;" : ""}
->
+<div class="relative min-h-0 min-w-0" style={$theme == "light" ? "background-color: #F7F7F7;" : ""}>
 	{#if loginModalOpen}
 		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
 	{/if}
@@ -70,9 +67,9 @@
 		}}
 	/>
 	<div
-		class="dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center bg-gradient-to-t from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
+		class="solidBootomWrap dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
 	>
-		<div class="flex w-full pb-3 max-md:justify-between">
+		<!-- <div class="flex w-full pb-3 max-md:justify-between">
 			{#if settings?.searchEnabled}
 				<WebSearchToggle />
 			{/if}
@@ -82,15 +79,16 @@
 					on:click={() => dispatch("stop")}
 				/>
 			{/if}
-		</div>
+		</div> -->
 		<form
 			on:submit|preventDefault={handleSubmit}
-			class="relative flex w-full max-w-4xl flex-1 items-center rounded-xl border bg-gray-100 focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
+			style="background-color: #fff; border-radius: 8px"
+			class="relative flex w-full max-w-4xl flex-1 items-center border focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
 			{isReadOnly ? 'opacity-30' : ''}"
 		>
 			<div class="flex w-full flex-1 border-none bg-transparent">
 				<ChatInput
-					placeholder="Ask anything"
+					placeholder="Ask for anything"
 					bind:value={message}
 					on:submit={handleSubmit}
 					on:keypress={() => {
@@ -118,12 +116,36 @@
 						disabled={!message || isReadOnly}
 						type="submit"
 					>
-						<CarbonSendAltFilled />
+						<!-- <CarbonSendAltFilled /> -->
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M5.323 19.8781L19.752 13.1791C20.75 12.7161 20.75 11.2821 19.752 10.8191L5.323 4.12205C4.288 3.64205 3.193 4.66005 3.58 5.74305L5.813 11.9971L3.58 18.2581C3.193 19.3401 4.288 20.3581 5.323 19.8781Z"
+								stroke="#323232"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M5.81 12H20.5"
+								stroke="#323232"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
 					</button>
 				{/if}
 			</div>
 		</form>
-		<div class="mt-2 flex justify-between self-stretch px-1 text-xs text-gray-400/90 max-sm:gap-2">
+		<div class="mt-2 flex justify-between self-stretch px-1 text-xs max-sm:gap-2">
 			<p>
 				Model: <a
 					href={currentModel.modelUrl || "https://huggingface.co/" + currentModel.name}
@@ -133,7 +155,7 @@
 				> <span class="max-sm:hidden">·</span><br class="sm:hidden" /> Generated content should be evaluated
 				for validity and accuracy when used legally.
 			</p>
-			{#if messages.length}
+			<!-- {#if messages.length}
 				<button
 					class="flex flex-none items-center hover:text-gray-400 hover:underline max-sm:rounded-lg max-sm:bg-gray-50 max-sm:px-2.5 dark:max-sm:bg-gray-800"
 					type="button"
@@ -142,14 +164,13 @@
 					<CarbonExport class="text-[.6rem] sm:mr-1.5 sm:text-primary-500" />
 					<div class="max-sm:hidden">Share this conversation</div>
 				</button>
-			{/if}
+			{/if} -->
 		</div>
 	</div>
 </div>
 
 <style>
-	.wrapper {
-		width: 100%;
-		height: 100%;
+	.solidBootomWrap {
+		background-color: #f7f7f7;
 	}
 </style>
