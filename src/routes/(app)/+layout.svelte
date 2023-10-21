@@ -225,7 +225,7 @@
 
 <div class="navbar-container">
 	<div class="top-navbar">
-		<p class="title">ImmiGpt</p>
+		<p class="title">ImmiGPT</p>
 		<div class="user-profile">
 			<div class="profile-image">
 				<p>{profileImg}</p>
