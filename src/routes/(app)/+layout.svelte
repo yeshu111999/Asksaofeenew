@@ -395,7 +395,7 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		/* justify-content: space-between; */
+		justify-content: space-between;
 	}
 
 	.left-menu-top {
