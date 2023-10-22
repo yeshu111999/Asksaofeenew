@@ -68,20 +68,6 @@
 		}
 	}
 
-	let recentSearchItems = [
-		"What is Immigration ?",
-		"What is Visa Stamping ?",
-		"What is the immigration process for international student?",
-	];
-
-	function getRecentSearches() {
-		recentSearchItems = [
-			"What is Immigration ?",
-			"What is Visa Stamping ?",
-			"What is the immigration process for international student?",
-		];
-	}
-
 	async function editConversationTitle(id: string, title: string) {
 		try {
 			const res = await fetch(`${base}/conversation/${id}`, {
@@ -239,7 +225,7 @@
 
 <div class="navbar-container">
 	<div class="top-navbar">
-		<p class="title">ImmiGpt</p>
+		<p class="title">ImmiGPT</p>
 		<div class="user-profile">
 			<div class="profile-image">
 				<p>{profileImg}</p>
@@ -262,10 +248,10 @@
 			<div class="left-menu-center">
 				<p class="recent-searches-text">Recent Searches</p>
 				<div class="recent-searches">
-					{#each recentSearchItems as item}
+					{#each data.conversations as item}
 						<button class="recent-search-btn">
 							<img src="/assets/icons/search-icon-black.svg" alt="" />
-							<p>{item}</p>
+							<p>{item.title}</p>
 						</button>
 					{/each}
 				</div>
