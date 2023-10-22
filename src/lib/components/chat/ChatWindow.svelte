@@ -74,7 +74,7 @@
 	<div
 		class="solidBootomWrap dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
 	>
-		<!-- <div class="flex w-full pb-3 max-md:justify-between">
+		<div class="flex w-full pb-3 max-md:justify-between">
 			{#if settings?.searchEnabled}
 				<WebSearchToggle />
 			{/if}
@@ -84,7 +84,7 @@
 					on:click={() => dispatch("stop")}
 				/>
 			{/if}
-		</div> -->
+		</div>
 		<form
 			on:submit|preventDefault={handleSubmit}
 			style="background-color: #fff; border-radius: 8px"
@@ -160,7 +160,7 @@
 				> <span class="max-sm:hidden">·</span><br class="sm:hidden" /> Generated content should be evaluated
 				for validity and accuracy when used legally.
 			</p>
-			<!-- {#if messages.length}
+			{#if messages.length}
 				<button
 					class="flex flex-none items-center hover:text-gray-400 hover:underline max-sm:rounded-lg max-sm:bg-gray-50 max-sm:px-2.5 dark:max-sm:bg-gray-800"
 					type="button"
@@ -169,7 +169,7 @@
 					<CarbonExport class="text-[.6rem] sm:mr-1.5 sm:text-primary-500" />
 					<div class="max-sm:hidden">Share this conversation</div>
 				</button>
-			{/if} -->
+			{/if}
 		</div>
 	</div>
 </div>
