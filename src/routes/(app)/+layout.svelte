@@ -249,8 +249,15 @@
 				<p class="recent-searches-text">Recent Searches</p>
 				<div class="recent-searches">
 					{#each data.conversations as conv}
-						<a class="recent-search-btn" href="{base}/conversation/{conv.id}">
-							<img src="/assets/icons/search-icon-black.svg" alt="" />
+						<a
+							class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
+							href="{base}/conversation/{conv.id}"
+						>
+							{#if conv.id === $page.params.id}
+								<img src="/assets/icons/search-icon-white.svg" alt="" />
+							{:else}
+								<img src="/assets/icons/search-icon-black.svg" alt="" />
+							{/if}
 							<p>{conv.title}</p>
 						</a>
 					{/each}
@@ -457,6 +464,15 @@
 		padding: 10px 16px;
 		align-items: center;
 		gap: 8px;
+	}
+
+	.recent-search-btn.active {
+		background-color: black;
+		border-radius: 4px;
+	}
+
+	.recent-search-btn.active p {
+		color: white;
 	}
 
 	.left-menu-center {
