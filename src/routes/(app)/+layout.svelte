@@ -240,19 +240,19 @@
 	<div class="navbar-body">
 		<div class="left-menu">
 			<div class="left-menu-top">
-				<button class="new-search-btn">
+				<a class="new-search-btn" href={`${base}/`}>
 					<img src="/assets/icons/search-icon-white.svg" alt="" />
 					<p>New Search</p>
-				</button>
+				</a>
 			</div>
 			<div class="left-menu-center">
 				<p class="recent-searches-text">Recent Searches</p>
 				<div class="recent-searches">
-					{#each data.conversations as item}
-						<button class="recent-search-btn">
+					{#each data.conversations as conv}
+						<a class="recent-search-btn" href="{base}/conversation/{conv.id}">
 							<img src="/assets/icons/search-icon-black.svg" alt="" />
-							<p>{item.title}</p>
-						</button>
+							<p>{conv.title}</p>
+						</a>
 					{/each}
 				</div>
 			</div>
