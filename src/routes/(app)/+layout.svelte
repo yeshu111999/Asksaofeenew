@@ -245,7 +245,7 @@
 					<p>New Search</p>
 				</a>
 			</div>
-			<div class="left-menu-center">
+			<div class="left-menu-center chgatsScroll">
 				<p class="recent-searches-text">Recent Searches</p>
 				<div class="recent-searches">
 					{#each data.conversations as conv}
@@ -297,6 +297,25 @@
 </div>
 
 <style>
+	.chgatsScroll::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	.chgatsScroll::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 5px grey;
+		border-radius: 10px;
+	}
+
+	/* Handle */
+	.chgatsScroll::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 10px;
+	}
+
+	/* Handle on hover */
+	.chgatsScroll::-webkit-scrollbar-thumb:hover {
+		background: rgba(255, 255, 255, 0.4);
+	}
 	.navbar-container {
 		height: 100vh;
 		width: 100vw;
@@ -374,6 +393,9 @@
 		box-shadow: 1px 0px 0px 0px #e1e1e1;
 		border-right: 1px solid #e1e1e1;
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		/* justify-content: space-between; */
 	}
 
 	.left-menu-top {
@@ -439,13 +461,16 @@
 	}
 
 	.left-menu-bottom {
-		position: absolute;
+		/* position: absolute; */
 		bottom: 0;
 		width: 100%;
 		/* padding: 20px; */
-		height: 250px;
-		height: 250px;
+		/* height: 250px;
+		height: 250px; */
 		padding-bottom: 20px;
+		border-top: 1px solid #e1e1e1;
+		background: white;
+		z-index: 1;
 	}
 
 	.recent-searches-text {
@@ -476,7 +501,8 @@
 	}
 
 	.left-menu-center {
-		height: 350px;
+		/* height: calc(100vh -390px); */
+		min-height: auto;
 		overflow-y: auto;
 	}
 
@@ -494,4 +520,14 @@
 		-webkit-line-clamp: 1;
 		flex: 1 0 0;
 	}
+
+	/* .left-menu-center::-webkit-scrollbar {
+		width: 0 !important;
+	}
+	.left-menu-center {
+		overflow: -moz-scrollbars-none;
+	}
+	.left-menu-center {
+		-ms-overflow-style: none;
+	} */
 </style>
