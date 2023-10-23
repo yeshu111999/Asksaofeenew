@@ -19,6 +19,7 @@
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
 	import { SvelteUIProvider } from "@svelteuidev/core";
 	import { bubble } from "svelte/internal";
+	import NavConversationItem from "$lib/components/NavConversationItem.svelte";
 
 	export let data;
 
@@ -245,43 +246,51 @@
 					<p>New Search</p>
 				</a>
 			</div>
-			<div class="left-menu-center chgatsScroll">
-				<p class="recent-searches-text">Recent Searches</p>
-				<div class="recent-searches">
-					{#each data.conversations as conv}
-						<a
-							class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
-							href="{base}/conversation/{conv.id}"
-						>
-							{#if conv.id === $page.params.id}
-								<img src="/assets/icons/search-icon-white.svg" alt="" />
-							{:else}
-								<img src="/assets/icons/search-icon-black.svg" alt="" />
-							{/if}
-							<p>{conv.title}</p>
-						</a>
-					{/each}
+			<div class="left-menu-body">
+				<div class="left-menu-center chgatsScroll">
+					<p class="recent-searches-text">Recent Searches</p>
+					<div class="recent-searches">
+						{#each data.conversations as conv}
+							<!-- <a
+								class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
+								href="{base}/conversation/{conv.id}"
+							>
+								{#if conv.id === $page.params.id}
+									<img src="/assets/icons/search-icon-white.svg" alt="" />
+								{:else}
+									<img src="/assets/icons/search-icon-black.svg" alt="" />
+								{/if}
+								<p>{conv.title}</p>
+							</a> -->
+							<NavConversationItem
+								on:editConversationTitle={(ev) =>
+									editConversationTitle(ev.detail.id, ev.detail.title)}
+								on:deleteConversation={(ev) => deleteConversation(ev.detail)}
+								{conv}
+							/>
+						{/each}
+					</div>
 				</div>
-			</div>
-			<div class="left-menu-bottom">
-				<button class="icon-text">
-					<img src="/assets/icons/template-icon-black.svg" alt="" />
-					<p>Browse Templates</p>
-				</button>
-				<button class="icon-text">
-					<img src="/assets/icons/chat-icon-black.svg" alt="" />
-					<p>P2P Chatter</p>
-				</button>
-				<button class="icon-text">
-					<img src="/assets/icons/visa-icon-black.svg" alt="" />
-					<p>Visa Preparation</p>
-				</button>
-				<button class="icon-text">
-					<img src="/assets/icons/help-icon-black.svg" alt="" />
-					<p>Immigration Help</p>
-				</button>
-				<div class="button-wrapper">
-					<button class="upgrade-btn"> Upgrade to Pro </button>
+				<div class="left-menu-bottom">
+					<button class="icon-text">
+						<img src="/assets/icons/template-icon-black.svg" alt="" />
+						<p>Browse Templates</p>
+					</button>
+					<button class="icon-text">
+						<img src="/assets/icons/chat-icon-black.svg" alt="" />
+						<p>P2P Chatter</p>
+					</button>
+					<button class="icon-text">
+						<img src="/assets/icons/visa-icon-black.svg" alt="" />
+						<p>Visa Preparation</p>
+					</button>
+					<button class="icon-text">
+						<img src="/assets/icons/help-icon-black.svg" alt="" />
+						<p>Immigration Help</p>
+					</button>
+					<div class="button-wrapper">
+						<button class="upgrade-btn"> Upgrade to Pro </button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -387,7 +396,7 @@
 
 	.left-menu {
 		width: 240px;
-		height: calc(100%-70px);
+		height: calc(100vh - 70px);
 		flex-shrink: 0;
 		background: #fff;
 		box-shadow: 1px 0px 0px 0px #e1e1e1;
@@ -461,12 +470,11 @@
 	}
 
 	.left-menu-bottom {
-		/* position: absolute; */
+		position: absolute;
 		bottom: 0;
 		width: 100%;
 		/* padding: 20px; */
-		/* height: 250px;
-		height: 250px; */
+		height: 250px;
 		padding-bottom: 20px;
 		border-top: 1px solid #e1e1e1;
 		background: white;
@@ -504,6 +512,7 @@
 		/* height: calc(100vh -390px); */
 		min-height: auto;
 		overflow-y: auto;
+		max-height: calc(100% - 250px);
 	}
 
 	.recent-search-btn p {
@@ -521,13 +530,7 @@
 		flex: 1 0 0;
 	}
 
-	/* .left-menu-center::-webkit-scrollbar {
-		width: 0 !important;
+	.left-menu-body {
+		height: 100%;
 	}
-	.left-menu-center {
-		overflow: -moz-scrollbars-none;
-	}
-	.left-menu-center {
-		-ms-overflow-style: none;
-	} */
 </style>
