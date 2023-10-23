@@ -12,6 +12,7 @@
 	export let conv: { id: string; title: string };
 
 	let confirmDelete = false;
+	let inputField;
 
 	const dispatch = createEventDispatcher<{
 		deleteConversation: string;
@@ -21,6 +22,9 @@
 	let color = "#FFF";
 	let bgColor = "#000";
 	let isMouseOver = false;
+	let isEditing = false;
+	let sessionName = conv.title;
+	let newSessionName = "";
 
 	function changeTextColor(shouldChangeColor) {
 		// if ($theme == "dark") return;
@@ -32,6 +36,25 @@
 			bgColor = "#FFF";
 		}
 	}
+
+	function focusInput() {
+		if (inputField) {
+			inputField.focus();
+			const value = inputField.value;
+			inputField.value = "";
+			inputField.value = value;
+		}
+	}
+
+	function editSessionName() {
+		isEditing = true;
+		newSessionName = sessionName;
+		focusInput();
+	}
+
+	$: {
+		focusInput();
+	}
 </script>
 
 <a
@@ -39,23 +62,60 @@
 	href="{base}/conversation/{conv.id}"
 	on:mouseleave={() => {
 		confirmDelete = false;
+		isEditing = false;
 	}}
 >
-	{#if conv.id === $page.params.id}
+	<!-- {#if conv.id === $page.params.id}
 		<img src="/assets/icons/search-icon-white.svg" alt="" />
-	{:else}
-		<img src="/assets/icons/search-icon-black.svg" alt="" />
-	{/if}
+	{:else} -->
+	<img src="/assets/icons/search-icon-black.svg" alt="" />
+	<!-- {/if} -->
 	{#if confirmDelete}
 		<span style="color:gray" class=""> Delete </span>
 	{/if}
-	<p>{conv.title}</p>
+	{#if isEditing}
+		<input
+			style="width:130px"
+			type="text"
+			bind:value={newSessionName}
+			bind:this={inputField}
+			on:input={() => focusInput()}
+			on:click|preventDefault={(e) => e.stopPropagation()}
+		/>
+		<button
+			type="button"
+			class="icon-button"
+			title="save"
+			on:click|preventDefault={() => {
+				isEditing = false;
+				sessionName = newSessionName;
+				dispatch("editConversationTitle", { id: conv.id, title: newSessionName });
+			}}
+		>
+			<CarbonCheckmark class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
+		</button>
+		<button
+			type="button"
+			class="icon-button"
+			title="Cancel"
+			on:click|preventDefault={() => {
+				isEditing = false;
+			}}
+		>
+			<CarbonClose class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
+		</button>
+	{:else}
+		<p>{conv.title}</p>
+	{/if}
 	{#if confirmDelete}
 		<button
 			type="button"
 			class="icon-button"
 			title="Confirm delete action"
-			on:click|preventDefault={() => dispatch("deleteConversation", conv.id)}
+			on:click|preventDefault={() => {
+				confirmDelete = false;
+				dispatch("deleteConversation", conv.id);
+			}}
 		>
 			<CarbonCheckmark class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
 		</button>
@@ -69,18 +129,18 @@
 		>
 			<CarbonClose class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
 		</button>
-	{:else}
+	{:else if !isEditing}
 		<button
 			type="button"
 			class="icon-button"
 			title="Edit conversation title"
-			on:click|preventDefault={() => {
-				const newTitle = prompt("Edit this conversation title:", conv.title);
-				if (!newTitle) return;
-				dispatch("editConversationTitle", { id: conv.id, title: newTitle });
+			on:click={() => {
+				focusInput();
 			}}
+			on:click|preventDefault={editSessionName}
 		>
-			<CarbonEdit class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
+			<!-- <CarbonEdit class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" /> -->
+			<img src="/assets/icons/edit-icon-black.svg" alt="" />
 		</button>
 
 		<button
@@ -95,7 +155,8 @@
 				}
 			}}
 		>
-			<CarbonTrashCan class="text-xs text-gray-400  hover:text-gray-500 dark:hover:text-gray-300" />
+			<!-- <CarbonTrashCan class="text-xs text-gray-400  hover:text-gray-500 dark:hover:text-gray-300" /> -->
+			<img src="/assets/icons/delete-icon-black.svg" alt="" />
 		</button>
 	{/if}
 </a>
@@ -180,17 +241,17 @@
 	}
 
 	.recent-search-btn.active {
-		background-color: black;
+		background-color: #ededed;
 		border-radius: 4px;
 	}
 
 	.recent-search-btn.active p {
-		color: white;
+		color: #323232;
 	}
 
 	.recent-search-btn p {
 		overflow: hidden;
-		color: rgba(0, 0, 0, 0.87);
+		color: #323232;
 		text-overflow: ellipsis;
 		font-family: Inter;
 		font-size: 13px;
