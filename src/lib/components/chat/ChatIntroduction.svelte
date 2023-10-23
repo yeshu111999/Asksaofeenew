@@ -56,7 +56,7 @@
 		root: {
 			"&.active": {
 				backgroundColor: "rgba(255, 255, 255, 0.2)",
-				borderRadius: 8,
+				// borderRadius: 8,
 			},
 		},
 	}));
@@ -97,14 +97,14 @@
 			<div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
 				<!-- <Tabs variant="unstyled" position="apart"> -->
 				<Tabs
-					variant="pills"
+					variant="default"
 					color={$theme == "dark"
 						? "rgba(255, 255, 255, 0.2)"
 						: "black" + themeVariable == "dark"
 						? "rgba(255, 255, 255, 0.2)"
 						: "black"}
 					position="apart"
-					orientation="vertical"
+					grow
 					on:change={renderDescriptionTab}
 				>
 					<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
