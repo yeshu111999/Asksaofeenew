@@ -5,12 +5,15 @@
 	import { afterUpdate, createEventDispatcher } from "svelte";
 	import { deepestChild } from "$lib/utils/deepestChild";
 	import { page } from "$app/stores";
+	import Cookies from "js-cookie";
+	import { TextInput, Button } from "@svelteuidev/core";
 
 	import CodeBlock from "../CodeBlock.svelte";
 	import CopyToClipBoardBtn from "../CopyToClipBoardBtn.svelte";
 	import IconLoading from "../icons/IconLoading.svelte";
 	import CarbonRotate360 from "~icons/carbon/rotate-360";
 	import CarbonDownload from "~icons/carbon/download";
+	import CarbonEdit from "~icons/carbon/edit";
 	import CarbonThumbsUp from "~icons/carbon/thumbs-up";
 	import CarbonThumbsDown from "~icons/carbon/thumbs-down";
 	import { PUBLIC_SEP_TOKEN } from "$lib/constants/publicSepToken";
@@ -55,6 +58,8 @@
 		retry: { content: string; id: Message["id"] };
 		vote: { score: Message["score"]; id: Message["id"] };
 	}>();
+
+	let userName = Cookies.get("name");
 
 	let contentEl: HTMLElement;
 	let loadingEl: IconLoading;
@@ -105,6 +110,9 @@
 			}, 600);
 		}
 	});
+
+	let editMessage = message.content;
+	let editFlag = false;
 
 	let searchUpdates: WebSearchUpdate[] = [];
 
@@ -234,15 +242,46 @@
 {/if}
 {#if message.from === "user"}
 	<div class="userChatGroup group relative flex items-start justify-start max-sm:text-sm">
-		<div class="profilePic">T</div>
+		<!-- <div class="profilePic">T</div> -->
+		<div class="profilePic">{userName?.charAt(0)}</div>
 		<!-- <div class="max-w-full whitespace-break-spaces break-words rounded-2xl px-5 py-3.5 text-gray-500 dark:text-gray-400"> -->
 		<div
 			class="responseTextStyle text-black-500 dark:text-black-400 max-w-full whitespace-break-spaces break-words"
 		>
-			{message.content.trim()}
+			{#if !editFlag}
+				{message.content.trim()}
+			{/if}
+			{#if editFlag}
+				<!-- <TextInput
+					placeholder=""
+					variant="unstyled"
+					radius="xs"
+					size="xs"
+					bind:value={editMessage}
+				/> -->
+				<input
+					type="text"
+					bind:value={editMessage}
+					style="height: auto; border-width: 0px; color: black; background-color: transparent; min-height: 28px; outline: 0px;"
+				/><br />
+				<Button
+					color="dark"
+					size="xs"
+					on:click={() => {
+						dispatch("retry", { content: editMessage, id: message.id });
+						editFlag = false;
+					}}
+				>
+					Submit
+				</Button>
+			{/if}
 		</div>
-		<!-- {#if !loading}
-			<div class="absolute right-0 top-3.5 flex gap-2 lg:-right-2">
+		{#if !loading}
+			<!-- <div class="absolute right-0 top-3.5 flex gap-2 lg:-right-2"> -->
+			<div
+				class="absolute right-0 lg:-right-2"
+				style="flex: 1;display: flex; gap: 8px; padding: 16px"
+			>
 				{#if downloadLink}
 					<a
 						class="rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden"
@@ -264,8 +303,19 @@
 						<CarbonRotate360 />
 					</button>
 				{/if}
+				{#if !readOnly}
+					<button
+						class="cursor-pointer rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden lg:-right-2"
+						title="Edit"
+						type="button"
+						on:click={() => (editFlag = true)}
+					>
+						<!-- on:click={() => dispatch("retry", { content: message.content, id: message.id })} -->
+						<CarbonEdit />
+					</button>
+				{/if}
 			</div>
-		{/if} -->
+		{/if}
 	</div>
 {/if}
 
