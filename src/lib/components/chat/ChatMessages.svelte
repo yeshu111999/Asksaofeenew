@@ -40,8 +40,17 @@
 	use:snapScrollToBottom={messages.length ? [...messages, ...webSearchMessages] : false}
 	bind:this={chatContainer}
 >
-	<div
+	<!-- <div
 		class="chat-intro mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl"
+	> -->
+	<!-- <div class="chat-intro-alone mx-auto flex flex-col px-5 xl:max-w-4xl"> -->
+	<!-- <div
+		class="chat-intro-alone mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl"
+	> -->
+	<div
+		class={messages.length > 0
+			? "chat-intro mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl"
+			: "chat-intro-alone mx-auto flex flex-col px-5 xl:max-w-4xl"}
 	>
 		{#each messages as message, i}
 			<ChatMessage
@@ -76,5 +85,12 @@
 	.chat-intro {
 		height: 100%;
 		width: 100%;
+	}
+	.chat-intro-alone {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
 	}
 </style>
