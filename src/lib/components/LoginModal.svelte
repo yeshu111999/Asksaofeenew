@@ -656,6 +656,7 @@
 
 	function openEmailApp() {
 		console.log("Open Email App");
+		window.open("https://mail.google.com", "_blank");
 	}
 
 	function NavigateToLogin() {
@@ -663,7 +664,7 @@
 		// showForgotPwd = false;
 		// resetMailSent = false;
 		// goto("/");
-		window.location.href="/";
+		window.location.href = "/";
 	}
 
 	async function forgotPassword() {
@@ -1016,7 +1017,7 @@
 								on:click={forgotPassword}
 								disabled={!isFpEmailValid}
 							>
-								Reset Password</button
+								{resetLoader ? "Sending.." : "Reset Password"}</button
 							>
 						</div>
 						<div class="signin-text center">
