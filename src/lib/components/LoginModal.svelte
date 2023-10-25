@@ -23,8 +23,10 @@
 	let isLoading = false;
 	let loginError = false;
 	let showSignUp = false;
+	let showForgotPwd = false;
 
 	let emailId = "";
+	let fpEmailId = "";
 	let mobileNumber = "";
 	let password = "";
 	let cnfPassword = "";
@@ -49,6 +51,7 @@
 	let checkMail = false;
 	let sentLink = false;
 	let resetLoader = false;
+	let resetMailSent = false;
 
 	let googleLoginBtn;
 	let clientId = "885560999939-uv51l6cgtbt9t7063r7bahmf74hem9e3.apps.googleusercontent.com";
@@ -347,7 +350,8 @@
 	}
 
 	$: isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(emailId);
-	let otp = '';
+	$: isFpEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(fpEmailId);
+	let otp = "";
 
 	// Computed property to check mobile number validity
 	$: isMobileValid = /^[0-9]{10}$/i.test(mobileNumber);
@@ -501,7 +505,8 @@
 
 	function toggleLogin() {
 		showSignUp = false;
-		renderSignInButton();
+		showForgotPwd = false;
+		// renderSignInButton();
 	}
 
 	function parseJwt(token: any) {
@@ -620,7 +625,7 @@
 			// };
 			let otpData = {
 				phoneNumber: countryCode.split("(")[0].trim() + mobileNumber,
-				otp: otp
+				otp: otp,
 			};
 			await fetch("https://backend.immigpt.net/verifyOTP", {
 				method: "POST",
@@ -643,12 +648,32 @@
 			console.log(error);
 		}
 	}
+
+	function toggleForgotPwd() {
+		console.log("toggle forgot pwd");
+		showForgotPwd = true;
+	}
+
+	function openEmailApp() {
+		console.log("Open Email App");
+		window.open("https://mail.google.com", "_blank");
+	}
+
+	function NavigateToLogin() {
+		// showSignUp = false;
+		// showForgotPwd = false;
+		// resetMailSent = false;
+		// goto("/");
+		window.location.href = "/";
+	}
+
 	async function forgotPassword() {
-		if (!emailId) {
+		if (!fpEmailId) {
 			checkMail = true;
 		} else {
 			resetLoader = true;
-			await fetch("https://backend.immigpt.net/sendResetPasswordMail?email=" + emailId, {
+
+			await fetch("https://backend.immigpt.net/sendResetPasswordMail?email=" + fpEmailId, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -657,6 +682,8 @@
 				.then(async (response) => {
 					if (response.status == 200) {
 						sentLink = true;
+						showForgotPwd = false;
+						resetMailSent = true;
 						checkMail = false;
 						resetLoader = false;
 					}
@@ -677,16 +704,35 @@
 	<div class="wrapper">
 		<div class="header">
 			<p class="app-title">ImmiGPT</p>
-			{#if showSignUp}
+			{#if showSignUp && !showForgotPwd && !resetMailSent}
 				<p class="login-text">Create your account</p>
 				<p class="welcome-text">Enjoy benefits of ImmiGPT in seconds</p>
-			{:else}
+			{:else if !showSignUp && !showForgotPwd && !resetMailSent}
 				<p class="login-text">Login to your account</p>
 				<p class="welcome-text">Welcome back ! Please Enter your details</p>
+			{:else if showForgotPwd && !resetMailSent}
+				<p class="login-text">Forgot Password</p>
+				<p class="welcome-text">No worries, we’ll send you reset instructions.</p>
+			{:else if resetMailSent}
+				<p class="login-text">Check your mail</p>
+				<p class="gray-text">We sent a password reset link to</p>
+				<p class="welcome-text">{fpEmailId}</p>
+				<button class="login-btn" on:click={openEmailApp}> Open Email App</button>
+				<div class="signin-text center">
+					<p class="no-account-text">Didn't Recieve the email?</p>
+					<button class="signup-text" on:click={forgotPassword}>Click to resend</button>
+				</div>
+				<div class="signin-text center">
+					<button on:click={NavigateToLogin} class="signup-text  back-btn">
+						<img src="/assets/icons/back-icon-black.svg" alt="" />
+						<p>Back to Login</p></button
+					>
+				</div>
 			{/if}
 		</div>
-		<div class="login-popup">
-			<!-- <h2 class="flex items-center text-2xl font-semibold text-gray-800">
+		{#if !resetMailSent}
+			<div class="login-popup">
+				<!-- <h2 class="flex items-center text-2xl font-semibold text-gray-800">
 				<Logo classNames="mr-1" />
 				{PUBLIC_APP_NAME}
 				<div
@@ -695,111 +741,124 @@
 					v{PUBLIC_VERSION}
 				</div>
 			</h2> -->
-			{#if $page.data.requiresLogin}
-				<p
-					class="px-4 text-lg font-semibold leading-snug text-gray-800 sm:px-12"
-					style="text-wrap: balance;"
-				>
-					Please Sign in with Hugging Face to continue
-				</p>
-			{/if}
+				{#if $page.data.requiresLogin}
+					<p
+						class="px-4 text-lg font-semibold leading-snug text-gray-800 sm:px-12"
+						style="text-wrap: balance;"
+					>
+						Please Sign in with Hugging Face to continue
+					</p>
+				{/if}
 
-			{#if !showSignUp}
-				<div class="input-fields">
-					<div>
-						<TextInput bind:value={emailId} label="Email Address" placeholder="Your email" />
-					</div>
-					{#if (emailId && !isEmailValid) || checkMail}
-						<p class="error">{!checkMail ? "Enter a valid Email Id" : "Email Id is mandatary"}</p>
-					{/if}
-					<div>
-						<PasswordInput
-							bind:value={password}
-							type="password"
-							label="Password"
-							placeholder="Password"
-						/>
-					</div>
-					<div class="signin-text">
-						{#if !sentLink && !resetLoader}
-							<button class="signup-text" on:click={forgotPassword}>Forgot password ?</button>
-						{:else if !resetLoader}
+				{#if !showSignUp && !showForgotPwd && !resetMailSent}
+					<div class="input-fields">
+						<div>
+							<TextInput bind:value={emailId} label="Email Address" placeholder="Your email" />
+						</div>
+						{#if (emailId && !isEmailValid) || checkMail}
+							<p class="error">{!checkMail ? "Enter a valid Email Id" : "Email Id is mandatary"}</p>
+						{/if}
+						<div>
+							<PasswordInput
+								bind:value={password}
+								type="password"
+								label="Password"
+								placeholder="Password"
+							/>
+						</div>
+						<div class="signin-text">
+							<!-- {#if !sentLink && !resetLoader} -->
+							<button class="signup-text" on:click={toggleForgotPwd}>Forgot password ?</button>
+							<!-- {:else if !resetLoader}
 							<p style="color: green;">
 								We have sent a reset password link <br /> to your mail. Please check
 							</p>
 						{:else}
 							<p style="color: green;">Sending..</p>
-						{/if}
-					</div>
-					<div class="login-button">
-						<button class="login-btn {isLoginBtnDisabled? 'disabled': ''}" on:click={Login} disabled={isLoginBtnDisabled}> Login</button>
-						<!-- <Button
+						{/if} -->
+						</div>
+						<div class="login-button">
+							<button
+								class="login-btn {isLoginBtnDisabled ? 'disabled' : ''}"
+								on:click={Login}
+								disabled={isLoginBtnDisabled}
+							>
+								Login</button
+							>
+							<!-- <Button
 							bind:loading={isLoading}
 							color="#3b82f6"
 							on:click={Login}
 							disabled={isLoginBtnDisabled}
 							ripple>Login</Button
 						> -->
+						</div>
+						<div class="signin-text center">
+							<p class="no-account-text">Don't have an account?</p>
+							<button class="signup-text" on:click={toggleSignup}>Sign up</button>
+						</div>
 					</div>
-					<div class="signin-text center">
-						<p class="no-account-text">Don't have an account?</p>
-						<button class="signup-text" on:click={toggleSignup}>Sign up</button>
-					</div>
-				</div>
-			{:else}
-				<div class="input-fields">
-					<div>
-						<TextInput
-							bind:value={emailId}
-							disabled={showOtpInputs || OTPVerified}
-							label="Email"
-							placeholder="Email"
-						/>
-					</div>
-					{#if emailId && !isEmailValid}
-						<p class="error">Enter a valid Email Id</p>
-					{/if}
-					<div class="sendOTP">
-						<p>Mobile Number</p>
-						<div class="mobile-number-section">
-							<div class="country-code">
-								<NativeSelect
-									bind:value={countryCode}
-									data={countryCodes}
-									disabled={showOtpInputs || OTPVerified}
-								>
-									<svelte:component this={ChevronDown} slot="rightSection" />
-								</NativeSelect>
-							</div>
+				{:else if showSignUp && !showForgotPwd && !resetMailSent}
+					<div class="input-fields">
+						<div>
 							<TextInput
-								bind:value={mobileNumber}
-								placeholder="Mobile Number"
+								bind:value={emailId}
 								disabled={showOtpInputs || OTPVerified}
+								label="Email"
+								placeholder="Email"
 							/>
 						</div>
-
-						{#if mobileNumber && !isMobileValid}
-							<p class="error">Enter a valid mobile number</p>
+						{#if emailId && !isEmailValid}
+							<p class="error">Enter a valid Email Id</p>
 						{/if}
-						{#if !hideSendOtpBtn}
-							<div class="login-button">
-								<!-- <Button
+						<div class="sendOTP">
+							<p>Mobile Number</p>
+							<div class="mobile-number-section">
+								<div class="country-code">
+									<NativeSelect
+										bind:value={countryCode}
+										data={countryCodes}
+										disabled={showOtpInputs || OTPVerified}
+									>
+										<svelte:component this={ChevronDown} slot="rightSection" />
+									</NativeSelect>
+								</div>
+								<div style="width:100%;">
+									<TextInput 
+									bind:value={mobileNumber}
+									placeholder="Mobile Number"
+									disabled={showOtpInputs || OTPVerified}
+								/>
+								</div>
+							</div>
+
+							{#if mobileNumber && !isMobileValid}
+								<p class="error">Enter a valid mobile number</p>
+							{/if}
+							{#if !hideSendOtpBtn}
+								<div class="login-button">
+									<!-- <Button
 									size="xs"
 									disabled={isSentOtpBtnDisabled}
 									ripple
 									color="#3b82f6"
 									on:click={sendOtp}>Send OTP</Button -->
-								
-								<button class="login-btn otp-btn {isSentOtpBtnDisabled ? 'disabled': ''}" on:click={sendOtp} disabled={isSentOtpBtnDisabled}> Send OTP</button>
 
-							</div>
-						{/if}
-					</div>
-					{#if showOtpInputs && !OTPVerified}
-						<div class="otp-body">
-							<p class="enter-otp-small">Enter OTP</p>
-							<div id="otp" class="inputs">
-								<!-- <input
+									<button
+										class="login-btn otp-btn {isSentOtpBtnDisabled ? 'disabled' : ''}"
+										on:click={sendOtp}
+										disabled={isSentOtpBtnDisabled}
+									>
+										Send OTP</button
+									>
+								</div>
+							{/if}
+						</div>
+						{#if showOtpInputs && !OTPVerified}
+							<div class="otp-body">
+								<p class="enter-otp-small">Enter OTP</p>
+								<div id="otp" class="inputs">
+									<!-- <input
 									bind:value={firstDigit}
 									class="rounded"
 									type="text"
@@ -841,63 +900,68 @@
 									id="sixth"
 									maxlength="1"
 								/> -->
-								<input class="otp-field" type="text" bind:value={otp} maxlength="6">
-							</div>
-							
-							{#if isTimerRunning}
-								<p class="timer-text">
-									Didn't Receive? Resend in <span class="gold-text">{timer} s</span>
-								</p>
-							{/if}
-							{#if !isTimerRunning}
-								<div class="signin-text center">
-									<p class="no-account-text">Didn't Recieve?</p>
-									<button class="signup-text" on:click={resendOtp}>Resend OTP</button>
+									<input class="otp-field" type="text" bind:value={otp} maxlength="6" />
 								</div>
-							{/if}
-							{#if isTimerRunning}
-								<div class="login-button">
-									<!-- <Button
+
+								{#if isTimerRunning}
+									<p class="timer-text">
+										Didn't Receive? Resend in <span class="gold-text">{timer} s</span>
+									</p>
+								{/if}
+								{#if !isTimerRunning}
+									<div class="signin-text center">
+										<p class="no-account-text">Didn't Recieve?</p>
+										<button class="signup-text" on:click={resendOtp}>Resend OTP</button>
+									</div>
+								{/if}
+								{#if isTimerRunning}
+									<div class="login-button">
+										<!-- <Button
 										ripple
 										size="xs"
 										disabled={isVerifyOtpBtnDisabled}
 										color="#3b82f6"
 										on:click={verifyOtp}>Verify OTP</Button
 									> -->
-									<button class="login-btn otp-btn {isVerifyOtpBtnDisabled ? 'disabled': ''}" on:click={verifyOtp} disabled={isVerifyOtpBtnDisabled}> Verify OTP</button>
-
-								</div>
-							{/if}
-						</div>
-					{/if}
-					{#if OTPVerified}
-						<div>
-							<TextInput bind:value={firstName} label="First Name" placeholder="First Name" />
-						</div>
-						<div>
-							<TextInput bind:value={lastName} label="Last Name" placeholder="Last Name" />
-						</div>
-						<div>
-							<PasswordInput
-								bind:value={password}
-								type="password"
-								label="Password"
-								placeholder="Password"
-							/>
-						</div>
-						<div>
-							<TextInput
-								bind:value={cnfPassword}
-								type="password"
-								label="Confirm Password"
-								placeholder="Confirm Password"
-							/>
-						</div>
-						{#if password && cnfPassword && !passwordsMatch}
-							<p class="error">Passwords do not match</p>
+										<button
+											class="login-btn otp-btn {isVerifyOtpBtnDisabled ? 'disabled' : ''}"
+											on:click={verifyOtp}
+											disabled={isVerifyOtpBtnDisabled}
+										>
+											Verify OTP</button
+										>
+									</div>
+								{/if}
+							</div>
 						{/if}
-						<div class="login-button">
-							<!-- <button
+						{#if OTPVerified}
+							<div>
+								<TextInput bind:value={firstName} label="First Name" placeholder="First Name" />
+							</div>
+							<div>
+								<TextInput bind:value={lastName} label="Last Name" placeholder="Last Name" />
+							</div>
+							<div>
+								<PasswordInput
+									bind:value={password}
+									type="password"
+									label="Password"
+									placeholder="Password"
+								/>
+							</div>
+							<div>
+								<TextInput
+									bind:value={cnfPassword}
+									type="password"
+									label="Confirm Password"
+									placeholder="Confirm Password"
+								/>
+							</div>
+							{#if password && cnfPassword && !passwordsMatch}
+								<p class="error">Passwords do not match</p>
+							{/if}
+							<div class="login-button">
+								<!-- <button
 							type="submit"
 							class="signup-btn mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500 {isSignupBtnDisabled
 								? 'disabled'
@@ -907,7 +971,7 @@
 						>
 							{isLoading ? "Loading..." : "Sign up"}
 						</button> -->
-							<!-- <Button
+								<!-- <Button
 								bind:loading={isLoading}
 								color="#3b82f6"
 								on:click={handleSignUp}
@@ -915,68 +979,105 @@
 								ripple>{OTPVerified ? "Sign up" : "Verify"}</Button
 							> -->
 
-							<button class="login-btn otp-btn {OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled ? 'disabled' : ''}" on:click={handleSignUp} disabled={OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled}>{OTPVerified ? "Sign up" : "Verify"}</button>
-
-						</div>
-						{#if showSignupError}
-							<div class="signup-error">
-								<p class="error">{signUpError}</p>
+								<button
+									class="login-btn otp-btn {OTPVerified
+										? isSignupBtnDisabled
+										: !isOTPVerifyEnabled
+										? 'disabled'
+										: ''}"
+									on:click={handleSignUp}
+									disabled={OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled}
+									>{OTPVerified ? "Sign up" : "Verify"}</button
+								>
 							</div>
+							{#if showSignupError}
+								<div class="signup-error">
+									<p class="error">{signUpError}</p>
+								</div>
+							{/if}
 						{/if}
-					{/if}
-					<div class="signin-text center">
-						<p class="no-account-text">Already have an account?</p>
-						<button on:click={toggleLogin} class="signup-text">Login</button>
+						<div class="signin-text center">
+							<p class="no-account-text">Already have an account?</p>
+							<button on:click={toggleLogin} class="signup-text">Login</button>
+						</div>
 					</div>
-				</div>
-			{/if}
-			<!-- {#if !showSignUp} -->
-			<div class="google-button">
-				<div bind:this={googleLoginBtn} />
-				<!-- <div class="g-signin2" data-onsuccess={onSignIn} data-onfailure="onSignInFailure" /> -->
-			</div>
-			<!-- {/if} -->
-			{#if loginError}
-				<p class="error">Failed while logging in</p>
-				<!-- Display the error message in red -->
-			{/if}
-
-			{#if PUBLIC_APP_DATA_SHARING}
-				<p class="px-2 text-sm text-gray-500">
-					Your conversations will be shared with model authors unless you disable it from your
-					settings.
-				</p>
-			{/if}
-			<form
-				action="{base}/{$page.data.requiresLogin ? 'login' : 'settings'}"
-				target={isIframe ? "_blank" : ""}
-				method="POST"
-				class="flex w-full flex-col items-center gap-2"
-			>
-				{#if $page.data.requiresLogin}
-					<button
-						type="submit"
-						class="mt-2 flex items-center whitespace-nowrap rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500"
-					>
-						Sign in
-						{#if PUBLIC_APP_NAME === "HuggingChat"}
-							with <LogoHuggingFaceBorderless classNames="text-xl mr-1 ml-1.5" /> Hugging Face
+				{:else if showForgotPwd && !resetMailSent}
+					<div class="input-fields">
+						<div>
+							<TextInput
+								bind:value={fpEmailId}
+								label="Email Address"
+								placeholder="Ex: abc@gmail.com"
+							/>
+						</div>
+						{#if fpEmailId && !isFpEmailValid}
+							<p class="error">Enter a valid Email Id</p>
 						{/if}
-					</button>
-				{:else if $page.data.requiresLogin}
-					<input type="hidden" name="ethicsModalAccepted" value={true} />
-					{#each Object.entries(settings) as [key, val]}
-						<input type="hidden" name={key} value={val} />
-					{/each}
-					<button
-						type="submit"
-						class="mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500"
-					>
-						Login
-					</button>
+						<div class="login-button">
+							<button
+								class="login-btn otp-btn {!isFpEmailValid ? 'disabled' : ''}"
+								on:click={forgotPassword}
+								disabled={!isFpEmailValid}
+							>
+								{resetLoader ? "Sending.." : "Reset Password"}</button
+							>
+						</div>
+						<div class="signin-text center">
+							<button on:click={toggleLogin} class="signup-text  back-btn">
+								<img src="/assets/icons/back-icon-black.svg" alt="" />
+								<p>Back to Login</p></button
+							>
+						</div>
+					</div>
 				{/if}
-			</form>
-		</div>
+				{#if !resetMailSent}
+					<div class="google-button">
+						<div bind:this={googleLoginBtn} />
+						<!-- <div class="g-signin2" data-onsuccess={onSignIn} data-onfailure="onSignInFailure" /> -->
+					</div>
+				{/if}
+				{#if loginError}
+					<p class="error">Failed while logging in</p>
+					<!-- Display the error message in red -->
+				{/if}
+
+				{#if PUBLIC_APP_DATA_SHARING}
+					<p class="px-2 text-sm text-gray-500">
+						Your conversations will be shared with model authors unless you disable it from your
+						settings.
+					</p>
+				{/if}
+				<form
+					action="{base}/{$page.data.requiresLogin ? 'login' : 'settings'}"
+					target={isIframe ? "_blank" : ""}
+					method="POST"
+					class="flex w-full flex-col items-center gap-2"
+				>
+					{#if $page.data.requiresLogin}
+						<button
+							type="submit"
+							class="mt-2 flex items-center whitespace-nowrap rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500"
+						>
+							Sign in
+							{#if PUBLIC_APP_NAME === "HuggingChat"}
+								with <LogoHuggingFaceBorderless classNames="text-xl mr-1 ml-1.5" /> Hugging Face
+							{/if}
+						</button>
+					{:else if $page.data.requiresLogin}
+						<input type="hidden" name="ethicsModalAccepted" value={true} />
+						{#each Object.entries(settings) as [key, val]}
+							<input type="hidden" name={key} value={val} />
+						{/each}
+						<button
+							type="submit"
+							class="mt-2 rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500"
+						>
+							Login
+						</button>
+					{/if}
+				</form>
+			</div>
+		{/if}
 	</div>
 </Modal>
 
@@ -1070,11 +1171,11 @@
 		gap: 8px;
 	}
 
-	.otp-btn{
+	.otp-btn {
 		margin-top: 12px;
 	}
 
-	.otp-field{
+	.otp-field {
 		border: 1px solid rgba(225, 225, 225, 1);
 		width: 100%;
 		border-radius: 8px;
@@ -1162,17 +1263,35 @@
 		margin-top: 12px;
 	}
 
-	.login-btn.disabled{
-		background-color:gray;
+	.login-btn.disabled {
+		background-color: gray;
 		cursor: not-allowed;
 	}
 
-	.timer-text{
+	.timer-text {
 		color: rgba(146, 146, 146, 1);
 		text-align: end;
 	}
 
-	.no-account-text{
+	.no-account-text {
 		color: rgba(146, 146, 146, 1);
+	}
+
+	.back-btn {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.gray-text {
+		color: rgba(0, 0, 0, 0.54);
+
+		text-align: center;
+		font-family: Inter;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 24px;
 	}
 </style>

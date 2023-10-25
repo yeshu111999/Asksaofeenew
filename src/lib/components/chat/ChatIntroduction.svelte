@@ -109,7 +109,7 @@
 				position="center"
 				on:change={renderDescriptionTab}
 			>
-				<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
+				<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"} style={activeHomeTabIndex == 0 ? 'font-weight:500;':''}>
 					{#if activeHomeTabIndex == 0}
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
@@ -127,7 +127,7 @@
 						</div>
 					{/if}
 				</Tabs.Tab>
-				<Tabs.Tab label="Professional" class={classes.root}>
+				<Tabs.Tab label="Professional" class={classes.root} style={activeHomeTabIndex == 1 ? 'font-weight:500;':''}>
 					{#if activeHomeTabIndex == 1}
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
@@ -143,7 +143,7 @@
 						</div>
 					{/if}
 				</Tabs.Tab>
-				<Tabs.Tab label="Tourist" class={classes.root}>
+				<Tabs.Tab label="Tourist" class={classes.root} style={activeHomeTabIndex == 2 ? 'font-weight:500;':''}>
 					{#if activeHomeTabIndex == 2}
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
