@@ -823,11 +823,13 @@
 										<svelte:component this={ChevronDown} slot="rightSection" />
 									</NativeSelect>
 								</div>
-								<TextInput
+								<div style="width:100%;">
+									<TextInput 
 									bind:value={mobileNumber}
 									placeholder="Mobile Number"
 									disabled={showOtpInputs || OTPVerified}
 								/>
+								</div>
 							</div>
 
 							{#if mobileNumber && !isMobileValid}
