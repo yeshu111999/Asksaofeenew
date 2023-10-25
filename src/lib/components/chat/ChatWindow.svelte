@@ -49,7 +49,7 @@
 <div
 	class="relative min-h-0 min-w-0"
 	style={$theme == "light"
-		? "background-color: #F7F7F7; overflow-y: scroll; height: calc(100vh - 70px)"
+		? "background-color: #F7F7F7; overflow-y: auto; height: calc(100vh - 70px)"
 		: ""}
 >
 	{#if loginModalOpen}

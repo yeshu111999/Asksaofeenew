@@ -84,7 +84,7 @@
 		/>
 		<button
 			type="button"
-			class="icon-button"
+			class="icon-button active"
 			title="save"
 			on:click|preventDefault={() => {
 				isEditing = false;
@@ -96,7 +96,7 @@
 		</button>
 		<button
 			type="button"
-			class="icon-button"
+			class="icon-button active"
 			title="Cancel"
 			on:click|preventDefault={() => {
 				isEditing = false;
@@ -132,7 +132,7 @@
 	{:else if !isEditing}
 		<button
 			type="button"
-			class="icon-button"
+			class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
 			title="Edit conversation title"
 			on:click={() => {
 				focusInput();
@@ -145,7 +145,7 @@
 
 		<button
 			type="button"
-			class="icon-button"
+			class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
 			title="Delete conversation"
 			on:click|preventDefault={(event) => {
 				if (event.shiftKey) {
@@ -268,7 +268,7 @@
 		display: none;
 	}
 
-	.recent-search-btn:hover .icon-button {
+	 .icon-button.active{
 		display: block;
 	}
 </style>
