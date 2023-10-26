@@ -81,6 +81,9 @@
 		window.location.href = "/";
 	}
 
+	function openBlogs() {
+		window.open("https://immigpt.blog/", "_blank");
+	}
 	async function editConversationTitle(id: string, title: string) {
 		try {
 			const res = await fetch(`${base}/conversation/${id}`, {
@@ -372,7 +375,7 @@
 							</svg>
 							<span class="menuBtnTxt">Help</span>
 						</button>
-						<button class="menuBtnWrap">
+						<button on:click={openBlogs} class="menuBtnWrap">
 							<svg
 								width="24"
 								height="24"
@@ -526,10 +529,10 @@
 						<img src="/assets/icons/template-icon-black.svg" alt="" />
 						<p>Browse Templates</p>
 					</button>
-					<button class="icon-text">
+					<!-- <button class="icon-text">
 						<img src="/assets/icons/chat-icon-black.svg" alt="" />
 						<p>P2P Chatter</p>
-					</button>
+					</button> -->
 					<button class="icon-text">
 						<img src="/assets/icons/visa-icon-black.svg" alt="" />
 						<p>Visa Preparation</p>
@@ -538,7 +541,7 @@
 						<img src="/assets/icons/help-icon-black.svg" alt="" />
 						<p>Immigration Help</p>
 					</button>
-					<button class="icon-text">
+					<button on:click={openBlogs} class="icon-text">
 						<img src="/assets/icons/visa-icon-black.svg" alt="" />
 						<p>Blogs</p>
 					</button>
@@ -754,7 +757,7 @@
 		bottom: 0;
 		width: 100%;
 		/* padding: 20px; */
-		height: 250px;
+		height: 200px;
 		padding-bottom: 20px;
 		border-top: 1px solid #e1e1e1;
 		background: white;
@@ -792,7 +795,7 @@
 		/* height: calc(100vh -390px); */
 		min-height: auto;
 		overflow-y: auto;
-		max-height: calc(100% - 250px);
+		max-height: calc(100% - 200px);
 	}
 
 	.recent-search-btn p {
