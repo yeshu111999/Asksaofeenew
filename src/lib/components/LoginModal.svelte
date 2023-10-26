@@ -9,7 +9,7 @@
 	import Logo from "./icons/Logo.svelte";
 	export let settings: LayoutData["settings"];
 	import Cookies from "js-cookie";
-	import { TextInput, Button, PasswordInput, NativeSelect } from "@svelteuidev/core";
+	import { TextInput, Button, PasswordInput, NativeSelect, Menu } from "@svelteuidev/core";
 	import { EnvelopeClosed, ChevronDown } from "radix-icons-svelte";
 	//import { AES } from "crypto-js";
 
@@ -52,6 +52,8 @@
 	let sentLink = false;
 	let resetLoader = false;
 	let resetMailSent = false;
+
+	let countryCodeMenuFlag = false;
 
 	let googleLoginBtn;
 	let clientId = "885560999939-uv51l6cgtbt9t7063r7bahmf74hem9e3.apps.googleusercontent.com";
@@ -407,6 +409,12 @@
 
 		window.google.accounts.id.prompt();
 	}
+
+	let filteredItems = searchText => {
+            return countryCodes.filter(item =>
+                item.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
 
 	async function onGoogleAuthSuccess(jwtCredentials) {
 		const profileData = JSON.parse(atob(jwtCredentials.credential.split(".")[1]));
@@ -834,18 +842,28 @@
 							<p>Mobile Number</p>
 							<div class="mobile-number-section">
 								<div class="country-code">
-									<NativeSelect
+									<Menu size="lg" opened={countryCodeMenuFlag} >
+										<div class="countryCodeWrap" slot='control'>
+											<span class="coutryCodeText">{(countryCode.split(' ')[0]).replace('(', '').replace(')', '')}</span>
+										</div>
+										<Menu.Item >
+											<TextInput on:click={() => countryCodeMenuFlag = true}
+												placeholder="Search country"
+												/>
+										</Menu.Item>
+										<div style="height: 300px; overflow-y:scroll; padding: 8px;">
+											{#each countryCodes as countryCodeText}
+												<Menu.Item on:click={() => countryCode = countryCodeText}>{countryCodeText}</Menu.Item>
+											{/each}
+										</div>
+									</Menu>
+									<!-- <NativeSelect
 										bind:value={countryCode}
 										data={countryCodes}
 										disabled={showOtpInputs || OTPVerified}
 									>
 										<svelte:component this={ChevronDown} slot="rightSection" />
-									</NativeSelect>
-									<!-- <Select {selectedCountry} {options} {onChange} let:option>
-										<img src={option.image} alt={option.label} class="flag-image" />
-										{option.label}
-									</Select> -->
-									<!-- <p>Selected Country: {selectedCountry ? selectedCountry.label : "None"}</p> -->
+									</NativeSelect> -->
 								</div>
 								<div style="width:100%;">
 									<TextInput
@@ -1317,5 +1335,16 @@
 		font-style: normal;
 		font-weight: 400;
 		line-height: 24px;
+	}
+
+	.countryCodeWrap {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 8px;
+		border: #222 solid 1px;
+		padding: 4px;
+		width: 80px;
+		overflow: hidden;
 	}
 </style>
