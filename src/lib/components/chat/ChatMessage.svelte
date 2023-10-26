@@ -486,9 +486,10 @@
 
 	.responseTextStyle {
 		padding: 20px 16px 16px 0px;
+		margin-right: 100px;
 	}
 
 	.responseTextWrap {
-		padding: 16px 16px 16px 16px;
+		padding: 16px 16px 24px 16px;
 	}
 </style>

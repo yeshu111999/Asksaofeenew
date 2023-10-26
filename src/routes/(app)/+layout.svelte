@@ -31,6 +31,7 @@
 	let currentError: string | null;
 	let canLogin = true;
 	let logoutConfirmationModal = false;
+	let opened = false;
 
 	async function onError() {
 		if ($error && currentError && $error !== currentError) {
@@ -238,7 +239,10 @@
 
 <div class="navbar-container">
 	<div class="top-navbar">
-		<p class="title">ImmiGPT</p>
+		<div class="logoWrap">
+			<img src="/assets/images/statue-liberty.jpg" width="40px" />
+			<p class="title">ImmiGPT</p>
+		</div>
 		<div class="user-profile">
 			<div class="button-wrapper">
 				<button class="upgrade-btn">
@@ -264,16 +268,29 @@
 					Upgrade to Pro
 				</button>
 			</div>
-			<Menu size="lg">
+			<!-- <Menu size="xl" on:open={() => (opened = true)} on:close={() => (opened = false)}> -->
+			<Menu size="xl">
 				<div class="user-profile" slot="control">
-					<div class="profile-image">
+					<div class="profile-image" on:click={() => (opened = !opened)}>
 						<p>{profileImg}</p>
 					</div>
 					<!-- <div class="user-details">
 						<p class="user-name">{userName}</p>
 						<p class="user-email">{userMail}</p>
 					</div> -->
-					<span class="dropdown"><img src="/assets/icons/dropdown-icon.svg" alt="" /></span>
+					{#if opened}
+						<span class="dropdown" on:click={() => (opened = !opened)}
+							><img
+								style="transform: rotate(180deg);"
+								src="/assets/icons/dropdown-icon.svg"
+								alt=""
+							/></span
+						>
+					{:else if !opened}
+						<span class="dropdown" on:click={() => (opened = !opened)}
+							><img src="/assets/icons/dropdown-icon.svg" alt="" /></span
+						>
+					{/if}
 				</div>
 				<!-- </div> -->
 				<div class="menuWrap">
@@ -631,7 +648,7 @@
 	}
 
 	.menuWrap {
-		/* padding: 8px; */
+		padding: 8px;
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
@@ -664,6 +681,9 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
+		width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.user-email {
@@ -673,6 +693,9 @@
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
+		width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.left-menu {
@@ -839,5 +862,19 @@
 		display: flex;
 		flex-direction: column;
 		/* gap: 16px; */
+	}
+
+	.user-details {
+		white-space: nowrap;
+		width: 250px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.logoWrap {
+		display: flex;
+		gap: 8px;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
