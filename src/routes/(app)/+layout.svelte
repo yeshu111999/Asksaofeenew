@@ -22,6 +22,7 @@
 	import NavConversationItem from "$lib/components/NavConversationItem.svelte";
 	import { PinRight } from "radix-icons-svelte";
 	import ConfirmationModal from "$lib/components/ConfirmationModal.svelte";
+	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 
 	export let data;
 
@@ -32,6 +33,8 @@
 	let canLogin = true;
 	let logoutConfirmationModal = false;
 	let opened = false;
+
+	let showSettingsPopup = false;
 
 	async function onError() {
 		if ($error && currentError && $error !== currentError) {
@@ -82,6 +85,9 @@
 		window.location.href = "/";
 	}
 
+	function openBlogs() {
+		window.open("https://immigpt.blog/", "_blank");
+	}
 	async function editConversationTitle(id: string, title: string) {
 		try {
 			const res = await fetch(`${base}/conversation/${id}`, {
@@ -102,6 +108,10 @@
 			console.error(err);
 			$error = String(err);
 		}
+	}
+
+	function toggleSettingsPopup(){
+		showSettingsPopup = !showSettingsPopup;
 	}
 
 	onDestroy(() => {
@@ -306,7 +316,7 @@
 					</div>
 					<hr />
 					<div class="menuActionBtnWrap">
-						<button class="menuBtnWrap">
+						<button class="menuBtnWrap" on:click={toggleSettingsPopup}>
 							<svg
 								width="24"
 								height="24"
@@ -389,7 +399,7 @@
 							</svg>
 							<span class="menuBtnTxt">Help</span>
 						</button>
-						<button class="menuBtnWrap">
+						<button on:click={openBlogs} class="menuBtnWrap">
 							<svg
 								width="24"
 								height="24"
@@ -543,10 +553,10 @@
 						<img src="/assets/icons/template-icon-black.svg" alt="" />
 						<p>Browse Templates</p>
 					</button>
-					<button class="icon-text">
+					<!-- <button class="icon-text">
 						<img src="/assets/icons/chat-icon-black.svg" alt="" />
 						<p>P2P Chatter</p>
-					</button>
+					</button> -->
 					<button class="icon-text">
 						<img src="/assets/icons/visa-icon-black.svg" alt="" />
 						<p>Visa Preparation</p>
@@ -555,7 +565,7 @@
 						<img src="/assets/icons/help-icon-black.svg" alt="" />
 						<p>Immigration Help</p>
 					</button>
-					<button class="icon-text">
+					<button on:click={openBlogs} class="icon-text">
 						<img src="/assets/icons/visa-icon-black.svg" alt="" />
 						<p>Blogs</p>
 					</button>
@@ -582,6 +592,8 @@
 		<LoginModal settings={data.settings} />
 	{/if}
 </div>
+
+<SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} showSettingsPopup={showSettingsPopup} />
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {
@@ -777,7 +789,7 @@
 		bottom: 0;
 		width: 100%;
 		/* padding: 20px; */
-		height: 250px;
+		height: 200px;
 		padding-bottom: 20px;
 		border-top: 1px solid #e1e1e1;
 		background: white;
@@ -815,7 +827,7 @@
 		/* height: calc(100vh -390px); */
 		min-height: auto;
 		overflow-y: auto;
-		max-height: calc(100% - 250px);
+		max-height: calc(100% - 200px);
 	}
 
 	.recent-search-btn p {

@@ -342,6 +342,45 @@
 					</a>
 				{/if} -->
 				{#if !readOnly}
+					<Tooltip withArrow transitionDuration={200} label="Edit prompt" position="bottom">
+						<button
+							class="cursor-pointer rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden lg:-right-2"
+							type="button"
+							on:click={() => (editFlag = true)}
+						>
+							<!-- title="Edit" -->
+							<!-- on:click={() => dispatch("retry", { content: message.content, id: message.id })} -->
+							<!-- <CarbonEdit /> -->
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									fill-rule="evenodd"
+									clip-rule="evenodd"
+									d="M5.293 15.619L15.619 5.293C16.009 4.903 16.642 4.903 17.032 5.293L18.708 6.969C19.098 7.359 19.098 7.992 18.708 8.382L8.381 18.707C8.194 18.895 7.94 19 7.675 19H5V16.325C5 16.06 5.105 15.806 5.293 15.619Z"
+									stroke="black"
+									stroke-opacity="0.87"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M13.75 7.16L16.84 10.25"
+									stroke="black"
+									stroke-opacity="0.87"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</button>
+					</Tooltip>
+				{/if}
+				{#if !readOnly}
 					<Tooltip withArrow transitionDuration={200} label="Regenerate prompt" position="bottom">
 						<button
 							class="cursor-pointer rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden lg:-right-2"
@@ -399,45 +438,6 @@
 								/>
 								<path
 									d="M4.94702 16.884C5.46902 17.699 6.13602 18.437 6.95902 19.047C10.039 21.33 14.187 21.126 17.026 18.805"
-									stroke="black"
-									stroke-opacity="0.87"
-									stroke-width="1.5"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</svg>
-						</button>
-					</Tooltip>
-				{/if}
-				{#if !readOnly}
-					<Tooltip withArrow transitionDuration={200} label="Edit prompt" position="bottom">
-						<button
-							class="cursor-pointer rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden lg:-right-2"
-							type="button"
-							on:click={() => (editFlag = true)}
-						>
-							<!-- title="Edit" -->
-							<!-- on:click={() => dispatch("retry", { content: message.content, id: message.id })} -->
-							<!-- <CarbonEdit /> -->
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									fill-rule="evenodd"
-									clip-rule="evenodd"
-									d="M5.293 15.619L15.619 5.293C16.009 4.903 16.642 4.903 17.032 5.293L18.708 6.969C19.098 7.359 19.098 7.992 18.708 8.382L8.381 18.707C8.194 18.895 7.94 19 7.675 19H5V16.325C5 16.06 5.105 15.806 5.293 15.619Z"
-									stroke="black"
-									stroke-opacity="0.87"
-									stroke-width="1.5"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M13.75 7.16L16.84 10.25"
 									stroke="black"
 									stroke-opacity="0.87"
 									stroke-width="1.5"

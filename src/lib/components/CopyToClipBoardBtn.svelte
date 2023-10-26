@@ -130,4 +130,13 @@
 		<!-- <span style="color: #323232; font-size: 14px; font-weight: 500;">Copy Results</span> -->
 		<Tooltip classNames={isSuccess ? "opacity-100" : "opacity-0"} />
 	</span>
+	<span class="copy-results">Copy Results</span>
 </button>
+
+<style>
+	.copy-results {
+		color: #323232;
+		font-weight: 500;
+		padding: 0px 6px;
+	}
+</style>
