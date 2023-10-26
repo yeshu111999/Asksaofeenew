@@ -22,6 +22,7 @@
 	import NavConversationItem from "$lib/components/NavConversationItem.svelte";
 	import { PinRight } from "radix-icons-svelte";
 	import ConfirmationModal from "$lib/components/ConfirmationModal.svelte";
+	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 
 	export let data;
 
@@ -31,6 +32,7 @@
 	let currentError: string | null;
 	let canLogin = true;
 	let logoutConfirmationModal = false;
+	let showSettingsPopup = false;
 
 	async function onError() {
 		if ($error && currentError && $error !== currentError) {
@@ -104,6 +106,10 @@
 			console.error(err);
 			$error = String(err);
 		}
+	}
+
+	function toggleSettingsPopup(){
+		showSettingsPopup = !showSettingsPopup;
 	}
 
 	onDestroy(() => {
@@ -292,7 +298,7 @@
 					</div>
 					<hr />
 					<div class="menuActionBtnWrap">
-						<button class="menuBtnWrap">
+						<button class="menuBtnWrap" on:click={toggleSettingsPopup}>
 							<svg
 								width="24"
 								height="24"
@@ -568,6 +574,8 @@
 		<LoginModal settings={data.settings} />
 	{/if}
 </div>
+
+<SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} showSettingsPopup={showSettingsPopup} />
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {
