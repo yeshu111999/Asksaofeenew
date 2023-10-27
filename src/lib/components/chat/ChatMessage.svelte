@@ -45,6 +45,21 @@
 		return md.replaceAll("&lt;", "<");
 	}
 
+	function updateDivContent(event) {
+		editMessage = stripHTML(event.target.innerHTML);
+	}
+
+	function stripHTML(html) {
+		let doc = new DOMParser().parseFromString(html, "text/html");
+		return doc.body.textContent || "";
+	}
+
+	function handlePaste(event) {
+		// event.preventDefault();
+		// const editMessage = (event.clipboardData || window.clipboardData).getData("text/plain");
+		// document.execCommand("insertText", false, text);
+	}
+
 	export let model: Model;
 	export let message: Message;
 	export let loading = false;
@@ -293,9 +308,7 @@
 		<!-- <div class="profilePic">T</div> -->
 		<div class="profilePic">{userName?.charAt(0)}</div>
 		<!-- <div class="max-w-full whitespace-break-spaces break-words rounded-2xl px-5 py-3.5 text-gray-500 dark:text-gray-400"> -->
-		<div
-			class="responseTextStyle text-black-500 dark:text-black-400 max-w-full whitespace-break-spaces break-words"
-		>
+		<div class="responseTextStyle text-black-500 dark:text-black-400 max-w-full  break-words">
 			{#if !editFlag}
 				{message.content.trim()}
 			{/if}
@@ -307,21 +320,40 @@
 					size="xs"
 					bind:value={editMessage}
 				/> -->
-				<input
+				<!-- <input
 					type="text"
 					bind:value={editMessage}
 					style="height: auto; border-width: 0px; color: black; background-color: transparent; min-height: 28px; outline: 0px;"
-				/><br />
-				<Button
-					color="dark"
-					size="xs"
-					on:click={() => {
-						dispatch("retry", { content: editMessage, id: message.id });
-						editFlag = false;
-					}}
+				/><br /> -->
+				<div
+					contenteditable="true"
+					on:input={updateDivContent}
+					on:paste={handlePaste}
+					style="width: 100%"
 				>
-					Submit
-				</Button>
+					{editMessage}
+				</div>
+				<div style="display: flex; width:100%; justify-content:flex-end; padding: 8px; gap: 16px">
+					<Button
+						color="gray"
+						size="xs"
+						on:click={() => {
+							editFlag = false;
+						}}
+					>
+						Cancel
+					</Button>
+					<Button
+						color="dark"
+						size="xs"
+						on:click={() => {
+							dispatch("retry", { content: editMessage, id: message.id });
+							editFlag = false;
+						}}
+					>
+						Save & Submit
+					</Button>
+				</div>
 			{/if}
 		</div>
 		{#if !loading}
@@ -487,9 +519,14 @@
 	.responseTextStyle {
 		padding: 20px 16px 16px 0px;
 		margin-right: 100px;
+		flex: 50%;
 	}
 
 	.responseTextWrap {
 		padding: 16px 16px 24px 16px;
+	}
+
+	div[contenteditable="true"]:focus {
+		outline: none; /* Remove the border on focus */
 	}
 </style>
