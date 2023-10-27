@@ -17,7 +17,7 @@
 	import SettingsModal from "$lib/components/SettingsModal.svelte";
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
-	import { SvelteUIProvider, Menu } from "@svelteuidev/core";
+	import { SvelteUIProvider, Menu, Burger } from "@svelteuidev/core";
 	import { bubble } from "svelte/internal";
 	import NavConversationItem from "$lib/components/NavConversationItem.svelte";
 	import { PinRight } from "radix-icons-svelte";
@@ -35,6 +35,7 @@
 	let opened = false;
 
 	let showSettingsPopup = false;
+	let menuToggleFlag = false;
 
 	async function onError() {
 		if ($error && currentError && $error !== currentError) {
@@ -110,7 +111,7 @@
 		}
 	}
 
-	function toggleSettingsPopup(){
+	function toggleSettingsPopup() {
 		showSettingsPopup = !showSettingsPopup;
 	}
 
@@ -249,6 +250,9 @@
 
 <div class="navbar-container">
 	<div class="top-navbar">
+		<div class="ham">
+			<Burger opened={menuToggleFlag} on:click={() => (menuToggleFlag = !menuToggleFlag)} />
+		</div>
 		<div class="logoWrap">
 			<img src="/assets/images/statue-liberty.jpg" width="40px" />
 			<p class="title">ImmiGPT</p>
@@ -575,6 +579,67 @@
 				</div>
 			</div>
 		</div>
+		{#if menuToggleFlag}
+			<div class="left-menu-mobile">
+				<div class="left-menu-top">
+					<a class="new-search-btn" href={`${base}/`}>
+						<img src="/assets/icons/search-icon-white.svg" alt="" />
+						<p>New Search</p>
+					</a>
+				</div>
+				<div class="left-menu-body">
+					<div class="left-menu-center chgatsScroll">
+						<p class="recent-searches-text">Recent Searches</p>
+						<div class="recent-searches">
+							{#each data.conversations as conv}
+								<!-- <a
+								class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
+								href="{base}/conversation/{conv.id}"
+							>
+								{#if conv.id === $page.params.id}
+									<img src="/assets/icons/search-icon-white.svg" alt="" />
+								{:else}
+									<img src="/assets/icons/search-icon-black.svg" alt="" />
+								{/if}
+								<p>{conv.title}</p>
+							</a> -->
+								<NavConversationItem
+									on:editConversationTitle={(ev) =>
+										editConversationTitle(ev.detail.id, ev.detail.title)}
+									on:deleteConversation={(ev) => deleteConversation(ev.detail)}
+									{conv}
+								/>
+							{/each}
+						</div>
+					</div>
+					<div class="left-menu-bottom">
+						<button class="icon-text">
+							<img src="/assets/icons/template-icon-black.svg" alt="" />
+							<p>Browse Templates</p>
+						</button>
+						<!-- <button class="icon-text">
+						<img src="/assets/icons/chat-icon-black.svg" alt="" />
+						<p>P2P Chatter</p>
+					</button> -->
+						<button class="icon-text">
+							<img src="/assets/icons/visa-icon-black.svg" alt="" />
+							<p>Visa Preparation</p>
+						</button>
+						<button class="icon-text">
+							<img src="/assets/icons/help-icon-black.svg" alt="" />
+							<p>Immigration Help</p>
+						</button>
+						<button on:click={openBlogs} class="icon-text">
+							<img src="/assets/icons/visa-icon-black.svg" alt="" />
+							<p>Blogs</p>
+						</button>
+						<!-- <div class="button-wrapper">
+						<button class="upgrade-btn"> Upgrade to Pro </button>
+					</div> -->
+					</div>
+				</div>
+			</div>
+		{/if}
 		<div class="right-body">
 			{#if logoutConfirmationModal}
 				<ConfirmationModal
@@ -593,7 +658,7 @@
 	{/if}
 </div>
 
-<SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} showSettingsPopup={showSettingsPopup} />
+<SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {
@@ -888,5 +953,40 @@
 		gap: 8px;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.ham {
+		display: none;
+	}
+
+	.left-menu-mobile {
+		display: none;
+	}
+
+	@media screen and (max-width: 786px) {
+		.left-menu {
+			display: none;
+		}
+
+		.left-menu-mobile {
+			width: 240px;
+			height: calc(100vh - 70px);
+			flex-shrink: 0;
+			background: #fff;
+			box-shadow: 1px 0px 0px 0px #e1e1e1;
+			border-right: 1px solid #e1e1e1;
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			z-index: 10;
+		}
+		.button-wrapper {
+			display: none;
+		}
+
+		.ham {
+			display: block;
+		}
 	}
 </style>
