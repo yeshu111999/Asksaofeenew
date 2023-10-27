@@ -1,31 +1,39 @@
 <script>
-	import { dictionary } from './../../../.svelte-kit/generated/client/app.js';
+	import { dictionary } from "./../../../.svelte-kit/generated/client/app.js";
 	import { createEventDispatcher, onMount } from "svelte";
-    import { TextInput, Button } from "@svelteuidev/core";
+	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
 
 	import Cookies from "js-cookie";
-	import axios from 'axios';
+	import axios from "axios";
+	import { goto } from "$app/navigation";
 
 	let dispatch = createEventDispatcher();
 	export let showSettingsPopup = false;
 
+	let token = "";
 	let activeTab = 0;
 	let fileInput;
 	let userName = "";
 	let userMail = "";
 	let profileImg = "";
-    let profilePic = '';
-    let firstName = '';
-    let lastName = '';
-    let mobileNumber = '';
+	let profilePic = "";
+	let firstName = "";
+	let lastName = "";
+	let mobileNumber = "";
+	let password = "";
+	let newPassword = "";
 
-	let tabs = [
-		"Profile Information",
-		"Change Password",
-		"Clear Chat",
-		"Export Chat",
-		"Delete Account",
-	];
+	let oldFirstName = "";
+	let oldLastName = "";
+	let oldMobileNumber = "";
+
+	let openDeleteAccountPopup = false;
+	let saveChangesLoader = false;
+
+	$: showSaveOption = oldFirstName != firstName || oldLastName != lastName;
+	$: showSavePwd = password.length > 4 && newPassword.length > 4 && password == newPassword;
+
+	let tabs = ["Profile Information", "Change Password", "Clear Chat", "Delete Account"];
 
 	function closePopup() {
 		dispatch("closeSettingsPopup");
@@ -33,6 +41,16 @@
 
 	function changeActiveTab(index) {
 		activeTab = index;
+		if (activeTab == 0) {
+			scrollToSection("profile-info");
+		} else if (activeTab == 1) {
+			scrollToSection("change-pwd");
+		} else if (activeTab == 2) {
+			scrollToSection("clear-convo");
+		}
+		if (activeTab == 3) {
+			scrollToSection("delete-account");
+		}
 	}
 
 	const handleImageSelect = (event) => {
@@ -63,75 +81,215 @@
 		}
 	};
 
-    const getUserDetails = async () => {
-		let headers = {
+	const getUserDetails = async () => {
+		let headers = new Headers({
 			Authorization: "Bearer " + Cookies.get("token"),
-		};
-		let response = await axios
-			.get("https://backend.immigpt.net/getUserProfile", { headers: headers })
-			.then((response) => {
-				// console.log("response", response);
-				userName = response.data.username;
-			    userMail = response.data.email;
-			    profilePic = response.data.profilePic;
-			})
-			.catch((error) => {
-				console.log("error", error);
+		});
+
+		try {
+			const response = await fetch("https://backend.immigpt.net/getUserProfile", {
+				method: "GET",
+				headers: headers,
 			});
-		console.log("response", response);
+
+			if (response.ok) {
+				const userData = await response.json();
+				userName = userData.username;
+				userMail = userData.email;
+				profilePic = userData.profilePic;
+
+				oldFirstName = userName.split(" ")[0];
+				oldLastName = userName.split(" ")[1];
+			} else {
+				const error = await response.text();
+				console.log("Error fetching user details: " + error);
+			}
+		} catch (error) {
+			console.error("An error occurred:", error);
+		}
+	};
+
+	const updatePassword = async () => {
+		saveChangesLoader = true;
+		let headers = new Headers({
+			Authorization: "Bearer " + Cookies.get("token"),
+		});
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+		let body = {
+			oldPassword: password,
+			newPassword: newPassword,
+			confirmPassword: newPassword,
+		};
+
+		let formData = new FormData();
+		formData.append("request", JSON.stringify(body));
+
+		let config = {
+			method: "POST",
+			headers: headers,
+			body: formData,
+		};
+
+		try {
+			const response = await fetch("https://backend.immigpt.net/updateUserProfile", config);
+
+			if (response.ok) {
+				const data = await response.json();
+				console.log(JSON.stringify(data));
+				saveChangesLoader = false;
+				// apiSuccessFlag = true;
+			} else {
+				const error = await response.text();
+				console.log(error);
+				saveChangesLoader = false;
+				// apiErrorFlag = true;
+			}
+		} catch (error) {
+			console.error(error);
+			saveChangesLoader = false;
+			// apiErrorFlag = true;
+		}
 	};
 
 	const updateUserDetails = async () => {
 		saveChangesLoader = true;
-		let headers = {
+		let headers = new Headers({
 			Authorization: "Bearer " + Cookies.get("token"),
-		};
-		let gauth = Cookies.get("gauth");
+		});
+		let gauth = Cookies.get("Google-Auth");
 		if (gauth) {
-			headers["Google-Auth"] = "True";
+			headers.append("Google-Auth", "True");
 		}
 		let body = {
-			name: name,
-			email: email,
+			name: firstName + " " + lastName,
+			email: userMail,
 			mobileNumber: mobileNumber,
-			oldPassword: oldPassword,
+			oldPassword: password,
 			newPassword: newPassword,
-			confirmPassword: confirmPassword,
+			confirmPassword: newPassword,
 		};
-		let data = new FormData();
-		data.append("request", JSON.stringify(body));
+
+		let formData = new FormData();
+		formData.append("request", JSON.stringify(body));
+
 		let config = {
-			method: "post",
-			maxBodyLength: Infinity,
-			url: "https://backend.immigpt.net/updateUserProfile",
+			method: "POST",
 			headers: headers,
-			data: data,
+			body: formData,
 		};
-		axios
-			.request(config)
-			.then((response) => {
-				console.log(JSON.stringify(response.data));
+
+		try {
+			const response = await fetch("https://backend.immigpt.net/updateUserProfile", config);
+
+			if (response.ok) {
+				const data = await response.json();
+				console.log(JSON.stringify(data));
 				saveChangesLoader = false;
-				apiSuccessFlag = true;
-			})
-			.catch((error) => {
+				// apiSuccessFlag = true;
+			} else {
+				const error = await response.text();
 				console.log(error);
 				saveChangesLoader = false;
-				apiErrorFlag = true;
-			});
+				// apiErrorFlag = true;
+			}
+		} catch (error) {
+			console.error(error);
+			saveChangesLoader = false;
+			// apiErrorFlag = true;
+		}
 	};
 
+	function scrollToSection(sectionId) {
+		// Update the active section and scroll to it
+		const section = document.querySelector(`#${sectionId}`);
+		if (section) {
+			section.scrollIntoView({ behavior: "smooth" });
+		}
+	}
+
+	function cancel() {
+		firstName = oldFirstName;
+		lastName = oldLastName;
+	}
+
+	function cancelPwd() {
+		password = "";
+		newPassword = "";
+	}
+
+	function clearChat() {
+		console.log("clear chat");
+	}
+
+	function toggleDeleteAccount() {
+		console.log("delete account");
+		openDeleteAccountPopup = true;
+	}
+
+	function closeDeleteAccountPopup() {
+		openDeleteAccountPopup = false;
+	}
+
+	const deleteAccount = async () => {
+		let headers = new Headers({
+			Authorization: "Bearer " + token,
+		});
+
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+
+		let config = {
+			method: "POST",
+			headers: headers,
+		};
+
+		try {
+			const response = await fetch("https://backend.immigpt.net/deleteAccount", config);
+
+			if (response.ok) {
+				console.log("Account deleted successfully");
+				openDeleteAccountPopup = false;
+				logOut();
+			} else {
+				const error = await response.text();
+				console.log("Error deleting account: " + error);
+				openDeleteAccountPopup = false;
+				goto("/");
+			}
+		} catch (error) {
+			console.error("An error occurred:", error);
+			openDeleteAccountPopup = false;
+			goto("/");
+		}
+	};
+
+	function logOut() {
+		var cookiesToRemove = ["token", "name", "email", "userId"];
+
+		cookiesToRemove.forEach(function (cookieName) {
+			document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		});
+		window.location.href = "/";
+	}
+
 	onMount(() => {
-		let token = Cookies.get("token");
+		token = Cookies.get("token");
 		if (token) {
 			userName = Cookies.get("name");
-            if(userName){
-                let names = userName.split(" ")
-                firstName = names[0];
-                if(names.length > 1){
-                    lastName = names[1]
-                }
-            }
+			if (userName) {
+				let names = userName.split(" ");
+				firstName = names[0];
+				oldFirstName = firstName;
+				if (names.length > 1) {
+					lastName = names[1];
+					oldLastName = lastName;
+				}
+			}
 			userMail = Cookies.get("email");
 			if (userName) {
 				let nameList = userName?.split(" ");
@@ -142,7 +300,7 @@
 				}
 			}
 		}
-        getUserDetails();
+		getUserDetails();
 	});
 </script>
 
@@ -169,7 +327,7 @@
 					{/each}
 				</div>
 				<div class="right-body">
-					{#if activeTab == 0}
+					<section id="profile-info">
 						<div class="profile-top">
 							<p class="section-header">Profile Information</p>
 							<div class="section-body">
@@ -177,7 +335,6 @@
 									<p class="mini-title">Avatar</p>
 									<div class="image-upload">
 										<div class="profile-image-wrap">
-                                            
 											{#if profilePic}
 												<img
 													src={profilePic}
@@ -197,8 +354,10 @@
 												style="display: none"
 												bind:this={fileInput}
 											/>
-											<button on:click={() => fileInput.click()} class="upload-btn"
-												><p>Upload Image</p></button
+											<Button
+												variant="default"
+												on:click={() => fileInput.click()}
+												class="upload-btn"><p>Upload Image</p></Button
 											>
 										</div>
 									</div>
@@ -207,40 +366,129 @@
 										your team notifications.
 									</p>
 								</div>
-                                <div class="input-wrapper">
-                                    <TextInput disabled bind:value={firstName} label="First Name" placeholder="First Name" />
-                                </div>
-                                <div class="input-wrapper">
-                                    <TextInput disabled bind:value={lastName} label="Last Name" placeholder="Last Name" />
-                                </div>
-                                <div class="input-wrapper">
-                                    <TextInput disabled bind:value={mobileNumber} label="Phone Number" placeholder="Phone Number" />
-                                </div>
+								<div class="input-wrapper">
+									<TextInput bind:value={firstName} label="First Name" placeholder="First Name" />
+								</div>
+								<div class="input-wrapper">
+									<TextInput bind:value={lastName} label="Last Name" placeholder="Last Name" />
+								</div>
+								<div class="input-wrapper">
+									<TextInput
+										disabled
+										bind:value={userMail}
+										label="Email Address"
+										placeholder="Email Address"
+									/>
+								</div>
+								<div class="input-wrapper">
+									<TextInput
+										bind:value={mobileNumber}
+										label="Phone Number"
+										placeholder="Phone Number"
+									/>
+								</div>
+								{#if showSaveOption}
+									<div class="buttons-wrapper">
+										<!-- <button class="button black" on:click={updateUserDetails}
+											><p>Save Info</p></button
+										> -->
+										<!-- <button class="button gray" on:click={cancel}><p>Cancel</p></button> -->
+										<Button color="dark" on:click={updateUserDetails} ripple>Save Info</Button>
+										<Button color="#e4e4e4" on:click={cancel} ripple style="color:black;"
+											>Cancel</Button
+										>
+									</div>
+								{/if}
 							</div>
 						</div>
-                        <div class="profile-body">
-                            <p class="section-header">Clear Conversations</p>
-                            <p class="description">Clear Conversations empties your account of all past chats and messages.</p>
-                        </div>
-					{:else if activeTab == 1}
-                        <div class="section">
-                            <p class="section-header">Change password</p>
-                        </div>
-					{:else if activeTab == 2}
-                        <div class="section">
-                            <p class="section-header">Clear Conversations</p>
-                            <p class="description">Clear Conversations empties your account of all past chats and messages.</p>
-                        </div>
-					{:else if activeTab == 3}
-                    <div class="section">
-                        <p class="section-header">Export Conversations</p>
-                        <p class="description">Export Conversations of your account of all past chats and messages</p>
-                    </div>
-					{:else if activeTab == 4}
-                    <div class="section">
-                        <p class="section-header">Delete Account</p>
-                    </div>
-					{/if}
+					</section>
+					<section id="change-pwd">
+						<div class="section">
+							<p class="section-header">Change password</p>
+							<div>
+								<PasswordInput
+									bind:value={password}
+									type="password"
+									label="Old Password"
+									placeholder="Password"
+								/>
+							</div>
+							<div>
+								<PasswordInput
+									bind:value={newPassword}
+									type="password"
+									label="New Password"
+									placeholder="Password"
+								/>
+							</div>
+							{#if showSavePwd}
+								<div class="buttons-wrapper">
+									<!-- <button class="button black" on:click={updateUserDetails}
+										><p>Change Password</p></button
+									>
+									<button class="button gray" on:click={cancelPwd}><p>Cancel</p></button> -->
+
+									<Button color="dark" on:click={updatePassword} ripple>Change Password</Button>
+									<Button color="#e4e4e4" on:click={cancelPwd} ripple style="color:black;"
+										>Cancel</Button
+									>
+								</div>
+							{/if}
+						</div>
+					</section>
+					<section id="clear-convo">
+						<div class="section">
+							<p class="section-header">Clear Conversations</p>
+							<p class="description">
+								Clear Conversations empties your account of all past chats and messages.
+							</p>
+							<Button variant="default" class="upload-btn" on:click={clearChat}
+								><p>Clear Chat</p></Button
+							>
+						</div>
+					</section>
+					<section id="delete-account">
+						<div class="section">
+							<p class="section-header">Delete Account</p>
+							<p class="description">
+								If you no longer want to use ImmiGPT, You can permanently delete your account. You
+								don’t undo this action
+							</p>
+							<Button
+								variant="outline"
+								color="#FC5454"
+								class="delete-btn"
+								on:click={toggleDeleteAccount}><p>Delete Account</p></Button
+							>
+						</div>
+						<Modal
+							centered
+							opened={openDeleteAccountPopup}
+							on:close={closeDeleteAccountPopup}
+							title="Delete Account"
+						>
+							<!-- <p class="title">Are you sure you want to delete your account?</p> -->
+							<div class="modal-body">
+								<p class="description">
+									If you no longer want to use ImmiGPT, You can permanently delete your account. You
+									don’t undo this action
+								</p>
+								<div class="buttons-wrapper">
+									<!-- <button class="button black" on:click={deleteAccount}
+									><p>Confirm</p></button
+								>
+								<button class="button gray" on:click={closeDeleteAccountPopup}><p>Cancel</p></button> -->
+									<Button color="dark" on:click={deleteAccount} ripple>Confirm</Button>
+									<Button
+										color="#e4e4e4"
+										on:click={closeDeleteAccountPopup}
+										ripple
+										style="color:black;">Cancel</Button
+									>
+								</div>
+							</div>
+						</Modal>
+					</section>
 				</div>
 			</div>
 		</div>
@@ -258,7 +506,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 4000;
+		z-index: 1;
 		opacity: 1;
 	}
 
@@ -304,6 +552,18 @@
 
 	.right-body {
 		width: calc(100% - 177px);
+		overflow-y: auto;
+		max-height: calc(100% - 73px);
+	}
+
+	.right-body::-webkit-scrollbar {
+		width: 0 !important;
+	}
+	.right-body {
+		overflow: -moz-scrollbars-none;
+	}
+	.right-body {
+		-ms-overflow-style: none;
 	}
 
 	.text-btn {
@@ -351,12 +611,12 @@
 		gap: 20px;
 	}
 
-    .profile-body{
-        display: flex;
+	.profile-body {
+		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 12px;
-    }
+	}
 
 	.section-header {
 		color: #000;
@@ -426,6 +686,7 @@
 		gap: 8px;
 		border-radius: 8px;
 		border: 1px solid rgba(0, 0, 0, 0.87);
+		width: max-content;
 	}
 
 	.upload-btn p {
@@ -438,11 +699,86 @@
 		line-height: 18px;
 	}
 
-    .input-wrapper{
-        width: 100%;
-    }
+	.delete-btn {
+		display: flex;
+		padding: 10px 20px;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		border-radius: 8px;
+		border: 1px solid rgba(252, 84, 84, 0.87);
+		width: max-content;
+	}
 
-    .section{
-        /* padding: 24px; */
-    }
+	.delete-btn p {
+		color: #fc5454;
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 18px; /* 138.462% */
+	}
+
+	.input-wrapper {
+		width: 100%;
+	}
+
+	section {
+		width: 100%;
+	}
+
+	.section {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		width: 100%;
+	}
+
+	.button {
+		display: flex;
+		padding: 12px 16px;
+		justify-content: center;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.button.black {
+		border-radius: 8px;
+		background: #000;
+	}
+
+	.button.gray {
+		border-radius: 8px;
+		background: #e4e4e4;
+	}
+
+	.button.black p {
+		color: rgba(255, 255, 255, 0.87);
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 16px;
+	}
+
+	.button.gray p {
+		color: rgba(0, 0, 0, 0.87);
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 16px; /* 123.077% */
+	}
+
+	.buttons-wrapper {
+		width: 100%;
+		display: flex;
+		gap: 12px;
+	}
+
+	.modal-body {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
 </style>
