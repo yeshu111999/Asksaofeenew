@@ -17,12 +17,13 @@
 	import SettingsModal from "$lib/components/SettingsModal.svelte";
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
-	import { SvelteUIProvider, Menu, Burger } from "@svelteuidev/core";
+	import { SvelteUIProvider, Menu, Burger, Modal, Textarea, TextInput } from "@svelteuidev/core";
 	import { bubble } from "svelte/internal";
 	import NavConversationItem from "$lib/components/NavConversationItem.svelte";
-	import { PinRight } from "radix-icons-svelte";
+	import { Button, PinRight } from "radix-icons-svelte";
 	import ConfirmationModal from "$lib/components/ConfirmationModal.svelte";
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
+	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 
 	export let data;
 
@@ -33,6 +34,11 @@
 	let canLogin = true;
 	let logoutConfirmationModal = false;
 	let opened = false;
+
+	let issue = '';
+	let issueDescription = '';
+
+	let showRaiseAnIssuePopup = false;
 
 	let showSettingsPopup = false;
 	let menuToggleFlag = false;
@@ -113,6 +119,18 @@
 
 	function toggleSettingsPopup() {
 		showSettingsPopup = !showSettingsPopup;
+	}
+
+	function openRaiseAnIssuePopup(){
+		showRaiseAnIssuePopup = true;
+	}
+
+	function closeRaiseAnIssuePopup(){
+		showRaiseAnIssuePopup = false;
+	}
+
+	function onIssueSubmit(){
+		console.log("issue submitted");
 	}
 
 	onDestroy(() => {
@@ -444,7 +462,7 @@
 							</svg>
 							<span class="menuBtnTxt">Blogs</span>
 						</button>
-						<button class="menuBtnWrap">
+						<button class="menuBtnWrap" on:click={openRaiseAnIssuePopup}>
 							<svg
 								width="24"
 								height="24"
@@ -659,6 +677,9 @@
 </div>
 
 <SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
+<RaiseAnIssuePopup showRaiseAnIssuePopup={showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup}/>
+
+
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {
@@ -703,6 +724,30 @@
 		font-style: normal;
 		font-weight: 700;
 		line-height: normal;
+	}
+
+	.popup-header {
+		padding: 24px;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #e1e1e1;
+	}
+
+	.popup-title {
+		color: #000;
+		font-family: Inter;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+	}
+
+	.popup-body {
+		width: 100%;
+		height: 100%;
+		display: flex;
 	}
 
 	.user-profile {
