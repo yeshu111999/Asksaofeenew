@@ -9,6 +9,25 @@
 	<SectionWrapper header={"FAQs"}>
 		<div style="width:100%">
 			<div>
+				<Card>
+					<div
+						style="display: flex;flex-direction:row; justify-content:space-between;"
+						on:click={() => (collapseFlags = !collapseFlags)}
+					>
+						<div style="font-weight:600">
+							1. How does immiGPT assist with family-sponsored visa applications?
+						</div>
+						<div>
+							<ThemeIcon>
+								{#if collapseFlags}
+									<ChevronDown />
+								{:else}
+									<ChevronUp />
+								{/if}
+							</ThemeIcon>
+						</div>
+					</div>
+				</Card>
 				<Collapse open={collapseFlags}>
 					<p>
 						ImmiGPT provides a detailed breakdown of family-sponsored visa requirements and guides
