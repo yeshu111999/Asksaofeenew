@@ -35,8 +35,8 @@
 	let logoutConfirmationModal = false;
 	let opened = false;
 
-	let issue = '';
-	let issueDescription = '';
+	let issue = "";
+	let issueDescription = "";
 
 	let showRaiseAnIssuePopup = false;
 
@@ -121,15 +121,15 @@
 		showSettingsPopup = !showSettingsPopup;
 	}
 
-	function openRaiseAnIssuePopup(){
+	function openRaiseAnIssuePopup() {
 		showRaiseAnIssuePopup = true;
 	}
 
-	function closeRaiseAnIssuePopup(){
+	function closeRaiseAnIssuePopup() {
 		showRaiseAnIssuePopup = false;
 	}
 
-	function onIssueSubmit(){
+	function onIssueSubmit() {
 		console.log("issue submitted");
 	}
 
@@ -303,25 +303,23 @@
 			<!-- <Menu size="xl" on:open={() => (opened = true)} on:close={() => (opened = false)}> -->
 			<Menu size="xl">
 				<div class="user-profile" slot="control">
-					<div class="profile-image" on:click={() => (opened = !opened)}>
-						<p>{profileImg}</p>
-					</div>
-					<!-- <div class="user-details">
-						<p class="user-name">{userName}</p>
-						<p class="user-email">{userMail}</p>
-					</div> -->
-					{#if opened}
-						<span class="dropdown" on:click={() => (opened = !opened)}
-							><img
-								style="transform: rotate(180deg);"
-								src="/assets/icons/dropdown-icon.svg"
-								alt=""
-							/></span
-						>
-					{:else if !opened}
-						<span class="dropdown" on:click={() => (opened = !opened)}
-							><img src="/assets/icons/dropdown-icon.svg" alt="" /></span
-						>
+					{#if profileImg}
+						<div class="profile-image" on:click={() => (opened = !opened)}>
+							<p>{profileImg ? profileImg : ""}</p>
+						</div>
+						{#if opened}
+							<span class="dropdown" on:click={() => (opened = !opened)}
+								><img
+									style="transform: rotate(180deg);"
+									src="/assets/icons/dropdown-icon.svg"
+									alt=""
+								/></span
+							>
+						{:else if !opened}
+							<span class="dropdown" on:click={() => (opened = !opened)}
+								><img src="/assets/icons/dropdown-icon.svg" alt="" /></span
+							>
+						{/if}
 					{/if}
 				</div>
 				<!-- </div> -->
@@ -368,7 +366,12 @@
 
 							<span class="menuBtnTxt">Settings</span>
 						</button>
-						<button class="menuBtnWrap">
+						<button
+							class="menuBtnWrap"
+							on:click={() => {
+								window.open("/faq", "_blank");
+							}}
+						>
 							<svg
 								width="24"
 								height="24"
@@ -419,7 +422,7 @@
 									stroke-linejoin="round"
 								/>
 							</svg>
-							<span class="menuBtnTxt">Help</span>
+							<span class="menuBtnTxt">Help & FAQ</span>
 						</button>
 						<button on:click={openBlogs} class="menuBtnWrap">
 							<svg
@@ -677,9 +680,7 @@
 </div>
 
 <SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
-<RaiseAnIssuePopup showRaiseAnIssuePopup={showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup}/>
-
-
+<RaiseAnIssuePopup {showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup} />
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {

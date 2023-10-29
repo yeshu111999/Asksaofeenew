@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, Textarea } from "@svelteuidev/core";
+	import Cookies from "js-cookie";
 
 	let dispatch = createEventDispatcher();
 	export let showRaiseAnIssuePopup = false;
@@ -10,6 +11,36 @@
 
 	function closePopup() {
 		dispatch("closeRaiseAnIssuePopup");
+	}
+
+	async function submitContactForm() {
+		const apiUrl = "https://backend.immigpt.net/contactUs";
+		const requestBody = {
+			issue: issue,
+			description: issueDescription,
+		};
+
+		if (issue)
+			try {
+				const response = await fetch(apiUrl, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"Google-Auth": "True",
+						Authorization: "Bearer " + Cookies.get("token"),
+					},
+					body: JSON.stringify(requestBody),
+				});
+
+				if (response.ok) {
+					const responseData = await response.json();
+					console.log("API Response:", responseData);
+				} else {
+					console.error("API Request Error:", response.status, response.statusText);
+				}
+			} catch (error) {
+				console.error("API Request Error:", error);
+			}
 	}
 
 	function onSubmit() {
@@ -41,16 +72,23 @@
 						bind:value={issueDescription}
 						placeholder="Add description"
 						label="Describe your issue"
-                        required
-                        rows={6}
+						required
+						rows={6}
 					/>
 				</div>
 				<div class="contact-details">
-					<p><span class="gray">You can also find us at</span> iamk.swaroop@gmail.com <span class="gray"> and </span> +1 9727994702</p>
+					<p>
+						<span class="gray">You can also find us at</span> iamk.swaroop@gmail.com
+						<span class="gray"> and </span> +1 9727994702
+					</p>
 				</div>
 				<div class="buttons-wrapper">
 					<Button color="#e4e4e4" on:click={closePopup} ripple style="color:black;">Cancel</Button>
-					<Button color="dark" on:click={onSubmit} ripple>Submit</Button>
+					{#if issue && issueDescription}
+						<Button color="dark" on:click={submitContactForm} ripple>Submit</Button>
+					{:else}
+						<Button color="dark" disabled ripple>Submit</Button>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -124,7 +162,7 @@
 		line-height: normal;
 	}
 
-    .contact-details p span.gray{
-        color: rgba(0, 0, 0, 0.50);
-    }
+	.contact-details p span.gray {
+		color: rgba(0, 0, 0, 0.5);
+	}
 </style>
