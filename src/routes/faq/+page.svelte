@@ -1,8 +1,37 @@
 <script>
 	import SectionWrapper from "$lib/components/SectionWrapper.svelte";
-	import { Card, Collapse, ThemeIcon, Grid } from "@svelteuidev/core";
+	import { Card, Collapse, ThemeIcon, Grid, Button } from "@svelteuidev/core";
 	import { ChevronDown, ChevronUp, Padding } from "radix-icons-svelte";
+	import HelpCentreCard from "$lib/components/helpCentre/HelpCentreCard.svelte";
 	let collapseFlags = false;
+
+	let cards = [
+		{
+			title: "Platform Guide",
+			description:
+				"If you're new to immiGPT, our user-friendly interface is designed for ease. But should you need it, we offer step-by-step guides to help you maximize our platform's potential.",
+		},
+		{
+			title: "FAQ’s",
+			description:
+				"Dive into our comprehensive Frequently Asked Questions section, where we've addressed many common queries ranging from visa applications to cultural assimilation.",
+		},
+		{
+			title: "Email & Support",
+			description:
+				"Can't find an answer in our FAQs? Our dedicated support team is just an email away. Drop us a message at hello@immiGPT.net with your queries, and we promise a swift response.",
+		},
+		{
+			title: "Technical Issues",
+			description:
+				"Your insights drive our improvements. If you have suggestions or feedback about our platform, its features, or any other aspect of our service, we want to hear from you.",
+		},
+		{
+			title: "Feedback and Suggestions",
+			description:
+				"Experiencing glitches or technical hiccups? Report them directly to our tech team, and we'll work diligently to resolve them in the quickest timeframe possible.",
+		},
+	];
 
 	let faqList = [
 		{
@@ -191,6 +220,12 @@
 		},
 	];
 
+	let showAll = false;
+
+	function toggleShowAll() {
+		showAll = !showAll;
+	}
+
 	function toggleCollapse(index) {
 		faqList.map((item) => {
 			item.isOpen = false;
@@ -205,58 +240,110 @@
 
 <div class="containerGridWrap scrollbar-custom">
 	<div class="containerGrid ">
-		<div class="facTitleWrap">
-			<span class="faqTitle">Help Centre</span>
-			<p class="faqDesc">
-				Navigating through immigration processes can sometimes be overwhelming, but with
-				immiGPT.net, you're never alone. Here's how we're equipped to assist you.
-			</p>
+		<div class="help-centre-wrapper">
+			<div class="facTitleWrap">
+				<span class="faqTitle">Help Centre</span>
+				<p class="faqDesc">
+					Navigating through immigration processes can sometimes be overwhelming, but with
+					immiGPT.net, you're never alone. Here's how we're equipped to assist you.
+				</p>
+			</div>
+			<div class="faqCardWrap">
+				{#each cards as card, i}
+					<HelpCentreCard title={card.title}>
+						{#if i != 2}
+							<p class="card-description">
+								{card.description}
+							</p>
+						{:else}
+							<p class="card-description">
+								<span
+									>Can't find an answer in our FAQs? Our dedicated support team is just an email
+									away. Drop us a message at <a href="mailto:hello@immiGPT.net">hello@immiGPT.net</a
+									> with your queries, and we promise a swift response.</span
+								>
+							</p>
+						{/if}
+					</HelpCentreCard>
+				{/each}
+			</div>
 		</div>
-		<div class="faqCardWrap">
-			<div style="width: 280px; height: 100px; background: #F0F0F0; border-radius: 12px" />
-			<div style="width: 280px; height: 100px; background: #F0F0F0; border-radius: 12px" />
-			<div style="width: 280px; height: 100px; background: #F0F0F0; border-radius: 12px" />
-			<div style="width: 280px; height: 100px; background: #F0F0F0; border-radius: 12px" />
-			<div style="width: 280px; height: 100px; background: #F0F0F0; border-radius: 12px" />
-			<div style="width: 280px; height: 100px; background: #F0F0F0; border-radius: 12px" />
-		</div>
-		<div class="facTitleWrap">
-			<span class="faqTitle">Frequently Asked Questions</span>
-			<p class="faqDesc">
-				Navigating through immigration processes can sometimes be overwhelming, but with
-				immiGPT.net, you're never alone. Here's how we're equipped to assist you.
-			</p>
-		</div>
-		<div class="faqQuestionWrap">
-			{#each faqList as faq, index}
-				<div class="faqQuestionSingleWrap" on:click={() => toggleCollapse(index)}>
-					<div class="faqQuestion">
-						<span class="faqQuestionText">
-							<b>{faq.faqTitle}</b>
-						</span>
-						<svg
-							width="16"
-							height="16"
-							viewBox="0 0 16 16"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M4 6L8 10L12 6"
-								stroke="#323739"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-					</div>
-					<Collapse open={faq.isOpen}>
-						<div class="faqAnswer">
-							{faq.faqDesc}
+		<div class="faq-wrapper">
+			<div class="facTitleWrap">
+				<span class="faqTitle">Frequently Asked Questions</span>
+				<p class="faqDesc">
+					Navigating through immigration processes can sometimes be overwhelming, but with
+					immiGPT.net, you're never alone. Here's how we're equipped to assist you.
+				</p>
+			</div>
+			<div class="faqQuestionWrap">
+				{#if !showAll}
+					{#each faqList.slice(0, 5) as faq, index}
+						<div class="faqQuestionSingleWrap" on:click={() => toggleCollapse(index)}>
+							<div class="faqQuestion">
+								<span class="faqQuestionText">
+									<b>{faq.faqTitle}</b>
+								</span>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M4 6L8 10L12 6"
+										stroke="#323739"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</div>
+							<Collapse open={faq.isOpen}>
+								<div class="faqAnswer">
+									{faq.faqDesc}
+								</div>
+							</Collapse>
 						</div>
-					</Collapse>
-				</div>
-			{/each}
+					{/each}
+				{:else}
+					{#each faqList as faq, index}
+						<div class="faqQuestionSingleWrap" on:click={() => toggleCollapse(index)}>
+							<div class="faqQuestion">
+								<span class="faqQuestionText">
+									<b>{faq.faqTitle}</b>
+								</span>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M4 6L8 10L12 6"
+										stroke="#323739"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</div>
+							<Collapse open={faq.isOpen}>
+								<div class="faqAnswer">
+									{faq.faqDesc}
+								</div>
+							</Collapse>
+						</div>
+					{/each}
+				{/if}
+			</div>
+			{#if !showAll}
+				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;">Show More</Button>
+			{:else}
+				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;">Show Less</Button>
+			{/if}
 		</div>
 	</div>
 </div>
@@ -264,20 +351,32 @@
 <style>
 	.containerGridWrap {
 		width: 100%;
-		padding: 16px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		height: calc(100vh - 70px);
+		height: 100vh;
 		overflow-y: auto;
 	}
 
 	.containerGrid {
-		width: 80%;
-		padding: 16px;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: 12px;
+	}
+
+	.faq-wrapper {
+		width: 100%;
+		padding: 32px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+	}
+	.help-centre-wrapper {
+		padding: 32px;
+		background: #FAFAFA;
 	}
 
 	.facTitleWrap {
@@ -286,6 +385,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: 12px;
 	}
 
 	.faqTitle {
@@ -301,12 +401,13 @@
 		font-family: Inter;
 		font-weight: 400;
 		line-height: 20px;
+		text-align: center;
 	}
 
 	.faqCardWrap {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 16px;
+		gap: 24px;
 		width: 100%;
 		justify-content: center;
 	}
@@ -315,7 +416,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
-		width: 100%;
+		width: 80%;
 	}
 
 	.faqQuestion {
@@ -336,5 +437,25 @@
 		flex-direction: column;
 		gap: 8px;
 		border: #e1e1e1 solid 1px;
+	}
+
+	.card-description {
+		color: rgba(0, 0, 0, 0.5);
+		text-align: center;
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 22px; /* 157.143% */
+	}
+
+	.card-description a {
+		color: rgba(0, 55, 198, 0.8);
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 22px;
+		text-decoration-line: underline;
 	}
 </style>
