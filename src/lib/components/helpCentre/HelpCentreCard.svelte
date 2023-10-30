@@ -23,14 +23,16 @@
 		border-radius: 12px;
 		border: 1px solid #e1e1e1;
 		background: #fff;
-        width: 270px;
+		width: 270px;
+		height: 100%;
+		cursor: pointer;
 	}
 
-    .text-content{
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
+	.text-content {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
 
 	.title {
 		color: #323232;
@@ -39,10 +41,8 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
-        text-align: center;
+		text-align: center;
 	}
-
-	
 
 	.icon-wrapper {
 		display: flex;
