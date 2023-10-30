@@ -24,6 +24,7 @@
 	import ConfirmationModal from "$lib/components/ConfirmationModal.svelte";
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
+	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 
 	export let data;
 
@@ -41,7 +42,12 @@
 	let showRaiseAnIssuePopup = false;
 
 	let showSettingsPopup = false;
+	let showBrowseTemplatesPopup = false;
 	let menuToggleFlag = false;
+
+	function toggleBrowseTemplatesPopup(){
+		showBrowseTemplatesPopup = !showBrowseTemplatesPopup;
+	}
 
 	async function onError() {
 		if ($error && currentError && $error !== currentError) {
@@ -574,7 +580,7 @@
 					</div>
 				</div>
 				<div class="left-menu-bottom">
-					<button class="icon-text">
+					<button class="icon-text" on:click={toggleBrowseTemplatesPopup}>
 						<img src="/assets/icons/template-icon-black.svg" alt="" />
 						<p>Browse Templates</p>
 					</button>
@@ -681,6 +687,7 @@
 
 <SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
 <RaiseAnIssuePopup {showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup} />
+<BrowseTemplatesPopup showTemplatesPopup={showBrowseTemplatesPopup} on:closeTemplatesPopup={toggleBrowseTemplatesPopup}/>
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {

@@ -1,10 +1,8 @@
 <script>
-	import { dictionary } from "./../../../.svelte-kit/generated/client/app.js";
 	import { createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
 
 	import Cookies from "js-cookie";
-	import axios from "axios";
 	import { goto } from "$app/navigation";
 
 	let dispatch = createEventDispatcher();

@@ -1,0 +1,110 @@
+<script>
+	export let imageUrl;
+	export let resumeTitle = " Resume";
+	export let resumeDescription = "Description";
+</script>
+
+<div class="container">
+	<div class="image-wrapper">
+		<img class="resume-img" src={imageUrl} alt="" />
+		<div class="middle">
+			<button class="use-template-btn"><p>Use Template</p></button>
+		</div>
+	</div>
+	<div class="text-content">
+		<p class="title">{resumeTitle}</p>
+		<p class="description">{resumeDescription}</p>
+	</div>
+</div>
+
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+		width: 226px;
+	}
+
+	.title {
+		color: #000;
+		font-family: Inter;
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+	}
+
+	.description {
+		color: rgba(0, 0, 0, 0.45);
+		font-family: Inter;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 16px;
+	}
+
+	.image-wrapper {
+		position: relative;
+		height: 333px;
+	}
+
+	.resume-img {
+		opacity: 1;
+		display: block;
+        height: 100%;
+		width: 100%;
+		height: auto;
+		transition: 0.5s ease;
+		backface-visibility: hidden;
+		border-radius: 4px;
+		border: 1px solid #e1e1e1;
+		background: lightgray 50%;
+	}
+
+	.middle {
+		transition: 0.5s ease;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		text-align: center;
+		border-radius: 4px;
+		border: 1px solid #e1e1e1;
+		background-color: rgba(0, 0, 0, 0.6);
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.container:hover .resume-img {
+		opacity: 1;
+	}
+
+	.container:hover .middle {
+		opacity: 1;
+	}
+
+	.use-template-btn {
+		display: flex;
+		padding: 12px 24px;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		border-radius: 48px;
+		background: #000;
+	}
+
+	.use-template-btn p {
+		color: #fff;
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+	}
+</style>
