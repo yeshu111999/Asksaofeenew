@@ -1,9 +1,11 @@
 <script>
 	import SectionWrapper from "$lib/components/SectionWrapper.svelte";
-	import { Card, Collapse, ThemeIcon, Grid, Button } from "@svelteuidev/core";
+	import { Card, Collapse, ThemeIcon, Grid, Button, TextInput, Textarea } from "@svelteuidev/core";
 	import { ChevronDown, ChevronUp, Padding } from "radix-icons-svelte";
 	import HelpCentreCard from "$lib/components/helpCentre/HelpCentreCard.svelte";
+	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	let collapseFlags = false;
+	let showRaiseAnIssuePopup = false;
 
 	let cards = [
 		{
@@ -236,6 +238,16 @@
 			faqList[index].isOpen = true;
 		}
 	}
+
+	function openRaiseAnIssuePopup(title) {
+		if (title == "Feedback and Suggestions") {
+			showRaiseAnIssuePopup = true;
+		}
+	}
+
+	function closeRaiseAnIssuePopup() {
+		showRaiseAnIssuePopup = false;
+	}
 </script>
 
 <div class="containerGridWrap scrollbar-custom">
@@ -250,21 +262,24 @@
 			</div>
 			<div class="faqCardWrap">
 				{#each cards as card, i}
-					<HelpCentreCard title={card.title}>
-						{#if i != 2}
-							<p class="card-description">
-								{card.description}
-							</p>
-						{:else}
-							<p class="card-description">
-								<span
-									>Can't find an answer in our FAQs? Our dedicated support team is just an email
-									away. Drop us a message at <a href="mailto:hello@immiGPT.net">hello@immiGPT.net</a
-									> with your queries, and we promise a swift response.</span
-								>
-							</p>
-						{/if}
-					</HelpCentreCard>
+					<div on:click={() => openRaiseAnIssuePopup(card.title)}>
+						<HelpCentreCard style="height:100%;" title={card.title}>
+							{#if i != 2}
+								<p class="card-description">
+									{card.description}
+								</p>
+							{:else}
+								<p class="card-description">
+									<span
+										>Can't find an answer in our FAQs? Our dedicated support team is just an email
+										away. Drop us a message at <a href="mailto:hello@immiGPT.net"
+											>hello@immiGPT.net</a
+										> with your queries, and we promise a swift response.</span
+									>
+								</p>
+							{/if}
+						</HelpCentreCard>
+					</div>
 				{/each}
 			</div>
 		</div>
@@ -340,13 +355,18 @@
 				{/if}
 			</div>
 			{#if !showAll}
-				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;">Show More</Button>
+				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;"
+					>Show More</Button
+				>
 			{:else}
-				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;">Show Less</Button>
+				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;"
+					>Show Less</Button
+				>
 			{/if}
 		</div>
 	</div>
 </div>
+<RaiseAnIssuePopup {showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup} />
 
 <style>
 	.containerGridWrap {
@@ -376,7 +396,7 @@
 	}
 	.help-centre-wrapper {
 		padding: 32px;
-		background: #FAFAFA;
+		background: #fafafa;
 	}
 
 	.facTitleWrap {
@@ -457,5 +477,74 @@
 		font-weight: 400;
 		line-height: 22px;
 		text-decoration-line: underline;
+	}
+	.overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 2;
+		opacity: 1;
+	}
+
+	.popup {
+		display: flex;
+		flex-direction: column;
+		/* align-items: center; */
+		border-radius: 4px;
+		background: var(--brand-colors-pure-white, #fff);
+		width: auto;
+		height: auto;
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		width: 100%;
+		height: 100%;
+		padding: 24px;
+	}
+
+	.header {
+		padding: 24px;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #e1e1e1;
+	}
+
+	.title {
+		color: #000;
+		font-family: Inter;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+	}
+
+	.buttons-wrapper {
+		display: flex;
+		gap: 12px;
+		justify-content: flex-end;
+	}
+
+	.contact-details p {
+		color: rgba(0, 0, 0, 0.87);
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	.contact-details p span.gray {
+		color: rgba(0, 0, 0, 0.5);
 	}
 </style>
