@@ -226,6 +226,7 @@
 		padding: 10px 8px 0px 8px;
 		/* width: fit-content; */
 		width: 100%;
+		color: var(--primary-text-color)
 	}
 
 	.tabBodyWrap {
@@ -254,6 +255,7 @@
 		font-size: 16px;
 		font-weight: 600;
 		text-align: center;
+		color: var(--primary-text-color)
 	}
 
 	.tabDetailsWrapInternal {
@@ -262,6 +264,7 @@
 		width: 100%;
 		padding: 8px;
 		gap: 8px;
+		color: var(--primary-text-color)
 	}
 
 	.tabDetailsSubTitle {
@@ -279,5 +282,6 @@
 		text-align: center;
 		font-weight: 700;
 		font-size: 24px;
+		color: var(--primary-text-color)
 	}
 </style>

@@ -1162,6 +1162,10 @@
 		-ms-overflow-style: none;
 	}
 
+	.coutryCodeText{
+		color: var(--primary-text-color);
+	}
+
 	.app-title {
 		font-family: Inter;
 		font-size: 24px;
@@ -1195,6 +1199,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+		color: var(--primary-text-color, black)
 	}
 	.input-fields {
 		display: flex;
@@ -1204,8 +1209,8 @@
 
 	.login-btn {
 		width: 100%;
-		background: rgba(0, 0, 0, 0.87);
-		color: white;
+		background: var(--primary-btn-color);
+		color: var(--primary-btn-text-color);
 		width: 360px;
 		height: 44px;
 		padding: 12px 16px 12px 16px;
@@ -1246,7 +1251,7 @@
 	}
 
 	.signup-btn.disabled {
-		background-color: grey;
+		background-color: var(--primary-btn-disabled-color);
 		cursor: not-allowed;
 	}
 
@@ -1306,8 +1311,9 @@
 	}
 
 	.login-btn.disabled {
-		background-color: gray;
+		background-color: var(--primary-btn-color);
 		cursor: not-allowed;
+		opacity: 0.5;
 	}
 
 	.timer-text {
