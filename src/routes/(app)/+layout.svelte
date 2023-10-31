@@ -26,6 +26,7 @@
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let data;
 
@@ -151,6 +152,14 @@
 
 	$: if ($error) onError();
 
+	function changeTheme() {
+		if ($currentTheme == "light") {
+			currentTheme.set("blue");
+		} else {
+			currentTheme.set("light");
+		}
+	}
+
 	const requiresLogin =
 		!$page.error &&
 		!$page.route.id?.startsWith("/r/") &&
@@ -227,6 +236,8 @@
 		sizes="180x180"
 		type="image/png"
 	/>
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
+	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
 </svelte:head>
 
 <!-- <div
@@ -377,6 +388,10 @@
 							</svg>
 
 							<span class="menuBtnTxt">Settings</span>
+						</button>
+						<button class="menuBtnWrap" on:click={changeTheme}>
+							<img class="icon" src="/assets/icons/theme-icon.png" alt="" />
+							<span class="menuBtnTxt">Theme</span>
 						</button>
 						<button
 							class="menuBtnWrap"
@@ -748,6 +763,11 @@
 		line-height: normal;
 	}
 
+	.icon {
+		width: 24px;
+		height: 24px;
+	}
+
 	.popup-header {
 		padding: 24px;
 		width: 100%;
@@ -880,10 +900,10 @@
 		gap: 8px;
 		flex-shrink: 0;
 		border-radius: 8px;
-		background: rgba(0, 0, 0, 0.87);
+		background: var(--primary-btn-color);
 	}
 	.new-search-btn p {
-		color: #fff;
+		color: var(--primary-btn-text-color);
 		text-align: center;
 		font-family: Inter;
 		font-size: 13px;
@@ -912,8 +932,8 @@
 		align-items: center;
 		gap: 8px;
 		border-radius: 8px;
-		background: rgba(0, 0, 0, 0.87);
-		color: white;
+		background: var(--primary-btn-color);
+		color: var(--primary-btn-text-color, white);
 	}
 
 	.left-menu-bottom {
@@ -996,6 +1016,7 @@
 		gap: 8px;
 		padding: 8px 8px;
 		border-radius: 8px;
+		/* background-color: var(--secondary-btn-color); */
 	}
 
 	.menuBtnWrap:hover {
@@ -1028,6 +1049,10 @@
 
 	.left-menu-mobile {
 		display: none;
+	}
+
+	.icon-text p {
+		color: var(--primary-text-color);
 	}
 
 	@media screen and (max-width: 786px) {

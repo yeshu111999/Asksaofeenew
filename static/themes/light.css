@@ -1,0 +1,9 @@
+:root{
+    --primary-btn-color: black;
+    --primary-btn-text-color: white;
+    --primary-btn-disabled-color : gray;
+    --primary-text-color: black;
+
+    --secondary-btn-color: gray;
+    --secondary-btn-text-color: black;
+}
