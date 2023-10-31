@@ -25,6 +25,7 @@
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
+	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 
 	export let data;
 
@@ -43,10 +44,15 @@
 
 	let showSettingsPopup = false;
 	let showBrowseTemplatesPopup = false;
+	let showUpgardetoProPopup = false;
 	let menuToggleFlag = false;
 
-	function toggleBrowseTemplatesPopup(){
+	function toggleBrowseTemplatesPopup() {
 		showBrowseTemplatesPopup = !showBrowseTemplatesPopup;
+	}
+
+	function toggleUpgardetoProPopup() {
+		showUpgardetoProPopup = !showUpgardetoProPopup;
 	}
 
 	async function onError() {
@@ -282,7 +288,7 @@
 			<p class="title">ImmiGPT</p>
 		</div>
 		<div class="user-profile">
-			<div class="button-wrapper">
+			<div class="button-wrapper" on:click={toggleUpgardetoProPopup}>
 				<button class="upgrade-btn">
 					<svg
 						width="20"
@@ -687,7 +693,15 @@
 
 <SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
 <RaiseAnIssuePopup {showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup} />
-<BrowseTemplatesPopup showTemplatesPopup={showBrowseTemplatesPopup} on:closeTemplatesPopup={toggleBrowseTemplatesPopup}/>
+<BrowseTemplatesPopup
+	showTemplatesPopup={showBrowseTemplatesPopup}
+	on:closeTemplatesPopup={toggleBrowseTemplatesPopup}
+/>
+<Upgradetopro
+	showTemplatesPopup={showUpgardetoProPopup}
+	on:closeTemplatesPopup={toggleUpgardetoProPopup}
+	on:contactUs={openRaiseAnIssuePopup}
+/>
 
 <style>
 	.chgatsScroll::-webkit-scrollbar {

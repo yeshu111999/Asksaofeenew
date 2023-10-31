@@ -2,3 +2,13 @@
 	font-family: "Inter";
 	src: url("/fonts/Inter-Regular.ttf");
 }
+
+
+*{
+	font-family: 'Inter' !important;
+}
+
+:root{
+	font-family: 'Inter';
+}
+
