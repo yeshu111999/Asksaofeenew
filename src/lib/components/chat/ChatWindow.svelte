@@ -44,6 +44,7 @@
 		if (loading) return;
 		dispatch("message", message);
 		message = "";
+		visaPrompt.set("");
 	};
 </script>
 
