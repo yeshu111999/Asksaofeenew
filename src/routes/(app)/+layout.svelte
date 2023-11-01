@@ -10,6 +10,7 @@
 	import { UrlDependency } from "$lib/types/UrlDependency";
 	import { error } from "$lib/stores/errors";
 	import Cookies from "js-cookie";
+	import { visaPrompt } from "$lib/stores/promptStore";
 
 	import MobileNav from "$lib/components/MobileNav.svelte";
 	import NavMenu from "$lib/components/NavMenu.svelte";
@@ -34,6 +35,7 @@
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
+	import VisaPreperationPopUp from "$lib/components/VisaPreperationPopUp.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let data;
@@ -54,14 +56,24 @@
 	let showSettingsPopup = false;
 	let showBrowseTemplatesPopup = false;
 	let showUpgardetoProPopup = false;
+	let showVisaPreperationPopUp = false;
 	let menuToggleFlag = false;
 
 	function toggleBrowseTemplatesPopup() {
 		showBrowseTemplatesPopup = !showBrowseTemplatesPopup;
 	}
 
+	function toggleVisaPreperationPopUp() {
+		showVisaPreperationPopUp = !showVisaPreperationPopUp;
+	}
+
 	function toggleUpgardetoProPopup() {
 		showUpgardetoProPopup = !showUpgardetoProPopup;
+	}
+
+	function visaPromptMethod(prompt) {
+		console.log("prompt", prompt.detail);
+		visaPrompt.set(prompt.detail);
 	}
 
 	async function onError() {
@@ -636,7 +648,7 @@
 						<img src="/assets/icons/chat-icon-black.svg" alt="" />
 						<p>P2P Chatter</p>
 					</button> -->
-					<button class="icon-text">
+					<button class="icon-text" on:click={toggleVisaPreperationPopUp}>
 						<img src="/assets/icons/visa-icon-black.svg" alt="" />
 						<p>Visa Preparation</p>
 					</button>
@@ -743,6 +755,11 @@
 	showTemplatesPopup={showUpgardetoProPopup}
 	on:closeTemplatesPopup={toggleUpgardetoProPopup}
 	on:contactUs={openRaiseAnIssuePopup}
+/>
+<VisaPreperationPopUp
+	showTemplatesPopup={showVisaPreperationPopUp}
+	on:closeTemplatesPopup={toggleVisaPreperationPopUp}
+	on:visaPrompt={visaPromptMethod}
 />
 
 <style>

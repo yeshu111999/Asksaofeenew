@@ -15,6 +15,7 @@
 	import WebSearchToggle from "../WebSearchToggle.svelte";
 	import LoginModal from "../LoginModal.svelte";
 	import type { WebSearchUpdate } from "$lib/types/MessageUpdate";
+	import { visaPrompt } from "$lib/stores/promptStore";
 
 	export let messages: Message[] = [];
 	export let loading = false;
@@ -30,7 +31,7 @@
 	$: isReadOnly = !models.some((model) => model.id === currentModel.id);
 
 	let loginModalOpen = false;
-	let message: string;
+	$: message = $visaPrompt;
 
 	const dispatch = createEventDispatcher<{
 		message: string;
