@@ -17,7 +17,15 @@
 	import SettingsModal from "$lib/components/SettingsModal.svelte";
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
-	import { SvelteUIProvider, Menu, Burger, Modal, Textarea, TextInput } from "@svelteuidev/core";
+	import {
+		SvelteUIProvider,
+		Menu,
+		Burger,
+		Modal,
+		Textarea,
+		TextInput,
+		Switch,
+	} from "@svelteuidev/core";
 	import { bubble } from "svelte/internal";
 	import NavConversationItem from "$lib/components/NavConversationItem.svelte";
 	import { Button, PinRight } from "radix-icons-svelte";
@@ -26,6 +34,7 @@
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let data;
 
@@ -151,6 +160,19 @@
 
 	$: if ($error) onError();
 
+	function changeTheme() {
+		console.log("hello");
+		if ($currentTheme == "light") {
+			currentTheme.set("blue");
+		} else {
+			currentTheme.set("light");
+		}
+	}
+
+	function gotoPolicies() {
+		goto("/privacy-policy");
+	}
+
 	const requiresLogin =
 		!$page.error &&
 		!$page.route.id?.startsWith("/r/") &&
@@ -162,6 +184,8 @@
 	let userName;
 	let userMail;
 	let profileImg;
+
+	let themeVariable = $currentTheme;
 
 	onMount(() => {
 		let token = Cookies.get("token");
@@ -227,6 +251,8 @@
 		sizes="180x180"
 		type="image/png"
 	/>
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
+	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
 </svelte:head>
 
 <!-- <div
@@ -378,6 +404,18 @@
 
 							<span class="menuBtnTxt">Settings</span>
 						</button>
+
+						<button class="menuBtnWrap">
+							<img class="icon" src="/assets/icons/theme-icon.png" alt="" />
+							<span class="menuBtnTxt">Theme</span>
+							<Switch
+								checked={$currentTheme == "blue"}
+								onLabel="light"
+								offLabel="color"
+								size="md"
+								on:click={changeTheme}
+							/>
+						</button>
 						<button
 							class="menuBtnWrap"
 							on:click={() => {
@@ -476,6 +514,10 @@
 								/>
 							</svg>
 							<span class="menuBtnTxt">Blogs</span>
+						</button>
+						<button class="menuBtnWrap" on:click={gotoPolicies}>
+							<img class="icon" src="/assets/icons/policy-icon-black.svg" alt="" />
+							<span class="menuBtnTxt">Terms & Policies</span>
 						</button>
 						<button class="menuBtnWrap" on:click={openRaiseAnIssuePopup}>
 							<svg
@@ -748,6 +790,11 @@
 		line-height: normal;
 	}
 
+	.icon {
+		width: 24px;
+		height: 24px;
+	}
+
 	.popup-header {
 		padding: 24px;
 		width: 100%;
@@ -880,10 +927,10 @@
 		gap: 8px;
 		flex-shrink: 0;
 		border-radius: 8px;
-		background: rgba(0, 0, 0, 0.87);
+		background: var(--primary-btn-color);
 	}
 	.new-search-btn p {
-		color: #fff;
+		color: var(--primary-btn-text-color);
 		text-align: center;
 		font-family: Inter;
 		font-size: 13px;
@@ -912,8 +959,8 @@
 		align-items: center;
 		gap: 8px;
 		border-radius: 8px;
-		background: rgba(0, 0, 0, 0.87);
-		color: white;
+		background: var(--primary-btn-color);
+		color: var(--primary-btn-text-color, white);
 	}
 
 	.left-menu-bottom {
@@ -996,6 +1043,7 @@
 		gap: 8px;
 		padding: 8px 8px;
 		border-radius: 8px;
+		/* background-color: var(--secondary-btn-color); */
 	}
 
 	.menuBtnWrap:hover {
@@ -1028,6 +1076,10 @@
 
 	.left-menu-mobile {
 		display: none;
+	}
+
+	.icon-text p {
+		color: var(--primary-text-color);
 	}
 
 	@media screen and (max-width: 786px) {

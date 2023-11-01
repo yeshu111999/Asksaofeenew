@@ -1,14 +1,23 @@
 <script>
-	export let imageUrl;
+	import { createEventDispatcher } from "svelte";
+	export let imageUrl = '';
 	export let resumeTitle = " Resume";
 	export let resumeDescription = "Description";
+	export let index = 0;
+
+	let dispatch = createEventDispatcher();
+
+	function selectedTemplate(){
+		console.log("template selected");
+		dispatch('selectedTemplate', { index : index})
+	}
 </script>
 
 <div class="container">
 	<div class="image-wrapper">
 		<img class="resume-img" src={imageUrl} alt="" />
 		<div class="middle">
-			<button class="use-template-btn"><p>Use Template</p></button>
+			<button on:click={selectedTemplate} class="use-template-btn"><p>Use Template</p></button>
 		</div>
 	</div>
 	<div class="text-content">
