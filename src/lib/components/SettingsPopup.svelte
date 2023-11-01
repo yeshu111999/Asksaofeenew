@@ -1,3 +1,12 @@
+/*
+ * Filename: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte
+ * Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui
+ * Created Date: Friday, October 27th 2023, 9:25:36 pm
+ * Author: Madan Kumar T
+ * 
+ * Copyright (c) 2023 Trinom Digital Pvt Ltd
+ */
+
 <script>
 	import { createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
@@ -28,8 +37,11 @@
 	let openDeleteAccountPopup = false;
 	let saveChangesLoader = false;
 
-	$: showSaveOption = oldFirstName != firstName || oldLastName != lastName;
-	$: showSavePwd = password.length > 4 && newPassword.length > 4 && password == newPassword;
+	$: showSaveOption =
+		oldFirstName != firstName ||
+		oldLastName != lastName ||
+		(oldMobileNumber != mobileNumber && mobileNumber.length == 10);
+	$: showSavePwd = password.length > 4 && newPassword.length > 4 && password != newPassword;
 
 	let tabs = ["Profile Information", "Change Password", "Clear Chat", "Delete Account"];
 
@@ -116,23 +128,19 @@
 		if (gauth) {
 			headers.append("Google-Auth", "True");
 		}
-		let body = {
+		let requestbody = {
 			oldPassword: password,
 			newPassword: newPassword,
-			confirmPassword: newPassword,
 		};
 
-		let formData = new FormData();
-		formData.append("request", JSON.stringify(body));
-
 		let config = {
-			method: "POST",
+			method: "PUT",
 			headers: headers,
-			body: formData,
+			body: JSON.stringify(requestbody),
 		};
 
 		try {
-			const response = await fetch("https://backend.immigpt.net/updateUserProfile", config);
+			const response = await fetch("https://backend.immigpt.net/updatePassword", config);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -302,6 +310,28 @@
 	});
 </script>
 
+/* * Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte * Path:
+c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th 2023,
+9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename:
+c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte *
+Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th
+2023, 9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* *
+Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte * Path:
+c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th 2023,
+9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename:
+c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte *
+Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th
+2023, 9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* *
+Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte * Path:
+c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th 2023,
+9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename:
+c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte *
+Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th
+2023, 9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */
+
 {#if showSettingsPopup}
 	<div class="overlay">
 		<div class="popup">
@@ -403,11 +433,15 @@
 					<section id="change-pwd">
 						<div class="section">
 							<p class="section-header">Change password</p>
+							<p class="description">
+								If you no longer want to use ImmiGPT, You can permanently delete your account. You
+								don’t undo this action
+							</p>
 							<div>
 								<PasswordInput
 									bind:value={password}
 									type="password"
-									label="Old Password"
+									label="Verify your current password"
 									placeholder="Password"
 								/>
 							</div>
