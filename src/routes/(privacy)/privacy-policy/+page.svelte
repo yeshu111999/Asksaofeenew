@@ -36,7 +36,7 @@
 	}
 </script>
 
-<div class=" container">
+<div class="container">
 	<div class="left-body">
 		{#each tabs as tab, i}
 			<button
@@ -51,15 +51,17 @@
 	</div>
 	<div class="right-body scrollbar-custom">
 		<PrivacyPolicy />
-		<CancellationAndRefundPolicy />
 		<TermsAndConditions />
+		<CancellationAndRefundPolicy />
 	</div>
 </div>
 
 <style>
 	.container {
-		padding: 00px 40px;
+		padding: 0px 0px 0px;
 		display: flex;
+		width: 100% !important;
+		max-width: 100%;
 	}
 
 	.left-body {
@@ -78,7 +80,7 @@
 
 	.text-btn p {
 		color: rgba(0, 0, 0, 0.54);
-
+		text-align: left;
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
@@ -99,6 +101,8 @@
 	.right-body {
 		height: 100vh;
 		overflow-y: auto;
-		padding: 40px;
+		padding: 40px 40px 40px 40px;
+		width: 100%;
+		scroll-behavior: smooth;
 	}
 </style>

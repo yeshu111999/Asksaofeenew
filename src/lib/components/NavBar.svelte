@@ -71,6 +71,10 @@
 		}, 3000);
 	}
 
+	function gotoHome() {
+		goto("/");
+	}
+
 	async function deleteConversation(id: string) {
 		try {
 			const res = await fetch(`${base}/conversation/${id}`, {
@@ -171,6 +175,10 @@
 	let userName;
 	let userMail;
 	let profileImg;
+
+	function gotoPolicies() {
+		goto("/privacy-policy");
+	}
 
 	onMount(() => {
 		let token = Cookies.get("token");
@@ -293,10 +301,10 @@
 	<div class="ham">
 		<Burger opened={menuToggleFlag} on:click={() => (menuToggleFlag = !menuToggleFlag)} />
 	</div>
-	<div class="logoWrap">
-		<img src="/assets/images/statue-liberty.jpg" width="40px" />
+	<button class="logoWrap" on:click={gotoHome}>
+		<img src="/assets/images/statue-liberty.jpg" width="40px" alt="" />
 		<p class="title">ImmiGPT</p>
-	</div>
+	</button>
 	<div class="user-profile">
 		<div class="button-wrapper" on:click={toggleUpgardetoProPopup}>
 			<button class="upgrade-btn">
@@ -490,6 +498,10 @@
 							/>
 						</svg>
 						<span class="menuBtnTxt">Blogs</span>
+					</button>
+					<button class="menuBtnWrap" on:click={gotoPolicies}>
+						<img class="icon" src="/assets/icons/policy-icon-black.svg" alt="" />
+						<span class="menuBtnTxt">Terms & Policies</span>
 					</button>
 					<button class="menuBtnWrap" on:click={openRaiseAnIssuePopup}>
 						<svg
@@ -899,6 +911,8 @@
 		gap: 8px;
 		justify-content: center;
 		align-items: center;
+		border: none;
+		background-color: transparent;
 	}
 
 	.ham {
