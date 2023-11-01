@@ -6,9 +6,7 @@
 <div class="navbar-container">
 	<NavBar />
 	<div class="navbar-body">
-		<SvelteUIProvider>
-			<slot />
-		</SvelteUIProvider>
+		<slot />
 	</div>
 </div>
 
@@ -22,5 +20,6 @@
 		padding: 0;
 		background: white;
 		display: flex;
+		width: 100% !important;
 	}
 </style>

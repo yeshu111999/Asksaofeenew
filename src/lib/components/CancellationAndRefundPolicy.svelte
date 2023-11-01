@@ -75,6 +75,7 @@
 		flex-direction: column;
 		gap: 24px;
 		padding-bottom: 120px;
+		width: 100%;
 	}
 	.title {
 		color: var(--primary-text-color);

@@ -199,6 +199,10 @@
 
 	let themeVariable = $currentTheme;
 
+	function gotoHome() {
+		goto("/");
+	}
+
 	onMount(() => {
 		let token = Cookies.get("token");
 		if (!token) {
@@ -321,10 +325,10 @@
 		<div class="ham">
 			<Burger opened={menuToggleFlag} on:click={() => (menuToggleFlag = !menuToggleFlag)} />
 		</div>
-		<div class="logoWrap">
+		<button class="logoWrap" on:click={gotoHome}>
 			<img src="/assets/images/statue-liberty.jpg" width="40px" />
 			<p class="title">ImmiGPT</p>
-		</div>
+		</button>
 		<div class="user-profile">
 			<div class="button-wrapper" on:click={toggleUpgardetoProPopup}>
 				<button class="upgrade-btn">
@@ -1085,6 +1089,8 @@
 		gap: 8px;
 		justify-content: center;
 		align-items: center;
+		border: none;
+		background-color: transparent;
 	}
 
 	.ham {
