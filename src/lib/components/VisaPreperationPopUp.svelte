@@ -37,6 +37,12 @@
 		}
 		visaPrompt();
 		submitLoader = false;
+		visaInterviewType = "";
+		travelFrom = "";
+		travelTo = "";
+		travelReason = "";
+		visaType = "";
+		visapreppromt = "";
 		closePopup();
 		// console.log("prompt", visapreppromt);
 	}
