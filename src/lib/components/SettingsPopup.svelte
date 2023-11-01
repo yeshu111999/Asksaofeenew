@@ -1,12 +1,3 @@
-/*
- * Filename: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte
- * Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui
- * Created Date: Friday, October 27th 2023, 9:25:36 pm
- * Author: Madan Kumar T
- * 
- * Copyright (c) 2023 Trinom Digital Pvt Ltd
- */
-
 <script>
 	import { createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
@@ -309,28 +300,6 @@
 		getUserDetails();
 	});
 </script>
-
-/* * Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte * Path:
-c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th 2023,
-9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename:
-c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte *
-Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th
-2023, 9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* *
-Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte * Path:
-c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th 2023,
-9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename:
-c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte *
-Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th
-2023, 9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* *
-Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte * Path:
-c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th 2023,
-9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename:
-c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\SettingsPopup.svelte *
-Path: c:\Users\Madan Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Friday, October 27th
-2023, 9:25:36 pm * Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */
 
 {#if showSettingsPopup}
 	<div class="overlay">
