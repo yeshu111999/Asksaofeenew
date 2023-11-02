@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from "svelte";
-	import { Tabs } from "@svelteuidev/core";
+	import { Modal, Tabs, Tooltip } from "@svelteuidev/core";
 
 	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
 
@@ -111,13 +111,23 @@
 	let themeVariable = "light";
 	let selectedTemplate = templates[0].resumeTemplates[0];
 
+	let showPreview = false;
+
+	function openPreview() {
+		showPreview = true;
+	}
+
+	function closePreview() {
+		showPreview = false;
+	}
+
 	function closePopup() {
 		dispatch("closeTemplatesPopup");
 	}
 
 	function closeShowTemplatePopup() {
 		showSelectedTemplate = false;
-        activeTabIndex = 0;
+		activeTabIndex = 0;
 	}
 
 	function selectedStudentTemplate(event) {
@@ -225,7 +235,9 @@
 				</div>
 			{:else if showSelectedTemplate}
 				<div class="header">
-					<p class="title">Back to Templates</p>
+					<button class="back-btn" on:click={closeShowTemplatePopup}
+						><p class="title">Back to Templates</p></button
+					>
 					<button class="close-btn" on:click={closeShowTemplatePopup}>
 						<img src="/assets/icons/close-icon-black.svg" alt="" />
 					</button>
@@ -239,13 +251,27 @@
 							<p class="templateTitle">{selectedTemplate.resumeTitle}</p>
 							<p class="templateDescription">{selectedTemplate.resumeDescription}</p>
 						</div>
-						<button class="use-template-btn"><p>Use Template</p></button>
+						<div class="buttons-wrapper">
+							<!-- <Tooltip position="bottom" withArrow label="Preview" gutter={8}>
+								<button class="preview-btn" on:click={openPreview}>
+									<img src="/assets/icons/eye-icon-black.png" alt="" />
+								</button>
+							</Tooltip> -->
+							<button class="use-template-btn" on:click={openPreview}><p>Preview</p></button>
+							<button class="use-template-btn"><p>Use Template</p></button>
+						</div>
 					</div>
 				</div>
 			{/if}
 		</div>
 	</div>
 {/if}
+
+<Modal size="50%" opened={showPreview} on:close={closePreview}>
+	<div class="preview-container">
+		<img src={selectedTemplate.imageUrl} alt="template" />
+	</div>
+</Modal>
 
 <style>
 	.overlay {
@@ -269,7 +295,7 @@
 		border-radius: 4px;
 		background: var(--brand-colors-pure-white, #fff);
 		width: 60%;
-		height: 620px;
+		height: 95vh;
 	}
 
 	.header {
@@ -352,7 +378,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 8px;
-        width: fit-content;
+		width: fit-content;
 	}
 
 	.use-template-btn p {
@@ -372,9 +398,28 @@
 	}
 
 	.resume-img {
-		height: 560px;
-		width: 400px;
+		height: 760px;
+		width: 600px;
 		border-radius: 4px;
 		border: 1px solid #e1e1e1;
+	}
+
+	.back-btn {
+		border: none;
+		background-color: transparent;
+	}
+
+	.buttons-wrapper {
+		display: flex;
+		gap: 12px;
+	}
+
+	.preview-btn img {
+		width: 32px;
+		height: 32px;
+	}
+
+	.preview-container img {
+		object-fit: cover;
 	}
 </style>
