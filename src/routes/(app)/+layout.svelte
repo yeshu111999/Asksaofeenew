@@ -37,6 +37,7 @@
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 	import VisaPreperationPopUp from "$lib/components/VisaPreperationPopUp.svelte";
+	import ImmigrationHelpPopUp from "$lib/components/ImmigrationHelpPopUp.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let data;
@@ -58,6 +59,7 @@
 	let showBrowseTemplatesPopup = false;
 	let showUpgardetoProPopup = false;
 	let showVisaPreperationPopUp = false;
+	let showImmigrationHelpPopUp = false;
 	let menuToggleFlag = false;
 
 	function toggleBrowseTemplatesPopup() {
@@ -68,11 +70,19 @@
 		showVisaPreperationPopUp = !showVisaPreperationPopUp;
 	}
 
+	function toggleImmigrationHelpPopUp() {
+		showImmigrationHelpPopUp = !showImmigrationHelpPopUp;
+	}
+
 	function toggleUpgardetoProPopup() {
 		showUpgardetoProPopup = !showUpgardetoProPopup;
 	}
 
 	function visaPromptMethod(prompt) {
+		console.log("prompt", prompt.detail);
+		visaPrompt.set(prompt.detail);
+	}
+	function immiHelpPrompt(prompt) {
 		console.log("prompt", prompt.detail);
 		visaPrompt.set(prompt.detail);
 	}
@@ -370,7 +380,7 @@
 						<img src="/assets/icons/visa-icon-black.svg" alt="" />
 						<p>Visa Preparation</p>
 					</button>
-					<button class="icon-text">
+					<button class="icon-text" on:click={toggleImmigrationHelpPopUp}>
 						<img src="/assets/icons/help-icon-black.svg" alt="" />
 						<p>Immigration Help</p>
 					</button>
@@ -478,6 +488,11 @@
 	showTemplatesPopup={showVisaPreperationPopUp}
 	on:closeTemplatesPopup={toggleVisaPreperationPopUp}
 	on:visaPrompt={visaPromptMethod}
+/>
+<ImmigrationHelpPopUp
+	showTemplatesPopup={showImmigrationHelpPopUp}
+	on:closeTemplatesPopup={toggleImmigrationHelpPopUp}
+	on:immiHelpPrompt={immiHelpPrompt}
 />
 
 <style>

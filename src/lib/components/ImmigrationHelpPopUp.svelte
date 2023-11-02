@@ -11,45 +11,45 @@
 
 	let themeVariable = "light";
 	let renderedText = "";
-	let visaInterviewType = "";
+	let immiHelpInterviewType = "";
 	let travelFrom = "";
 	let travelTo = "";
 	let travelReason = "";
-	let visaType = "";
-	let visapreppromt = "";
+	let immiHelpType = "";
+	let immiHelppreppromt = "";
 	let submitLoader = false;
 
-	$: isValidSubmit = visaInterviewType && travelFrom && travelTo && travelReason && visaType;
+	$: isValidSubmit =
+		immiHelpInterviewType && travelFrom && travelTo && travelReason && immiHelpType;
 	function closePopup() {
 		dispatch("closeTemplatesPopup");
 	}
 
-	function visaPrompt() {
-		dispatch("visaPrompt", visapreppromt);
+	function immiHelpPrompt() {
+		dispatch("immiHelpPrompt", immiHelppreppromt);
 	}
 
-	function prepareVisaPrompt() {
+	function prepareimmiHelpPrompt() {
 		submitLoader = true;
-		if (visaInterviewType == "VISA preparation") {
-			visapreppromt = `Please provide a comprehensive list of important and expected questions, along with suggested answers, to prepare for the ${visaType} visa interview. The questions should be based on the traveller's current scenario. Specifically, consider that the traveller is applying for a ${visaType} visa to enter ${travelTo} from ${travelFrom} for ${travelReason}. Tailor the questions to cover all aspects that are typically asked during a ${visaType} visa interview. Additionally, suggest answers that are clear, honest, and provide relevant information. Begin responding with a greeting`;
+		if (immiHelpInterviewType == "Immigration preparation") {
+			immiHelppreppromt = `Please provide a comprehensive list of important and expected questions, along with suggested answers, to prepare for immigration. The questions should be based on the traveller's current scenario. Specifically, consider that the traveller holds ${immiHelpInterviewType} visa to enter ${travelTo} from ${travelFrom} for ${travelReason}. Tailor the questions to cover all aspects that are typically asked during the immigration by the immigration officer. Additionally, suggest answers that are clear, honest, and provide relevant information`;
 		} else {
-			visapreppromt = `Imagine you're a visa interview officer at ${travelTo} Embassy/Consulate, and you are conducting a visa interview for a traveller. The traveller is applying for ${visaType} visa to enter ${travelTo} from ${travelFrom} for the purpose of ${travelReason}. Please make sure to ask one question at a time.`;
+			immiHelppreppromt = `Imagine you're an immigration officer at ${travelTo} Embassy/Consulate, and you are interviewing a traveller. The traveller holds ${immiHelpInterviewType} visa and is entering ${travelTo} from ${travelFrom} for the purpose of ${travelReason}. Please ensure that you ask one question at a time.`;
 		}
-		visaPrompt();
+		immiHelpPrompt();
 		submitLoader = false;
-		visaInterviewType = "";
+		immiHelpInterviewType = "";
 		travelFrom = "";
 		travelTo = "";
 		travelReason = "";
-		visaType = "";
-		visapreppromt = "";
+		immiHelpType = "";
 		closePopup();
-		// console.log("prompt", visapreppromt);
+		// console.log("prompt", immiHelppreppromt);
 	}
 	let items = [
-		"Make you to prepare for visa interview with sample questions and answers",
-		"Train you with Visa Mock Interview",
-		"Help you with better prompt for visa preparation",
+		"Help you with port of entry immigration questions",
+		"mock preparation with port of entry immigration",
+		"Help with better prompt for immigration help",
 	];
 </script>
 
@@ -70,9 +70,9 @@
 				</div>
 				<div class="input-wrapper visaprep-container">
 					<NativeSelect
-						data={["VISA preparation", "VISA Mock preparation"]}
+						data={["mock Immigration", "Immigration preparation"]}
 						required
-						bind:value={visaInterviewType}
+						bind:value={immiHelpInterviewType}
 						label="Select Option"
 						placeholder="Select Interview"
 					/>
@@ -87,7 +87,7 @@
 						/>
 					</div>
 					<div style="width:50%">
-						<TextInput required bind:value={travelTo} placeholder="To (Ex. India)" />
+						<TextInput required bind:value={travelTo} placeholder="To (Ex. Dubai)" />
 					</div>
 				</div>
 				<!-- <div class="input-wrapper visaprep-container">
@@ -108,7 +108,7 @@
 				<div class="input-wrapper visaprep-container">
 					<TextInput
 						required
-						bind:value={visaType}
+						bind:value={immiHelpType}
 						label="Select visa type"
 						placeholder="Ex. Visitor Visa"
 					/>
@@ -122,7 +122,7 @@
 					disabled={!isValidSubmit}
 					color="black"
 					loading={submitLoader}
-					on:click={prepareVisaPrompt}>Submit</Button
+					on:click={prepareimmiHelpPrompt}>Submit</Button
 				>
 			</div>
 		</div>
