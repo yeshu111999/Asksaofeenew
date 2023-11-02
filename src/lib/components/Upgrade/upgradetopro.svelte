@@ -59,7 +59,8 @@
 					<p>Pro</p>
 					<p class="description-amount">$10/Month</p>
 					<div class="plan-button">
-						<Button fullSize color="#0037C6CC">Upgrade Plan</Button>
+						<Button fullSize style="background-color:var(--primary-btn-color);">Upgrade Plan</Button
+						>
 					</div>
 					<p>Plan includes:</p>
 					<div class="features">
@@ -105,7 +106,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 1;
+		z-index: 2;
 		opacity: 1;
 	}
 
@@ -136,7 +137,8 @@
 		border-top: 1px solid #e1e1e1;
 	}
 	.footer-text {
-		color: #335fd1;
+		/* color: #335fd1; */
+		color: var(--primary-btn-color);
 		font-size: 14px;
 		font-weight: 600;
 		cursor: pointer;

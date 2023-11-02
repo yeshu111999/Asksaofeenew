@@ -52,6 +52,8 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 32px;
-		background: #323232;
+		/* background-color: aqua; */
+		/* background: #323232; */
+		background: var(--primary-btn-color);
 	}
 </style>

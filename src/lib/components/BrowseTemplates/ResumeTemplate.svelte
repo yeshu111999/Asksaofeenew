@@ -1,15 +1,15 @@
 <script>
 	import { createEventDispatcher } from "svelte";
-	export let imageUrl = '';
+	export let imageUrl = "";
 	export let resumeTitle = " Resume";
 	export let resumeDescription = "Description";
 	export let index = 0;
 
 	let dispatch = createEventDispatcher();
 
-	function selectedTemplate(){
+	function selectedTemplate() {
 		console.log("template selected");
-		dispatch('selectedTemplate', { index : index})
+		dispatch("selectedTemplate", { index: index });
 	}
 </script>
 
@@ -61,7 +61,7 @@
 	.resume-img {
 		opacity: 1;
 		display: block;
-        height: 100%;
+		height: 100%;
 		width: 100%;
 		height: auto;
 		transition: 0.5s ease;
@@ -105,7 +105,7 @@
 		align-items: center;
 		gap: 8px;
 		border-radius: 48px;
-		background: #000;
+		background: var(--primary-btn-color);
 	}
 
 	.use-template-btn p {

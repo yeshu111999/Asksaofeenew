@@ -4,7 +4,9 @@
 
 	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
 
+	// import { theme } from "$lib/stores/theme";
 	import { theme } from "$lib/stores/theme";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	let dispatch = createEventDispatcher();
 	export let showTemplatesPopup = false;
@@ -117,7 +119,7 @@
 
 	function closeShowTemplatePopup() {
 		showSelectedTemplate = false;
-        activeTabIndex = 0;
+		activeTabIndex = 0;
 	}
 
 	function selectedStudentTemplate(event) {
@@ -167,9 +169,9 @@
 						variant="default"
 						color={$theme == "dark"
 							? "rgba(255, 255, 255, 0.2)"
-							: "black" + themeVariable == "dark"
+							: "var(--primary-btn-color)" + themeVariable == "dark"
 							? "rgba(255, 255, 255, 0.2)"
-							: "black"}
+							: "var(--primary-btn-color)"}
 						on:change={renderDescriptionTab}
 					>
 						<Tabs.Tab
@@ -258,7 +260,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 1;
+		z-index: 2;
 		opacity: 1;
 	}
 
@@ -346,23 +348,24 @@
 
 	.use-template-btn {
 		border-radius: 48px;
-		background: #000;
+		/* background: #000; */
+		/* background: var(--primary-btn-color); */
 		display: inline-flex;
 		padding: 12px 24px;
 		justify-content: center;
 		align-items: center;
 		gap: 8px;
-        width: fit-content;
+		width: fit-content;
 	}
 
 	.use-template-btn p {
+		/* background: var(--primary-btn-color);
 		color: #fff;
-
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
-		font-weight: 600;
-		line-height: normal;
+		font-weight: 600; */
+		/* line-height: normal; */
 	}
 
 	.right-body {

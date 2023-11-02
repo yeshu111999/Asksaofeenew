@@ -85,7 +85,11 @@
 				<div class="buttons-wrapper">
 					<Button color="#e4e4e4" on:click={closePopup} ripple style="color:black;">Cancel</Button>
 					{#if issue && issueDescription}
-						<Button color="dark" on:click={submitContactForm} ripple>Submit</Button>
+						<Button
+							style="background-color:  var(--primary-btn-color)"
+							on:click={submitContactForm}
+							ripple>Submit</Button
+						>
 					{:else}
 						<Button color="dark" disabled ripple>Submit</Button>
 					{/if}
@@ -106,7 +110,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 2;
+		z-index: 1;
 		opacity: 1;
 	}
 
