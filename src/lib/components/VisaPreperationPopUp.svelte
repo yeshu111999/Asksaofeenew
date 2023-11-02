@@ -120,7 +120,7 @@
 				>
 				<Button
 					disabled={!isValidSubmit}
-					color="black"
+					color="var(--primary-btn-color)"
 					loading={submitLoader}
 					on:click={prepareVisaPrompt}>Submit</Button
 				>
