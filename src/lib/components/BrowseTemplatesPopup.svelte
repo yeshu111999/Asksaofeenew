@@ -375,7 +375,8 @@
 	.use-template-btn {
 		border-radius: 48px;
 		/* background: #000; */
-		/* background: var(--primary-btn-color); */
+		/* color: #fff; */
+		background: var(--primary-btn-color);
 		display: inline-flex;
 		padding: 12px 24px;
 		justify-content: center;
@@ -385,12 +386,12 @@
 	}
 
 	.use-template-btn p {
-		/* background: var(--primary-btn-color);
+		/* background: var(--primary-btn-color); */
 		color: #fff;
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
-		font-weight: 600; */
+		font-weight: 600;
 		/* line-height: normal; */
 	}
 
