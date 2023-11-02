@@ -102,7 +102,7 @@
 						required
 						bind:value={travelReason}
 						label="Reason for travelling"
-						placeholder="Ex. Visting"
+						placeholder="Ex. Visiting"
 					/>
 				</div>
 				<div class="input-wrapper visaprep-container">
