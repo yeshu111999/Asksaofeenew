@@ -57,7 +57,7 @@
 	<div class="overlay">
 		<div class="popup">
 			<div class="header">
-				<p class="title">Tell us about your travel</p>
+				<p class="title">VISA Preparation</p>
 				<button class="close-btn" on:click={closePopup}>
 					<img src="/assets/icons/close-icon-black.svg" alt="" />
 				</button>
