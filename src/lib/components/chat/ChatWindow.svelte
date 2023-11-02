@@ -33,6 +33,13 @@
 	let loginModalOpen = false;
 	$: message = $visaPrompt;
 
+	$: {
+		let msg = $visaPrompt;
+		if (msg.length > 0) {
+			handleSubmit();
+		}
+	}
+
 	const dispatch = createEventDispatcher<{
 		message: string;
 		share: void;
