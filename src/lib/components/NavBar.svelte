@@ -5,6 +5,7 @@
 	import "../../styles/main.css";
 	import { base } from "$app/paths";
 	import { PUBLIC_ORIGIN, PUBLIC_APP_DISCLAIMER } from "$env/static/public";
+	import { createEventDispatcher } from "svelte";
 
 	import { shareConversation } from "$lib/shareConversation";
 	import { UrlDependency } from "$lib/types/UrlDependency";
@@ -27,6 +28,8 @@
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
+
+	let dispatch = createEventDispatcher();
 
 	export let data;
 
@@ -576,7 +579,13 @@
 
 <div class="top-navbar">
 	<div class="ham">
-		<Burger opened={menuToggleFlag} on:click={() => (menuToggleFlag = !menuToggleFlag)} />
+		<Burger
+			opened={menuToggleFlag}
+			on:click={() => {
+				menuToggleFlag = !menuToggleFlag;
+				dispatch("hamClick");
+			}}
+		/>
 	</div>
 	<button class="logoWrap" on:click={gotoHome}>
 		{#if $currentTheme == "light"}
@@ -813,7 +822,13 @@
 						</svg>
 						<span class="menuBtnTxt">Contact Us</span>
 					</button>
-					<button class="menuBtnWrap" on:click={() => (logoutConfirmationModal = true)}>
+					<button
+						class="menuBtnWrap"
+						on:click={() => {
+							logoutConfirmationModal = true;
+							dispatch("logoutClick");
+						}}
+					>
 						<svg
 							width="24"
 							height="24"
