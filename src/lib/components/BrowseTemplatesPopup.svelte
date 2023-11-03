@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher } from "svelte";
 	import { Modal, Tabs, Tooltip } from "@svelteuidev/core";
+	import { visaPrompt } from "$lib/stores/promptStore";
 
 	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
 
@@ -20,6 +21,7 @@
 					resumeTitle: "Statement of Purpose - For Students - MS",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
+					tag: "SOP",
 				},
 
 				{
@@ -27,6 +29,7 @@
 					resumeTitle: "Statement of Purpose - For Students - Scholarship",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-2",
+					tag: "SOP",
 				},
 
 				{
@@ -115,6 +118,15 @@
 		let index = event.detail.index;
 		selectedTemplate = templates[2].resumeTemplates[index];
 		showSelectedTemplate = true;
+	}
+
+	function useTemplate() {
+		let prompt =
+			"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP? 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [Course Name] at [University Name]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.";
+		if (selectedTemplate.tag == "SOP") {
+			visaPrompt.set(prompt);
+		}
+		closePopup();
 	}
 
 	$: activeTemplates = templates[activeTabIndex].resumeTemplates;
@@ -226,7 +238,7 @@
 								</button>
 							</Tooltip> -->
 							<button class="use-template-btn" on:click={openPreview}><p>Preview</p></button>
-							<button class="use-template-btn"><p>Use Template</p></button>
+							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
 						</div>
 					</div>
 				</div>
