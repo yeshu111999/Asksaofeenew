@@ -332,7 +332,10 @@
 </div> -->
 
 <div class="navbar-container">
-	<NavBar />
+	<NavBar
+		on:hamClick={() => (menuToggleFlag = !menuToggleFlag)}
+		on:logoutClick={() => (logoutConfirmationModal = !logoutConfirmationModal)}
+	/>
 
 	<div class="navbar-body">
 		<div class="left-menu">

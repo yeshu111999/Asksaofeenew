@@ -28,6 +28,8 @@
 	let openDeleteAccountPopup = false;
 	let saveChangesLoader = false;
 
+	let imageAccessFlag = false;
+
 	$: showSaveOption =
 		oldFirstName != firstName ||
 		oldLastName != lastName ||
@@ -52,6 +54,20 @@
 		if (activeTab == 3) {
 			scrollToSection("delete-account");
 		}
+	}
+
+	function isImageURL(url, callback) {
+		const img = new Image();
+
+		img.onload = function () {
+			callback(true);
+		};
+
+		img.onerror = function () {
+			callback(false);
+		};
+
+		img.src = url;
 	}
 
 	const handleImageSelect = (event) => {
@@ -298,6 +314,7 @@
 			}
 		}
 		getUserDetails();
+		isImageURL(profilePic, (flag) => (imageAccessFlag = flag));
 	});
 </script>
 
@@ -332,14 +349,15 @@
 									<p class="mini-title">Avatar</p>
 									<div class="image-upload">
 										<div class="profile-image-wrap">
-											{#if profilePic}
+											{#if profilePic && imageAccessFlag}
+												<!-- alt="Selected Image" -->
 												<img
 													src={profilePic}
-													alt="Selected Image"
+													alt={firstName.charAt(0)}
 													style="width: 70px; height:70px;  object-fit: cover; border-radius: 75px"
 												/>
 											{/if}
-											{#if !profilePic}
+											{#if !profilePic || !imageAccessFlag}
 												<div class="profile-image">
 													<span class="initial">{profileImg}</span>
 												</div>
@@ -507,7 +525,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 2;
+		z-index: 20;
 		opacity: 1;
 	}
 
@@ -541,7 +559,7 @@
 
 	.body {
 		width: 100%;
-		height: 100%;
+		height: calc(100% - 72.5px);
 		display: flex;
 	}
 
@@ -671,7 +689,9 @@
 
 	.profile-image {
 		display: flex;
-		padding: 26px 24px 25px 23px;
+		/* padding: 26px 24px 25px 23px; */
+		height: 50px;
+		width: 50px;
 		justify-content: center;
 		align-items: center;
 		border-radius: 1000px;
@@ -781,5 +801,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+	}
+
+	@media screen and (max-width: 786px) {
+		.left-body {
+			display: none;
+		}
+		.right-body {
+			flex: auto;
+		}
 	}
 </style>
