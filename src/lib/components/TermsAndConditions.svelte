@@ -101,4 +101,14 @@
 		flex-direction: column;
 		gap: 24px;
 	}
+
+	@media (max-width: 600px) {
+		.title {
+			font-size: 24px;
+		}
+
+		.container {
+			padding-bottom: 40px;
+		}
+	}
 </style>

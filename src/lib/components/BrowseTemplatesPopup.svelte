@@ -16,42 +16,22 @@
 			type: "Student",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/For-MS-in-Engineering-1.png",
+					resumeTitle: "Statement of Purpose - For Students - MS",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/student-resume2.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/For-Scholarship.png",
+					resumeTitle: "Statement of Purpose - For Students - Scholarship",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-2",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/student-resume3.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-3",
-				},
-				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
-				},
-
-				{
-					imageUrl: "/assets/images/resumes/student-resume2.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-2",
-				},
-
-				{
-					imageUrl: "/assets/images/resumes/student-resume3.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/Letter-of-Recommendation.png",
+					resumeTitle: "Letter of Recommendation - For Students",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-3",
 				},
@@ -61,22 +41,15 @@
 			type: "Professional",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/offer-letter.png",
+					resumeTitle: "Offer Letter - For Professionals",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
-				},
-
-				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/OL.png",
+					resumeTitle: "Offer Letter - For Professionals - Experienced",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
@@ -86,22 +59,15 @@
 			type: "Tourists",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/financial1.png",
+					resumeTitle: "Letter of financial support",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
-				},
-
-				{
-					imageUrl: "/assets/images/resumes/student-resume1.png",
-					resumeTitle: "Statement of Purpose - For Students - Standard",
+					imageUrl: "/assets/images/resumes/financial2.png",
+					resumeTitle: "Financial support letter",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
@@ -269,7 +235,7 @@
 	</div>
 {/if}
 
-<Modal size="50%" opened={showPreview} on:close={closePreview}>
+<Modal size="100%" opened={showPreview} on:close={closePreview}>
 	<div class="preview-container">
 		<img src={selectedTemplate.imageUrl} alt="template" />
 	</div>
@@ -423,7 +389,47 @@
 		height: 32px;
 	}
 
+	.preview-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	.preview-container img {
 		object-fit: cover;
+	}
+
+	@media (max-width: 900px) {
+		.popup {
+			width: 90%;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.popup {
+			width: 90%;
+		}
+
+		.template-body {
+			flex-direction: column;
+		}
+
+		/* .template-body {
+			justify-content: flex-end;
+		} */
+
+		.templateTitle {
+			font-size: 18px;
+		}
+
+		.templateDescription {
+			font-size: 14px;
+		}
+
+		.resume-img {
+			width: auto;
+			height: auto;
+		}
 	}
 </style>

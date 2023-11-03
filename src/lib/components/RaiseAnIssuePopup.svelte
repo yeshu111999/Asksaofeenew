@@ -169,4 +169,18 @@
 	.contact-details p span.gray {
 		color: rgba(0, 0, 0, 0.5);
 	}
+
+	@media (max-width: 1000px) {
+		.popup {
+			width: 70%;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.popup {
+			width: 90%;
+			height: auto;
+			overflow-y: auto;
+		}
+	}
 </style>

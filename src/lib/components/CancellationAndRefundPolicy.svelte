@@ -122,4 +122,14 @@
 		color: #0037c6;
 		text-decoration: underline;
 	}
+
+	@media (max-width: 600px) {
+		.title {
+			font-size: 24px;
+		}
+
+		.container {
+			padding-bottom: 40px;
+		}
+	}
 </style>

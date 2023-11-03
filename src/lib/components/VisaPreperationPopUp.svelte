@@ -55,7 +55,7 @@
 
 {#if showTemplatesPopup}
 	<div class="overlay">
-		<div class="popup">
+		<div class="popup scrollbar-custom">
 			<div class="header">
 				<p class="title">VISA Preparation</p>
 				<button class="close-btn" on:click={closePopup}>
@@ -255,5 +255,19 @@
 		gap: 12px;
 		align-items: end;
 		width: 100%;
+	}
+
+	@media (max-width: 1000px) {
+		.popup {
+			width: 70%;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.popup {
+			width: 90%;
+			height: 90%;
+			overflow-y: auto;
+		}
 	}
 </style>

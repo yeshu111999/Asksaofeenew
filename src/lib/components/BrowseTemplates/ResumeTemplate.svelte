@@ -63,7 +63,6 @@
 		display: block;
 		height: 100%;
 		width: 100%;
-		height: auto;
 		transition: 0.5s ease;
 		backface-visibility: hidden;
 		border-radius: 4px;
@@ -115,5 +114,15 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
+	}
+
+	@media (max-width: 900px) {
+		.container .resume-img {
+			opacity: 1;
+		}
+
+		.container .middle {
+			opacity: 1;
+		}
 	}
 </style>

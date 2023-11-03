@@ -105,4 +105,15 @@
 		width: 100%;
 		scroll-behavior: smooth;
 	}
+
+	@media (max-width: 600px) {
+		.left-body {
+			display: none;
+		}
+
+		.right-body {
+			padding: 24px;
+			padding-bottom: 100px;
+		}
+	}
 </style>

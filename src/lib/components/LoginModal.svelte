@@ -403,18 +403,16 @@
 			text: "signin",
 			shape: "square",
 			size: "large",
-			width: 350,
+
 			theme: "white",
 		});
 
 		window.google.accounts.id.prompt();
 	}
 
-	let filteredItems = searchText => {
-            return countryCodes.filter(item =>
-                item.toLowerCase().includes(searchText.toLowerCase())
-            );
-        }
+	let filteredItems = (searchText) => {
+		return countryCodes.filter((item) => item.toLowerCase().includes(searchText.toLowerCase()));
+	};
 
 	async function onGoogleAuthSuccess(jwtCredentials) {
 		const profileData = JSON.parse(atob(jwtCredentials.credential.split(".")[1]));
@@ -577,7 +575,7 @@
 						window.location.href = "/";
 					} else {
 						showSignupError = true;
-						signUpError = response ? response.message : "Unable to sign up..";
+						signUpError = response && response.message ? response.message : "Unable to sign up..";
 					}
 				})
 				.catch((error) => {
@@ -585,6 +583,8 @@
 					if (error.response.status == 400 || error.response.status == 401) {
 						showSignupError = true;
 						signUpError = error.message;
+					} else {
+						signUpError = "Something went wrong. Please try again!!";
 					}
 					isLoading = false;
 				});
@@ -842,18 +842,23 @@
 							<p>Mobile Number</p>
 							<div class="mobile-number-section">
 								<div class="country-code">
-									<Menu size="lg" opened={countryCodeMenuFlag} >
-										<div class="countryCodeWrap" slot='control'>
-											<span class="coutryCodeText">{(countryCode.split(' ')[0]).replace('(', '').replace(')', '')}</span>
+									<Menu size="lg" opened={countryCodeMenuFlag}>
+										<div class="countryCodeWrap" slot="control">
+											<span class="coutryCodeText"
+												>{countryCode.split(" ")[0].replace("(", "").replace(")", "")}</span
+											>
 										</div>
-										<Menu.Item >
-											<TextInput on:click={() => countryCodeMenuFlag = true}
+										<Menu.Item>
+											<TextInput
+												on:click={() => (countryCodeMenuFlag = true)}
 												placeholder="Search country"
-												/>
+											/>
 										</Menu.Item>
 										<div style="height: 300px; overflow-y:scroll; padding: 8px;">
 											{#each countryCodes as countryCodeText}
-												<Menu.Item on:click={() => countryCode = countryCodeText}>{countryCodeText}</Menu.Item>
+												<Menu.Item on:click={() => (countryCode = countryCodeText)}
+													>{countryCodeText}</Menu.Item
+												>
 											{/each}
 										</div>
 									</Menu>
@@ -1162,7 +1167,7 @@
 		-ms-overflow-style: none;
 	}
 
-	.coutryCodeText{
+	.coutryCodeText {
 		color: var(--primary-text-color);
 	}
 
@@ -1199,7 +1204,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
-		color: var(--primary-text-color, black)
+		color: var(--primary-text-color, black);
 	}
 	.input-fields {
 		display: flex;
@@ -1307,7 +1312,11 @@
 	}
 
 	.google-button {
+		display: flex;
+		width: 100%;
 		margin-top: 12px;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.login-btn.disabled {
@@ -1352,5 +1361,34 @@
 		padding: 4px;
 		width: 80px;
 		overflow: hidden;
+	}
+
+	@media (max-width: 600px) {
+		.login-popup {
+			min-width: 90vw;
+			max-width: 90vw;
+			padding: 16px;
+		}
+
+		.app-title {
+			font-size: 24px;
+		}
+
+		.login-text {
+			font-size: 18px;
+		}
+
+		.welcome-text,
+		.signup-text,
+		.no-account-text {
+			font-size: 16px;
+		}
+	}
+
+	@media (max-width: 400px) {
+		.login-popup {
+			min-width: 90vw;
+			max-width: 90vw;
+		}
 	}
 </style>
