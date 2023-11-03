@@ -431,7 +431,7 @@
 						</div>
 					</div>
 					<div class="left-menu-bottom">
-						<button class="icon-text">
+						<button class="icon-text" on:click={toggleBrowseTemplatesPopup}>
 							<img src="/assets/icons/template-icon-black.svg" alt="" />
 							<p>Browse Templates</p>
 						</button>
@@ -439,11 +439,11 @@
 						<img src="/assets/icons/chat-icon-black.svg" alt="" />
 						<p>P2P Chatter</p>
 					</button> -->
-						<button class="icon-text">
+						<button class="icon-text" on:click={toggleVisaPreperationPopUp}>
 							<img src="/assets/icons/visa-icon-black.svg" alt="" />
 							<p>Visa Preparation</p>
 						</button>
-						<button class="icon-text">
+						<button class="icon-text" on:click={toggleImmigrationHelpPopUp}>
 							<img src="/assets/icons/help-icon-black.svg" alt="" />
 							<p>Immigration Help</p>
 						</button>

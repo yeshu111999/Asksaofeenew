@@ -252,7 +252,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 2;
+		z-index: 20;
 		opacity: 1;
 	}
 
@@ -421,6 +421,10 @@
 
 		.templateTitle {
 			font-size: 18px;
+		}
+
+		.tabDetailsWrapInternal {
+			justify-content: center;
 		}
 
 		.templateDescription {
