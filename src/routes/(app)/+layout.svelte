@@ -62,6 +62,10 @@
 	let showImmigrationHelpPopUp = false;
 	let menuToggleFlag = false;
 
+	function closeBurger() {
+		menuToggleFlag = false;
+	}
+
 	function toggleBrowseTemplatesPopup() {
 		showBrowseTemplatesPopup = !showBrowseTemplatesPopup;
 	}
@@ -81,10 +85,12 @@
 	function visaPromptMethod(prompt) {
 		console.log("prompt", prompt.detail);
 		visaPrompt.set(prompt.detail);
+		closeBurger();
 	}
 	function immiHelpPrompt(prompt) {
 		console.log("prompt", prompt.detail);
 		visaPrompt.set(prompt.detail);
+		closeBurger();
 	}
 
 	async function onError() {
@@ -214,6 +220,12 @@
 		goto("/");
 	}
 
+	function handleOutsideClick(event) {
+		if (menuToggleFlag && !event.target.closest(".navbar-container")) {
+			closeBurger();
+		}
+	}
+
 	onMount(() => {
 		let token = Cookies.get("token");
 		if (!token) {
@@ -234,7 +246,12 @@
 				}
 			}
 		}
+		//document.addEventListener("click", handleOutsideClick);
 	});
+
+	// onDestroy(() => {
+	// 	document.removeEventListener("click", handleOutsideClick);
+	// });
 </script>
 
 <svelte:head>
@@ -333,6 +350,7 @@
 
 <div class="navbar-container">
 	<NavBar
+		{menuToggleFlag}
 		on:hamClick={() => (menuToggleFlag = !menuToggleFlag)}
 		on:logoutClick={() => (logoutConfirmationModal = !logoutConfirmationModal)}
 	/>
@@ -365,6 +383,7 @@
 								on:editConversationTitle={(ev) =>
 									editConversationTitle(ev.detail.id, ev.detail.title)}
 								on:deleteConversation={(ev) => deleteConversation(ev.detail)}
+								on:conversationSelected={closeBurger}
 								{conv}
 							/>
 						{/each}
@@ -425,6 +444,7 @@
 									on:editConversationTitle={(ev) =>
 										editConversationTitle(ev.detail.id, ev.detail.title)}
 									on:deleteConversation={(ev) => deleteConversation(ev.detail)}
+									on:conversationSelected={closeBurger}
 									{conv}
 								/>
 							{/each}
@@ -481,6 +501,7 @@
 <BrowseTemplatesPopup
 	showTemplatesPopup={showBrowseTemplatesPopup}
 	on:closeTemplatesPopup={toggleBrowseTemplatesPopup}
+	on:closeBurger={closeBurger}
 />
 <Upgradetopro
 	showTemplatesPopup={showUpgardetoProPopup}

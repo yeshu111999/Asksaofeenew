@@ -17,26 +17,50 @@
 			type: "Student",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/For-MS-in-Engineering-1.png",
-					resumeTitle: "Statement of Purpose - For Students - MS",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					imageUrl: "/assets/images/resumes/SOP-MS.jpg",
+					resumeTitle: "SOP for Master's in Data Science",
+					resumeDescription: "",
 					id: "student-1",
 					tag: "SOP",
+					prompt:
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Academic background: [Paste the above SOP sample here]",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/For-Scholarship.png",
-					resumeTitle: "Statement of Purpose - For Students - Scholarship",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					imageUrl: "/assets/images/resumes/SOP-MBA.jpg",
+					resumeTitle: "SOP for MBA Program",
+					resumeDescription: "",
 					id: "student-2",
 					tag: "SOP",
+					prompt:
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details on my work experience - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Work Experience and Career Goals: [Paste the above SOP sample here]",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/Letter-of-Recommendation.png",
-					resumeTitle: "Letter of Recommendation - For Students",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					imageUrl: "/assets/images/resumes/SOP-Phd.jpg",
+					resumeTitle: "SOP for Ph.D. in Environmental Engineering",
+					resumeDescription: "",
 					id: "student-3",
+					prompt:
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Research and faculty connections: [Paste the above SOP sample here]",
+				},
+				{
+					imageUrl: "/assets/images/resumes/SOP-MIR.jpg",
+					resumeTitle: "SOP for Master's in International Relations",
+					resumeDescription: "",
+					id: "student-2",
+					tag: "SOP",
+					prompt:
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
+				},
+
+				{
+					imageUrl: "/assets/images/resumes/SOP-MHA.jpg",
+					resumeTitle: "SOP for Master's in Healthcare Administration",
+					resumeDescription: "",
+					id: "student-3",
+					prompt:
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details]. These are the details on my work experience - [Add all the details]. Details on my Leadership and Impact - [Add all the details]. My career goals are [Add all the details]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Work Experience and Leadership: [Paste the above SOP sample here]",
 				},
 			],
 		},
@@ -121,10 +145,9 @@
 	}
 
 	function useTemplate() {
-		let prompt =
-			"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP? 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [Course Name] at [University Name]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.";
 		if (selectedTemplate.tag == "SOP") {
-			visaPrompt.set(prompt);
+			visaPrompt.set(selectedTemplate.prompt);
+			dispatch("closeBurger");
 		}
 		closePopup();
 	}
@@ -316,7 +339,7 @@
 
 	.tabDetailsWrapInternal {
 		display: flex;
-		gap: 12px;
+		gap: 24px;
 		flex-wrap: wrap;
 		width: 100%;
 		height: 100%;

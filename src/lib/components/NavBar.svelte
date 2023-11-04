@@ -49,7 +49,7 @@
 	let showSettingsPopup = false;
 	let showBrowseTemplatesPopup = false;
 	let showUpgardetoProPopup = false;
-	let menuToggleFlag = false;
+	export let menuToggleFlag = false;
 
 	function toggleBrowseTemplatesPopup() {
 		showBrowseTemplatesPopup = !showBrowseTemplatesPopup;

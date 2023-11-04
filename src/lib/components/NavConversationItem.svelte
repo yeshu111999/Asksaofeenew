@@ -8,16 +8,14 @@
 	import CarbonClose from "~icons/carbon/close";
 	import CarbonEdit from "~icons/carbon/edit";
 	import { theme } from "$lib/stores/theme";
+	import { goto } from "$app/navigation";
 
 	export let conv: { id: string; title: string };
 
 	let confirmDelete = false;
 	let inputField;
 
-	const dispatch = createEventDispatcher<{
-		deleteConversation: string;
-		editConversationTitle: { id: string; title: string };
-	}>();
+	const dispatch = createEventDispatcher();
 
 	let color = "#FFF";
 	let bgColor = "#000";
@@ -46,6 +44,11 @@
 		}
 	}
 
+	function gotoConversation() {
+		goto(`${base}/conversation/${conv.id}`);
+		dispatch("conversationSelected");
+	}
+
 	function editSessionName() {
 		isEditing = true;
 		newSessionName = sessionName;
@@ -57,9 +60,9 @@
 	}
 </script>
 
-<a
+<button
 	class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
-	href="{base}/conversation/{conv.id}"
+	on:click={gotoConversation}
 	on:mouseleave={() => {
 		confirmDelete = false;
 		isEditing = false;
@@ -159,7 +162,7 @@
 			<img src="/assets/icons/delete-icon-black.svg" alt="" />
 		</button>
 	{/if}
-</a>
+</button>
 
 <!-- <a
 	data-sveltekit-noscroll
@@ -268,7 +271,7 @@
 		display: none;
 	}
 
-	 .icon-button.active{
+	.icon-button.active {
 		display: block;
 	}
 </style>
