@@ -40,6 +40,7 @@
 					imageUrl: "/assets/images/resumes/SOP-Phd.jpg",
 					resumeTitle: "SOP for Ph.D. in Environmental Engineering",
 					resumeDescription: "",
+					tag: "SOP",
 					id: "student-3",
 					prompt:
 						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Research and faculty connections: [Paste the above SOP sample here]",
@@ -48,7 +49,7 @@
 					imageUrl: "/assets/images/resumes/SOP-MIR.jpg",
 					resumeTitle: "SOP for Master's in International Relations",
 					resumeDescription: "",
-					id: "student-2",
+					id: "student-4",
 					tag: "SOP",
 					prompt:
 						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
@@ -58,9 +59,39 @@
 					imageUrl: "/assets/images/resumes/SOP-MHA.jpg",
 					resumeTitle: "SOP for Master's in Healthcare Administration",
 					resumeDescription: "",
-					id: "student-3",
+					id: "student-5",
+					tag: "SOP",
 					prompt:
 						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details]. These are the details on my work experience - [Add all the details]. Details on my Leadership and Impact - [Add all the details]. My career goals are [Add all the details]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Work Experience and Leadership: [Paste the above SOP sample here]",
+				},
+				{
+					imageUrl: "/assets/images/resumes/offer-letter.png",
+					resumeTitle: "Letter of Recommendation from a Manager",
+					resumeDescription: "",
+					id: "lor-1",
+					tag: "LOR",
+					prompt:
+						"Generate a personalized Letter of Recommendation (LOR) from the manager at [Company Name] for [Applicant's Name] as they apply for admission to the [Degree Name] program in [Course Name] at [University Name]. Please offer specific details about the applicant's professional performance and notable achievements within your organization, underscoring how these accomplishments make them an ideal candidate for the program.",
+				},
+
+				{
+					imageUrl: "/assets/images/resumes/OL.png",
+					resumeTitle: "Letter of Recommendation from a Professor",
+					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					id: "lor-2",
+					tag: "LOR",
+					prompt:
+						"Generate a personalized Letter of Recommendation (LOR) from a professor who instructed [Courses Names] at [Institution Name] for [Applicant's Name], who is currently seeking admission to the [Degree Name] program in [Course Name] at [University Name]. Please offer comprehensive insights into the applicant's academic performance in your class and their qualifications, underlining their suitability for the program.",
+				},
+
+				{
+					imageUrl: "/assets/images/resumes/OL.png",
+					resumeTitle: "Letter of Recommendation from an Educator",
+					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					id: "lor-3",
+					tag: "LOR",
+					prompt:
+						"Generate a personalized Letter of Recommendation (LOR) from an experienced Educator who taught [Taught Course Name] at [Taught Institution Name], for [Applicant's Name], who is currently seeking admission to the [Degree Name] program in [Course Name] at [University Name]. Please focus on the applicant's academic achievements and exceptional personal qualities that make them a strong fit for this program. Provide insights into the applicant's performance and character to help the admissions committee gain a comprehensive understanding of their potential.",
 				},
 			],
 		},
@@ -145,7 +176,7 @@
 	}
 
 	function useTemplate() {
-		if (selectedTemplate.tag == "SOP") {
+		if (selectedTemplate.tag == "SOP" || selectedTemplate.tag == "LOR") {
 			visaPrompt.set(selectedTemplate.prompt);
 			dispatch("closeBurger");
 		}
