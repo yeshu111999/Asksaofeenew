@@ -313,6 +313,28 @@
 
 	let countryCode = countryCodes[0];
 
+	let searchCountryText = "";
+
+	function searchCountry(arr, query) {
+		query = query.toLowerCase();
+		console.log("query", query);
+		return arr.filter((item) => item.toLowerCase().includes(query));
+	}
+
+	function toggleContent() {
+		const content = document.querySelector(".dropdown-content");
+		if (content.style.display === "none") {
+			content.style.display = "block"; // Display the content
+		} else {
+			content.style.display = "none"; // Hide the content
+		}
+	}
+
+	function toggleContents(disp) {
+		const content = document.querySelector(".dropdown-content");
+		content.style.display = disp;
+	}
+
 	$: isSentOtpBtnDisabled = !emailId || !isEmailValid || !mobileNumber || !isMobileValid;
 
 	let showSignupError = false;
@@ -899,33 +921,37 @@
 							<p>Mobile Number</p>
 							<div class="mobile-number-section">
 								<div class="country-code">
-									<Menu size="lg" opened={countryCodeMenuFlag}>
-										<div class="countryCodeWrap" slot="control">
-											<span class="coutryCodeText"
-												>{countryCode.split(" ")[0].replace("(", "").replace(")", "")}</span
-											>
+									<div class="dropdown">
+										<div class="countryCodeWrap" on:click={() => toggleContent()}>
+											<span class="coutryCodeText">
+												{countryCode.split(" ")[0].replace("(", "").replace(")", "")}
+											</span>
 										</div>
-										<Menu.Item>
+										<div class="dropdown-content">
 											<TextInput
 												on:click={() => (countryCodeMenuFlag = true)}
+												bind:value={searchCountryText}
+												on:change={() => searchCountry(countryCodes, searchCountryText)}
 												placeholder="Search country"
 											/>
-										</Menu.Item>
-										<div style="height: 300px; overflow-y:scroll; padding: 8px;">
-											{#each countryCodes as countryCodeText}
-												<Menu.Item on:click={() => (countryCode = countryCodeText)}
-													>{countryCodeText}</Menu.Item
-												>
-											{/each}
+											<div
+												class="scrollbar-custom"
+												style="max-height: 100px; overflow-y:scroll; padding: 8px; display: flex; flex-direction: column; align-items: baseline; gap: 8px;"
+											>
+												<!-- {#each countryCodes as countryCodeText} -->
+												{#each searchCountry(countryCodes, searchCountryText) as countryCodeText}
+													<button
+														on:click={() => {
+															countryCode = countryCodeText;
+															toggleContents("none");
+														}}
+													>
+														{countryCodeText}
+													</button>
+												{/each}
+											</div>
 										</div>
-									</Menu>
-									<!-- <NativeSelect
-										bind:value={countryCode}
-										data={countryCodes}
-										disabled={showOtpInputs || OTPVerified}
-									>
-										<svelte:component this={ChevronDown} slot="rightSection" />
-									</NativeSelect> -->
+									</div>
 								</div>
 								<div style="width:100%;">
 									<TextInput
@@ -1212,6 +1238,23 @@
 		min-width: 400px;
 	} */
 
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		z-index: 15;
+		padding: 8px;
+		background-color: #fff;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 8px;
+		width: 300px;
+		color: #222;
+	}
+
 	.wrapper {
 		width: 100%;
 		height: 100%;
@@ -1440,6 +1483,7 @@
 		padding: 4px;
 		width: 80px;
 		overflow: hidden;
+		cursor: pointer;
 	}
 
 	@media (max-width: 600px) {

@@ -166,9 +166,8 @@
 		userId = Cookies.get("email");
 		token = Cookies.get("token");
 
-		themeVariable == "light"
-			? (activeClassVariable = "active-chat-light")
-			: (activeClassVariable = "active-chat");
+		// themeVariable == "light"
+		true ? (activeClassVariable = "active-chat-light") : (activeClassVariable = "active-chat");
 
 		console.log(userId, token);
 		getContacts();

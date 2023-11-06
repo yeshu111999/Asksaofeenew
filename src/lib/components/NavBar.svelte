@@ -180,7 +180,8 @@
 	let profileImg;
 
 	function gotoPolicies() {
-		goto("/privacy-policy");
+		// goto("/privacy-policy");
+		window.open("/privacy-policy", "_blank");
 	}
 
 	onMount(() => {

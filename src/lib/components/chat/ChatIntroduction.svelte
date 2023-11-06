@@ -109,7 +109,11 @@
 				position="center"
 				on:change={renderDescriptionTab}
 			>
-				<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"} style={activeHomeTabIndex == 0 ? 'font-weight:500;':''}>
+				<Tabs.Tab
+					label="Student"
+					class={classes.root + $theme == "light" ? "light" : "dark"}
+					style={activeHomeTabIndex == 0 ? "font-weight:500;" : ""}
+				>
 					{#if activeHomeTabIndex == 0}
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
@@ -127,7 +131,11 @@
 						</div>
 					{/if}
 				</Tabs.Tab>
-				<Tabs.Tab label="Professional" class={classes.root} style={activeHomeTabIndex == 1 ? 'font-weight:500;':''}>
+				<Tabs.Tab
+					label="Professional"
+					class={classes.root}
+					style={activeHomeTabIndex == 1 ? "font-weight:500;" : ""}
+				>
 					{#if activeHomeTabIndex == 1}
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
@@ -143,7 +151,11 @@
 						</div>
 					{/if}
 				</Tabs.Tab>
-				<Tabs.Tab label="Tourist" class={classes.root} style={activeHomeTabIndex == 2 ? 'font-weight:500;':''}>
+				<Tabs.Tab
+					label="Tourist"
+					class={classes.root}
+					style={activeHomeTabIndex == 2 ? "font-weight:500;" : ""}
+				>
 					{#if activeHomeTabIndex == 2}
 						<div class="tabDetailsWrapInternal">
 							<span class="tabDetailsDescription">
@@ -226,11 +238,12 @@
 		padding: 10px 8px 0px 8px;
 		/* width: fit-content; */
 		width: 100%;
-		color: var(--primary-text-color)
+		color: var(--primary-text-color);
 	}
 
 	.tabBodyWrap {
-		border: #fff solid 2px;
+		/* border: #fff solid 2px; */
+		border: #dddddd solid 1px;
 		border-radius: 12px;
 		display: flex;
 		flex-direction: column;
@@ -255,7 +268,7 @@
 		font-size: 16px;
 		font-weight: 600;
 		text-align: center;
-		color: var(--primary-text-color)
+		color: var(--primary-text-color);
 	}
 
 	.tabDetailsWrapInternal {
@@ -264,7 +277,7 @@
 		width: 100%;
 		padding: 8px;
 		gap: 8px;
-		color: var(--primary-text-color)
+		color: var(--primary-text-color);
 	}
 
 	.tabDetailsSubTitle {
@@ -282,6 +295,6 @@
 		text-align: center;
 		font-weight: 700;
 		font-size: 24px;
-		color: var(--primary-text-color)
+		color: var(--primary-text-color);
 	}
 </style>

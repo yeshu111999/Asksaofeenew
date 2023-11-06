@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import { Switch } from "@svelteuidev/core";
+	import { Switch, Button } from "@svelteuidev/core";
 
 	import Modal from "$lib/components/Modal.svelte";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	// export let settings: LayoutData["settings"];
 	// export let models: Array<Model>;
-	export let confirmationText: String;
+	export let confirmationText: string;
 	const dispatch = createEventDispatcher<{ close: void; confirm: void }>();
 </script>
 
@@ -16,12 +17,18 @@
 			<span class="confirmationText">{confirmationText}</span>
 		</div>
 		<div class="flex items-start justify-between text-xl font-semibold text-gray-800">
-			<button type="button" class="group" on:click={() => dispatch("close")}
-				><span class="buttonText">Cancel</span></button
+			<Button
+				color={$currentTheme == "light" ? "grey" : "grey"}
+				class="group"
+				on:click={() => dispatch("close")}><span class="buttonText">Cancel</span></Button
 			>
-			<button type="button" class="group" on:click={() => dispatch("confirm")}
-				><span class="buttonText" style="color: rgb(90, 125, 252);">Confirm</span></button
+			<Button
+				color={$currentTheme == "light" ? "dark" : "blue"}
+				class="group"
+				on:click={() => dispatch("confirm")}
 			>
+				<span class="buttonText" style="color: #fff">Confirm</span>
+			</Button>
 			<!-- <h2>Confirm</h2>
 			<button type="button" class="group" on:click={() => dispatch("close")}>
 				<CarbonClose class="text-gray-900 group-hover:text-gray-500" />
@@ -40,6 +47,7 @@
 	.confirmationText {
 		font-size: 18px;
 		font-weight: 600;
+		color: #222;
 	}
 
 	.confirmationTextWrap {

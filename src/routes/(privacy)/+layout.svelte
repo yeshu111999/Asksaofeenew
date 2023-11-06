@@ -1,7 +1,13 @@
 <script>
 	import NavBar from "$lib/components/NavBar.svelte";
 	import { SvelteUIProvider } from "@svelteuidev/core";
+	import { currentTheme } from "$lib/stores/themeStore";
 </script>
+
+<svelte:head>
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
+	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
+</svelte:head>
 
 <div class="navbar-container">
 	<NavBar />
