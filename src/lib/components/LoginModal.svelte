@@ -603,7 +603,9 @@
 	async function sendOtp() {
 		try {
 			let otpData = {
-				phoneNumber: countryCode.split("(")[0].trim() + mobileNumber,
+
+				phoneNumber: 
+				countryCode.split(" ")[0].replace("(","").replace(")", "").trim() + mobileNumber,
 			};
 			await fetch("https://backend.immigpt.net/generateOTP", {
 				method: "POST",
