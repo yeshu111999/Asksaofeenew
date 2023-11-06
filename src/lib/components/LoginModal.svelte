@@ -317,6 +317,8 @@
 
 	let showSignupError = false;
 	let signUpError = "";
+	let isOtpSent = false;
+	let isOtpLoading = false;
 
 	function startTimer() {
 		if (!isTimerRunning) {
@@ -372,6 +374,18 @@
 	$: isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(emailId);
 	$: isFpEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(fpEmailId);
 	let otp = "";
+	let otpSentError = false;
+	let otpVerifyError = false;
+	let otpError = "Internal Server Error! Please try again!";
+
+	const btnStyles = {
+		backgroundColor: "var(--primary-btn-color) !important",
+		color: "var(--primary-btn-text-color) !important",
+		"&:disabled": {
+			backgroundColor: "var(--primary-btn-color) !important",
+			opacity: "0.5 !important",
+		},
+	};
 
 	// Computed property to check mobile number validity
 	$: isMobileValid = /^[0-9]{10}$/i.test(mobileNumber);
@@ -524,12 +538,22 @@
 		OTPVerified = false;
 		emailId = "";
 		mobileNumber = "";
+		firstName = "";
+		lastName = "";
+		password = "";
+		cnfPassword = "";
+		otp = "";
 		renderSignInButton();
 	}
 
 	function toggleLogin() {
 		showSignUp = false;
 		showForgotPwd = false;
+		firstName = "";
+		lastName = "";
+		password = "";
+		cnfPassword = "";
+		otp = "";
 		// renderSignInButton();
 	}
 
@@ -577,6 +601,7 @@
 						showSignupError = true;
 						signUpError = response && response.message ? response.message : "Unable to sign up..";
 					}
+					isLoading = false;
 				})
 				.catch((error) => {
 					console.log("error.response", error.response.status == 401);
@@ -602,10 +627,11 @@
 
 	async function sendOtp() {
 		try {
+			isOtpSent = true;
+			otpSentError = false;
 			let otpData = {
-
-				phoneNumber: 
-				countryCode.split(" ")[0].replace("(","").replace(")", "").trim() + mobileNumber,
+				phoneNumber:
+					countryCode.split(" ")[0].replace("(", "").replace(")", "").trim() + mobileNumber,
 			};
 			await fetch("https://backend.immigpt.net/generateOTP", {
 				method: "POST",
@@ -623,13 +649,22 @@
 						// }, 1000);
 					} else {
 						console.log("error", response);
+						otpSentError = true;
+						otpError = "Internal server error! Please try again";
 					}
+					isOtpSent = false;
 				})
 				.catch((error) => {
 					console.log("error.response", error.response.status == 401);
+					isOtpSent = false;
+					otpSentError = true;
+					otpError = "Internal server error! Please try again";
 				});
 		} catch (error) {
 			console.log(error);
+			isOtpSent = false;
+			otpSentError = true;
+			otpError = "Internal server error! Please try again";
 		}
 	}
 
@@ -651,8 +686,11 @@
 			// 		inputs[4].value +
 			// 		inputs[5].value,
 			// };
+			otpVerifyError = false;
+			isOtpLoading = true;
 			let otpData = {
-				phoneNumber: countryCode.split(" ")[0].replace("(","").replace(")", "").trim() + mobileNumber,
+				phoneNumber:
+					countryCode.split(" ")[0].replace("(", "").replace(")", "").trim() + mobileNumber,
 				otp: otp,
 			};
 			await fetch("https://backend.immigpt.net/verifyOTP", {
@@ -665,15 +703,25 @@
 				.then(async (response) => {
 					if (response.status == 200) {
 						OTPVerified = true;
+						isOtpLoading = false;
 					} else {
 						console.log("error", response);
+						otpVerifyError = true;
+						otpError = "Invalid OTP. Please try again!";
+						isOtpLoading = false;
 					}
 				})
 				.catch((error) => {
 					console.log("error.response", error.response.status == 401);
+					otpVerifyError = true;
+					otpError = "Invalid OTP. Please try again!";
+					isOtpLoading = false;
 				});
 		} catch (error) {
 			console.log(error);
+			otpVerifyError = true;
+			otpError = "Internal server error! Please try again";
+			isOtpLoading = false;
 		}
 	}
 
@@ -692,6 +740,10 @@
 		// showForgotPwd = false;
 		// resetMailSent = false;
 		// goto("/");
+		firstName = "";
+		lastName = "";
+		password = "";
+		cnfPassword = "";
 		window.location.href = "/";
 	}
 
@@ -719,6 +771,7 @@
 				})
 				.catch((error) => {
 					console.log("error.response", error.response.status == 401);
+					resetLoader = false;
 				});
 		}
 	}
@@ -807,20 +860,22 @@
 						{/if} -->
 						</div>
 						<div class="login-button">
-							<button
+							<!-- <button
 								class="login-btn {isLoginBtnDisabled ? 'disabled' : ''}"
 								on:click={Login}
 								disabled={isLoginBtnDisabled}
 							>
 								Login</button
+							> -->
+							<Button
+								className="login-btn"
+								override={btnStyles}
+								bind:loading={isLoading}
+								on:click={Login}
+								disabled={isLoginBtnDisabled}
+								fullSize={true}
+								ripple>Login</Button
 							>
-							<!-- <Button
-							bind:loading={isLoading}
-							color="#3b82f6"
-							on:click={Login}
-							disabled={isLoginBtnDisabled}
-							ripple>Login</Button
-						> -->
 						</div>
 						<div class="signin-text center">
 							<p class="no-account-text">Don't have an account?</p>
@@ -893,14 +948,21 @@
 									color="#3b82f6"
 									on:click={sendOtp}>Send OTP</Button -->
 
-									<button
-										class="login-btn otp-btn {isSentOtpBtnDisabled ? 'disabled' : ''}"
+									<Button
+										className="login-btn otp-btn {isSentOtpBtnDisabled ? 'disabled' : ''}"
 										on:click={sendOtp}
 										disabled={isSentOtpBtnDisabled}
+										override={btnStyles}
+										fullSize={true}
+										ripple
+										bind:loading={isOtpSent}
 									>
-										Send OTP</button
+										Send OTP</Button
 									>
 								</div>
+							{/if}
+							{#if otpSentError}
+								<p class="error">{otpError}</p>
 							{/if}
 						</div>
 						{#if showOtpInputs && !OTPVerified}
@@ -972,14 +1034,21 @@
 										color="#3b82f6"
 										on:click={verifyOtp}>Verify OTP</Button
 									> -->
-										<button
-											class="login-btn otp-btn {isVerifyOtpBtnDisabled ? 'disabled' : ''}"
+										<Button
+											className="login-btn otp-btn {isVerifyOtpBtnDisabled ? 'disabled' : ''}"
 											on:click={verifyOtp}
 											disabled={isVerifyOtpBtnDisabled}
+											fullSize={true}
+											override={btnStyles}
+											ripple
+											bind:loading={isOtpLoading}
 										>
-											Verify OTP</button
+											Verify OTP</Button
 										>
 									</div>
+								{/if}
+								{#if otpVerifyError}
+									<p class="error">{otpError}</p>
 								{/if}
 							</div>
 						{/if}
@@ -1028,15 +1097,19 @@
 								ripple>{OTPVerified ? "Sign up" : "Verify"}</Button
 							> -->
 
-								<button
-									class="login-btn otp-btn {OTPVerified
+								<Button
+									className="login-btn otp-btn {OTPVerified
 										? isSignupBtnDisabled
 										: !isOTPVerifyEnabled
 										? 'disabled'
 										: ''}"
 									on:click={handleSignUp}
-									disabled={OTPVerified ? isSignupBtnDisabled : !isOTPVerifyEnabled}
-									>{OTPVerified ? "Sign up" : "Verify"}</button
+									fullSize={true}
+									ripple
+									override={btnStyles}
+									bind:loading={isLoading}
+									disabled={!OTPVerified || isSignupBtnDisabled}
+									>{OTPVerified ? "Sign up" : "Verify"}</Button
 								>
 							</div>
 							{#if showSignupError}
@@ -1063,12 +1136,16 @@
 							<p class="error">Enter a valid Email Id</p>
 						{/if}
 						<div class="login-button">
-							<button
-								class="login-btn otp-btn {!isFpEmailValid ? 'disabled' : ''}"
+							<Button
+								className="login-btn otp-btn {!isFpEmailValid ? 'disabled' : ''}"
 								on:click={forgotPassword}
 								disabled={!isFpEmailValid}
+								fullSize={true}
+								ripple
+								bind:loading={resetLoader}
+								override={btnStyles}
 							>
-								{resetLoader ? "Sending.." : "Reset Password"}</button
+								{resetLoader ? "Sending.." : "Reset Password"}</Button
 							>
 						</div>
 						<div class="signin-text center">
@@ -1324,7 +1401,7 @@
 	.login-btn.disabled {
 		background-color: var(--primary-btn-color);
 		cursor: not-allowed;
-		opacity: 0.5;
+		opacity: 0.5 !important;
 	}
 
 	.timer-text {

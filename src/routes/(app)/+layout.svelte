@@ -364,8 +364,8 @@
 				</a>
 			</div>
 			<div class="left-menu-body">
+				<p class="recent-searches-text">Recent Searches</p>
 				<div class="left-menu-center chgatsScroll">
-					<p class="recent-searches-text">Recent Searches</p>
 					<div class="recent-searches">
 						{#each data.conversations as conv}
 							<!-- <a
@@ -425,8 +425,8 @@
 					</a>
 				</div>
 				<div class="left-menu-body">
+					<p class="recent-searches-text">Recent Searches</p>
 					<div class="left-menu-center chgatsScroll">
-						<p class="recent-searches-text">Recent Searches</p>
 						<div class="recent-searches">
 							{#each data.conversations as conv}
 								<!-- <a

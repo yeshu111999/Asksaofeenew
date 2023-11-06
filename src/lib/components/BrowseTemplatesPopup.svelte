@@ -17,8 +17,8 @@
 			type: "Student",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/SOP-MS.jpg",
-					resumeTitle: "SOP for Master's in Data Science",
+					imageUrl: ["/assets/images/resumes/SOP-MS.jpg"],
+					resumeTitle: "SOP for Master's",
 					resumeDescription: "",
 					id: "student-1",
 					tag: "SOP",
@@ -27,7 +27,7 @@
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/SOP-MBA.jpg",
+					imageUrl: ["/assets/images/resumes/SOP-MBA.jpg"],
 					resumeTitle: "SOP for MBA Program",
 					resumeDescription: "",
 					id: "student-2",
@@ -37,7 +37,7 @@
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/SOP-Phd.jpg",
+					imageUrl: ["/assets/images/resumes/SOP-Phd.jpg"],
 					resumeTitle: "SOP for Ph.D. in Environmental Engineering",
 					resumeDescription: "",
 					tag: "SOP",
@@ -46,7 +46,7 @@
 						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Research and faculty connections: [Paste the above SOP sample here]",
 				},
 				{
-					imageUrl: "/assets/images/resumes/SOP-MIR.jpg",
+					imageUrl: ["/assets/images/resumes/SOP-MIR.jpg"],
 					resumeTitle: "SOP for Master's in International Relations",
 					resumeDescription: "",
 					id: "student-4",
@@ -56,7 +56,7 @@
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/SOP-MHA.jpg",
+					imageUrl: ["/assets/images/resumes/SOP-MHA.jpg"],
 					resumeTitle: "SOP for Master's in Healthcare Administration",
 					resumeDescription: "",
 					id: "student-5",
@@ -65,7 +65,10 @@
 						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details]. These are the details on my work experience - [Add all the details]. Details on my Leadership and Impact - [Add all the details]. My career goals are [Add all the details]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Work Experience and Leadership: [Paste the above SOP sample here]",
 				},
 				{
-					imageUrl: "/assets/images/resumes/offer-letter.png",
+					imageUrl: [
+						"/assets/images/resumes/LOR-MBA-1.jpg",
+						"/assets/images/resumes/LOR-MBA-2.jpg",
+					],
 					resumeTitle: "Letter of Recommendation from a Manager",
 					resumeDescription: "",
 					id: "lor-1",
@@ -75,9 +78,12 @@
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/OL.png",
+					imageUrl: [
+						"/assets/images/resumes/LOR-Masters-1.jpg",
+						"/assets/images/resumes/LOR-Masters-2.jpg",
+					],
 					resumeTitle: "Letter of Recommendation from a Professor",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					resumeDescription: "",
 					id: "lor-2",
 					tag: "LOR",
 					prompt:
@@ -85,9 +91,12 @@
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/OL.png",
+					imageUrl: [
+						"/assets/images/resumes/LOR-BPS-1.jpg",
+						"/assets/images/resumes/LOR-BPS-2.jpg",
+					],
 					resumeTitle: "Letter of Recommendation from an Educator",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
+					resumeDescription: "",
 					id: "lor-3",
 					tag: "LOR",
 					prompt:
@@ -99,14 +108,14 @@
 			type: "Professional",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/offer-letter.png",
+					imageUrl: ["/assets/images/resumes/offer-letter.png"],
 					resumeTitle: "Offer Letter - For Professionals",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/OL.png",
+					imageUrl: ["/assets/images/resumes/OL.png"],
 					resumeTitle: "Offer Letter - For Professionals - Experienced",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
@@ -117,14 +126,14 @@
 			type: "Tourists",
 			resumeTemplates: [
 				{
-					imageUrl: "/assets/images/resumes/financial1.png",
+					imageUrl: ["/assets/images/resumes/financial1.png"],
 					resumeTitle: "Letter of financial support",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
 				},
 
 				{
-					imageUrl: "/assets/images/resumes/financial2.png",
+					imageUrl: ["/assets/images/resumes/financial2.png"],
 					resumeTitle: "Financial support letter",
 					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
 					id: "student-1",
@@ -149,6 +158,7 @@
 
 	function closePopup() {
 		dispatch("closeTemplatesPopup");
+		showSelectedTemplate = false;
 	}
 
 	function closeShowTemplatePopup() {
@@ -227,7 +237,7 @@
 										<ResumeTemplate
 											on:selectedTemplate={selectedStudentTemplate}
 											index={i}
-											imageUrl={template.imageUrl}
+											imageUrl={template.imageUrl[0]}
 											resumeTitle={template.resumeTitle}
 											resumeDescription={template.resumeDescription}
 										/>
@@ -242,7 +252,7 @@
 										<ResumeTemplate
 											on:selectedTemplate={selectedProfessionalTemplate}
 											index={i}
-											imageUrl={template.imageUrl}
+											imageUrl={template.imageUrl[0]}
 											resumeTitle={template.resumeTitle}
 											resumeDescription={template.resumeDescription}
 										/>
@@ -257,7 +267,7 @@
 										<ResumeTemplate
 											on:selectedTemplate={selectedTouristsTemplate}
 											index={i}
-											imageUrl={template.imageUrl}
+											imageUrl={template.imageUrl[0]}
 											resumeTitle={template.resumeTitle}
 											resumeDescription={template.resumeDescription}
 										/>
@@ -278,7 +288,7 @@
 				</div>
 				<div class="body template-body scrollbar-custom">
 					<div class="left-body">
-						<img class="resume-img" src={selectedTemplate.imageUrl} alt="" />
+						<img class="resume-img" src={selectedTemplate.imageUrl[0]} alt="" />
 					</div>
 					<div class="right-body">
 						<div class="text-content">
@@ -301,12 +311,37 @@
 	</div>
 {/if}
 
-<Modal size="100%" opened={showPreview} on:close={closePreview}>
-	<div class="preview-container">
-		<img src={selectedTemplate.imageUrl} alt="template" />
+{#if showPreview}
+	<div class="overlay">
+		<div class="popup">
+			<div class="close-wrapper">
+				<button on:click={closePreview} class="close-btn"
+					><img src="/assets/icons/close-icon-black.svg" alt="" /></button
+				>
+			</div>
+			<div class="preview-container scrollbar-custom">
+				{#each selectedTemplate.imageUrl as image}
+					<img src={image} alt="template" />
+				{/each}
+			</div>
+		</div>
 	</div>
-</Modal>
+{/if}
 
+<!-- <Modal size="100%" opened={showPreview} on:close={closePreview} withCloseButton={false}>
+	<div class="popup-container">
+		<div class="close-wrapper">
+			<button on:click={closePreview} class="close-btn"
+				><img src="/assets/icons/close-icon-black.svg" alt="" /></button
+			>
+		</div>
+		<div class="preview-container">
+			{#each selectedTemplate.imageUrl as image}
+				<img src={image} alt="template" />
+			{/each}
+		</div>
+	</div>
+</Modal> -->
 <style>
 	.overlay {
 		position: fixed;
@@ -458,12 +493,29 @@
 	.preview-container {
 		width: 100%;
 		display: flex;
-		justify-content: center;
+		/* justify-content: center; */
 		align-items: center;
+		flex-direction: column;
+		gap: 8px;
 	}
 
 	.preview-container img {
 		object-fit: cover;
+		border: 1px solid #e1e1e1;
+	}
+
+	.close-wrapper {
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 20px;
+	}
+
+	.preview-container {
+		height: calc(100% - 30px);
+		overflow-y: auto;
+		padding: 12px;
 	}
 
 	@media (max-width: 900px) {
