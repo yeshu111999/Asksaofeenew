@@ -8,6 +8,8 @@
 	// export let settings: LayoutData["settings"];
 	// export let models: Array<Model>;
 	export let confirmationText: string;
+
+	let loaderFlag = false;
 	const dispatch = createEventDispatcher<{ close: void; confirm: void }>();
 </script>
 
@@ -25,7 +27,11 @@
 			<Button
 				color={$currentTheme == "light" ? "dark" : "blue"}
 				class="group"
-				on:click={() => dispatch("confirm")}
+				loading={loaderFlag}
+				on:click={() => {
+					dispatch("confirm");
+					loaderFlag = true;
+				}}
 			>
 				<span class="buttonText" style="color: #fff">Confirm</span>
 			</Button>

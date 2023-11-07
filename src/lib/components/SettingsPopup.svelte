@@ -102,6 +102,10 @@
 		let headers = new Headers({
 			Authorization: "Bearer " + Cookies.get("token"),
 		});
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
 
 		try {
 			const response = await fetch("https://backend.immigpt.net/getUserProfile", {

@@ -91,6 +91,10 @@
 		let headers = {
 			Authorization: "Bearer " + Cookies.get("token"),
 		};
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
 		let response = await axios
 			.get("https://backend.immigpt.net/getUserProfile", { headers: headers })
 			.then((response) => {

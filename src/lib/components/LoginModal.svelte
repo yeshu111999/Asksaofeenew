@@ -63,6 +63,8 @@
 	let selectedCountry = null;
 	let countryOptions = [];
 
+	let countryCodeEnableFlag = true;
+
 	async function fetchCountryData() {
 		const response = await fetch("https://restcountries.com/v3.1/all");
 		const countries = await response.json();
@@ -296,7 +298,6 @@
 		"(+380) Ukraine",
 		"(+971) United Arab Emirates",
 		"(+44) United Kingdom",
-		"(+1) United States",
 		"(+598) Uruguay",
 		"(+998) Uzbekistan",
 		"(+678) Vanuatu",
@@ -323,7 +324,7 @@
 
 	function toggleContent() {
 		const content = document.querySelector(".dropdown-content");
-		if (content.style.display === "none") {
+		if (content.style.display == "none" || !content.style.display) {
 			content.style.display = "block"; // Display the content
 		} else {
 			content.style.display = "none"; // Hide the content
@@ -399,6 +400,10 @@
 	let otpSentError = false;
 	let otpVerifyError = false;
 	let otpError = "Internal Server Error! Please try again!";
+
+	const handleOTPInput = (event) => {
+		otp = event.target.value.replace(/[^0-9]/g, "");
+	};
 
 	const btnStyles = {
 		backgroundColor: "var(--primary-btn-color) !important",
@@ -651,6 +656,7 @@
 		try {
 			isOtpSent = true;
 			otpSentError = false;
+			countryCodeEnableFlag = false;
 			let otpData = {
 				phoneNumber:
 					countryCode.split(" ")[0].replace("(", "").replace(")", "").trim() + mobileNumber,
@@ -694,6 +700,8 @@
 		sendOtp();
 		timer = 60;
 		startTimer();
+		otpVerifyError = false;
+		otp = "";
 	}
 
 	async function verifyOtp() {
@@ -709,6 +717,7 @@
 			// 		inputs[5].value,
 			// };
 			otpVerifyError = false;
+
 			isOtpLoading = true;
 			let otpData = {
 				phoneNumber:
@@ -798,9 +807,22 @@
 		}
 	}
 
+	let dropCon = "";
+
 	onMount(() => {
 		renderSignInButton();
 		fetchCountryData();
+		document.addEventListener("click", (event) => {
+			// const dropCon = document.getElementById("country-code");
+			console.log("dropCon", dropCon);
+			if (!dropCon?.contains(event.target)) {
+				toggleContents("none");
+			}
+		});
+	});
+
+	afterUpdate(() => {
+		dropCon = document.querySelector(".country-code");
 	});
 </script>
 
@@ -920,10 +942,16 @@
 						<div class="sendOTP">
 							<p>Mobile Number</p>
 							<div class="mobile-number-section">
-								<div class="country-code">
+								<div class="country-code" id="country-code">
 									<div class="dropdown">
-										<div class="countryCodeWrap" on:click={() => toggleContent()}>
-											<span class="coutryCodeText">
+										<div
+											class="countryCodeWrap"
+											on:click={() => (countryCodeEnableFlag ? toggleContent() : "")}
+										>
+											<span
+												class="coutryCodeText"
+												style={countryCodeEnableFlag ? "" : "color: grey;"}
+											>
 												{countryCode.split(" ")[0].replace("(", "").replace(")", "")}
 											</span>
 										</div>
@@ -941,6 +969,7 @@
 												<!-- {#each countryCodes as countryCodeText} -->
 												{#each searchCountry(countryCodes, searchCountryText) as countryCodeText}
 													<button
+														class="selectCode"
 														on:click={() => {
 															countryCode = countryCodeText;
 															toggleContents("none");
@@ -1037,7 +1066,13 @@
 									id="sixth"
 									maxlength="1"
 								/> -->
-									<input class="otp-field" type="text" bind:value={otp} maxlength="6" />
+									<input
+										class="otp-field"
+										type="text"
+										on:input={handleOTPInput}
+										bind:value={otp}
+										maxlength="6"
+									/>
 								</div>
 
 								{#if isTimerRunning}
@@ -1267,7 +1302,7 @@
 
 	.login-popup {
 		width: 440px;
-		max-height: 500px;
+		/* max-height: 500px; */
 		overflow-y: auto;
 		top: 255px;
 		left: 500px;
@@ -1353,7 +1388,7 @@
 		border: 1px solid rgba(225, 225, 225, 1);
 		width: 100%;
 		border-radius: 8px;
-		padding: 12px;
+		padding: 6px;
 	}
 
 	.error {
@@ -1431,6 +1466,12 @@
 
 	.country-code {
 		max-width: 90px;
+	}
+
+	.selectCode {
+		display: flex;
+		width: 100%;
+		text-align: left;
 	}
 
 	.google-button {
