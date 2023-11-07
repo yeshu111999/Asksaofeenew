@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from "svelte";
+	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
 	import { Modal, Tabs, Tooltip } from "@svelteuidev/core";
 	import { visaPrompt } from "$lib/stores/promptStore";
 
@@ -108,17 +108,33 @@
 			type: "Professional",
 			resumeTemplates: [
 				{
-					imageUrl: ["/assets/images/resumes/offer-letter.png"],
-					resumeTitle: "Offer Letter - For Professionals",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
+					imageUrl: ["/assets/images/resumes/FSL-Bank.jpg"],
+					resumeTitle: "Financial Support Letter from the Bank",
+					resumeDescription: "",
+					id: "professional-1",
+					tag: "SOP",
+					prompt:
+						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [ ], Outstanding balance - [ ], Number of days that the balance is being maintained for - [ ].",
 				},
 
 				{
-					imageUrl: ["/assets/images/resumes/OL.png"],
-					resumeTitle: "Offer Letter - For Professionals - Experienced",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
+					imageUrl: ["/assets/images/resumes/FSL-Relative.jpg"],
+					resumeTitle: "Financial Support Letter from Sponsor (Family member or a Friend)",
+					resumeDescription: "",
+					id: "professional-2",
+					tag: "SOP",
+					prompt:
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Name of University - [ ]",
+				},
+
+				{
+					imageUrl: ["/assets/images/resumes/FSL-Employer.jpg"],
+					resumeTitle: "Financial Support Letter from Employer",
+					resumeDescription: "",
+					tag: "SOP",
+					id: "student-3",
+					prompt:
+						" Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [ ], Name of the Applicant - [ ], Name of University - [ ]",
 				},
 			],
 		},
@@ -200,6 +216,12 @@
 		console.log("index", index);
 		activeTabIndex = index;
 	};
+
+	onMount(() => {
+		console.log("template mounted");
+		activeTabIndex = 0;
+		activeTemplates = templates[activeTabIndex].resumeTemplates;
+	});
 </script>
 
 {#if showTemplatesPopup}
@@ -229,7 +251,7 @@
 						<Tabs.Tab
 							label="Student"
 							class={$theme == "light" ? "light" : "dark"}
-							style={activeTabIndex == 0 ? "font-weight:500;" : ""}
+							style={activeTabIndex == 0 ? "font-weight:600;" : ""}
 						>
 							{#if activeTabIndex == 0}
 								<div class="tabDetailsWrapInternal">
@@ -245,7 +267,7 @@
 								</div>
 							{/if}
 						</Tabs.Tab>
-						<Tabs.Tab label="Professional" style={activeTabIndex == 1 ? "font-weight:500;" : ""}>
+						<Tabs.Tab label="Professional" style={activeTabIndex == 1 ? "font-weight:600;" : ""}>
 							{#if activeTabIndex == 1}
 								<div class="tabDetailsWrapInternal">
 									{#each activeTemplates as template, i}
@@ -260,7 +282,7 @@
 								</div>
 							{/if}
 						</Tabs.Tab>
-						<Tabs.Tab label="Tourist" style={activeTabIndex == 2 ? "font-weight:500;" : ""}>
+						<Tabs.Tab label="Tourist" style={activeTabIndex == 2 ? "font-weight:600;" : ""}>
 							{#if activeTabIndex == 2}
 								<div class="tabDetailsWrapInternal">
 									{#each activeTemplates as template, i}
