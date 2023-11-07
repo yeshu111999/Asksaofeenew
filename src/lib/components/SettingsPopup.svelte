@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher, onMount } from "svelte";
+	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
 
 	import Cookies from "js-cookie";
@@ -27,6 +27,20 @@
 
 	let openDeleteAccountPopup = false;
 	let saveChangesLoader = false;
+
+	let showUpdatePasswordError = false;
+	let updatePassordError = "";
+
+	let showUpdatePasswordSuccess = false;
+	let updatePasswordSuccess = "Passowrd updated successfully!!";
+
+	let imageFile;
+
+	let showUpdateDetailsError = false;
+	let updateDetailsError = "";
+
+	let showUpdateDetailsSuccess = false;
+	let updateDetailsSuccess = "User details updated successfully!!";
 
 	let imageAccessFlag = false;
 
@@ -57,6 +71,7 @@
 	}
 
 	function isImageURL(url, callback) {
+		console.log("url", url);
 		const img = new Image();
 
 		img.onload = function () {
@@ -72,29 +87,31 @@
 
 	const handleImageSelect = (event) => {
 		const file = event.target.files[0];
+		imageFile = file;
 
 		if (file) {
 			const imageURL = URL.createObjectURL(file);
 			profilePic = imageURL;
+			console.log("profile pic", profilePic);
 
 			// Create a FormData object and send the image to the backend
 			const formData = new FormData();
 			formData.append("image", file);
 
-			fetch("/your-backend-endpoint", {
-				method: "POST",
-				body: formData,
-			})
-				.then((response) => {
-					if (response.ok) {
-						console.log("Image uploaded successfully.");
-					} else {
-						console.error("Error uploading image.");
-					}
-				})
-				.catch((error) => {
-					console.error("Error:", error);
-				});
+			// fetch("/your-backend-endpoint", {
+			// 	method: "POST",
+			// 	body: formData,
+			// })
+			// 	.then((response) => {
+			// 		if (response.ok) {
+			// 			console.log("Image uploaded successfully.");
+			// 		} else {
+			// 			console.error("Error uploading image.");
+			// 		}
+			// 	})
+			// 	.catch((error) => {
+			// 		console.error("Error:", error);
+			// 	});
 		}
 	};
 
@@ -130,6 +147,7 @@
 		saveChangesLoader = true;
 		let headers = new Headers({
 			Authorization: "Bearer " + Cookies.get("token"),
+			"Content-Type": "application/json",
 		});
 		let gauth = Cookies.get("Google-Auth");
 		if (gauth) {
@@ -153,17 +171,32 @@
 				const data = await response.json();
 				console.log(JSON.stringify(data));
 				saveChangesLoader = false;
+				showUpdatePasswordSuccess = true;
+				setTimeout(() => {
+					showUpdatePasswordSuccess = false;
+				}, 5000);
+
 				// apiSuccessFlag = true;
 			} else {
-				const error = await response.text();
-				console.log(error);
+				const error = await response.json();
+				console.log("error msg", error.message);
+				showUpdatePasswordError = true;
+				updatePassordError = error.message
+					? error.message
+					: "Something went wrong! Please try again";
 				saveChangesLoader = false;
 				// apiErrorFlag = true;
 			}
+			password = "";
+			newPassword = "";
 		} catch (error) {
-			console.error(error);
+			console.error("error", error);
+			showUpdatePasswordError = true;
+			updatePassordError = "Something went wrong! Please try again";
 			saveChangesLoader = false;
 			// apiErrorFlag = true;
+			password = "";
+			newPassword = "";
 		}
 	};
 
@@ -177,16 +210,16 @@
 			headers.append("Google-Auth", "True");
 		}
 		let body = {
-			name: firstName + " " + lastName,
+			username: firstName + " " + lastName,
 			email: userMail,
-			mobileNumber: mobileNumber,
-			oldPassword: password,
-			newPassword: newPassword,
-			confirmPassword: newPassword,
+			firstName: firstName,
+			lastName: lastName,
+			phoneNumber: mobileNumber,
 		};
 
 		let formData = new FormData();
 		formData.append("request", JSON.stringify(body));
+		formData.append("file", imageFile);
 
 		let config = {
 			method: "POST",
@@ -201,16 +234,24 @@
 				const data = await response.json();
 				console.log(JSON.stringify(data));
 				saveChangesLoader = false;
+				showUpdateDetailsSuccess = true;
+				setTimeout(() => {
+					showUpdateDetailsSuccess = false;
+				});
 				// apiSuccessFlag = true;
 			} else {
-				const error = await response.text();
+				const error = await response.json();
 				console.log(error);
 				saveChangesLoader = false;
+				showUpdateDetailsError = true;
+				updateDetailsError = error.message ? error.message : "Something went wrong!! Try again";
 				// apiErrorFlag = true;
 			}
 		} catch (error) {
 			console.error(error);
 			saveChangesLoader = false;
+			showUpdateDetailsError = true;
+			updateDetailsError = "Something went wrong!! Try again";
 			// apiErrorFlag = true;
 		}
 	};
@@ -314,6 +355,12 @@
 			}
 		}
 		getUserDetails();
+		let panda =
+			"https://immigpt.s3.amazonaws.com/profilePic/360c8b587ded262ac3cb95625c5294d7592422c43e53858576e480ce457f5629.png";
+		// isImageURL(profilePic, (flag) => (imageAccessFlag = flag));
+		// isImageURL(panda, (flag) => (imageAccessFlag = flag));
+	});
+	afterUpdate(() => {
 		isImageURL(profilePic, (flag) => (imageAccessFlag = flag));
 	});
 </script>
@@ -402,6 +449,12 @@
 										placeholder="Phone Number"
 									/>
 								</div>
+								{#if showUpdateDetailsError}
+									<p class="error">{updateDetailsError}</p>
+								{/if}
+								{#if showUpdateDetailsSuccess}
+									<p class="success">{updateDetailsSuccess}</p>
+								{/if}
 								{#if showSaveOption}
 									<div class="buttons-wrapper">
 										<!-- <button class="button black" on:click={updateUserDetails}
@@ -452,6 +505,12 @@
 										>Cancel</Button
 									>
 								</div>
+							{/if}
+							{#if showUpdatePasswordError}
+								<p class="error">{updatePassordError}</p>
+							{/if}
+							{#if showUpdatePasswordSuccess}
+								<p class="success">{updatePasswordSuccess}</p>
 							{/if}
 						</div>
 					</section>
@@ -628,6 +687,16 @@
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 20px;
+	}
+
+	.error {
+		color: #fc5454;
+		font-size: 14px;
+	}
+
+	.success {
+		color: green;
+		font-size: 14px;
 	}
 
 	.profile-body {
