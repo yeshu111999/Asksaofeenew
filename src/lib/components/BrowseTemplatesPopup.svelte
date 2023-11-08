@@ -17,37 +17,45 @@
 			type: "Student",
 			resumeTemplates: [
 				{
-					imageUrl: ["/assets/images/resumes/SOP-MS.jpg"],
-					resumeTitle: "SOP for Master's",
+					imageUrl: [
+						"/assets/images/templates/Student/SOPs/SOP Highlighting Academic Background.jpeg",
+					],
+					resumeTitle: "SOP Highlighting Academic Background",
 					resumeDescription: "",
 					id: "student-1",
 					tag: "SOP",
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Academic background: [Paste the above SOP sample here]",
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academic background.",
 				},
 
 				{
-					imageUrl: ["/assets/images/resumes/SOP-MBA.jpg"],
-					resumeTitle: "SOP for MBA Program",
+					imageUrl: [
+						"/assets/images/templates/Student/SOPs/SOP Highlighting Work Experience and Career Goals.jpeg",
+					],
+					resumeTitle: "SOP Highlighting Work Experience and Career Goals",
 					resumeDescription: "",
 					id: "student-2",
 					tag: "SOP",
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details on my work experience - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Work Experience and Career Goals: [Paste the above SOP sample here]",
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details on my work experience - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Work Experience and Career Goals.",
 				},
 
 				{
-					imageUrl: ["/assets/images/resumes/SOP-Phd.jpg"],
-					resumeTitle: "SOP for Ph.D. in Environmental Engineering",
+					imageUrl: [
+						"/assets/images/templates/Student/SOPs/SOP with Academic and Research Emphasis.jpeg",
+					],
+					resumeTitle: "SOP with Academic and Research Emphasis",
 					resumeDescription: "",
 					tag: "SOP",
 					id: "student-3",
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Research and faculty connections: [Paste the above SOP sample here]",
+						" Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.",
 				},
 				{
-					imageUrl: ["/assets/images/resumes/SOP-MIR.jpg"],
-					resumeTitle: "SOP for Master's in International Relations",
+					imageUrl: [
+						"/assets/images/templates/Student/SOPs/SOP with Research and Faculty Emphasis.jpeg",
+					],
+					resumeTitle: "SOP with Research and Faculty Emphasis",
 					resumeDescription: "",
 					id: "student-4",
 					tag: "SOP",
@@ -56,18 +64,28 @@
 				},
 
 				{
-					imageUrl: ["/assets/images/resumes/SOP-MHA.jpg"],
-					resumeTitle: "SOP for Master's in Healthcare Administration",
+					imageUrl: [
+						"/assets/images/templates/Student/SOPs/SOP with Work Experience and Leadership Focus.jpeg",
+					],
+					resumeTitle: "SOP with Work Experience and Leadership Focus",
 					resumeDescription: "",
 					id: "student-5",
 					tag: "SOP",
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details]. These are the details on my work experience - [Add all the details]. Details on my Leadership and Impact - [Add all the details]. My career goals are [Add all the details]. [Additional Details]. Please craft a personalized SOP by taking the following format of SOP as a reference which highlights Work Experience and Leadership: [Paste the above SOP sample here]",
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details]. These are the details on my work experience - [Add all the details]. Details on my Leadership and Impact - [Add all the details]. My career goals are [Add all the details]. [Additional Details]. Please craft a personalized SOP by highlighting my Work Experience and Leadership.",
+				},
+				{
+					imageUrl: ["/assets/images/templates/Student/SOPs/SOP with Customized Format.jpeg"],
+					resumeTitle: "SOP with Customized Format",
+					resumeDescription: "",
+					id: "student-6",
+					tag: "SOP",
+					prompt:
+						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP? 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [Degree Name] in [Course Name] at [University Name]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.",
 				},
 				{
 					imageUrl: [
-						"/assets/images/resumes/LOR-MBA-1.jpg",
-						"/assets/images/resumes/LOR-MBA-2.jpg",
+						"/assets/images/templates/Student/LORs/Letter of Recommendation from a Manager.jpeg",
 					],
 					resumeTitle: "Letter of Recommendation from a Manager",
 					resumeDescription: "",
@@ -79,8 +97,7 @@
 
 				{
 					imageUrl: [
-						"/assets/images/resumes/LOR-Masters-1.jpg",
-						"/assets/images/resumes/LOR-Masters-2.jpg",
+						"/assets/images/templates/Student/LORs/Letter of Recommendation from a Professor.jpeg",
 					],
 					resumeTitle: "Letter of Recommendation from a Professor",
 					resumeDescription: "",
@@ -92,8 +109,7 @@
 
 				{
 					imageUrl: [
-						"/assets/images/resumes/LOR-BPS-1.jpg",
-						"/assets/images/resumes/LOR-BPS-2.jpg",
+						"/assets/images/templates/Student/LORs/Letter of Recommendation from an Educator.jpeg",
 					],
 					resumeTitle: "Letter of Recommendation from an Educator",
 					resumeDescription: "",
@@ -102,39 +118,65 @@
 					prompt:
 						"Generate a personalized Letter of Recommendation (LOR) from an experienced Educator who taught [Taught Course Name] at [Taught Institution Name], for [Applicant's Name], who is currently seeking admission to the [Degree Name] program in [Course Name] at [University Name]. Please focus on the applicant's academic achievements and exceptional personal qualities that make them a strong fit for this program. Provide insights into the applicant's performance and character to help the admissions committee gain a comprehensive understanding of their potential.",
 				},
+
+				{
+					imageUrl: [
+						"/assets/images/templates/Student/Financial Support Letters/Financial Support Letter from Employer.jpeg",
+					],
+					resumeTitle: "Financial Support Letter from Employer",
+					resumeDescription: "",
+					id: "fsl-1",
+					tag: "FSL",
+					prompt:
+						"Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [ ], Name of the Applicant - [ ], Name of University - [ ]",
+				},
+
+				{
+					imageUrl: [
+						"/assets/images/templates/Student/Financial Support Letters/Financial Support Letter from Sponsor (Family member or a Friend).jpeg",
+					],
+					resumeTitle: "Financial Support Letter from Sponsor (Family member or a Friend)",
+					resumeDescription: "",
+					id: "fsl-2",
+					tag: "FSL",
+					prompt:
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Name of University - [ ]",
+				},
+
+				{
+					imageUrl: [
+						"/assets/images/templates/Student/Financial Support Letters/Financial Support Letter from the Bank.jpeg",
+					],
+					resumeTitle: "Financial Support Letter from the Bank",
+					resumeDescription: "",
+					id: "fsl-3",
+					tag: "FSL",
+					prompt:
+						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [ ], Outstanding balance - [ ], Number of days that the balance is being maintained for - [ ].",
+				},
 			],
 		},
 		{
 			type: "Professional",
 			resumeTemplates: [
 				{
-					imageUrl: ["/assets/images/resumes/FSL-Bank.jpg"],
-					resumeTitle: "Financial Support Letter from the Bank",
+					imageUrl: ["/assets/images/templates/Professional/Academic Offer Letter.jpeg"],
+					resumeTitle: "Academic Offer Letter",
 					resumeDescription: "",
 					id: "professional-1",
-					tag: "SOP",
+					tag: "Professional",
 					prompt:
 						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [ ], Outstanding balance - [ ], Number of days that the balance is being maintained for - [ ].",
 				},
 
 				{
-					imageUrl: ["/assets/images/resumes/FSL-Relative.jpg"],
-					resumeTitle: "Financial Support Letter from Sponsor (Family member or a Friend)",
+					imageUrl: ["/assets/images/templates/Professional/Employment Offer Letter.jpeg"],
+					resumeTitle: "Employment Offer Letter",
 					resumeDescription: "",
 					id: "professional-2",
-					tag: "SOP",
+					tag: "Professional",
 					prompt:
 						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Name of University - [ ]",
-				},
-
-				{
-					imageUrl: ["/assets/images/resumes/FSL-Employer.jpg"],
-					resumeTitle: "Financial Support Letter from Employer",
-					resumeDescription: "",
-					tag: "SOP",
-					id: "student-3",
-					prompt:
-						" Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [ ], Name of the Applicant - [ ], Name of University - [ ]",
 				},
 			],
 		},
@@ -142,17 +184,35 @@
 			type: "Tourists",
 			resumeTemplates: [
 				{
-					imageUrl: ["/assets/images/resumes/financial1.png"],
-					resumeTitle: "Letter of financial support",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
+					imageUrl: [
+						"/assets/images/templates/Tourist/Financial Support Letter - Self-Financed.jpeg",
+					],
+					resumeTitle: "Financial Support Letter - Self-Financed",
+					resumeDescription: "",
+					id: "tourist-1",
+					tag: "Tourist",
+					prompt: "",
 				},
 
 				{
-					imageUrl: ["/assets/images/resumes/financial2.png"],
-					resumeTitle: "Financial support letter",
-					resumeDescription: "The Harvard template, updated for the 21st century, boasts a sleek",
-					id: "student-1",
+					imageUrl: [
+						"/assets/images/templates/Tourist/Financial Support Letter from Employer.jpeg",
+					],
+					resumeTitle: "Financial Support Letter from Employer",
+					resumeDescription: "",
+					id: "tourist-2",
+					tag: "Tourist",
+					prompt: "",
+				},
+				{
+					imageUrl: [
+						"/assets/images/templates/Tourist/Financial Support Letter from Sponsor (Family Member or Friend).jpeg",
+					],
+					resumeTitle: "Financial Support Letter from Sponsor (Family Member or Friend)",
+					resumeDescription: "",
+					id: "tourist-3",
+					tag: "Tourist",
+					prompt: "",
 				},
 			],
 		},
@@ -202,10 +262,9 @@
 	}
 
 	function useTemplate() {
-		if (selectedTemplate.tag == "SOP" || selectedTemplate.tag == "LOR") {
-			visaPrompt.set(selectedTemplate.prompt);
-			dispatch("closeBurger");
-		}
+		// if (selectedTemplate.tag == "SOP" || selectedTemplate.tag == "LOR") {
+		visaPrompt.set(selectedTemplate.prompt);
+		dispatch("closeBurger");
 		closePopup();
 	}
 
