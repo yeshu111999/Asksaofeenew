@@ -457,15 +457,36 @@
 
 	async function onGoogleAuthSuccess(jwtCredentials) {
 		const profileData = JSON.parse(atob(jwtCredentials.credential.split(".")[1]));
-		var idToken = jwtCredentials.credential;
-		const expirationTime = new Date();
-		expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
-		Cookies.set("token", idToken, { expires: expirationTime });
-		Cookies.set("email", profileData.email, { expires: expirationTime });
-		Cookies.set("name", profileData.name, { expires: expirationTime });
-		Cookies.set("Google-Auth", "true", { expires: expirationTime });
-		console.log("email id", profileData.email);
-		window.location.href = "/";
+		let email = profileData.email;
+		let params = {
+			email: email,
+			username: email,
+			password: "",
+		};
+		await fetch("https://backend.immigpt.net/signup?isGoogleSignIn=true", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(params),
+		})
+			.then(async (response) => {
+				console.log("response", response);
+				if (response.status == 200) {
+					var idToken = jwtCredentials.credential;
+					const expirationTime = new Date();
+					expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
+					Cookies.set("token", idToken, { expires: expirationTime });
+					Cookies.set("email", profileData.email, { expires: expirationTime });
+					Cookies.set("name", profileData.name, { expires: expirationTime });
+					Cookies.set("Google-Auth", "true", { expires: expirationTime });
+					console.log("email id", profileData.email);
+					window.location.href = "/";
+				}
+			})
+			.catch((error) => {
+				console.log("error.response1", error);
+			});
 	}
 
 	function onSignIn(googleUser) {
