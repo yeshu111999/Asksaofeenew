@@ -65,7 +65,7 @@
 					<p>Plan includes:</p>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to ImmiGPT to our pro model</p>
+						<p>Access to our ImmiGPT Pro Model</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />

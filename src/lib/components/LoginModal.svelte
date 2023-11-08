@@ -1086,28 +1086,21 @@
 										<button class="signup-text" on:click={resendOtp}>Resend OTP</button>
 									</div>
 								{/if}
-								{#if isTimerRunning}
-									<div class="login-button">
-										<!-- <Button
-										ripple
-										size="xs"
+								<!-- {#if isTimerRunning} -->
+								<div class="login-button">
+									<Button
+										className="login-btn otp-btn {isVerifyOtpBtnDisabled ? 'disabled' : ''}"
+										on:click={verifyOtp}
 										disabled={isVerifyOtpBtnDisabled}
-										color="#3b82f6"
-										on:click={verifyOtp}>Verify OTP</Button
-									> -->
-										<Button
-											className="login-btn otp-btn {isVerifyOtpBtnDisabled ? 'disabled' : ''}"
-											on:click={verifyOtp}
-											disabled={isVerifyOtpBtnDisabled}
-											fullSize={true}
-											override={btnStyles}
-											ripple
-											bind:loading={isOtpLoading}
-										>
-											Verify OTP</Button
-										>
-									</div>
-								{/if}
+										fullSize={true}
+										override={btnStyles}
+										ripple
+										bind:loading={isOtpLoading}
+									>
+										Verify OTP</Button
+									>
+								</div>
+								<!-- {/if} -->
 								{#if otpVerifyError}
 									<p class="error">{otpError}</p>
 								{/if}
