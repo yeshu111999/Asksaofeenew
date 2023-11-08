@@ -47,9 +47,8 @@
 		// console.log("prompt", visapreppromt);
 	}
 	let items = [
-		"Make you to prepare for visa interview with sample questions and answers",
-		"Train you with Visa Mock Interview",
-		"Help you with better prompt for visa preparation",
+		"Assist with preparation for visa interview with sample questions and answers.",
+		"Simulate Visa Interview scenarios for practice",
 	];
 </script>
 
@@ -63,6 +62,7 @@
 				</button>
 			</div>
 			<div class="visaprep">
+				<p>Helps with creating a better prompt for Visa Interview Preparation to:</p>
 				<div class="visaprep-container">
 					{#each items as item (item)}
 						<li>{item}</li>

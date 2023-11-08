@@ -47,9 +47,8 @@
 		// console.log("prompt", immiHelppreppromt);
 	}
 	let items = [
-		"Help you with port of entry immigration questions",
-		"mock preparation with port of entry immigration",
-		"Help with better prompt for immigration help",
+		"Assist with preparation for port of entry Immigration with sample questions and answers.",
+		"Simulate port of entry Immigration scenarios for practice",
 	];
 </script>
 
@@ -63,6 +62,7 @@
 				</button>
 			</div>
 			<div class="visaprep">
+				<p>Helps with creating a better prompt for Immigration assistance to:</p>
 				<div class="visaprep-container">
 					{#each items as item (item)}
 						<li>{item}</li>
