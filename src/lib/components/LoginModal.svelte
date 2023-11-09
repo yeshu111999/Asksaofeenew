@@ -53,6 +53,8 @@
 	let resetLoader = false;
 	let resetMailSent = false;
 
+	let countdown;
+
 	let countryCodeMenuFlag = false;
 
 	let googleLoginBtn;
@@ -344,18 +346,18 @@
 	let isOtpLoading = false;
 
 	function startTimer() {
-		if (!isTimerRunning) {
-			hideSendOtpBtn = true;
-			isTimerRunning = true;
-			showVerifyOtpBtn = true;
-			const countdown = setInterval(() => {
-				timer -= 1;
-				if (timer === 0) {
-					clearInterval(countdown);
-					isTimerRunning = false;
-				}
-			}, 1000);
-		}
+		timer = 60;
+		hideSendOtpBtn = true;
+		isTimerRunning = true;
+		showVerifyOtpBtn = true;
+		clearInterval(countdown);
+		countdown = setInterval(() => {
+			timer -= 1;
+			if (timer === 0) {
+				clearInterval(countdown);
+				isTimerRunning = false;
+			}
+		}, 1000);
 	}
 
 	function OTPInput() {
@@ -692,6 +694,7 @@
 				.then(async (response) => {
 					if (response.status == 200) {
 						showOtpInputs = true;
+						timer = 60;
 						startTimer();
 						// setTimeout(() => {
 						// 	OTPInput();

@@ -70,7 +70,7 @@
 				</div>
 				<div class="input-wrapper visaprep-container">
 					<NativeSelect
-						data={["mock Immigration", "Immigration preparation"]}
+						data={["Immigration preparation", "Mock Immigration"]}
 						required
 						bind:value={immiHelpInterviewType}
 						label="Select Option"

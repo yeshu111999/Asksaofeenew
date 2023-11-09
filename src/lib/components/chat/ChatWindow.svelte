@@ -26,6 +26,7 @@
 	export let settings: LayoutData["settings"];
 	export let webSearchMessages: WebSearchUpdate[] = [];
 	import { theme } from "$lib/stores/theme";
+	import CookieConsent from "../CookieConsent.svelte";
 
 	export let loginRequired = false;
 	$: isReadOnly = !models.some((model) => model.id === currentModel.id);

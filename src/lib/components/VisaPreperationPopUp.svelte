@@ -30,7 +30,7 @@
 
 	function prepareVisaPrompt() {
 		submitLoader = true;
-		if (visaInterviewType == "VISA preparation") {
+		if (visaInterviewType == "Visa Interview Preparation") {
 			visapreppromt = `Please provide a comprehensive list of important and expected questions, along with suggested answers, to prepare for the ${visaType} visa interview. The questions should be based on the traveller's current scenario. Specifically, consider that the traveller is applying for a ${visaType} visa to enter ${travelTo} from ${travelFrom} for ${travelReason}. Tailor the questions to cover all aspects that are typically asked during a ${visaType} visa interview. Additionally, suggest answers that are clear, honest, and provide relevant information. break the interview questions into, personal, professional, job details, company or sponsor details. don't restrict yourself and give me around 25-30 questions and answers, continue automatically if the generation is truncated.`;
 		} else {
 			visapreppromt = `Assume your role as a seasoned visa consular officer at the ${travelTo} Embassy/Consulate, and you are conducting a visa interview for a traveller. who is applying for an ${visaType} visa to enter ${travelTo} from ${travelFrom} for the purpose of ${travelReason}. let's get into a interview mode where you ask one question, I answer the question. I will type end to end the interview practice. when I type end, give me all questions, my answers and a better answer if needed in a tabular format.`;
@@ -70,7 +70,7 @@
 				</div>
 				<div class="input-wrapper visaprep-container">
 					<NativeSelect
-						data={["VISA preparation", "VISA Mock preparation"]}
+						data={["Visa Interview Preparation", "Mock Visa Interview"]}
 						required
 						bind:value={visaInterviewType}
 						label="Select Option"

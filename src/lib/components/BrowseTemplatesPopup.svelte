@@ -1,6 +1,6 @@
 <script>
 	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
-	import { Modal, Tabs, Tooltip } from "@svelteuidev/core";
+	import { Modal, Tabs, TextInput, Tooltip } from "@svelteuidev/core";
 	import { visaPrompt } from "$lib/stores/promptStore";
 
 	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
@@ -49,7 +49,7 @@
 					tag: "SOP",
 					id: "student-3",
 					prompt:
-						" Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.",
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
 				},
 				{
 					imageUrl: [
@@ -60,7 +60,7 @@
 					id: "student-4",
 					tag: "SOP",
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
+						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.",
 				},
 
 				{
@@ -166,7 +166,7 @@
 					id: "professional-1",
 					tag: "Professional",
 					prompt:
-						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [ ], Outstanding balance - [ ], Number of days that the balance is being maintained for - [ ].",
+						"Generate an Academic offer letter to the student with the following Course details - Program Name - [ ], University Name - [ ], Country Name - [ ], Start Date - [ ], Duration - [ ], Tuition Fees - $ [ ] per semester, Scholarship/Financial Aid - [ ], Additional Details - [ ].",
 				},
 
 				{
@@ -176,7 +176,7 @@
 					id: "professional-2",
 					tag: "Professional",
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Name of University - [ ]",
+						"Generate an employment offer letter with the following terms of the offer - Job Title - [ ], Company Name - [ ],  Start Date - [ ], Salary per year - [ ], Benefits - [ ], Vacation Time (No.of days per year) - [ ], Holidays (List holidays observed by the company) - [ ], Additional Details (Tasks and Responsibilities) - [ ].",
 				},
 			],
 		},
@@ -191,7 +191,8 @@
 					resumeDescription: "",
 					id: "tourist-1",
 					tag: "Tourist",
-					prompt: "",
+					prompt:
+						"Generate a brief financial support letter for a self-sponsored tourist visa application for [Name] travelling to [Destination Country]",
 				},
 
 				{
@@ -202,7 +203,8 @@
 					resumeDescription: "",
 					id: "tourist-2",
 					tag: "Tourist",
-					prompt: "",
+					prompt:
+						"Generate a brief financial support letter on behalf of the applicant's employer to support their tourism plans by using the following details - Company Name - [ ], Name of the Applicant - [ ], Destination Country - [ ]",
 				},
 				{
 					imageUrl: [
@@ -212,7 +214,8 @@
 					resumeDescription: "",
 					id: "tourist-3",
 					tag: "Tourist",
-					prompt: "",
+					prompt:
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Destination Country - [ ].",
 				},
 			],
 		},
@@ -221,6 +224,10 @@
 	let activeTabIndex = 0;
 	let themeVariable = "light";
 	let selectedTemplate = templates[0].resumeTemplates[0];
+
+	let degreeName = "";
+	let courseName = "";
+	let universityName = "";
 
 	let showPreview = false;
 
@@ -294,8 +301,8 @@
 					</button>
 				</div>
 				<p class="description">
-					Browse and choose a template from the available selection, We’ll generate the content
-					based on the template you’ve choosen
+					Browse and choose a template from the available selection, We’ll help create prompts to
+					generate the content based on the template you've choosen
 				</p>
 				<div class="body scrollbar-custom">
 					<Tabs
@@ -384,6 +391,30 @@
 							</Tooltip> -->
 							<button class="use-template-btn" on:click={openPreview}><p>Preview</p></button>
 							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
+						</div>
+						<div class="input-wrapper visaprep-container">
+							<TextInput
+								required
+								bind:value={degreeName}
+								label="Degree Name"
+								placeholder="Ex. Masters"
+							/>
+						</div>
+						<div class="input-wrapper visaprep-container">
+							<TextInput
+								required
+								bind:value={courseName}
+								label="Course Name"
+								placeholder="Ex. Data science"
+							/>
+						</div>
+						<div class="input-wrapper visaprep-container">
+							<TextInput
+								required
+								bind:value={universityName}
+								label="University Name"
+								placeholder="Ex. Oxford"
+							/>
 						</div>
 					</div>
 				</div>
