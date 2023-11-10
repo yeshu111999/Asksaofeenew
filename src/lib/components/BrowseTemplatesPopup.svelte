@@ -1,6 +1,6 @@
 <script>
 	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
-	import { Modal, Tabs, TextInput, Tooltip } from "@svelteuidev/core";
+	import { Modal, Tabs, TextInput, Textarea, Tooltip } from "@svelteuidev/core";
 	import { visaPrompt } from "$lib/stores/promptStore";
 
 	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
@@ -228,6 +228,21 @@
 	let degreeName = "";
 	let courseName = "";
 	let universityName = "";
+	let additionalDetails = "";
+	let projectsDone = "";
+	let keyCourses = "";
+	let CompletedUniversityName = "";
+	let completedCourseName = "";
+	let completedDegreeName = "";
+	let companyName = "";
+	let jobTitle = "";
+	let jobDuration = "";
+	let keyResponsibilities = "";
+	let achievements = "";
+	let careerGoals = "";
+	let researchExperiences = "";
+	let facultyConnection = "";
+	let leadershipAndImpact = "";
 
 	let showPreview = false;
 
@@ -392,29 +407,156 @@
 							<button class="use-template-btn" on:click={openPreview}><p>Preview</p></button>
 							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
 						</div>
-						<div class="input-wrapper visaprep-container">
-							<TextInput
-								required
-								bind:value={degreeName}
-								label="Degree Name"
-								placeholder="Ex. Masters"
-							/>
-						</div>
-						<div class="input-wrapper visaprep-container">
-							<TextInput
-								required
-								bind:value={courseName}
-								label="Course Name"
-								placeholder="Ex. Data science"
-							/>
-						</div>
-						<div class="input-wrapper visaprep-container">
-							<TextInput
-								required
-								bind:value={universityName}
-								label="University Name"
-								placeholder="Ex. Oxford"
-							/>
+						<div class="input-fields">
+							{#if selectedTemplate.tag == "SOP"}
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={degreeName}
+										label="Applying Degree Name"
+										placeholder="Ex. Masters"
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={courseName}
+										label="Applying Course Name"
+										placeholder="Ex. Data science"
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={universityName}
+										label="Applying University Name"
+										placeholder="Ex. Oxford"
+									/>
+								</div>
+								<p>Academic Details</p>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={completedDegreeName}
+										label="University Degree"
+										placeholder="Ex. Masters"
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={completedCourseName}
+										label="Course Name"
+										placeholder="Ex. Data science"
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={CompletedUniversityName}
+										label="University Name"
+										placeholder="Ex. Oxford"
+									/>
+								</div>
+							{/if}
+							{#if selectedTemplate.id == "student-1" || selectedTemplate.id == "student-4"}
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={keyCourses}
+										label="Any Key Courses that are relevant to the applying course"
+										placeholder="Ex. Data science"
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={projectsDone}
+										label="Projects Done"
+										placeholder="Ex. Oxford"
+									/>
+								</div>
+							{/if}
+							{#if selectedTemplate.id == "student-2"}
+								<p>Work Experience</p>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={companyName}
+										label="Company Name"
+										placeholder=""
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput required bind:value={jobTitle} label="Job Title" placeholder="" />
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={jobDuration}
+										label="Duration of Employment (start and end dates)"
+										placeholder=""
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<Textarea
+										required
+										bind:value={keyResponsibilities}
+										label="Key Responsibilities"
+										placeholder=""
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<Textarea
+										required
+										bind:value={achievements}
+										label="Achievements"
+										placeholder=""
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<Textarea required bind:value={careerGoals} label="Career Goals" placeholder="" />
+								</div>
+							{/if}
+							{#if selectedTemplate.id == "student-3" || selectedTemplate.id == "student-4"}
+								<div class="input-wrapper visaprep-container">
+									<Textarea
+										required
+										bind:value={researchExperiences}
+										label="Research Experiences"
+										placeholder=""
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={facultyConnection}
+										label="Faculty Connection"
+										placeholder=""
+									/>
+								</div>
+								<div class="input-wrapper visaprep-container">
+									<Textarea required bind:value={careerGoals} label="Career Goals" placeholder="" />
+								</div>
+							{/if}
+							{#if selectedTemplate.id == "student-5"}
+								<div class="input-wrapper visaprep-container">
+									<Textarea
+										required
+										bind:value={leadershipAndImpact}
+										label="Leadership and Impact"
+										placeholder=""
+									/>
+								</div>
+							{/if}
+							<div class="input-wrapper visaprep-container">
+								<Textarea
+									required
+									bind:value={additionalDetails}
+									label="Additional Details"
+									placeholder=""
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -628,6 +770,13 @@
 		height: calc(100% - 30px);
 		overflow-y: auto;
 		padding: 12px;
+	}
+
+	.input-fields {
+		padding-bottom: 40px;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
 	}
 
 	@media (max-width: 900px) {

@@ -477,7 +477,7 @@
 				if (response.status == 200) {
 					var idToken = jwtCredentials.credential;
 					const expirationTime = new Date();
-					expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
+					expirationTime.setTime(expirationTime.getTime() + 7 * 24 * 60 * 60 * 1000);
 					Cookies.set("token", idToken, { expires: expirationTime });
 					Cookies.set("email", profileData.email, { expires: expirationTime });
 					Cookies.set("name", profileData.name, { expires: expirationTime });
