@@ -73,9 +73,9 @@
 	{:else} -->
 	<img src="/assets/icons/search-icon-black.svg" alt="" />
 	<!-- {/if} -->
-	{#if confirmDelete}
+	<!--{#if confirmDelete}
 		<span style="color:gray" class=""> Delete </span>
-	{/if}
+	{/if}-->
 	{#if isEditing}
 		<input
 			style="width:130px"
@@ -151,11 +151,11 @@
 			class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
 			title="Delete conversation"
 			on:click|preventDefault={(event) => {
-				if (event.shiftKey) {
+				//if (event.shiftKey) {
 					dispatch("deleteConversation", conv.id);
-				} else {
-					confirmDelete = true;
-				}
+				//} else {
+				//	confirmDelete = true;
+				//}
 			}}
 		>
 			<!-- <CarbonTrashCan class="text-xs text-gray-400  hover:text-gray-500 dark:hover:text-gray-300" /> -->
