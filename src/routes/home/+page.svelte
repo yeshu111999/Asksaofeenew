@@ -133,6 +133,7 @@
 					</div>
 					<div class="freePlanTitle">Free Plan Available</div>
 				</div>
+				<img src="/assets/images/previewImm.png" style="margin-top: 16px;" alt="" />
 			</div>
 		</div>
 		<div class="featureDetailSection">
@@ -758,7 +759,10 @@
 		padding: 16px;
 		align-items: center;
 		gap: 32px;
-		height: 100vh;
+		min-height: 100vh;
+		height: auto;
+		margin-top: 74px;
+		margin-bottom: 74px;
 		justify-content: center;
 	}
 
