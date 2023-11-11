@@ -1,9 +1,11 @@
 <script>
 	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
-	import { Modal, Tabs, TextInput, Textarea, Tooltip } from "@svelteuidev/core";
+	import { Modal, Tabs, TextInput, Textarea, Tooltip, Button } from "@svelteuidev/core";
 	import { visaPrompt } from "$lib/stores/promptStore";
 
 	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
+	import { ActionIcon } from "@svelteuidev/core";
+	import { ThickArrowLeft } from "radix-icons-svelte";
 
 	// import { theme } from "$lib/stores/theme";
 	import { theme } from "$lib/stores/theme";
@@ -68,8 +70,53 @@
 					resumeDescription: "",
 					id: "student-2",
 					tag: "SOP",
+					inputFields: [
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Details",
+							label: "Ex: Machine Learning",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Work Experience Details",
+							label: "Ex: Company, Position, Duration",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Career Goals",
+							label: "Ex: Short-term and Long-term goals",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details",
+							label: "Ex: Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
+
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details on my work experience - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Work Experience and Career Goals.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details on my work experience - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Work Experience and Career Goals.",
 				},
 
 				{
@@ -80,8 +127,53 @@
 					resumeDescription: "",
 					tag: "SOP",
 					id: "student-3",
+					inputFields: [
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Details",
+							label: "Ex: GPA, Courses, Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Research Experience and Faculty Connections",
+							label: "Ex: Research projects, Faculty interactions",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Career Goals",
+							label: "Ex: Short-term and Long-term goals",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details",
+							label: "Ex: Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
+
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details of my research experiences and faculty connections - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
 				},
 				{
 					imageUrl: [
@@ -91,8 +183,53 @@
 					resumeDescription: "",
 					id: "student-4",
 					tag: "SOP",
+					inputFields: [
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Details",
+							label: "Ex: GPA, Courses, Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Research Experience and Faculty Connections",
+							label: "Ex: Research projects, Faculty interactions",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Career Goals",
+							label: "Ex: Short-term and Long-term goals",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details",
+							label: "Ex: Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
+
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. These are the details of my research experiences and faculty connections - [Add all the details that are being asked from the user]. My career goals are [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details of my research experiences and faculty connections - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.",
 				},
 
 				{
@@ -103,17 +240,118 @@
 					resumeDescription: "",
 					id: "student-5",
 					tag: "SOP",
+					inputFields: [
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Details",
+							label: "Ex: GPA, Courses, Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Work Experience Details",
+							label: "Ex: Company, Position, Duration",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Leadership and Impact",
+							label: "Ex: Leadership roles, Impactful projects",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Career Goals",
+							label: "Ex: Short-term and Long-term goals",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details",
+							label: "Ex: Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details]. These are the details on my work experience - [Add all the details]. Details on my Leadership and Impact - [Add all the details]. My career goals are [Add all the details]. [Additional Details]. Please craft a personalized SOP by highlighting my Work Experience and Leadership.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details on my work experience - [fieldValue5]. Details on my Leadership and Impact - [fieldValue6]. My career goals are [fieldValue7]. [fieldValue8]. Please craft a personalized SOP by highlighting my Work Experience and Leadership.",
 				},
+
 				{
 					imageUrl: ["/assets/images/templates/Student/SOPs/SOP with Customized Format.jpeg"],
 					resumeTitle: "SOP with Customized Format",
 					resumeDescription: "",
 					id: "student-6",
 					tag: "SOP",
+					inputFields: [
+						{
+							name: "Introduction",
+							label: "Ex: Opening statement about yourself",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Background",
+							label: "Ex: Undergraduate degree and major",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Aspirations",
+							label: "Ex: Why [Degree Name] in [Course Name] at [University Name]",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Relevant Projects",
+							label: "Ex: Research projects, internships",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Work Experience",
+							label: "Ex: Organizations, positions, relevance to the course",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Career Goals",
+							label: "Ex: Short-term and Long-term goals",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Unique Qualities and Achievements",
+							label: "Ex: Standout qualities, skills, achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Closing Statement",
+							label: "Ex: Concluding the SOP with a strong statement",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP? 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [Degree Name] in [Course Name] at [University Name]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.",
+						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: [Add details from inputFields]. Ask me the necessary details that you'll require to write this SOP.",
 				},
 				{
 					imageUrl: [
@@ -123,8 +361,40 @@
 					resumeDescription: "",
 					id: "lor-1",
 					tag: "LOR",
+					inputFields: [
+						{
+							name: "Company Name",
+							label: "Ex: XYZ Corp",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Applicant's Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a personalized Letter of Recommendation (LOR) from the manager at [Company Name] for [Applicant's Name] as they apply for admission to the [Degree Name] program in [Course Name] at [University Name]. Please offer specific details about the applicant's professional performance and notable achievements within your organization, underscoring how these accomplishments make them an ideal candidate for the program.",
+						"Generate a personalized Letter of Recommendation (LOR) from the manager at [fieldValue1] for [fieldValue2] as they apply for admission to the [fieldValue3] program in [fieldValue4] at [fieldValue5]. Please offer specific details about the applicant's professional performance and notable achievements within your organization, underscoring how these accomplishments make them an ideal candidate for the program.",
 				},
 
 				{
@@ -135,8 +405,46 @@
 					resumeDescription: "",
 					id: "lor-2",
 					tag: "LOR",
+					inputFields: [
+						{
+							name: "Courses Names",
+							label: "Ex: Machine Learning, Data Analysis",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Institution Name",
+							label: "Ex: XYZ University",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Applicant's Name",
+							label: "Ex: Jane Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a personalized Letter of Recommendation (LOR) from a professor who instructed [Courses Names] at [Institution Name] for [Applicant's Name], who is currently seeking admission to the [Degree Name] program in [Course Name] at [University Name]. Please offer comprehensive insights into the applicant's academic performance in your class and their qualifications, underlining their suitability for the program.",
+						"Generate a personalized Letter of Recommendation (LOR) from a professor who instructed [fieldValue1] at [fieldValue2] for [fieldValue3], who is currently seeking admission to the [fieldValue4] program in [fieldValue5] at [fieldValue6]. Please offer comprehensive insights into the applicant's academic performance in your class and their qualifications, underlining their suitability for the program.",
 				},
 
 				{
@@ -147,8 +455,46 @@
 					resumeDescription: "",
 					id: "lor-3",
 					tag: "LOR",
+					inputFields: [
+						{
+							name: "Taught Course Name",
+							label: "Ex: Introduction to Computer Science",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Taught Institution Name",
+							label: "Ex: ABC School",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Applicant's Name",
+							label: "Ex: Jim Smith",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a personalized Letter of Recommendation (LOR) from an experienced Educator who taught [Taught Course Name] at [Taught Institution Name], for [Applicant's Name], who is currently seeking admission to the [Degree Name] program in [Course Name] at [University Name]. Please focus on the applicant's academic achievements and exceptional personal qualities that make them a strong fit for this program. Provide insights into the applicant's performance and character to help the admissions committee gain a comprehensive understanding of their potential.",
+						"Generate a personalized Letter of Recommendation (LOR) from an experienced Educator who taught [fieldValue1] at [fieldValue2], for [fieldValue3], who is currently seeking admission to the [fieldValue4] program in [fieldValue5] at [fieldValue6]. Please focus on the applicant's academic achievements and exceptional personal qualities that make them a strong fit for this program. Provide insights into the applicant's performance and character to help the admissions committee gain a comprehensive understanding of their potential.",
 				},
 
 				{
@@ -159,8 +505,28 @@
 					resumeDescription: "",
 					id: "fsl-1",
 					tag: "FSL",
+					inputFields: [
+						{
+							name: "Company Name",
+							label: "Ex: XYZ Corp",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Name of the Applicant",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Name of University",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [ ], Name of the Applicant - [ ], Name of University - [ ]",
+						"Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [fieldValue1], Name of the Applicant - [fieldValue2], Name of University - [fieldValue3]",
 				},
 
 				{
@@ -171,8 +537,28 @@
 					resumeDescription: "",
 					id: "fsl-2",
 					tag: "FSL",
+					inputFields: [
+						{
+							name: "Name of the Applicant",
+							label: "Ex: Jane Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Relation to the Applicant",
+							label: "Ex: Father",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Name of University",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Name of University - [ ]",
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Name of University - [fieldValue3]",
 				},
 
 				{
@@ -183,8 +569,28 @@
 					resumeDescription: "",
 					id: "fsl-3",
 					tag: "FSL",
+					inputFields: [
+						{
+							name: "Account holder's Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Outstanding balance",
+							label: "Ex: $10,000",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Number of days",
+							label: "Ex: 180",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [ ], Outstanding balance - [ ], Number of days that the balance is being maintained for - [ ].",
+						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [fieldValue1], Outstanding balance - [fieldValue2], Number of days that the balance is being maintained for - [fieldValue3].",
 				},
 			],
 		},
@@ -197,8 +603,58 @@
 					resumeDescription: "",
 					id: "professional-1",
 					tag: "Professional",
+					inputFields: [
+						{
+							name: "Program Name",
+							label: "Ex: Master of Science in Computer Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: XYZ University",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Country Name",
+							label: "Ex: United States",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Start Date",
+							label: "Ex: August 1, 2023",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Duration",
+							label: "Ex: 2 years",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Tuition Fees",
+							label: "Ex: $10,000 per semester",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Scholarship/Financial Aid",
+							label: "Ex: Merit-based scholarship",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details",
+							label: "Ex: Any other relevant information",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate an Academic offer letter to the student with the following Course details - Program Name - [ ], University Name - [ ], Country Name - [ ], Start Date - [ ], Duration - [ ], Tuition Fees - $ [ ] per semester, Scholarship/Financial Aid - [ ], Additional Details - [ ].",
+						"Generate an Academic offer letter to the student with the following Course details - Program Name - [fieldValue1], University Name - [fieldValue2], Country Name - [fieldValue3], Start Date - [fieldValue4], Duration - [fieldValue5], Tuition Fees - $ [fieldValue6] per semester, Scholarship/Financial Aid - [fieldValue7], Additional Details - [fieldValue8].",
 				},
 
 				{
@@ -207,8 +663,58 @@
 					resumeDescription: "",
 					id: "professional-2",
 					tag: "Professional",
+					inputFields: [
+						{
+							name: "Job Title",
+							label: "Ex: Software Engineer",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Company Name",
+							label: "Ex: ABC Tech Solutions",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Start Date",
+							label: "Ex: August 15, 2023",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Salary per year",
+							label: "Ex: $80,000",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Benefits",
+							label: "Ex: Health insurance, Retirement plan",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Vacation Time (No.of days per year)",
+							label: "Ex: 15 days",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Holidays (List holidays observed by the company)",
+							label: "Ex: New Year's Day, Independence Day",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details (Tasks and Responsibilities)",
+							label: "Ex: Project management, Coding tasks",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate an employment offer letter with the following terms of the offer - Job Title - [ ], Company Name - [ ],  Start Date - [ ], Salary per year - [ ], Benefits - [ ], Vacation Time (No.of days per year) - [ ], Holidays (List holidays observed by the company) - [ ], Additional Details (Tasks and Responsibilities) - [ ].",
+						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
 				},
 			],
 		},
@@ -223,8 +729,22 @@
 					resumeDescription: "",
 					id: "tourist-1",
 					tag: "Tourist",
+					inputFields: [
+						{
+							name: "Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Destination Country",
+							label: "Ex: France",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a brief financial support letter for a self-sponsored tourist visa application for [Name] travelling to [Destination Country]",
+						"Generate a brief financial support letter for a self-sponsored tourist visa application for [fieldValue1] travelling to [fieldValue2]",
 				},
 
 				{
@@ -235,8 +755,28 @@
 					resumeDescription: "",
 					id: "tourist-2",
 					tag: "Tourist",
+					inputFields: [
+						{
+							name: "Company Name",
+							label: "Ex: XYZ Corp",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Name of the Applicant",
+							label: "Ex: Jane Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Destination Country",
+							label: "Ex: Italy",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's employer to support their tourism plans by using the following details - Company Name - [ ], Name of the Applicant - [ ], Destination Country - [ ]",
+						"Generate a brief financial support letter on behalf of the applicant's employer to support their tourism plans by using the following details - Company Name - [fieldValue1], Name of the Applicant - [fieldValue2], Destination Country - [fieldValue3]",
 				},
 				{
 					imageUrl: [
@@ -246,8 +786,28 @@
 					resumeDescription: "",
 					id: "tourist-3",
 					tag: "Tourist",
+					inputFields: [
+						{
+							name: "Name of the Applicant",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Relation to the Applicant",
+							label: "Ex: Father",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Destination Country",
+							label: "Ex: Spain",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [ ], Relation to the Applicant - [ ], Destination Country - [ ].",
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3]",
 				},
 			],
 		},
@@ -317,10 +877,6 @@
 
 	function useTemplate() {
 		// if (selectedTemplate.tag == "SOP" || selectedTemplate.tag == "LOR") {
-		// visaPrompt.set(selectedTemplate.prompt);
-		// dispatch("closeBurger");
-		// closePopup();
-		// console.log("selectedTemplate", selectedTemplate);
 		let fields = selectedTemplate.inputFields;
 		for (let i = 0; i < fields?.length; i++) {
 			let field = fields[i];
@@ -329,6 +885,9 @@
 			selectedTemplate.prompt = selectedTemplate.prompt.replace(placeholder, userInputValue);
 		}
 		console.log("selectedTemplate", selectedTemplate);
+		visaPrompt.set(selectedTemplate.prompt);
+		dispatch("closeBurger");
+		closePopup();
 	}
 
 	$: activeTemplates = templates[activeTabIndex].resumeTemplates;
@@ -424,9 +983,10 @@
 				</div>
 			{:else if showSelectedTemplate}
 				<div class="header">
-					<button class="back-btn" on:click={closeShowTemplatePopup}
-						><p class="title">Back to Templates</p></button
-					>
+					<Button color="transparent" className="back-btn" on:click={closeShowTemplatePopup}>
+						<ThickArrowLeft size={24} color="#000" slot="leftIcon" />
+						<p class="title">Back to Templates</p>
+					</Button>
 					<button class="close-btn" on:click={closeShowTemplatePopup}>
 						<img src="/assets/icons/close-icon-black.svg" alt="" />
 					</button>
@@ -601,27 +1161,29 @@
 							</div>
 						</div> -->
 						<div class="input-fields" />
-						{#each activeInputFields as field, index}
-							{#if field.fieldType == "textfield"}
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={field.fieldValue}
-										label={field.name}
-										placeholder={field.label}
-									/>
-								</div>
-							{:else}
-								<div class="input-wrapper visaprep-container">
-									<Textarea
-										required
-										label={field.name}
-										bind:value={field.fieldValue}
-										placeholder={field.label}
-									/>
-								</div>
-							{/if}
-						{/each}
+						{#if activeInputFields?.length > 0}
+							{#each activeInputFields as field, index}
+								{#if field.fieldType == "textfield"}
+									<div class="input-wrapper visaprep-container">
+										<TextInput
+											required
+											bind:value={field.fieldValue}
+											label={field.name}
+											placeholder={field.label}
+										/>
+									</div>
+								{:else}
+									<div class="input-wrapper visaprep-container">
+										<Textarea
+											required
+											label={field.name}
+											bind:value={field.fieldValue}
+											placeholder={field.label}
+										/>
+									</div>
+								{/if}
+							{/each}
+						{/if}
 						<div class="buttons-wrapper">
 							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
 						</div>
@@ -798,7 +1360,7 @@
 
 	.back-btn {
 		border: none;
-		background-color: transparent;
+		background-color: transparent !important;
 	}
 
 	.buttons-wrapper {
