@@ -200,7 +200,7 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 						{
 							$set: {
 								messages,
-								title: (await summarize(newPrompt)) ?? conv.title,
+								title: conv.title.startsWith("untitled") ? (await summarize(newPrompt)) ?? conv.title : conv.title,
 								updatedAt: new Date(),
 							},
 						}
