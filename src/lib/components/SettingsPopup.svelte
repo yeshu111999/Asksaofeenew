@@ -1,6 +1,8 @@
 <script>
 	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
+	import { error } from "$lib/stores/errors";
+	import { base } from "$app/paths";
 
 	import Cookies from "js-cookie";
 	import { goto } from "$app/navigation";
@@ -26,6 +28,7 @@
 	let oldMobileNumber = "";
 
 	let openDeleteAccountPopup = false;
+	let openClearChatPopup = false;
 	let saveChangesLoader = false;
 
 	let showUpdatePasswordError = false;
@@ -278,8 +281,9 @@
 		newPassword = "";
 	}
 
-	function clearChat() {
+	function toggleClearChat() {
 		console.log("clear chat");
+		openClearChatPopup = true;
 	}
 
 	function toggleDeleteAccount() {
@@ -290,6 +294,40 @@
 	function closeDeleteAccountPopup() {
 		openDeleteAccountPopup = false;
 	}
+
+	function closeClearChatPopup() {
+		openClearChatPopup = false;
+	}
+
+	const clearChat = async () => {
+		try {
+			const response = await fetch(`${base}/conversation`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!response.ok) {
+				$error = "Error while deleting conversation, try again.";
+				return;
+			}
+
+			if (response.ok) {
+				console.log("All conversations deleted successfully");
+				openClearChatPopup = false;
+				goto("/");
+			} else {
+				const error = await response.text();
+				console.log("Error clearing all conversations: " + error);
+				openClearChatPopup = false;
+				goto("/");
+			}
+		} catch (err) {
+			console.error(err);
+			$error = String(err);
+		}
+	};
 
 	const deleteAccount = async () => {
 		let headers = new Headers({
@@ -524,7 +562,7 @@
 							<p class="description">
 								Clear Conversations empties your account of all past chats and messages.
 							</p>
-							<Button variant="default" class="upload-btn" on:click={clearChat}
+							<Button variant="default" class="upload-btn" on:click={toggleClearChat}
 								><p>Clear Chat</p></Button
 							>
 						</div>
@@ -566,6 +604,30 @@
 										on:click={closeDeleteAccountPopup}
 										ripple
 										style="color:black;">Cancel</Button
+									>
+								</div>
+							</div>
+						</Modal>
+						<Modal
+							centered
+							opened={openClearChatPopup}
+							on:close={closeClearChatPopup}
+							title="Clear all conversations"
+						>
+							<!-- <p class="title">Are you sure you want to delete your account?</p> -->
+							<div class="modal-body">
+								<p class="description">
+									All your conversations will be permanently deleted from your account. You don’t
+									undo this action
+								</p>
+								<div class="buttons-wrapper">
+									<!-- <button class="button black" on:click={deleteAccount}
+									><p>Confirm</p></button
+								>
+								<button class="button gray" on:click={closeDeleteAccountPopup}><p>Cancel</p></button> -->
+									<Button color="dark" on:click={clearChat} ripple>Confirm</Button>
+									<Button color="#e4e4e4" on:click={closeClearChatPopup} ripple style="color:black;"
+										>Cancel</Button
 									>
 								</div>
 							</div>

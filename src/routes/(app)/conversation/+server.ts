@@ -8,6 +8,18 @@ import type { Message } from "$lib/types/Message";
 import { models, validateModel } from "$lib/server/models";
 import { authCondition } from "$lib/server/auth";
 
+export const DELETE: RequestHandler = async ({locals, request, cookies}) => {
+	const res = await collections.conversations.deleteMany({
+		...(locals.userId ? { userId: locals.userId } : { sessionId: locals.sessionId }),
+	});
+	return new Response(
+		JSON.stringify({
+			"message": "Cleared all conversations"
+		}),
+		{ headers: { "Content-Type": "application/json" } }
+	);
+}
+
 export const POST: RequestHandler = async ({ locals, request , cookies}) => {
 	const body = await request.text();
 

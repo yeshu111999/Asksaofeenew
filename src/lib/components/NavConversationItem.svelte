@@ -80,7 +80,7 @@
 		<input
 			style="width:130px"
 			type="text"
-			bind:value={newSessionName}
+			bind:value={sessionName}
 			bind:this={inputField}
 			on:input={() => focusInput()}
 			on:click|preventDefault={(e) => e.stopPropagation()}
@@ -152,7 +152,7 @@
 			title="Delete conversation"
 			on:click|preventDefault={(event) => {
 				//if (event.shiftKey) {
-					dispatch("deleteConversation", conv.id);
+				dispatch("deleteConversation", conv.id);
 				//} else {
 				//	confirmDelete = true;
 				//}
