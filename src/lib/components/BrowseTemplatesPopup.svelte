@@ -24,8 +24,40 @@
 					resumeDescription: "",
 					id: "student-1",
 					tag: "SOP",
+					inputFields: [
+						{
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Academic Details",
+							label: "Ex: Machine Learning",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details",
+							label: "Ex: like Achievements",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [Degree Name] in [Course Name] program at [University Name]. These are my Academic details - [Add all the details that are being asked from the user]. [Additional Details]. Please craft a personalized SOP by highlighting my Academic background.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. [fieldValue5]. Please craft a personalized SOP by highlighting my Academic background.",
 				},
 
 				{
@@ -285,12 +317,22 @@
 
 	function useTemplate() {
 		// if (selectedTemplate.tag == "SOP" || selectedTemplate.tag == "LOR") {
-		visaPrompt.set(selectedTemplate.prompt);
-		dispatch("closeBurger");
-		closePopup();
+		// visaPrompt.set(selectedTemplate.prompt);
+		// dispatch("closeBurger");
+		// closePopup();
+		// console.log("selectedTemplate", selectedTemplate);
+		let fields = selectedTemplate.inputFields;
+		for (let i = 0; i < fields?.length; i++) {
+			let field = fields[i];
+			const placeholder = `[fieldValue${i + 1}]`;
+			const userInputValue = field.fieldValue;
+			selectedTemplate.prompt = selectedTemplate.prompt.replace(placeholder, userInputValue);
+		}
+		console.log("selectedTemplate", selectedTemplate);
 	}
 
 	$: activeTemplates = templates[activeTabIndex].resumeTemplates;
+	$: activeInputFields = selectedTemplate.inputFields;
 
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
@@ -405,9 +447,9 @@
 								</button>
 							</Tooltip> -->
 							<button class="use-template-btn" on:click={openPreview}><p>Preview</p></button>
-							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
+							<!-- <button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button> -->
 						</div>
-						<div class="input-fields">
+						<!-- <div class="input-fields">
 							{#if selectedTemplate.tag == "SOP"}
 								<div class="input-wrapper visaprep-container">
 									<TextInput
@@ -557,6 +599,31 @@
 									placeholder=""
 								/>
 							</div>
+						</div> -->
+						<div class="input-fields" />
+						{#each activeInputFields as field, index}
+							{#if field.fieldType == "textfield"}
+								<div class="input-wrapper visaprep-container">
+									<TextInput
+										required
+										bind:value={field.fieldValue}
+										label={field.name}
+										placeholder={field.label}
+									/>
+								</div>
+							{:else}
+								<div class="input-wrapper visaprep-container">
+									<Textarea
+										required
+										label={field.name}
+										bind:value={field.fieldValue}
+										placeholder={field.label}
+									/>
+								</div>
+							{/if}
+						{/each}
+						<div class="buttons-wrapper">
+							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
 						</div>
 					</div>
 				</div>
@@ -773,7 +840,7 @@
 	}
 
 	.input-fields {
-		padding-bottom: 40px;
+		/* padding-bottom: 40px; */
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
@@ -784,7 +851,6 @@
 			width: 90%;
 		}
 	}
-
 	@media (max-width: 600px) {
 		.popup {
 			width: 90%;
