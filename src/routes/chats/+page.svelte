@@ -79,7 +79,7 @@
 	let themeVariable = "light";
 	if (browser) {
 		let tempTheme = window.localStorage.getItem("theme");
-		themeVariable = tempTheme ? tempTheme : themeVariable;
+		// themeVariable = tempTheme ? tempTheme : themeVariable;
 	}
 
 	let activeClassVariable = "active-chat";
@@ -320,8 +320,9 @@
 					className="search-box"
 					style={themeVariable == "light"
 						? "border-radius:8px;color:#222;"
-						: "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"}
+						: "border-radius:8px;color:#222;"}
 				/>
+				<!-- : "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"} -->
 				<!-- style="background-color:#343a40;border:none;border-radius:8px;color:#FFF;" -->
 			</div>
 			<div class="list-of-friends">
@@ -418,8 +419,9 @@
 						className="search-box"
 						style={themeVariable == "light"
 							? "border-radius:8px;color:#222;"
-							: "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"}
+							: "border-radius:8px;color:#222;"}
 					/>
+					<!-- : "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"} -->
 				</div>
 				<div class="search-results">
 					{#if searchResults}

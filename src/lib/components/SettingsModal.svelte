@@ -46,7 +46,8 @@
 			});
 	};
 
-	let themeVariable = localStorage.getItem("theme") == "dark" ? true : false;
+	// let themeVariable = localStorage.getItem("theme") == "dark" ? true : false;
+	let themeVariable = false;
 	const dispatch = createEventDispatcher<{ close: void }>();
 </script>
 

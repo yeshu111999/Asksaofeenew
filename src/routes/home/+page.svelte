@@ -1,9 +1,19 @@
 <script>
 	import { Button } from "@svelteuidev/core";
 	import LoginModal from "$lib/components/LoginModal.svelte";
+	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 
 	let loginModalOpen = false;
 	let settings;
+
+	let showRaiseAnIssuePopup = false;
+	function openRaiseAnIssuePopup() {
+		showRaiseAnIssuePopup = true;
+	}
+
+	function closeRaiseAnIssuePopup() {
+		showRaiseAnIssuePopup = false;
+	}
 </script>
 
 <div class="landingPageWrap scrollbar-custom">
@@ -15,66 +25,7 @@
 			<div class="landBarWidthWrap">
 				<div class="logoTitleWrap">
 					<div class="logoWrap">
-						<svg
-							width="36"
-							height="36"
-							viewBox="0 0 36 36"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<g clip-path="url(#clip0_709_2093)">
-								<circle
-									cx="17.8769"
-									cy="17.8772"
-									r="15"
-									transform="rotate(-24.714 17.8769 17.8772)"
-									stroke="black"
-									stroke-width="1.85"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M22.6246 18.9943L19.8712 26.4433C19.7505 26.7698 19.5051 27.035 19.1888 27.1805L18.0643 27.6981C17.6483 27.8896 17.1625 27.8503 16.7825 27.5945C16.4026 27.3387 16.1835 26.9033 16.2045 26.4458L16.4148 21.8523"
-									stroke="black"
-									stroke-width="1.85"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M22.106 14.2792L14.657 11.5258C14.3305 11.4051 13.9694 11.419 13.6532 11.5646L12.5287 12.0821C12.1126 12.2736 11.8265 12.6682 11.7737 13.1231C11.7209 13.5781 11.9091 14.0277 12.2703 14.3094L15.8962 17.1372"
-									stroke="black"
-									stroke-width="1.85"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M12.3928 18.7499L10.8609 17.5216C10.196 16.9885 9.28691 16.8768 8.51273 17.2331L7.82088 17.5516C7.38288 17.7532 7.06848 18.153 6.97591 18.6262C6.88334 19.0994 7.02388 19.5883 7.35364 19.94L10.1047 22.8749C10.8406 23.66 11.9964 23.8861 12.9739 23.4361L16.3271 21.8929"
-									stroke="black"
-									stroke-width="1.85"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M12.4807 18.7095L24.7442 13.0653C25.873 12.5457 27.2093 13.0397 27.7288 14.1685V14.1685C28.2483 15.2973 27.7544 16.6336 26.6256 17.1531"
-									stroke="black"
-									stroke-width="1.85"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M26.6254 17.1529L22.6246 18.9943"
-									stroke="black"
-									stroke-width="1.85"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</g>
-							<defs>
-								<clipPath id="clip0_709_2093">
-									<rect width="36" height="36" fill="white" />
-								</clipPath>
-							</defs>
-						</svg>
+						<img width="40px" src="/assets/images/statue-liberty.jpg" alt="immigpt" />
 					</div>
 					<div class="logoTitle">ImmiGPT</div>
 				</div>
@@ -84,11 +35,13 @@
 						variant="default"
 						color="dark"
 						radius="xl"
-						size="md">Sign up</Button
+						size="md"
 					>
-					<Button on:click={() => (loginModalOpen = true)} color="dark" radius="xl" size="md"
-						>Login</Button
-					>
+						Sign up
+					</Button>
+					<Button on:click={() => (loginModalOpen = true)} color="dark" radius="xl" size="md">
+						Login
+					</Button>
 				</div>
 			</div>
 		</div>
@@ -97,13 +50,16 @@
 				<div class="landPgHeroTitle1">A Generative AI</div>
 				<div class="landPgHeroTitle2">For Immigration and Travel</div>
 				<div class="landPgHeroDesc">
-					ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant responses to your Travel and Immigration concerns.
+					ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
+					responses to your Travel and Immigration concerns.
 				</div>
 			</div>
 			<div class="landPgHeroMailSection2">
 				<div class="landPgHeroMailInputWrap">
 					<input class="landPgHeroMailInput" type="text" placeholder="Enter Email address" />
-					<Button color="dark" radius="xl">Try now</Button>
+					<Button on:click={() => (loginModalOpen = true)} color="dark" radius="xl" size="xs"
+						>Try now</Button
+					>
 				</div>
 				<div class="freePlanWrap">
 					<div class="freeIconWrap">
@@ -183,9 +139,11 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Visa Interview and Immigration Preparation </div>
+								<div class="featureTextTitle">Visa Interview and Immigration Preparation</div>
 								<div class="featureTextDesc">
-									Unlock a customized set of anticipated questions and answers designed for your visa interview and immigration,considering your individual situtation.</div>
+									Unlock a customized set of anticipated questions and answers designed for your
+									visa interview and immigration,considering your individual situtation.
+								</div>
 							</div>
 						</div>
 						<div class="featureDetailCard">
@@ -267,18 +225,22 @@
 							<div class="featureTextWrap">
 								<div class="featureTextTitle">Customizable Templates</div>
 								<div class="featureTextDesc">
-									Explore our document generation guidance for students, professionals, and tourists. From SOPs and LORs to financial support letters and offer letters, browse our provided formats. Fill in your details to receive personalized documents in your chosen template.
+									Explore our document generation guidance for students, professionals, and
+									tourists. From SOPs and LORs to financial support letters and offer letters,
+									browse our provided formats. Fill in your details to receive personalized
+									documents in your chosen template.
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="featureMainCard">
 						<div class="featureMainCardFull">
-							<div class="featureTextTitle">
-								Web Search Functionality
-							</div>
+							<div class="featureTextTitle">Web Search Functionality</div>
 							<div class="featureTextDesc">
-								Enhance your search experience with our web search function, extracting precise and organized responses directly from the web that are relevant to your queries. This enables you to bypass the manual web scraping hassle, saving time and ensuring accurate, up-to-date information tailored to your needs.
+								Enhance your search experience with our web search function, extracting precise and
+								organized responses directly from the web that are relevant to your queries. This
+								enables you to bypass the manual web scraping hassle, saving time and ensuring
+								accurate, up-to-date information tailored to your needs.
 							</div>
 						</div>
 					</div>
@@ -318,9 +280,12 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Simulated Visa Interview and Immigration Scenarios</div>
+								<div class="featureTextTitle">
+									Simulated Visa Interview and Immigration Scenarios
+								</div>
 								<div class="featureTextDesc">
-									Engage in simulated mock visa interviews and immigration scenarios designed to align with your current circumstances.
+									Engage in simulated mock visa interviews and immigration scenarios designed to
+									align with your current circumstances.
 								</div>
 							</div>
 						</div>
@@ -365,7 +330,9 @@
 							<div class="featureTextWrap">
 								<div class="featureTextTitle">Blogs & FAQ's</div>
 								<div class="featureTextDesc">
-									Discover a wealth of knowledge in our blogs and FAQs. Dive into user experiences, gain insights, and find answers to commonly asked questions. Explore our content to enrich your understanding and make the most of your journey with us.
+									Discover a wealth of knowledge in our blogs and FAQs. Dive into user experiences,
+									gain insights, and find answers to commonly asked questions. Explore our content
+									to enrich your understanding and make the most of your journey with us.
 								</div>
 							</div>
 						</div>
@@ -373,7 +340,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="pricingDetailSection">
+		<div class="pricingDetailSection" id="pricingDetailSection">
 			<div class="pricingDetailsWrap">
 				<div class="pricingDetailSubTitle">pricing</div>
 				<div class="pricingDetailTitle">Choose the plan that suits you best</div>
@@ -562,11 +529,16 @@
 		<div class="trySection">
 			<div class="tryWrap">
 				<div class="tryTextWrap">
-					<div class="tryTitle">Experience the power of ImmiGPT for Free. </div>
-					<div class="tryDesc">
-						Try it now and explore the possibilities!					</div>
+					<div class="tryTitle">Experience the power of ImmiGPT for Free.</div>
+					<div class="tryDesc">Try it now and explore the possibilities!</div>
 				</div>
-				<Button variant="default" color="dark" radius="xl" size="md">Get Started</Button>
+				<Button
+					on:click={() => (loginModalOpen = true)}
+					variant="default"
+					color="dark"
+					radius="xl"
+					size="md">Get Started</Button
+				>
 			</div>
 		</div>
 		<div class="footerSection">
@@ -645,37 +617,41 @@
 					<div class="linkSection">
 						<div class="linksTitle">Important Links</div>
 						<div class="linksWrap">
-							<div class="link">
+							<!-- <div class="link">
 								<a href="/#">About us</a>
+							</div> -->
+							<div class="link">
+								<a href="#pricingDetailSection">Pricing</a>
 							</div>
 							<div class="link">
-								<a href="/#">Pricing</a>
+								<a href="/privacy-policy">Terms and Policies</a>
 							</div>
+							<!-- <div class="link">
+								<a href="/privacy-policy">Privacy policy</a>
+							</div> -->
 							<div class="link">
-								<a href="/#">Terms and conditions</a>
-							</div>
-							<div class="link">
-								<a href="/#">Privacy policy</a>
-							</div>
-							<div class="link">
-								<a href="/#">Contact Us</a>
+								<a on:click={openRaiseAnIssuePopup}>Contact Us</a>
 							</div>
 						</div>
+						<RaiseAnIssuePopup
+							{showRaiseAnIssuePopup}
+							on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup}
+						/>
 					</div>
 					<div class="linkSection">
 						<div class="linksTitle">Follow us</div>
 						<div class="linksWrap">
 							<div class="link">
-								<a href="/#">Linked in</a>
+								<a href="https://www.google.com">Linked in</a>
 							</div>
 							<div class="link">
-								<a href="/#">Facebook</a>
+								<a href="https://www.google.com">Facebook</a>
 							</div>
 							<div class="link">
-								<a href="/#">Twitter</a>
+								<a href="https://www.google.com">Twitter</a>
 							</div>
 							<div class="link">
-								<a href="/#">Instagram</a>
+								<a href="https://www.google.com">Instagram</a>
 							</div>
 						</div>
 					</div>
@@ -690,6 +666,7 @@
 		padding: 8px;
 		border: none;
 		outline: none;
+		flex: 1;
 	}
 
 	.landingPageWrap {
@@ -782,7 +759,7 @@
 		padding: 8px;
 		text-align: center;
 		width: 100%;
-		max-width: 380px;
+		max-width: 480px;
 	}
 
 	.landPgHeroTitle1 {
@@ -834,7 +811,7 @@
 	}
 
 	.featureDetailSection {
-		height: 100vh;
+		min-height: 100vh;
 		background-color: #000;
 		padding: 16px;
 		display: flex;
@@ -926,7 +903,7 @@
 	}
 
 	.pricingDetailSection {
-		height: 100vh;
+		min-height: 100vh;
 		padding: 16px;
 		display: flex;
 		justify-content: center;
@@ -947,6 +924,7 @@
 		font-size: 40px;
 		font-family: Inter;
 		font-weight: 700;
+		text-align: center;
 	}
 
 	.pricingDetailsWrap {
@@ -976,7 +954,7 @@
 		border-radius: 16px;
 		border: 2px solid #d9d9d9;
 		width: 100%;
-		max-width: 400px;
+		/* max-width: 400px; */
 	}
 
 	.payTypeFeaturesWrap {
@@ -1080,6 +1058,7 @@
 		justify-content: center;
 		align-items: center;
 		max-width: 1240px;
+		width: 100%;
 	}
 
 	.linkSection {
@@ -1107,5 +1086,32 @@
 		font-size: 14px;
 		font-family: Inter;
 		font-weight: 400;
+		cursor: pointer;
+	}
+
+	@media screen and (max-width: 786px) {
+		.featureCardsWrap {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.pricingDetailCardsWrap {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.footerWrap {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			justify-content: space-between;
+			height: 100%;
+		}
+
+		.footerLinksWrap {
+			width: 100%;
+			justify-content: space-around;
+		}
 	}
 </style>

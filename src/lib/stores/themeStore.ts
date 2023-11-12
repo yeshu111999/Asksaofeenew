@@ -1,8 +1,3 @@
-// import { writable } from 'svelte/store';
-
-// const currentTheme = writable('light');
-// export {currentTheme}
-
 import { browser } from "$app/environment";
 import { writable } from "svelte/store";
 
