@@ -648,17 +648,21 @@
 					<div class="linkSection">
 						<div class="linksTitle">Follow us</div>
 						<div class="linksWrap">
+							<!-- <div class="link">
+								<a href="">Linked in</a>
+							</div> -->
 							<div class="link">
-								<a href="https://www.google.com">Linked in</a>
+								<a target="_blank" href="https://www.facebook.com/profile.php?id=100094491979735"
+									>Facebook</a
+								>
 							</div>
 							<div class="link">
-								<a href="https://www.google.com">Facebook</a>
+								<a target="_blank" href="https://twitter.com/immiGPT">Twitter</a>
 							</div>
 							<div class="link">
-								<a href="https://www.google.com">Twitter</a>
-							</div>
-							<div class="link">
-								<a href="https://www.google.com">Instagram</a>
+								<a target="_blank" href="https://instagram.com/immigpt?igshid=NzVpdjdkZXozajBq"
+									>Instagram</a
+								>
 							</div>
 						</div>
 					</div>
