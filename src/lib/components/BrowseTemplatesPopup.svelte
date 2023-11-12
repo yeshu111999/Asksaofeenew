@@ -46,8 +46,8 @@
 							fieldValue: "",
 						},
 						{
-							name: "Academic Details",
-							label: "Ex: Machine Learning",
+							name: "Academic Background Details",
+							label: "Ex: GPA, Courses, Achievements",
 							fieldType: "textfield",
 							fieldValue: "",
 						},
@@ -90,8 +90,8 @@
 							fieldValue: "",
 						},
 						{
-							name: "Academic Details",
-							label: "Ex: Machine Learning",
+							name: "Academic Background Details",
+							label: "Ex: GPA, Courses, Achievements",
 							fieldType: "textfield",
 							fieldValue: "",
 						},
@@ -147,7 +147,7 @@
 							fieldValue: "",
 						},
 						{
-							name: "Academic Details",
+							name: "Academic Background Details",
 							label: "Ex: GPA, Courses, Achievements",
 							fieldType: "textarea",
 							fieldValue: "",
@@ -203,7 +203,7 @@
 							fieldValue: "",
 						},
 						{
-							name: "Academic Details",
+							name: "Academic Background Details",
 							label: "Ex: GPA, Courses, Achievements",
 							fieldType: "textarea",
 							fieldValue: "",
@@ -260,7 +260,7 @@
 							fieldValue: "",
 						},
 						{
-							name: "Academic Details",
+							name: "Academic Background Details",
 							label: "Ex: GPA, Courses, Achievements",
 							fieldType: "textarea",
 							fieldValue: "",
@@ -890,6 +890,7 @@
 		closePopup();
 	}
 
+	$: isTemplateDisabled = selectedTemplate.inputFields.some((field) => field.fieldValue === "");
 	$: activeTemplates = templates[activeTabIndex].resumeTemplates;
 	$: activeInputFields = selectedTemplate.inputFields;
 
@@ -1185,7 +1186,11 @@
 							{/each}
 						{/if}
 						<div class="buttons-wrapper">
-							<button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button>
+							<Button
+								disabled={isTemplateDisabled}
+								color="var(--primary-btn-color)"
+								on:click={useTemplate}><p>Use Template</p></Button
+							>
 						</div>
 					</div>
 				</div>
