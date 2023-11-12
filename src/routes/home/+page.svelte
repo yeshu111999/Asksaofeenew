@@ -94,11 +94,10 @@
 		</div>
 		<div class="landPgHeroWrap">
 			<div class="landPgHeroDetailWrap">
-				<div class="landPgHeroTitle1">Ultimate guide for</div>
-				<div class="landPgHeroTitle2">Travel and Immigration</div>
+				<div class="landPgHeroTitle1">A Generative AI</div>
+				<div class="landPgHeroTitle2">For Immigration and Travel</div>
 				<div class="landPgHeroDesc">
-					Find real time answers related to Travel and Immigration, Prepare and attempt mocks for
-					Visa interview, Compelling SOP assistance
+					ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant responses to your Travel and Immigration concerns.
 				</div>
 			</div>
 			<div class="landPgHeroMailSection2">
@@ -184,11 +183,9 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Visa Preparation</div>
+								<div class="featureTextTitle">Visa Interview and Immigration Preparation </div>
 								<div class="featureTextDesc">
-									Find real time answers related to Travel and Immigration, Prepare and attempt
-									mocks for Visa.
-								</div>
+									Unlock a customized set of anticipated questions and answers designed for your visa interview and immigration,considering your individual situtation.</div>
 							</div>
 						</div>
 						<div class="featureDetailCard">
@@ -268,10 +265,9 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Prepared templates</div>
+								<div class="featureTextTitle">Customizable Templates</div>
 								<div class="featureTextDesc">
-									Find real time answers related to Travel and Immigration, Prepare and attempt
-									mocks for Visa.
+									Explore our document generation guidance for students, professionals, and tourists. From SOPs and LORs to financial support letters and offer letters, browse our provided formats. Fill in your details to receive personalized documents in your chosen template.
 								</div>
 							</div>
 						</div>
@@ -279,11 +275,10 @@
 					<div class="featureMainCard">
 						<div class="featureMainCardFull">
 							<div class="featureTextTitle">
-								Web based results for all your travel & Immirgration quesitons
+								Web Search Functionality
 							</div>
 							<div class="featureTextDesc">
-								Find real time answers related to Travel and Immigration, Prepare and attempt mocks
-								for Visa.
+								Enhance your search experience with our web search function, extracting precise and organized responses directly from the web that are relevant to your queries. This enables you to bypass the manual web scraping hassle, saving time and ensuring accurate, up-to-date information tailored to your needs.
 							</div>
 						</div>
 					</div>
@@ -323,10 +318,9 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Visa Mockup Tests</div>
+								<div class="featureTextTitle">Simulated Visa Interview and Immigration Scenarios</div>
 								<div class="featureTextDesc">
-									Find real time answers related to Travel and Immigration, Prepare and attempt
-									mocks for Visa.
+									Engage in simulated mock visa interviews and immigration scenarios designed to align with your current circumstances.
 								</div>
 							</div>
 						</div>
@@ -369,10 +363,9 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Streamlined Blogs</div>
+								<div class="featureTextTitle">Blogs & FAQ's</div>
 								<div class="featureTextDesc">
-									Find real time answers related to Travel and Immigration, Prepare and attempt
-									mocks for Visa.
+									Discover a wealth of knowledge in our blogs and FAQs. Dive into user experiences, gain insights, and find answers to commonly asked questions. Explore our content to enrich your understanding and make the most of your journey with us.
 								</div>
 							</div>
 						</div>
@@ -383,7 +376,7 @@
 		<div class="pricingDetailSection">
 			<div class="pricingDetailsWrap">
 				<div class="pricingDetailSubTitle">pricing</div>
-				<div class="pricingDetailTitle">Choose plan suits for you</div>
+				<div class="pricingDetailTitle">Choose the plan that suits you best</div>
 				<div class="pricingDetailCardsWrap">
 					<div class="pricingDetailMainCard">
 						<div class="priceWrap">
@@ -569,11 +562,9 @@
 		<div class="trySection">
 			<div class="tryWrap">
 				<div class="tryTextWrap">
-					<div class="tryTitle">Try ImmiGPT for Free</div>
+					<div class="tryTitle">Experience the power of ImmiGPT for Free. </div>
 					<div class="tryDesc">
-						Find real time answers related to Travel and Immigration, Prepare and attempt mocks for
-						Visa interview, Compelling SOP assistance
-					</div>
+						Try it now and explore the possibilities!					</div>
 				</div>
 				<Button variant="default" color="dark" radius="xl" size="md">Get Started</Button>
 			</div>
@@ -647,8 +638,7 @@
 						<div class="logoTitle">ImmiGPT</div>
 					</div>
 					<div class="footerAboutDesc">
-						ImmiGPT helps to find real time answers related to Travel and Immigration, Prepare and
-						attempt mocks for Visa interview, Compelling SOP assistance
+						Your AI Companion for Travel and Immigration - Explore, Migrate, Thrive.
 					</div>
 				</div>
 				<div class="footerLinksWrap">
