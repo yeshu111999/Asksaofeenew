@@ -716,6 +716,142 @@
 					prompt:
 						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
 				},
+
+				{
+					imageUrl: [
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-1.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-2.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-3.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-4.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-5.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-6.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-7.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-8.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-9.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-10.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-11.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-12.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-13.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-14.jpg",
+						"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-15.jpg",
+					],
+					resumeTitle: "Pettition Letter",
+					resumeDescription: "",
+					id: "professional-3",
+					tag: "Professional",
+					inputFields: [
+						{
+							name: "Job Title",
+							label: "Ex: Software Engineer",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Company Name",
+							label: "Ex: ABC Tech Solutions",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Start Date",
+							label: "Ex: August 15, 2023",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Salary per year",
+							label: "Ex: $80,000",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Benefits",
+							label: "Ex: Health insurance, Retirement plan",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Vacation Time (No.of days per year)",
+							label: "Ex: 15 days",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Holidays (List holidays observed by the company)",
+							label: "Ex: New Year's Day, Independence Day",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details (Tasks and Responsibilities)",
+							label: "Ex: Project management, Coding tasks",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						"Generate a pettition letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
+				},
+
+				{
+					imageUrl: ["/assets/images/templates/Professional/H-1B_Sample_Forms.jpg"],
+					resumeTitle: "H-1B Sample Forms",
+					resumeDescription: "",
+					id: "professional-4",
+					tag: "Professional",
+					inputFields: [
+						{
+							name: "Job Title",
+							label: "Ex: Software Engineer",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Company Name",
+							label: "Ex: ABC Tech Solutions",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Start Date",
+							label: "Ex: August 15, 2023",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Salary per year",
+							label: "Ex: $80,000",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Benefits",
+							label: "Ex: Health insurance, Retirement plan",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Vacation Time (No.of days per year)",
+							label: "Ex: 15 days",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Holidays (List holidays observed by the company)",
+							label: "Ex: New Year's Day, Independence Day",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details (Tasks and Responsibilities)",
+							label: "Ex: Project management, Coding tasks",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
+				},
 			],
 		},
 		{

@@ -3,9 +3,12 @@
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
+	import Cookies from "js-cookie";
 
 	let loginModalOpen = false;
 	let settings;
+	let token;
 
 	let showRaiseAnIssuePopup = false;
 	function openRaiseAnIssuePopup() {
@@ -19,6 +22,13 @@
 	function gotoHome() {
 		goto("/home");
 	}
+
+	// onMount(() => {
+	// 	token = Cookies.get("token");
+	// 	if (!token) {
+	// 		goto("/home");
+	// 	}
+	// });
 </script>
 
 <div class="landingPageWrap scrollbar-custom">

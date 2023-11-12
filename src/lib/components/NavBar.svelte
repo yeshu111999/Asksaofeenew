@@ -188,7 +188,7 @@
 		let token = Cookies.get("token");
 		if (!token) {
 			loginModalVisible = true;
-			goto("/");
+			//goto("/");
 		}
 		if (token) {
 			canLogin = false;
