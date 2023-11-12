@@ -48,6 +48,8 @@
 	let currentError: string | null;
 	let canLogin = true;
 	let logoutConfirmationModal = false;
+	let deleteCoveConfirmationModal = false;
+	let tallId = "";
 	let opened = false;
 
 	let issue = "";
@@ -108,8 +110,10 @@
 		}, 3000);
 	}
 
-	async function deleteConversation(id: string) {
+	// async function deleteConversation(id: string) {
+	async function deleteConversation() {
 		try {
+			let id = tallId;
 			const res = await fetch(`${base}/conversation/${id}`, {
 				method: "DELETE",
 				headers: {
@@ -125,6 +129,7 @@
 			if ($page.params.id !== id) {
 				await invalidate(UrlDependency.ConversationList);
 			} else {
+				deleteCoveConfirmationModal = false;
 				await goto(`${base}/`, { invalidateAll: true });
 			}
 		} catch (err) {
@@ -382,10 +387,14 @@
 							<NavConversationItem
 								on:editConversationTitle={(ev) =>
 									editConversationTitle(ev.detail.id, ev.detail.title)}
-								on:deleteConversation={(ev) => deleteConversation(ev.detail)}
+								on:deleteConversation={(ev) => {
+									tallId = ev.detail;
+									deleteCoveConfirmationModal = true;
+								}}
 								on:conversationSelected={closeBurger}
 								{conv}
 							/>
+							<!-- on:deleteConversation={(ev) => deleteConversation(ev.detail)} -->
 						{/each}
 					</div>
 				</div>
@@ -443,10 +452,14 @@
 								<NavConversationItem
 									on:editConversationTitle={(ev) =>
 										editConversationTitle(ev.detail.id, ev.detail.title)}
-									on:deleteConversation={(ev) => deleteConversation(ev.detail)}
+									on:deleteConversation={(ev) => {
+										tallId = ev.detail;
+										deleteCoveConfirmationModal = true;
+									}}
 									on:conversationSelected={closeBurger}
 									{conv}
 								/>
+								<!-- on:deleteConversation={(ev) => {deleteConversation(ev.detail)}} -->
 							{/each}
 						</div>
 					</div>
@@ -484,6 +497,13 @@
 					on:close={() => (logoutConfirmationModal = false)}
 					on:confirm={logOut}
 					confirmationText="Click confirm to logout"
+				/>
+			{/if}
+			{#if deleteCoveConfirmationModal}
+				<ConfirmationModal
+					on:close={() => (deleteCoveConfirmationModal = false)}
+					on:confirm={deleteConversation}
+					confirmationText="Click confirm to delete chat"
 				/>
 			{/if}
 			<SvelteUIProvider>
