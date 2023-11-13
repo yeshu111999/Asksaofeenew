@@ -59,7 +59,7 @@
 						},
 					],
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. [fieldValue5]. Please craft a personalized SOP by highlighting my Academic background.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. [fieldValue5]. Please craft a personalized SOP by highlighting my Academic background.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -116,7 +116,7 @@
 					],
 
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details on my work experience - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Work Experience and Career Goals.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details on my work experience - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Work Experience and Career Goals.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -173,7 +173,7 @@
 					],
 
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details of my research experiences and faculty connections - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Academics and Research experience.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details of my research experiences and faculty connections - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Academics and Research experience.Please don't mention yourself as an immigration officer.",
 				},
 				{
 					imageUrl: [
@@ -229,7 +229,7 @@
 					],
 
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details of my research experiences and faculty connections - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details of my research experiences and faculty connections - [fieldValue5]. My career goals are [fieldValue6]. [fieldValue7]. Please craft a personalized SOP by highlighting my Research experience and Faculty connections.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -291,7 +291,7 @@
 						},
 					],
 					prompt:
-						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details on my work experience - [fieldValue5]. Details on my Leadership and Impact - [fieldValue6]. My career goals are [fieldValue7]. [fieldValue8]. Please craft a personalized SOP by highlighting my Work Experience and Leadership.",
+						"Generate a Statement of Purpose (SOP) for my application to the [fieldValue1] in [fieldValue2] program at [fieldValue3]. These are my Academic details - [fieldValue4]. These are the details on my work experience - [fieldValue5]. Details on my Leadership and Impact - [fieldValue6]. My career goals are [fieldValue7]. [fieldValue8]. Please craft a personalized SOP by highlighting my Work Experience and Leadership.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -321,7 +321,7 @@
 						},
 					],
 					prompt:
-						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP. 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [fieldValue1] in [fieldValue2] at [fieldValue3]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.",
+						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP. 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [fieldValue1] in [fieldValue2] at [fieldValue3]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.Please don't mention yourself as an immigration officer.",
 				},
 				{
 					imageUrl: [
@@ -364,7 +364,7 @@
 						},
 					],
 					prompt:
-						"Generate a personalized Letter of Recommendation (LOR) from the manager at [fieldValue1] for [fieldValue2] as they apply for admission to the [fieldValue3] program in [fieldValue4] at [fieldValue5]. Please offer specific details about the applicant's professional performance and notable achievements within your organization, underscoring how these accomplishments make them an ideal candidate for the program.",
+						"Generate a personalized Letter of Recommendation (LOR) from the manager at [fieldValue1] for [fieldValue2] as they apply for admission to the [fieldValue3] program in [fieldValue4] at [fieldValue5]. Please offer specific details about the applicant's professional performance and notable achievements within your organization, underscoring how these accomplishments make them an ideal candidate for the program.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -414,7 +414,7 @@
 						},
 					],
 					prompt:
-						"Generate a personalized Letter of Recommendation (LOR) from a professor who instructed [fieldValue1] at [fieldValue2] for [fieldValue3], who is currently seeking admission to the [fieldValue4] program in [fieldValue5] at [fieldValue6]. Please offer comprehensive insights into the applicant's academic performance in your class and their qualifications, underlining their suitability for the program.",
+						"Generate a personalized Letter of Recommendation (LOR) from a professor who instructed [fieldValue1] at [fieldValue2] for [fieldValue3], who is currently seeking admission to the [fieldValue4] program in [fieldValue5] at [fieldValue6]. Please offer comprehensive insights into the applicant's academic performance in your class and their qualifications, underlining their suitability for the program.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -464,7 +464,7 @@
 						},
 					],
 					prompt:
-						"Generate a personalized Letter of Recommendation (LOR) from an experienced Educator who taught [fieldValue1] at [fieldValue2], for [fieldValue3], who is currently seeking admission to the [fieldValue4] program in [fieldValue5] at [fieldValue6]. Please focus on the applicant's academic achievements and exceptional personal qualities that make them a strong fit for this program. Provide insights into the applicant's performance and character to help the admissions committee gain a comprehensive understanding of their potential.",
+						"Generate a personalized Letter of Recommendation (LOR) from an experienced Educator who taught [fieldValue1] at [fieldValue2], for [fieldValue3], who is currently seeking admission to the [fieldValue4] program in [fieldValue5] at [fieldValue6]. Please focus on the applicant's academic achievements and exceptional personal qualities that make them a strong fit for this program. Provide insights into the applicant's performance and character to help the admissions committee gain a comprehensive understanding of their potential.Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -496,7 +496,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [fieldValue1], Name of the Applicant - [fieldValue2], Name of University - [fieldValue3]",
+						"Generate a brief financial support letter on behalf of the applicant's employer to support their studies by using the following details - Company Name - [fieldValue1], Name of the Applicant - [fieldValue2], Name of University - [fieldValue3]. Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -528,7 +528,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Name of University - [fieldValue3]",
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their studies by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Name of University - [fieldValue3].Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -560,7 +560,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [fieldValue1], Outstanding balance - [fieldValue2], Number of days that the balance is being maintained for - [fieldValue3].",
+						"Generate a brief letter from the bank addressed to 'To Whom It May Concern' containing the following details - Account holder's Name - [fieldValue1], Outstanding balance - [fieldValue2], Number of days that the balance is being maintained for - [fieldValue3].Please don't mention yourself as an immigration officer.",
 				},
 			],
 		},
@@ -624,7 +624,7 @@
 						},
 					],
 					prompt:
-						"Generate an Academic offer letter to the student with the following Course details - Program Name - [fieldValue1], University Name - [fieldValue2], Country Name - [fieldValue3], Start Date - [fieldValue4], Duration - [fieldValue5], Tuition Fees - $ [fieldValue6] per semester, Scholarship/Financial Aid - [fieldValue7], Additional Details - [fieldValue8].",
+						"Generate an Academic offer letter to the student with the following Course details - Program Name - [fieldValue1], University Name - [fieldValue2], Country Name - [fieldValue3], Start Date - [fieldValue4], Duration - [fieldValue5], Tuition Fees - $ [fieldValue6] per semester, Scholarship/Financial Aid - [fieldValue7], Additional Details - [fieldValue8]. Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -684,7 +684,7 @@
 						},
 					],
 					prompt:
-						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
+						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8]. Please don't mention yourself as an immigration officer.",
 				},
 
 				// {
@@ -820,7 +820,7 @@
 						},
 					],
 					prompt:
-						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
+						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].Please don't mention yourself as an immigration officer.",
 				},
 			],
 		},
@@ -850,7 +850,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief financial support letter for a self-sponsored tourist visa application for [fieldValue1] travelling to [fieldValue2]",
+						"Generate a brief financial support letter for a self-sponsored tourist visa application for [fieldValue1] travelling to [fieldValue2].Please don't mention yourself as an immigration officer.",
 				},
 
 				{
@@ -882,7 +882,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's employer to support their tourism plans by using the following details - Company Name - [fieldValue1], Name of the Applicant - [fieldValue2], Destination Country - [fieldValue3]",
+						"Generate a brief financial support letter on behalf of the applicant's employer to support their tourism plans by using the following details - Company Name - [fieldValue1], Name of the Applicant - [fieldValue2], Destination Country - [fieldValue3]. Please don't mention yourself as an immigration officer.",
 				},
 				{
 					imageUrl: [
@@ -913,7 +913,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3]",
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3]. Please don't mention yourself as an immigration officer.",
 				},
 			],
 		},
