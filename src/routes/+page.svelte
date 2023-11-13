@@ -810,6 +810,7 @@
 		font-family: Inter;
 		font-weight: 700;
 		line-height: 52px;
+		text-align: center;
 	}
 
 	.featureCardsWrap {
@@ -1089,6 +1090,18 @@
 		}
 
 		.landPgHeroTitle2 {
+			font-size: 36px;
+		}
+
+		.featureTitle {
+			font-size: 36px;
+		}
+
+		.pricingDetailTitle {
+			font-size: 36px;
+		}
+
+		.tryTitle {
 			font-size: 36px;
 		}
 	}

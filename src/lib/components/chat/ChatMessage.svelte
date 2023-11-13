@@ -10,6 +10,7 @@
 
 	import CodeBlock from "../CodeBlock.svelte";
 	import CopyToClipBoardBtn from "../CopyToClipBoardBtn.svelte";
+	import Tooltips from "../Tooltip.svelte";
 	import IconLoading from "../icons/IconLoading.svelte";
 	import CarbonRotate360 from "~icons/carbon/rotate-360";
 	import CarbonDownload from "~icons/carbon/download";
@@ -68,6 +69,15 @@
 	export let isTapped = false;
 
 	export let webSearchMessages: WebSearchUpdate[];
+
+	let toolTap = false;
+
+	const handleToolClick = () => {
+		toolTap = true;
+		setTimeout(() => {
+			toolTap = false;
+		}, 1000);
+	};
 
 	const dispatch = createEventDispatcher<{
 		retry: { content: string; id: Message["id"] };
@@ -221,81 +231,95 @@
 					{isTapped || isCopied ? 'max-md:visible max-md:translate-y-0 max-md:opacity-100' : ''}
 				"
 			>
-				<button
-					class="btn rounded-sm p-1 text-sm text-gray-400 focus:ring-0 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300
+				<Tooltip opened={message.score === 1 && toolTap} label="Liked" position="bottom">
+					<button
+						class="btn rounded-sm p-1 text-sm text-gray-400 focus:ring-0 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300
 					{message.score && message.score > 0
-						? 'text-green-500 hover:text-green-500 dark:text-green-400 hover:dark:text-green-400'
-						: ''}"
-					title={message.score === 1 ? "Remove +1" : "+1"}
-					type="button"
-					on:click={() => dispatch("vote", { score: message.score === 1 ? 0 : 1, id: message.id })}
-				>
-					<!-- <CarbonThumbsUp class="h-[1.14em] w-[1.14em]" /> -->
-					<svg
-						width="24"
-						height="25"
-						viewBox="0 0 24 25"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
+							? 'text-green-500 hover:text-green-500 dark:text-green-400 hover:dark:text-green-400'
+							: ''}"
+						title={message.score === 1 ? "Remove +1" : "+1"}
+						type="button"
+						on:click={() => {
+							dispatch("vote", { score: message.score === 1 ? 0 : 1, id: message.id });
+							handleToolClick();
+						}}
 					>
-						<path
-							fill-rule="evenodd"
-							clip-rule="evenodd"
-							d="M6.944 19.5H5.056C4.473 19.5 4 19.027 4 18.444V11.056C4 10.473 4.473 10 5.056 10H6.944C7.527 10 8 10.473 8 11.056V18.444C8 19.027 7.527 19.5 6.944 19.5V19.5Z"
-							stroke="#6E6E6E"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							fill={message.score === 1 ? "#222" : ""}
-						/>
-						<path
-							d="M8 11.072L11.649 6.321C12.328 5.436 13.654 5.414 14.363 6.275V6.275C14.628 6.596 14.772 7 14.772 7.416V10.687H17.868C18.469 10.687 19.03 10.987 19.364 11.486L19.693 11.977C19.988 12.418 20.074 12.967 19.927 13.476L18.568 18.198C18.346 18.969 17.641 19.5 16.839 19.5H10.55C10.05 19.5 9.572 19.292 9.232 18.926L8 17.6"
-							stroke="#6E6E6E"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							fill={message.score === 1 ? "#222" : ""}
-						/>
-					</svg>
-				</button>
-				<button
-					class="btn rounded-sm p-1 text-sm text-gray-400 focus:ring-0 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300
-					{message.score && message.score < 0
-						? 'text-red-500 hover:text-red-500 dark:text-red-400 hover:dark:text-red-400'
-						: ''}"
-					title={message.score === -1 ? "Remove -1" : "-1"}
-					type="button"
-					on:click={() =>
-						dispatch("vote", { score: message.score === -1 ? 0 : -1, id: message.id })}
-				>
-					<!-- <CarbonThumbsDown class="h-[1.14em] w-[1.14em]" /> -->
-					<svg
-						width="24"
-						height="25"
-						viewBox="0 0 24 25"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
+						<!-- <CarbonThumbsUp class="h-[1.14em] w-[1.14em]" /> -->
+						<svg
+							width="24"
+							height="25"
+							viewBox="0 0 24 25"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M6.944 19.5H5.056C4.473 19.5 4 19.027 4 18.444V11.056C4 10.473 4.473 10 5.056 10H6.944C7.527 10 8 10.473 8 11.056V18.444C8 19.027 7.527 19.5 6.944 19.5V19.5Z"
+								stroke="#6E6E6E"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								fill={message.score === 1 ? "#222" : ""}
+							/>
+							<path
+								d="M8 11.072L11.649 6.321C12.328 5.436 13.654 5.414 14.363 6.275V6.275C14.628 6.596 14.772 7 14.772 7.416V10.687H17.868C18.469 10.687 19.03 10.987 19.364 11.486L19.693 11.977C19.988 12.418 20.074 12.967 19.927 13.476L18.568 18.198C18.346 18.969 17.641 19.5 16.839 19.5H10.55C10.05 19.5 9.572 19.292 9.232 18.926L8 17.6"
+								stroke="#6E6E6E"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								fill={message.score === 1 ? "#222" : ""}
+							/>
+						</svg>
+					</button>
+				</Tooltip>
+				<!-- <Tooltips
+					classNames={isTapped && message.score === 1 ? "opacity-100" : "opacity-0"}
+					label="Liked"
+					position="left-1/2 top-full transform -translate-x-1/2 translate-y-2"
+				/> -->
+				<Tooltip opened={message.score === -1 && toolTap} label="Disliked" position="bottom">
+					<button
+						class="btn rounded-sm p-1 text-sm text-gray-400 focus:ring-0 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300
+						{message.score && message.score < 0
+							? 'text-red-500 hover:text-red-500 dark:text-red-400 hover:dark:text-red-400'
+							: ''}"
+						title={message.score === -1 ? "Remove -1" : "-1"}
+						type="button"
+						on:click={() => {
+							dispatch("vote", { score: message.score === -1 ? 0 : -1, id: message.id });
+							handleToolClick();
+						}}
 					>
-						<path
-							fill-rule="evenodd"
-							clip-rule="evenodd"
-							d="M17.056 5.5H18.944C19.527 5.5 20 5.973 20 6.556V13.944C20 14.527 19.527 15 18.944 15H17.056C16.473 15 16 14.527 16 13.944V6.556C16 5.973 16.473 5.5 17.056 5.5V5.5Z"
-							stroke="#6E6E6E"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							fill={message.score === -1 ? "#222" : ""}
-						/>
-						<path
-							d="M16 13.928L12.351 18.679C11.672 19.564 10.346 19.586 9.637 18.725V18.725C9.372 18.404 9.228 18 9.228 17.584V14.313H6.132C5.531 14.313 4.97 14.013 4.636 13.514L4.307 13.023C4.012 12.582 3.926 12.033 4.073 11.524L5.432 6.802C5.654 6.031 6.359 5.5 7.161 5.5L13.45 5.5C13.95 5.5 14.428 5.708 14.768 6.074L16 7.4"
-							stroke="#6E6E6E"
-							stroke-width="1.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							fill={message.score === -1 ? "#222" : ""}
-						/>
-					</svg>
-				</button>
+						<!-- <CarbonThumbsDown class="h-[1.14em] w-[1.14em]" /> -->
+						<svg
+							width="24"
+							height="25"
+							viewBox="0 0 24 25"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M17.056 5.5H18.944C19.527 5.5 20 5.973 20 6.556V13.944C20 14.527 19.527 15 18.944 15H17.056C16.473 15 16 14.527 16 13.944V6.556C16 5.973 16.473 5.5 17.056 5.5V5.5Z"
+								stroke="#6E6E6E"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								fill={message.score === -1 ? "#222" : ""}
+							/>
+							<path
+								d="M16 13.928L12.351 18.679C11.672 19.564 10.346 19.586 9.637 18.725V18.725C9.372 18.404 9.228 18 9.228 17.584V14.313H6.132C5.531 14.313 4.97 14.013 4.636 13.514L4.307 13.023C4.012 12.582 3.926 12.033 4.073 11.524L5.432 6.802C5.654 6.031 6.359 5.5 7.161 5.5L13.45 5.5C13.95 5.5 14.428 5.708 14.768 6.074L16 7.4"
+								stroke="#6E6E6E"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								fill={message.score === -1 ? "#222" : ""}
+							/>
+						</svg>
+					</button>
+				</Tooltip>
 				<CopyToClipBoardBtn
 					on:click={() => {
 						isCopied = true;
