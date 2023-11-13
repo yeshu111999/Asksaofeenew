@@ -80,7 +80,7 @@
 		<input
 			style="width:130px"
 			type="text"
-			bind:value={sessionName}
+			bind:value={conv.title}
 			bind:this={inputField}
 			on:input={() => focusInput()}
 			on:click|preventDefault={(e) => e.stopPropagation()}
@@ -91,8 +91,8 @@
 			title="save"
 			on:click|preventDefault={() => {
 				isEditing = false;
-				sessionName = newSessionName;
-				dispatch("editConversationTitle", { id: conv.id, title: newSessionName });
+				sessionName = inputField.value;
+				dispatch("editConversationTitle", { id: conv.id, title: inputField.value });
 			}}
 		>
 			<CarbonCheckmark class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />

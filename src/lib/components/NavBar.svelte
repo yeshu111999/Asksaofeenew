@@ -26,6 +26,7 @@
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
+	import AboutUsPopup from "./AboutUsPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
 
@@ -149,6 +150,15 @@
 		showRaiseAnIssuePopup = false;
 	}
 
+	let showAboutUsPopup = false;
+	function openAboutUsPopup() {
+		showAboutUsPopup = true;
+	}
+
+	function closeAboutUsPopup() {
+		showAboutUsPopup = false;
+	}
+
 	function onIssueSubmit() {
 		console.log("issue submitted");
 	}
@@ -188,7 +198,7 @@
 		let token = Cookies.get("token");
 		if (!token) {
 			loginModalVisible = true;
-			goto("/");
+			//goto("/");
 		}
 		if (token) {
 			canLogin = false;
@@ -803,6 +813,10 @@
 						<img class="icon" src="/assets/icons/policy-icon-black.svg" alt="" />
 						<span class="menuBtnTxt">Terms & Policies</span>
 					</button>
+					<button class="menuBtnWrap" on:click={openAboutUsPopup}>
+						<img class="icon" src="/assets/icons/policy-icon-black.svg" alt="" />
+						<span class="menuBtnTxt">About Us</span>
+					</button>
 					<button class="menuBtnWrap" on:click={openRaiseAnIssuePopup}>
 						<svg
 							width="24"
@@ -887,6 +901,7 @@
 
 <SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
 <RaiseAnIssuePopup {showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup} />
+<AboutUsPopup {showAboutUsPopup} on:closeAboutUsPopup={closeAboutUsPopup} />
 <BrowseTemplatesPopup
 	showTemplatesPopup={showBrowseTemplatesPopup}
 	on:closeTemplatesPopup={toggleBrowseTemplatesPopup}

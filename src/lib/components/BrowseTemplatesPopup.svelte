@@ -47,13 +47,13 @@
 						},
 						{
 							name: "Academic Background Details",
-							label: "Ex: GPA, Courses, Achievements",
+							label: "Ex: Degree obtained, GPA, Courses, Projects",
 							fieldType: "textfield",
 							fieldValue: "",
 						},
 						{
 							name: "Additional Details",
-							label: "Ex: like Achievements",
+							label: "Ex: Achievements",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -91,7 +91,7 @@
 						},
 						{
 							name: "Academic Background Details",
-							label: "Ex: GPA, Courses, Achievements",
+							label: "Ex: Degree obtained, GPA, Courses, Projects",
 							fieldType: "textfield",
 							fieldValue: "",
 						},
@@ -148,7 +148,7 @@
 						},
 						{
 							name: "Academic Background Details",
-							label: "Ex: GPA, Courses, Achievements",
+							label: "Ex: Degree obtained, GPA, Courses, Projects",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -204,7 +204,7 @@
 						},
 						{
 							name: "Academic Background Details",
-							label: "Ex: GPA, Courses, Achievements",
+							label: "Ex: Degree obtained, GPA, Courses, Projects",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -261,7 +261,7 @@
 						},
 						{
 							name: "Academic Background Details",
-							label: "Ex: GPA, Courses, Achievements",
+							label: "Ex: Degree obtained, GPA, Courses, Projects",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -716,6 +716,142 @@
 					prompt:
 						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
 				},
+
+				// {
+				// 	imageUrl: [
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-1.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-2.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-3.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-4.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-5.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-6.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-7.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-8.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-9.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-10.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-11.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-12.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-13.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-14.jpg",
+				// 		"/assets/images/templates/Professional/CloudRevolute_Petition_Letter_SUDHIR-15.jpg",
+				// 	],
+				// 	resumeTitle: "Pettition Letter",
+				// 	resumeDescription: "",
+				// 	id: "professional-3",
+				// 	tag: "Professional",
+				// 	inputFields: [
+				// 		{
+				// 			name: "Job Title",
+				// 			label: "Ex: Software Engineer",
+				// 			fieldType: "textfield",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Company Name",
+				// 			label: "Ex: ABC Tech Solutions",
+				// 			fieldType: "textfield",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Start Date",
+				// 			label: "Ex: August 15, 2023",
+				// 			fieldType: "textfield",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Salary per year",
+				// 			label: "Ex: $80,000",
+				// 			fieldType: "textfield",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Benefits",
+				// 			label: "Ex: Health insurance, Retirement plan",
+				// 			fieldType: "textarea",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Vacation Time (No.of days per year)",
+				// 			label: "Ex: 15 days",
+				// 			fieldType: "textfield",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Holidays (List holidays observed by the company)",
+				// 			label: "Ex: New Year's Day, Independence Day",
+				// 			fieldType: "textarea",
+				// 			fieldValue: "",
+				// 		},
+				// 		{
+				// 			name: "Additional Details (Tasks and Responsibilities)",
+				// 			label: "Ex: Project management, Coding tasks",
+				// 			fieldType: "textarea",
+				// 			fieldValue: "",
+				// 		},
+				// 	],
+				// 	prompt:
+				// 		"Generate a pettition letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
+				// },
+
+				{
+					imageUrl: ["/assets/images/templates/Professional/H-1B_Sample_Forms.jpg"],
+					resumeTitle: "H-1B Sample Forms",
+					resumeDescription: "",
+					id: "professional-4",
+					tag: "Professional",
+					inputFields: [
+						{
+							name: "Job Title",
+							label: "Ex: Software Engineer",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Company Name",
+							label: "Ex: ABC Tech Solutions",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Start Date",
+							label: "Ex: August 15, 2023",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Salary per year",
+							label: "Ex: $80,000",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Benefits",
+							label: "Ex: Health insurance, Retirement plan",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Vacation Time (No.of days per year)",
+							label: "Ex: 15 days",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Holidays (List holidays observed by the company)",
+							label: "Ex: New Year's Day, Independence Day",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+						{
+							name: "Additional Details (Tasks and Responsibilities)",
+							label: "Ex: Project management, Coding tasks",
+							fieldType: "textarea",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].",
+				},
 			],
 		},
 		{
@@ -1010,157 +1146,11 @@
 							<button class="use-template-btn" on:click={openPreview}><p>Preview</p></button>
 							<!-- <button class="use-template-btn" on:click={useTemplate}><p>Use Template</p></button> -->
 						</div>
-						<!-- <div class="input-fields">
-							{#if selectedTemplate.tag == "SOP"}
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={degreeName}
-										label="Applying Degree Name"
-										placeholder="Ex. Masters"
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={courseName}
-										label="Applying Course Name"
-										placeholder="Ex. Data science"
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={universityName}
-										label="Applying University Name"
-										placeholder="Ex. Oxford"
-									/>
-								</div>
-								<p>Academic Details</p>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={completedDegreeName}
-										label="University Degree"
-										placeholder="Ex. Masters"
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={completedCourseName}
-										label="Course Name"
-										placeholder="Ex. Data science"
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={CompletedUniversityName}
-										label="University Name"
-										placeholder="Ex. Oxford"
-									/>
-								</div>
-							{/if}
-							{#if selectedTemplate.id == "student-1" || selectedTemplate.id == "student-4"}
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={keyCourses}
-										label="Any Key Courses that are relevant to the applying course"
-										placeholder="Ex. Data science"
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={projectsDone}
-										label="Projects Done"
-										placeholder="Ex. Oxford"
-									/>
-								</div>
-							{/if}
-							{#if selectedTemplate.id == "student-2"}
-								<p>Work Experience</p>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={companyName}
-										label="Company Name"
-										placeholder=""
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput required bind:value={jobTitle} label="Job Title" placeholder="" />
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={jobDuration}
-										label="Duration of Employment (start and end dates)"
-										placeholder=""
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<Textarea
-										required
-										bind:value={keyResponsibilities}
-										label="Key Responsibilities"
-										placeholder=""
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<Textarea
-										required
-										bind:value={achievements}
-										label="Achievements"
-										placeholder=""
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<Textarea required bind:value={careerGoals} label="Career Goals" placeholder="" />
-								</div>
-							{/if}
-							{#if selectedTemplate.id == "student-3" || selectedTemplate.id == "student-4"}
-								<div class="input-wrapper visaprep-container">
-									<Textarea
-										required
-										bind:value={researchExperiences}
-										label="Research Experiences"
-										placeholder=""
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<TextInput
-										required
-										bind:value={facultyConnection}
-										label="Faculty Connection"
-										placeholder=""
-									/>
-								</div>
-								<div class="input-wrapper visaprep-container">
-									<Textarea required bind:value={careerGoals} label="Career Goals" placeholder="" />
-								</div>
-							{/if}
-							{#if selectedTemplate.id == "student-5"}
-								<div class="input-wrapper visaprep-container">
-									<Textarea
-										required
-										bind:value={leadershipAndImpact}
-										label="Leadership and Impact"
-										placeholder=""
-									/>
-								</div>
-							{/if}
-							<div class="input-wrapper visaprep-container">
-								<Textarea
-									required
-									bind:value={additionalDetails}
-									label="Additional Details"
-									placeholder=""
-								/>
-							</div>
-						</div> -->
+						<div>
+							<p class="description">
+								Note:<br /> Please fill in all the fields for personalised results
+							</p>
+						</div>
 						<div class="input-fields" />
 						{#if activeInputFields?.length > 0}
 							{#each activeInputFields as field, index}
