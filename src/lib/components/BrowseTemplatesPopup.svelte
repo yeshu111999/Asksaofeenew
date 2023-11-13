@@ -53,7 +53,7 @@
 						},
 						{
 							name: "Additional Details",
-							label: "Ex: Achievements",
+							label: "Ex: Achievements, Related Work, Future goals",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -109,7 +109,7 @@
 						},
 						{
 							name: "Additional Details",
-							label: "Ex: Achievements",
+							label: "Ex: None, Achievements, Career Goals ",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -166,7 +166,7 @@
 						},
 						{
 							name: "Additional Details",
-							label: "Ex: Achievements",
+							label: "Ex: Achievements, Career Goals, None",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -222,7 +222,7 @@
 						},
 						{
 							name: "Additional Details",
-							label: "Ex: Achievements",
+							label: "Ex: Achievements, Career Goals, None",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -285,7 +285,7 @@
 						},
 						{
 							name: "Additional Details",
-							label: "Ex: Achievements",
+							label: "Ex: Achievements, Career Goals, None",
 							fieldType: "textarea",
 							fieldValue: "",
 						},
@@ -1118,7 +1118,7 @@
 						</div>
 						<div>
 							<p class="description">
-								Note:<br /> Please fill in all the fields for personalised results
+								Note: Please fill in all the fields for personalised results
 							</p>
 						</div>
 						<div class="input-fields" />
