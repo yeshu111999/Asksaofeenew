@@ -53,7 +53,7 @@
 	<div class="overlay">
 		<div class="popup">
 			<div class="header">
-				<p class="title">Raise an Issue</p>
+				<p class="title">Contact Us</p>
 				<button class="close-btn" on:click={closePopup}>
 					<img src="/assets/icons/close-icon-black.svg" alt="" />
 				</button>

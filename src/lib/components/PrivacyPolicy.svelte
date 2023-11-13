@@ -61,43 +61,44 @@
 			defend the rights or property of Cloud Revolute; and/or (c) act under exigent circumstances to
 			protect the personal safety of users of Cloud Revolute, or the public. Right to Deletion
 			Subject to certain exceptions set out below, on receipt of a verifiable request from you, we
-			will: • Delete your personal information from our records; and • Direct any service providers
-			to delete your personal information from their records. Please note that we may not be able to
-			comply with requests to delete your personal information if it is necessary to: • Complete the
-			transaction for which the personal information was collected, fulfill the terms of a written
-			warranty or product recall conducted in accordance with federal law, provide a good or service
-			requested by you, or reasonably anticipated within the context of our ongoing business
-			relationship with you, or otherwise perform a contract between you and us; • Detect security
-			incidents, protect against malicious, deceptive, fraudulent, or illegal activity; or prosecute
-			those responsible for that activity; • Debug to identify and repair errors that impair
-			existing intended functionality; • Exercise free speech, ensure the right of another consumer
-			to exercise his or her right of free speech, or exercise another right provided for by law; •
-			Comply with the California Electronic Communications Privacy Act; • Engage in public or
-			peer-reviewed scientific, historical, or statistical research in the public interest that
-			adheres to all other applicable ethics and privacy laws, when our deletion of the information
-			is likely to render impossible or seriously impair the achievement of such research, provided
-			we have obtained your informed consent; • Enable solely internal uses that are reasonably
-			aligned with your expectations based on your relationship with us; • Comply with an existing
-			legal obligation; or • Otherwise use your personal information, internally, in a lawful manner
-			that is compatible with the context in which you provided the information. Children Under
-			Thirteen Cloud Revolute does not knowingly collect personally identifiable information from
-			children under the age of thirteen. If you are under the age of thirteen, you must ask your
-			parent or guardian for permission to use this application. E-mail Communications From time to
-			time, Cloud Revolute may contact you via email for the purpose of providing announcements,
-			promotional offers, alerts, confirmations, surveys, and/or other general communication. If you
-			would like to stop receiving marketing or promotional communications via email from Cloud
-			Revolute, you may opt out of such communications by clicking on the UNSUBSCRIBE button.
-			Changes to this Statement Cloud Revolute reserves the right to change this Privacy Policy from
-			time to time. We will notify you about significant changes in the way we treat personal
-			information by sending a notice to the primary email address specified in your account, by
-			placing a prominent notice on our application, and/or by updating any privacy information.
-			Your continued use of the application and/or Services available after such modifications will
-			constitute your: (a) acknowledgment of the modified Privacy Policy; and (b) agreement to abide
-			and be bound by that Policy. Contact Information Cloud Revolute welcomes your questions or
-			comments regarding this Statement of Privacy. If you believe that Cloud Revolute has not
-			adhered to this Statement, please contact Cloud Revolute at: Cloude Revolute Inc 1800 valley
-			view ln Farmers Branch, Texas 75234 Email Address: iamk.swaroop@gmail.com Telephone number:
-			9727994702 Effective as of September 07, 2023
+			will:<br /><br /> • Delete your personal information from our records; and<br /> • Direct any
+			service providers to delete your personal information from their records. Please note that we
+			may not be able to comply with requests to delete your personal information if it is necessary
+			to:<br /> • Complete the transaction for which the personal information was collected, fulfill
+			the terms of a written warranty or product recall conducted in accordance with federal law,
+			provide a good or service requested by you, or reasonably anticipated within the context of
+			our ongoing business relationship with you, or otherwise perform a contract between you and
+			us;<br /> • Detect security incidents, protect against malicious, deceptive, fraudulent, or
+			illegal activity; or prosecute those responsible for that activity;<br /> • Debug to identify
+			and repair errors that impair existing intended functionality;
+			<br />• Exercise free speech, ensure the right of another consumer to exercise his or her
+			right of free speech, or exercise another right provided for by law;<br /> • Comply with the
+			California Electronic Communications Privacy Act;<br /> • Engage in public or peer-reviewed
+			scientific, historical, or statistical research in the public interest that adheres to all
+			other applicable ethics and privacy laws, when our deletion of the information is likely to
+			render impossible or seriously impair the achievement of such research, provided we have
+			obtained your informed consent;<br /> • Enable solely internal uses that are reasonably
+			aligned with your expectations based on your relationship with us;<br /> • Comply with an
+			existing legal obligation; or<br /> • Otherwise use your personal information, internally, in
+			a lawful manner that is compatible with the context in which you provided the information.
+			<br /><br />Children Under Thirteen Cloud Revolute does not knowingly collect personally
+			identifiable information from children under the age of thirteen. If you are under the age of
+			thirteen, you must ask your parent or guardian for permission to use this application. E-mail
+			Communications From time to time, Cloud Revolute may contact you via email for the purpose of
+			providing announcements, promotional offers, alerts, confirmations, surveys, and/or other
+			general communication. If you would like to stop receiving marketing or promotional
+			communications via email from Cloud Revolute, you may opt out of such communications by
+			clicking on the UNSUBSCRIBE button. Changes to this Statement Cloud Revolute reserves the
+			right to change this Privacy Policy from time to time. We will notify you about significant
+			changes in the way we treat personal information by sending a notice to the primary email
+			address specified in your account, by placing a prominent notice on our application, and/or by
+			updating any privacy information. Your continued use of the application and/or Services
+			available after such modifications will constitute your: (a) acknowledgment of the modified
+			Privacy Policy; and (b) agreement to abide and be bound by that Policy. Contact Information
+			Cloud Revolute welcomes your questions or comments regarding this Statement of Privacy. If you
+			believe that Cloud Revolute has not adhered to this Statement, please contact Cloud Revolute
+			at: Cloude Revolute Inc 1800 valley view ln Farmers Branch, Texas 75234 Email Address:
+			iamk.swaroop@gmail.com Telephone number: 9727994702 Effective as of September 07, 2023
 		</p>
 	</div>
 </div>

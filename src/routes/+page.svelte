@@ -2,6 +2,7 @@
 	import { Button } from "@svelteuidev/core";
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
+	import AboutUsPopup from "$lib/components/AboutUsPopup.svelte";
 	import { goto } from "$app/navigation";
 	import { onMount } from "svelte";
 	import Cookies from "js-cookie";
@@ -17,6 +18,15 @@
 
 	function closeRaiseAnIssuePopup() {
 		showRaiseAnIssuePopup = false;
+	}
+
+	let showAboutUsPopup = false;
+	function openAboutUsPopup() {
+		showAboutUsPopup = true;
+	}
+
+	function closeAboutUsPopup() {
+		showAboutUsPopup = false;
 	}
 
 	function gotoHome() {
@@ -631,7 +641,7 @@
 								<a href="#pricingDetailSection">Pricing</a>
 							</div>
 							<div class="link">
-								<a href="/privacy-policy">Terms and Policies</a>
+								<a target="_blank" href="/privacy-policy">Terms and Policies</a>
 							</div>
 							<!-- <div class="link">
 								<a href="/privacy-policy">Privacy policy</a>
@@ -639,11 +649,18 @@
 							<div class="link">
 								<a on:click={openRaiseAnIssuePopup}>Contact Us</a>
 							</div>
+							<div class="link">
+								<a on:click={openAboutUsPopup}>About Us</a>
+							</div>
+							<div class="link">
+								<a target="_blank" href="https://immigpt.blog/">Blogs</a>
+							</div>
 						</div>
 						<RaiseAnIssuePopup
 							{showRaiseAnIssuePopup}
 							on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup}
 						/>
+						<AboutUsPopup {showAboutUsPopup} on:closeAboutUsPopup={closeAboutUsPopup} />
 					</div>
 					<div class="linkSection">
 						<div class="linksTitle">Follow us</div>
