@@ -475,12 +475,15 @@
 			.then(async (response) => {
 				console.log("response", response);
 				if (response.status == 200) {
+					let data = await response.json();
 					var idToken = jwtCredentials.credential;
+					let payload = parseJwt(data.token); 
 					const expirationTime = new Date();
 					expirationTime.setTime(expirationTime.getTime() + 7 * 24 * 60 * 60 * 1000);
 					Cookies.set("token", idToken, { expires: expirationTime });
 					Cookies.set("email", profileData.email, { expires: expirationTime });
 					Cookies.set("name", profileData.name, { expires: expirationTime });
+					Cookies.set("userId", payload.userId);
 					Cookies.set("Google-Auth", "true", { expires: expirationTime });
 					console.log("email id", profileData.email);
 					window.location.href = "/";
