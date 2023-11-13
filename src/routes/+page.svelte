@@ -419,8 +419,8 @@
 							</div>
 							<div class="detailText"><span style="color: #fff;">.</span></div>
 						</div>
-						<Button fullSize variant="default" radius="md"
-							><span style="color: #7E7E7E">Choose Plan</span></Button
+						<Button fullSize color="dark" radius="md"
+							><span style="color: #fff">Choose Plan</span></Button
 						>
 					</div>
 					<div class="pricingDetailMainCard">
@@ -516,8 +516,8 @@
 								</svg> Access Beta features
 							</div>
 						</div>
-						<Button fullSize variant="default" radius="md"
-							><span style="color: #7E7E7E">Choose Plan</span></Button
+						<Button fullSize color="dark" radius="md"
+							><span style="color: #fff">Choose Plan</span></Button
 						>
 					</div>
 				</div>
@@ -543,66 +543,7 @@
 				<div class="footerAbout">
 					<div class="logoTitleWrap">
 						<div class="logoWrap">
-							<svg
-								width="36"
-								height="36"
-								viewBox="0 0 36 36"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<g clip-path="url(#clip0_709_2093)">
-									<circle
-										cx="17.8769"
-										cy="17.8772"
-										r="15"
-										transform="rotate(-24.714 17.8769 17.8772)"
-										stroke="black"
-										stroke-width="1.85"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-									<path
-										d="M22.6246 18.9943L19.8712 26.4433C19.7505 26.7698 19.5051 27.035 19.1888 27.1805L18.0643 27.6981C17.6483 27.8896 17.1625 27.8503 16.7825 27.5945C16.4026 27.3387 16.1835 26.9033 16.2045 26.4458L16.4148 21.8523"
-										stroke="black"
-										stroke-width="1.85"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-									<path
-										d="M22.106 14.2792L14.657 11.5258C14.3305 11.4051 13.9694 11.419 13.6532 11.5646L12.5287 12.0821C12.1126 12.2736 11.8265 12.6682 11.7737 13.1231C11.7209 13.5781 11.9091 14.0277 12.2703 14.3094L15.8962 17.1372"
-										stroke="black"
-										stroke-width="1.85"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-									<path
-										d="M12.3928 18.7499L10.8609 17.5216C10.196 16.9885 9.28691 16.8768 8.51273 17.2331L7.82088 17.5516C7.38288 17.7532 7.06848 18.153 6.97591 18.6262C6.88334 19.0994 7.02388 19.5883 7.35364 19.94L10.1047 22.8749C10.8406 23.66 11.9964 23.8861 12.9739 23.4361L16.3271 21.8929"
-										stroke="black"
-										stroke-width="1.85"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-									<path
-										d="M12.4807 18.7095L24.7442 13.0653C25.873 12.5457 27.2093 13.0397 27.7288 14.1685V14.1685C28.2483 15.2973 27.7544 16.6336 26.6256 17.1531"
-										stroke="black"
-										stroke-width="1.85"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-									<path
-										d="M26.6254 17.1529L22.6246 18.9943"
-										stroke="black"
-										stroke-width="1.85"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</g>
-								<defs>
-									<clipPath id="clip0_709_2093">
-										<rect width="36" height="36" fill="white" />
-									</clipPath>
-								</defs>
-							</svg>
+							<img width="40px" src="/assets/images/statue-liberty.jpg" alt="immigpt" />
 						</div>
 						<div class="logoTitle">ImmiGPT</div>
 					</div>
@@ -866,6 +807,7 @@
 		backdrop-filter: blur(4px);
 		-webkit-backdrop-filter: blur(4px);
 		border-radius: 10px;
+		height: 100%;
 	}
 
 	.featureMainCardFull {
@@ -1113,6 +1055,14 @@
 		.footerLinksWrap {
 			width: 100%;
 			justify-content: space-around;
+		}
+
+		.landPgHeroTitle1 {
+			font-size: 36px;
+		}
+
+		.landPgHeroTitle2 {
+			font-size: 36px;
 		}
 	}
 </style>
