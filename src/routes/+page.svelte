@@ -874,7 +874,7 @@
 	}
 
 	.pricingDetailSection {
-		min-height: 100vh;
+		min-height: 85vh;
 		padding: 16px;
 		display: flex;
 		justify-content: center;

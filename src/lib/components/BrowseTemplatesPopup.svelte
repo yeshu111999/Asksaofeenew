@@ -302,56 +302,26 @@
 					tag: "SOP",
 					inputFields: [
 						{
-							name: "Introduction",
-							label: "Ex: Opening statement about yourself",
-							fieldType: "textarea",
+							name: "Degree Name",
+							label: "Ex: Masters",
+							fieldType: "textfield",
 							fieldValue: "",
 						},
 						{
-							name: "Academic Background",
-							label: "Ex: Undergraduate degree and major",
-							fieldType: "textarea",
+							name: "Course Name",
+							label: "Ex: Data Science",
+							fieldType: "textfield",
 							fieldValue: "",
 						},
 						{
-							name: "Academic Aspirations",
-							label: "Ex: Why [Degree Name] in [Course Name] at [University Name]",
-							fieldType: "textarea",
-							fieldValue: "",
-						},
-						{
-							name: "Relevant Projects",
-							label: "Ex: Research projects, internships",
-							fieldType: "textarea",
-							fieldValue: "",
-						},
-						{
-							name: "Work Experience",
-							label: "Ex: Organizations, positions, relevance to the course",
-							fieldType: "textarea",
-							fieldValue: "",
-						},
-						{
-							name: "Career Goals",
-							label: "Ex: Short-term and Long-term goals",
-							fieldType: "textarea",
-							fieldValue: "",
-						},
-						{
-							name: "Unique Qualities and Achievements",
-							label: "Ex: Standout qualities, skills, achievements",
-							fieldType: "textarea",
-							fieldValue: "",
-						},
-						{
-							name: "Closing Statement",
-							label: "Ex: Concluding the SOP with a strong statement",
-							fieldType: "textarea",
+							name: "University Name",
+							label: "Ex: Buffalo",
+							fieldType: "textfield",
 							fieldValue: "",
 						},
 					],
 					prompt:
-						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: [Add details from inputFields]. Ask me the necessary details that you'll require to write this SOP.",
+						"I'm seeking your assistance in crafting a compelling Statement of Purpose (SOP). The SOP is a critical document for my application, and I'd like it to effectively convey my qualifications and aspirations to the admissions committee. Could you please help me by: 1. Providing a well-structured introduction for the SOP. 2. Creating a section that outlines my academic background, including my undergraduate degree and major. 3. Crafting a portion that explains my academic aspirations and why I'm interested in pursuing [fieldValue1] in [fieldValue2] at [fieldValue3]. 4. Describing any relevant research projects, internships, or academic projects I've been involved in. 5. Summarizing my work experience, specifying the organizations I've worked for and how this experience relates to my chosen course. 6. Outlining my career goals, both short-term and long-term, and explaining how the chosen course aligns with these goals. 7. Highlighting any unique qualities, skills, or achievements that make me a standout candidate. 8. Concluding the SOP with a strong closing statement. Ask me the necessary details that you'll require to write this SOP.",
 				},
 				{
 					imageUrl: [
