@@ -822,6 +822,41 @@
 					prompt:
 						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].Please don't mention yourself as an immigration officer.",
 				},
+			{
+					imageUrl: ["/assets/images/templates/Professional/h1b petition letter1(1).jpg",
+					"/assets/images/templates/Professional/h1b petition letter1(2).jpg"
+
+				],
+					resumeTitle: "H1B Visa Petition Letter",
+					resumeDescription: "",
+					id: "professional-5",
+					tag: "Professional",
+					inputFields: [
+						{
+							name: "Company Name",
+							label: "Ex: Google,Amazon",
+							fieldType: "textfield",
+							fieldValue: "",
+					
+						},
+						{
+							name: "Beneficiary's Full Name",
+							label: "Ex: John Kim",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Job Role",
+							label: "Ex: Senior Software Engineer",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+	
+					],
+					prompt:
+						" Generate a detailed letter to USCIS petitioning for an H-1B visa for [fieldValue2] on behalf of [fieldValue1]. Include details about [fieldValue2]  qualifications,[fieldValue3], and the employer's need for their expertise. Make sure to include - 1. Detailed information about the company, highlighting its key aspects. 2. Description of the position of [fieldValue3] for which the H1B visa is being sought, in a very detailed manner by emphasizing its significance along with the details on responsibilities, requirements and qualifications for the position. 7. Provide a detailed description about the qualifications of [fieldValue2], showcasing their strengths and suitability for the specified position of [fieldValue3]. Please don't mention yourself as an immigration officer.",
+				},
+	
 			],
 		},
 		{
@@ -913,7 +948,7 @@
 						},
 					],
 					prompt:
-						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3]. Please don't mention yourself as an immigration officer.",
+						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3].Please don't mention yourself as an immigration officer. ",
 				},
 			],
 		},
