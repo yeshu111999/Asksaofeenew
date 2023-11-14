@@ -156,10 +156,9 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Visa Interview and Immigration Preparation</div>
+								<div class="featureTextTitle">Visa Interview and Immigration Preparation with Simulated Scenarios</div>
 								<div class="featureTextDesc">
-									Unlock a customized set of anticipated questions and answers designed for your
-									visa interview and immigration,considering your individual situtation.
+									Access a tailored compilation of anticipated questions and answers for your visa interview and immigration, personalized to your unique situation. Additionally, immerse yourself in simulated mock visa interviews and immigration scenarios that closely match your current circumstances.
 								</div>
 							</div>
 						</div>
@@ -252,12 +251,9 @@
 					</div>
 					<div class="featureMainCard">
 						<div class="featureMainCardFull">
-							<div class="featureTextTitle">Web Search Functionality</div>
+							<div class="featureTextTitle">What gives ImmiGPT a competitive edge ?</div>
 							<div class="featureTextDesc">
-								Enhance your search experience with our web search function, extracting precise and
-								organized responses directly from the web that are relevant to your queries. This
-								enables you to bypass the manual web scraping hassle, saving time and ensuring
-								accurate, up-to-date information tailored to your needs.
+								ImmiGPT simplifies the complex immigration process by addressing critical market gaps. Unlike Other GPT’s, ImmiGPT ensures access to real-time, up-to-date information eliminating knowledge restrictions. Its specialized training data ensures precise advice, focusing on immigration laws. The platform's unique reasoning module, paired with Large Language Model technology, facilitates logical reasoning, inference, and decision-making, offering personalized solutions. ImmiGPT stands as an innovative, efficient, and personalized alternative, empowering clients to navigate the complexities of immigration confidently and achieve their goals without unnecessary stress or delay.
 							</div>
 						</div>
 					</div>
@@ -298,11 +294,13 @@
 							</div>
 							<div class="featureTextWrap">
 								<div class="featureTextTitle">
-									Simulated Visa Interview and Immigration Scenarios
+									Web Search Functionality
 								</div>
 								<div class="featureTextDesc">
-									Engage in simulated mock visa interviews and immigration scenarios designed to
-									align with your current circumstances.
+									Enhance your search experience with our web search function, extracting precise and
+								organized responses directly from the web that are relevant to your queries. This
+								enables you to bypass the manual web scraping hassle, saving time and ensuring
+								accurate, up-to-date information tailored to your needs.
 								</div>
 							</div>
 						</div>
@@ -546,7 +544,7 @@
 		<div class="trySection">
 			<div class="tryWrap">
 				<div class="tryTextWrap">
-					<div class="tryTitle">Experience the power of ImmiGPT for Free.</div>
+					<div class="tryTitle">Experience the power of ImmiGPT for Free</div>
 					<div class="tryDesc">Try it now and explore the possibilities!</div>
 				</div>
 				<Button
@@ -568,7 +566,7 @@
 						<div class="logoTitle">ImmiGPT</div>
 					</div>
 					<div class="footerAboutDesc">
-						Your AI Companion for Travel and Immigration - Explore, Migrate, Thrive.
+						A Generative AI For Immigration And Travel
 					</div>
 				</div>
 				<div class="footerLinksWrap">
