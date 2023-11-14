@@ -163,7 +163,7 @@
 		<div class="mt-2 flex justify-between self-stretch px-1 text-xs max-sm:gap-2">
 			<p>
 				Model: <a
-					href={currentModel.modelUrl || "https://huggingface.co/" + currentModel.name}
+					href="https://immigpt.blog/"
 					target="_blank"
 					rel="noreferrer"
 					class="hover:underline">{currentModel.displayName}</a
