@@ -25,7 +25,30 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 	const convId = new ObjectId(id);
 	const promptedAt = new Date();
 
-	const userId = locals.user?._id ?? locals.sessionId;
+	// finally parse the content of the request
+	const json = await request.json();
+
+	const {
+		inputs: newPrompt,
+		response_id: responseId,
+		id: messageId,
+		is_retry,
+		web_search: webSearch,
+		userId: paramUserId
+	} = z
+		.object({
+			inputs: z.string().trim().min(1),
+			id: z.optional(z.string().uuid()),
+			response_id: z.optional(z.string().uuid()),
+			is_retry: z.optional(z.boolean()),
+			web_search: z.optional(z.boolean()),
+			userId: z.optional(z.string().trim())
+		})
+		.parse(json);
+
+	
+	const userId = paramUserId ?? locals.userId ?? locals.sessionId;
+	const authCond = paramUserId ? {userId : paramUserId} : authCondition(locals)
 
 	// check user
 	if (!userId) {
@@ -35,7 +58,7 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 	// check if the user has access to the conversation
 	const conv = await collections.conversations.findOne({
 		_id: convId,
-		...authCondition(locals),
+		...authCond,
 	});
 
 	if (!conv) {
@@ -70,30 +93,12 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 
 	// fetch the model
 	const model = models.find((m) => m.id === conv.model);
-	const settings = await collections.settings.findOne(authCondition(locals));
+	console.log("Locals userId:"+locals.userId);
+	const settings = await collections.settings.findOne(authCond);
 
 	if (!model) {
 		throw error(410, "Model not available anymore");
 	}
-
-	// finally parse the content of the request
-	const json = await request.json();
-
-	const {
-		inputs: newPrompt,
-		response_id: responseId,
-		id: messageId,
-		is_retry,
-		web_search: webSearch,
-	} = z
-		.object({
-			inputs: z.string().trim().min(1),
-			id: z.optional(z.string().uuid()),
-			response_id: z.optional(z.string().uuid()),
-			is_retry: z.optional(z.boolean()),
-			web_search: z.optional(z.boolean()),
-		})
-		.parse(json);
 
 	// get the list of messages
 	// while checking for retries
@@ -192,7 +197,6 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 						}
 					}
 					lastMessage.content = generated_text;
-
 					await collections.conversations.updateOne(
 						{
 							_id: convId,
@@ -276,9 +280,9 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 			}
 		},
 		async cancel() {
-			const conversation =await collections.conversations.findOne({
+			const conversation = await collections.conversations.findOne({
 				_id: convId,
-				...authCondition(locals),
+				...authCond,
 			});
 			await collections.conversations.updateOne(
 				{

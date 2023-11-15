@@ -29,9 +29,12 @@ export const POST: RequestHandler = async ({ locals, request , cookies}) => {
 	const values = z
 		.object({
 			fromShare: z.string().optional(),
+			userId: z.optional(z.string().trim()),
 			model: validateModel(models),
 		})
 		.parse(JSON.parse(body));
+		
+	const authCond = values.userId ? {userId : values.userId} : authCondition(locals)
 
 	if (values.fromShare) {
 		const conversation = await collections.sharedConversations.findOne({
@@ -51,12 +54,12 @@ export const POST: RequestHandler = async ({ locals, request , cookies}) => {
 		_id: new ObjectId(),
 		title:
 			title ||
-			"Untitled " + ((await collections.conversations.countDocuments(authCondition(locals))) + 1),
+			"Untitled " + ((await collections.conversations.countDocuments(authCond)) + 1),
 		messages,
 		model: values.model,
 		createdAt: new Date(),
 		updatedAt: new Date(),
-		...(locals.userId ? { userId: locals.userId } : { sessionId: locals.sessionId }),
+		...(values.userId ? { userId: values.userId } : locals.userId ? { userId: locals.userId } : { sessionId: locals.sessionId }),
 		...(values.fromShare ? { meta: { fromShareId: values.fromShare } } : {}),
 	});
 
@@ -66,8 +69,4 @@ export const POST: RequestHandler = async ({ locals, request , cookies}) => {
 		}),
 		{ headers: { "Content-Type": "application/json" } }
 	);
-};
-
-export const GET: RequestHandler = async () => {
-	throw redirect(302, `${base}/`);
 };
