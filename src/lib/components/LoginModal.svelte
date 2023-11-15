@@ -477,7 +477,7 @@
 				if (response.status == 200) {
 					let data = await response.json();
 					var idToken = jwtCredentials.credential;
-					let payload = parseJwt(data.token); 
+					let payload = parseJwt(data.token);
 					const expirationTime = new Date();
 					expirationTime.setTime(expirationTime.getTime() + 7 * 24 * 60 * 60 * 1000);
 					Cookies.set("token", idToken, { expires: expirationTime });
@@ -639,8 +639,10 @@
 				body: JSON.stringify(signUpData),
 			})
 				.then(async (response) => {
+					let data = await response.json();
+					console.log("data", data.message);
+					console.log("data", data);
 					if (response.status == 200) {
-						let data = await response.json();
 						const expirationTime = new Date();
 						expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
 						Cookies.set("token", data.token, { expires: expirationTime });
@@ -652,7 +654,7 @@
 						window.location.href = "/";
 					} else {
 						showSignupError = true;
-						signUpError = response && response.message ? response.message : "Unable to sign up..";
+						signUpError = data.message ? data.message : "Unable to sign up..";
 					}
 					isLoading = false;
 				})
@@ -852,6 +854,20 @@
 		dropCon = document.querySelector(".country-code");
 	});
 </script>
+
+/* * Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
+Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
+Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
+Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
+Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
+Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */
 
 <Modal>
 	<div class="wrapper">
