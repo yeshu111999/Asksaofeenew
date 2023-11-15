@@ -4,7 +4,7 @@
 
 <svelte:head>
 	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "light"} />
-	<link rel="stylesheet" href={`../../themes/${$currentTheme}.css`} />
+	<link rel="stylesheet" href={`/themes/${$currentTheme}.css`} />
 </svelte:head>
 
 <slot />

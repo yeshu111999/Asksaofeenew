@@ -162,7 +162,7 @@
 		type="image/png"
 	/>
 	<!-- <meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} /> -->
-	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "light"} />
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
 	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
 </svelte:head>
 

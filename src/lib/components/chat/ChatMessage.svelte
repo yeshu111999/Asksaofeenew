@@ -191,7 +191,7 @@
 			{/if}
 
 			<div
-				class="prose max-w-none dark:prose-invert max-sm:prose-sm prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-base prose-pre:bg-gray-800 dark:prose-pre:bg-gray-900"
+				class="responseText prose max-w-none dark:prose-invert max-sm:prose-sm prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-base prose-pre:bg-gray-800 dark:prose-pre:bg-gray-900"
 				bind:this={contentEl}
 			>
 				{#each tokens as token}
@@ -515,15 +515,15 @@
 
 <style>
 	.userChatGroup {
-		background-color: #fff;
+		background-color: var(--user-chat-bg-color);
 		border-radius: 8px;
-		border: #e1e1e1 solid 1px;
+		border: var(--user-chat-border-color) solid 1px;
 	}
 
 	.responseChatGroup {
 		border-radius: 8px;
-		border: #e1e1e1 solid 1px;
-		background-color: rgba(225, 223, 223, 0.2);
+		border: var(--user-chat-border-color) solid 1px;
+		background-color: var(--assistant-chat-bg-color);
 		margin-bottom: 0px;
 	}
 
@@ -534,12 +534,12 @@
 		align-items: center;
 		width: 32px;
 		height: 32px;
-		background-color: #e1e1e1;
+		background-color: var(--primary-background-color);
 		border-radius: 16px;
 		margin: 16px;
 		min-width: 32px;
 		max-width: 32px;
-		color: #5d5c5c;
+		color: var(--primary-text-color);
 		font-weight: 600;
 		font-size: 12px;
 	}
@@ -556,5 +556,9 @@
 
 	div[contenteditable="true"]:focus {
 		outline: none; /* Remove the border on focus */
+	}
+
+	.responseText {
+		color: var(--primary-text-color);
 	}
 </style>

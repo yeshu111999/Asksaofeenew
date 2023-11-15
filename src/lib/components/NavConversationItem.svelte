@@ -9,6 +9,7 @@
 	import CarbonEdit from "~icons/carbon/edit";
 	import { theme } from "$lib/stores/theme";
 	import { goto } from "$app/navigation";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let conv: { id: string; title: string };
 
@@ -71,7 +72,11 @@
 	<!-- {#if conv.id === $page.params.id}
 		<img src="/assets/icons/search-icon-white.svg" alt="" />
 	{:else} -->
-	<img src="/assets/icons/search-icon-black.svg" alt="" />
+	{#if $currentTheme == "light" || conv.id === $page.params.id}
+		<img src="/assets/icons/search-icon-black.svg" alt="" />
+	{:else}
+		<img src="/assets/icons/search-icon-white.svg" alt="" />
+	{/if}
 	<!-- {/if} -->
 	<!--{#if confirmDelete}
 		<span style="color:gray" class=""> Delete </span>
@@ -254,7 +259,7 @@
 
 	.recent-search-btn p {
 		overflow: hidden;
-		color: #323232;
+		color: var(--primary-text-color);
 		text-overflow: ellipsis;
 		font-family: Inter;
 		font-size: 13px;

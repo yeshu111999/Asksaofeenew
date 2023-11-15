@@ -2,7 +2,26 @@
 	--primary-btn-color: black;
 	--primary-btn-text-color: white;
 
-	--secondary-btn-color: pink;
+	--primary-background-color: #171717;
+	--secondary-background-color: #1e1e1e;
+	--primary-text-color: white;
+
+	--primary-border-color: #3d3d3d;
+
+	--secondary-btn-color: rgba(255, 255, 255, 0.8);
 	--secondary-btn-text-color: black;
-	--test-color: "green";
+
+	--new-search-btn-color: rgba(255, 255, 255, 0.8);
+	--new-search-btn-text-color: black;
+
+	--user-chat-bg-color: #282828;
+	--user-chat-border-color: #282828;
+	--assistant-chat-bg-color: linear-gradient(
+			0deg,
+			rgba(13, 13, 13, 0.95) 0%,
+			rgba(13, 13, 13, 0.95) 100%
+		),
+		#fff;
+	--user-chat-txt-color: white;
+	--assistant-chat-txt-color: white;
 }

@@ -59,8 +59,8 @@
 <div
 	class="relative min-h-0 min-w-0"
 	style={$theme == "light"
-		? "background-color: #F7F7F7; overflow-y: auto; height: calc(100vh - 70px)"
-		: "background-color: #F7F7F7; overflow-y: auto; height: calc(100vh - 70px)"}
+		? "background-color: var(--secondary-background-color); overflow-y: auto; height: calc(100vh - 70px)"
+		: "background-color: var(--secondary-background-color); overflow-y: auto; height: calc(100vh - 70px)"}
 >
 	{#if loginModalOpen}
 		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
@@ -97,7 +97,7 @@
 		</div>
 		<form
 			on:submit|preventDefault={handleSubmit}
-			style="background-color: #fff; border-radius: 8px"
+			style="background-color: var(--secondary-background-color); border-radius: 8px; overflow:hidden; border: 1px solid var(--user-chat-border-color);"
 			class="relative flex w-full max-w-4xl flex-1 items-center border focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
 			{isReadOnly ? 'opacity-30' : ''}"
 		>
@@ -186,6 +186,6 @@
 
 <style>
 	.solidBootomWrap {
-		background-color: #f7f7f7;
+		background-color: var(--secondary-background-color);
 	}
 </style>
