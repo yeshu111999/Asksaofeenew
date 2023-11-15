@@ -924,7 +924,48 @@
 					],
 					prompt:
 						" Generate a detailed letter to USCIS requesting a family-based green card for [fieldValue2], [fieldValue3] of the petitioner [fieldValue1]. Provide a comprehensive overview of the relationship, including the familial ties, history, and any significant events that emphasize the genuine nature of the relationship. Detail the petitioner's current immigration status and any relevant immigration history. Clearly articulate the reasons and circumstances necessitating the green card application, emphasizing the need for family reunification and the potential hardships that may arise if the green card is not granted. Include any supporting documentation or evidence that strengthens the case, such as family photographs, affidavits from family members, or other relevant proofs of the bona fide relationship. Ensure that the letter adheres to USCIS guidelines and regulations for family-based green card petitions. Note- Please don't mention yourself as an immigration officer.",
-				},		
+				},	
+				{
+					imageUrl: ["/assets/images/templates/Professional/L-1 Visa Petition Letter 1.jpg",
+					"/assets/images/templates/Professional/L-1 Visa Petition Letter 2.jpg",
+					"/assets/images/templates/Professional/L-1 Visa Petition Letter 3.jpg",
+				],
+
+					resumeTitle: "L-1 Visa Petition Letter",
+					resumeDescription: "",
+					id: "professional-8",
+					tag: "Professional",
+					inputFields: [
+						{
+							name: "L-1 category",
+							label: "Ex: L-1A,L-1B",
+							fieldType: "textfield",
+							fieldValue: "",
+					
+						},
+						{
+							name: "Beneficiary's Full Name",
+							label: "Ex: Kim",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Role of Beneficiary",
+							label: "Ex: Data Scientist",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: " Petitioner's Company Name",
+							label: "Ex: Google,Amazon",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+	
+					],
+					prompt:
+						" Generate a compelling [fieldValue1] visa petition letter addressed to USCIS on behalf of [fieldValue2], by [fieldValue4]. Present a detailed overview of the professional relationship between the petitioner and the beneficiary, highlighting their roles, responsibilities, and achievements within the company. Provide a comprehensive history of the petitioner's business in the U.S., underscoring the necessity and benefits of transferring the beneficiary to a U.S.-based role as a [fieldValue3]. Include information about the petitioner's current immigration status and any pertinent immigration history, ensuring clarity and compliance with USCIS guidelines. Clearly articulate the reasons for the [fieldValue1] visa application, emphasizing the essential role the beneficiary plays in the company's operations and the advantages of having their expertise in the U.S. Describe any potential challenges or disruptions to business operations if the [fieldValue1] visa is not granted. Attach supporting documentation, such as organizational charts, employment contracts, letters of recommendation, and evidence of the beneficiary's qualifications and achievements. Ensure that the letter aligns with USCIS regulations for L-1 visa petitions, providing a strong and compelling case for the approval of the visa application. Note: Do not mention yourself as an immigration officer.",
+				},	
 			],
 		},
 		{
