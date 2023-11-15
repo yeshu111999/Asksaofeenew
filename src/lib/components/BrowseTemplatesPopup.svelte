@@ -822,11 +822,11 @@
 					prompt:
 						"Generate an employment offer letter with the following terms of the offer - Job Title - [fieldValue1], Company Name - [fieldValue2], Start Date - [fieldValue3], Salary per year - [fieldValue4], Benefits - [fieldValue5], Vacation Time (No.of days per year) - [fieldValue6], Holidays (List holidays observed by the company) - [fieldValue7], Additional Details (Tasks and Responsibilities) - [fieldValue8].Please don't mention yourself as an immigration officer.",
 				},
-			{
-					imageUrl: ["/assets/images/templates/Professional/h1b petition letter1(1).jpg",
-					"/assets/images/templates/Professional/h1b petition letter1(2).jpg"
-
-				],
+				{
+					imageUrl: [
+						"/assets/images/templates/Professional/h1b petition letter1(1).jpg",
+						"/assets/images/templates/Professional/h1b petition letter1(2).jpg",
+					],
 					resumeTitle: "H1B Visa Petition Letter",
 					resumeDescription: "",
 					id: "professional-5",
@@ -837,7 +837,6 @@
 							label: "Ex: Google,Amazon",
 							fieldType: "textfield",
 							fieldValue: "",
-					
 						},
 						{
 							name: "Beneficiary's Full Name",
@@ -851,16 +850,15 @@
 							fieldType: "textfield",
 							fieldValue: "",
 						},
-	
 					],
 					prompt:
 						" Generate a detailed letter to USCIS petitioning for an H-1B visa for [fieldValue2] on behalf of [fieldValue1]. Include details about [fieldValue2]  qualifications,[fieldValue3], and the employer's need for their expertise. Make sure to include - 1. Detailed information about the company, highlighting its key aspects. 2. Description of the position of [fieldValue3] for which the H1B visa is being sought, in a very detailed manner by emphasizing its significance along with the details on responsibilities, requirements and qualifications for the position. 7. Provide a detailed description about the qualifications of [fieldValue2], showcasing their strengths and suitability for the specified position of [fieldValue3]. Please don't mention yourself as an immigration officer.",
 				},
 				{
-					imageUrl: ["/assets/images/templates/Professional/o1.png",
-					"/assets/images/templates/Professional/o1.1.png"
-
-				],
+					imageUrl: [
+						"/assets/images/templates/Professional/o1.png",
+						"/assets/images/templates/Professional/o1.1.png",
+					],
 					resumeTitle: "O-1 Extraordinary Ability Visa Petition Letter",
 					resumeDescription: "",
 					id: "professional-6",
@@ -871,7 +869,6 @@
 							label: "Ex: Google,Amazon",
 							fieldType: "textfield",
 							fieldValue: "",
-					
 						},
 						{
 							name: "Beneficiary's Full Name",
@@ -885,16 +882,16 @@
 							fieldType: "textfield",
 							fieldValue: "",
 						},
-	
 					],
 					prompt:
 						" Generate a detailed compelling letter to USCIS for an O-1 visa on behalf of [fieldValue1] for [fieldValue2], showcasing their extraordinary ability in [fieldValue3]. Include detailed evidence of their exceptional achievements, recognition, and contributions to their field, such as specific awards, publications, or notable projects. Emphasize the unique expertise that the beneficiary brings and articulate how their visit to the United States will significantly benefit the field or industry. Make sure to include detailed information about the [fieldValue1]. Ensure the letter aligns with USCIS requirements for O-1 visa petitions and is supported by relevant documentation. Note- Please don't mention yourself as an immigration officer.",
 				},
 				{
-					imageUrl: ["/assets/images/templates/Professional/familybasedpetition01.jpg",
-					"/assets/images/templates/Professional/familybasedpetition02.jpg",
-					"/assets/images/templates/Professional/familybasedpetition03.jpg",
-				],
+					imageUrl: [
+						"/assets/images/templates/Professional/familybasedpetition01.jpg",
+						"/assets/images/templates/Professional/familybasedpetition02.jpg",
+						"/assets/images/templates/Professional/familybasedpetition03.jpg",
+					],
 
 					resumeTitle: "Family-based Green Card Petition Letter",
 					resumeDescription: "",
@@ -906,7 +903,6 @@
 							label: "Ex: John",
 							fieldType: "textfield",
 							fieldValue: "",
-					
 						},
 						{
 							name: "Beneficiary's Full Name",
@@ -920,11 +916,10 @@
 							fieldType: "textfield",
 							fieldValue: "",
 						},
-	
 					],
 					prompt:
 						" Generate a detailed letter to USCIS requesting a family-based green card for [fieldValue2], [fieldValue3] of the petitioner [fieldValue1]. Provide a comprehensive overview of the relationship, including the familial ties, history, and any significant events that emphasize the genuine nature of the relationship. Detail the petitioner's current immigration status and any relevant immigration history. Clearly articulate the reasons and circumstances necessitating the green card application, emphasizing the need for family reunification and the potential hardships that may arise if the green card is not granted. Include any supporting documentation or evidence that strengthens the case, such as family photographs, affidavits from family members, or other relevant proofs of the bona fide relationship. Ensure that the letter adheres to USCIS guidelines and regulations for family-based green card petitions. Note- Please don't mention yourself as an immigration officer.",
-				},		
+				},
 			],
 		},
 		{
@@ -1062,7 +1057,7 @@
 
 	function closeShowTemplatePopup() {
 		showSelectedTemplate = false;
-		activeTabIndex = 0;
+		activeTabIndex = activeTabIndex;
 	}
 
 	function selectedStudentTemplate(event) {
@@ -1132,6 +1127,8 @@
 				</p>
 				<div class="body scrollbar-custom">
 					<Tabs
+						bind:activeTabIndex
+						initialTab={activeTabIndex}
 						variant="default"
 						color={$theme == "dark"
 							? "rgba(255, 255, 255, 0.2)"
@@ -1145,49 +1142,43 @@
 							class={$theme == "light" ? "light" : "dark"}
 							style={activeTabIndex == 0 ? "font-weight:600;" : ""}
 						>
-							{#if activeTabIndex == 0}
-								<div class="tabDetailsWrapInternal">
-									{#each activeTemplates as template, i}
-										<ResumeTemplate
-											on:selectedTemplate={selectedStudentTemplate}
-											index={i}
-											imageUrl={template.imageUrl[0]}
-											resumeTitle={template.resumeTitle}
-											resumeDescription={template.resumeDescription}
-										/>
-									{/each}
-								</div>
-							{/if}
+							<div class="tabDetailsWrapInternal">
+								{#each activeTemplates as template, i}
+									<ResumeTemplate
+										on:selectedTemplate={selectedStudentTemplate}
+										index={i}
+										imageUrl={template.imageUrl[0]}
+										resumeTitle={template.resumeTitle}
+										resumeDescription={template.resumeDescription}
+									/>
+								{/each}
+							</div>
 						</Tabs.Tab>
 						<Tabs.Tab label="Professional" style={activeTabIndex == 1 ? "font-weight:600;" : ""}>
-							{#if activeTabIndex == 1}
-								<div class="tabDetailsWrapInternal">
-									{#each activeTemplates as template, i}
-										<ResumeTemplate
-											on:selectedTemplate={selectedProfessionalTemplate}
-											index={i}
-											imageUrl={template.imageUrl[0]}
-											resumeTitle={template.resumeTitle}
-											resumeDescription={template.resumeDescription}
-										/>
-									{/each}
-								</div>
-							{/if}
+							<div class="tabDetailsWrapInternal">
+								{#each activeTemplates as template, i}
+									<ResumeTemplate
+										on:selectedTemplate={selectedProfessionalTemplate}
+										index={i}
+										imageUrl={template.imageUrl[0]}
+										resumeTitle={template.resumeTitle}
+										resumeDescription={template.resumeDescription}
+									/>
+								{/each}
+							</div>
 						</Tabs.Tab>
 						<Tabs.Tab label="Tourist" style={activeTabIndex == 2 ? "font-weight:600;" : ""}>
-							{#if activeTabIndex == 2}
-								<div class="tabDetailsWrapInternal">
-									{#each activeTemplates as template, i}
-										<ResumeTemplate
-											on:selectedTemplate={selectedTouristsTemplate}
-											index={i}
-											imageUrl={template.imageUrl[0]}
-											resumeTitle={template.resumeTitle}
-											resumeDescription={template.resumeDescription}
-										/>
-									{/each}
-								</div>
-							{/if}
+							<div class="tabDetailsWrapInternal">
+								{#each activeTemplates as template, i}
+									<ResumeTemplate
+										on:selectedTemplate={selectedTouristsTemplate}
+										index={i}
+										imageUrl={template.imageUrl[0]}
+										resumeTitle={template.resumeTitle}
+										resumeDescription={template.resumeDescription}
+									/>
+								{/each}
+							</div>
 						</Tabs.Tab>
 					</Tabs>
 				</div>

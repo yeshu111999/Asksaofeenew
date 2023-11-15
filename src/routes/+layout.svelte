@@ -20,6 +20,7 @@
 	import { SvelteUIProvider } from "@svelteuidev/core";
 
 	import { currentTheme } from "$lib/stores/themeStore";
+	import Analytics from "$lib/components/Analytics.svelte";
 
 	export let data;
 
@@ -165,6 +166,7 @@
 	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
 </svelte:head>
 
+<Analytics />
 <div
 	class="grid h-full w-screen grid-cols-1 grid-rows-[auto,1fr] overflow-hidden text-smd dark:text-gray-300 "
 >

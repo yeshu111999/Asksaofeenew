@@ -5,6 +5,7 @@
 	import "../../styles/main.css";
 	import { base } from "$app/paths";
 	import { PUBLIC_ORIGIN, PUBLIC_APP_DISCLAIMER } from "$env/static/public";
+	import Analytics from "$lib/components/Analytics.svelte";
 
 	import { shareConversation } from "$lib/shareConversation";
 	import { UrlDependency } from "$lib/types/UrlDependency";
@@ -352,6 +353,7 @@
 		<slot />
 	</SvelteUIProvider>
 </div> -->
+<Analytics />
 
 <div class="navbar-container">
 	<NavBar
