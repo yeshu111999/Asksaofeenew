@@ -13,6 +13,7 @@
 	import { findCurrentModel } from "$lib/utils/models";
 	import { createStyles, Tabs } from "@svelteuidev/core";
 	import { theme } from "$lib/stores/theme";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let currentModel: Model;
 	export let settings: LayoutData["settings"];
@@ -101,17 +102,13 @@
 			<!-- <Tabs variant="unstyled" position="apart"> -->
 			<Tabs
 				variant="default"
-				color={$theme == "dark"
-					? "rgba(255, 255, 255, 0.2)"
-					: "black" + themeVariable == "dark"
-					? "rgba(255, 255, 255, 0.2)"
-					: "black"}
+				color={$currentTheme == "light" ? "black" : "white"}
 				position="center"
 				on:change={renderDescriptionTab}
 			>
 				<Tabs.Tab
 					label="Student"
-					class={classes.root + $theme == "light" ? "light" : "dark"}
+					class={classes.root + $currentTheme == "light" ? "light" : "dark"}
 					style={activeHomeTabIndex == 0 ? "font-weight:500;" : ""}
 				>
 					{#if activeHomeTabIndex == 0}
@@ -243,7 +240,7 @@
 
 	.tabBodyWrap {
 		/* border: #fff solid 2px; */
-		border: #dddddd solid 1px;
+		border: var(--primary-border-color) solid 1px;
 		border-radius: 12px;
 		display: flex;
 		flex-direction: column;
@@ -254,7 +251,7 @@
 
 	.tabBodyWrap.light {
 		/*	border: black solid 1px;*/
-		border: #dddddd solid 1px;
+		border: var(--primary-border-color) solid 1px;
 	}
 
 	.tabDetailsWrap {

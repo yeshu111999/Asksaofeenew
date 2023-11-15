@@ -171,7 +171,7 @@
 
 	function changeTheme() {
 		if ($currentTheme == "light") {
-			currentTheme.set("blue");
+			currentTheme.set("dark");
 		} else {
 			currentTheme.set("light");
 		}
@@ -602,8 +602,8 @@
 	<button class="logoWrap" on:click={gotoHome}>
 		{#if $currentTheme == "light"}
 			<img src="/assets/images/statue-liberty.jpg" width="40px" />
-		{:else}
-			<img src="/assets/images/logo.svg" width="25px" />
+			<!-- {:else}
+			<img src="/assets/images/logo.svg" width="25px" /> -->
 		{/if}
 		<p class="title">ImmiGPT</p>
 	</button>
@@ -640,17 +640,29 @@
 						<p>{profileImg ? profileImg : ""}</p>
 					</div>
 					{#if opened}
-						<span class="dropdown" on:click={() => (opened = !opened)}
-							><img
-								style="transform: rotate(180deg);"
-								src="/assets/icons/dropdown-icon.svg"
-								alt=""
-							/></span
-						>
+						<span class="dropdown" on:click={() => (opened = !opened)}>
+							{#if $currentTheme == "light"}
+								<img
+									style="transform: rotate(180deg);"
+									src="/assets/icons/dropdown-icon.svg"
+									alt=""
+								/>
+							{:else}
+								<img
+									style="transform: rotate(180deg);"
+									src="/assets/icons/dropdown-icon-white.svg"
+									alt=""
+								/>
+							{/if}
+						</span>
 					{:else if !opened}
-						<span class="dropdown" on:click={() => (opened = !opened)}
-							><img src="/assets/icons/dropdown-icon.svg" alt="" /></span
-						>
+						<span class="dropdown" on:click={() => (opened = !opened)}>
+							{#if $currentTheme == "light"}
+								<img src="/assets/icons/dropdown-icon.svg" alt="" />
+							{:else}
+								<img src="/assets/icons/dropdown-icon-white.svg" alt="" />
+							{/if}
+						</span>
 					{/if}
 				{/if}
 			</div>
@@ -703,9 +715,9 @@
 						<img class="icon" src="/assets/icons/theme-icon.png" alt="" />
 						<span class="menuBtnTxt">Theme</span>
 						<Switch
-							checked={$currentTheme == "blue"}
+							checked={$currentTheme == "light"}
 							onLabel="light"
-							offLabel="color"
+							offLabel="dark"
 							size="md"
 							on:click={changeTheme}
 						/>
@@ -937,16 +949,16 @@
 		display: inline-flex;
 		padding: 15px 24px 15px 16px;
 		align-items: center;
-		background: #fff;
-		box-shadow: 0px 1px 0px 0px #e1e1e1;
+		background: var(--primary-background-color);
+		box-shadow: 0px 1px 0px 0px var(--primary-border-color);
 		height: 70px;
 		width: 100%;
 		justify-content: space-between;
-		border-bottom: 1px solid #e1e1e1;
+		border-bottom: 1px solid var(--primary-border-color);
 	}
 
 	.title {
-		color: #131313;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 24px;
 		font-style: normal;
@@ -1015,11 +1027,11 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 32px;
-		background: #ececec;
+		background: var(--secondary-background-color);
 	}
 
 	.profile-image p {
-		color: #5d5c5c;
+		color: var(--primary-text-color);
 
 		font-family: Inter;
 		font-size: 14px;

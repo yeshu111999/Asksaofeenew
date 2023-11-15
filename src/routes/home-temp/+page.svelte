@@ -908,7 +908,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #f7f7f7;
+		background-color: var(--secondary-background-color);
 	}
 
 	.pricingDetailSubTitle {

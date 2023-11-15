@@ -301,7 +301,7 @@
 		sizes="180x180"
 		type="image/png"
 	/>
-	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "light"} />
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
 	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
 </svelte:head>
 
@@ -366,7 +366,11 @@
 		<div class="left-menu">
 			<div class="left-menu-top">
 				<a class="new-search-btn" href={`${base}/`}>
-					<img src="/assets/icons/search-icon-white.svg" alt="" />
+					{#if $currentTheme == "light"}
+						<img src="/assets/icons/search-icon-white.svg" alt="" />
+					{:else}
+						<img src="/assets/icons/search-icon-black.svg" alt="" />
+					{/if}
 					<p>New Search</p>
 				</a>
 			</div>
@@ -402,7 +406,11 @@
 				</div>
 				<div class="left-menu-bottom">
 					<button class="icon-text" on:click={toggleBrowseTemplatesPopup}>
-						<img src="/assets/icons/template-icon-black.svg" alt="" />
+						{#if $currentTheme == "light"}
+							<img src="/assets/icons/template-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/template-icon-white.svg" alt="" />
+						{/if}
 						<p>Browse Templates</p>
 					</button>
 					<!-- <button class="icon-text">
@@ -410,15 +418,27 @@
 						<p>P2P Chatter</p>
 					</button> -->
 					<button class="icon-text" on:click={toggleVisaPreperationPopUp}>
-						<img src="/assets/icons/visa-icon-black.svg" alt="" />
+						{#if $currentTheme == "light"}
+							<img src="/assets/icons/visa-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/visa-icon-white.svg" alt="" />
+						{/if}
 						<p>Visa Preparation</p>
 					</button>
 					<button class="icon-text" on:click={toggleImmigrationHelpPopUp}>
-						<img src="/assets/icons/help-icon-black.svg" alt="" />
+						{#if $currentTheme == "light"}
+							<img src="/assets/icons/help-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/help-icon-white.svg" alt="" />
+						{/if}
 						<p>Immigration Help</p>
 					</button>
 					<button on:click={openBlogs} class="icon-text">
-						<img src="/assets/icons/visa-icon-black.svg" alt="" />
+						{#if $currentTheme == "light"}
+							<img src="/assets/icons/visa-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/visa-icon-white.svg" alt="" />
+						{/if}
 						<p>Blogs</p>
 					</button>
 					<!-- <div class="button-wrapper">
@@ -431,7 +451,11 @@
 			<div class="left-menu-mobile">
 				<div class="left-menu-top">
 					<a class="new-search-btn" href={`${base}/`}>
-						<img src="/assets/icons/search-icon-white.svg" alt="" />
+						{#if $currentTheme == "dark"}
+							<img src="/assets/icons/search-icon-white.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/search-icon-black.svg" alt="" />
+						{/if}
 						<p>New Search</p>
 					</a>
 				</div>
@@ -689,9 +713,9 @@
 		width: 240px;
 		height: calc(100vh - 70px);
 		flex-shrink: 0;
-		background: #fff;
+		background: var(--primary-background-color);
 		box-shadow: 1px 0px 0px 0px #e1e1e1;
-		border-right: 1px solid #e1e1e1;
+		border-right: 1px solid var(--primary-border-color);
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -723,10 +747,10 @@
 		gap: 8px;
 		flex-shrink: 0;
 		border-radius: 8px;
-		background: var(--primary-btn-color);
+		background: var(--new-search-btn-color);
 	}
 	.new-search-btn p {
-		color: var(--primary-btn-text-color);
+		color: var(--new-search-btn-text-color);
 		text-align: center;
 		font-family: Inter;
 		font-size: 13px;
@@ -766,8 +790,8 @@
 		/* padding: 20px; */
 		height: 200px;
 		padding-bottom: 20px;
-		border-top: 1px solid #e1e1e1;
-		background: white;
+		border-top: 1px solid var(--primary-border-color);
+		background: var(--primary-background-color);
 		z-index: 1;
 	}
 
@@ -889,9 +913,9 @@
 			width: 240px;
 			height: calc(100vh - 70px);
 			flex-shrink: 0;
-			background: #fff;
+			background: var(--primary-background-color);
 			box-shadow: 1px 0px 0px 0px #e1e1e1;
-			border-right: 1px solid #e1e1e1;
+			border-right: 1px solid var(--primary-border-color);
 			position: absolute;
 			display: flex;
 			flex-direction: column;

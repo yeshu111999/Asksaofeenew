@@ -2,9 +2,28 @@
 	--primary-btn-color: black;
 	--primary-btn-text-color: white;
 	--primary-btn-disabled-color: gray;
+
 	--primary-text-color: black;
+	--primary-background-color: white;
+	--secondary-background-color: white;
+	--primary-box-shadow-color: #e1e1e1;
+	--primary-border-color: #e1e1e1;
 
 	--secondary-btn-color: gray;
 	--secondary-btn-text-color: black;
-	--test-color: "green";
+
+	--new-search-btn-color: black;
+	--new-search-btn-text-color: white;
+
+	--user-chat-bg-color: #fff;
+	--user-chat-border-color: #e1e1e1;
+	--assistant-chat-bg-color: linear-gradient(
+			0deg,
+			rgba(255, 255, 255, 0.95) 0%,
+			rgba(255, 255, 255, 0.95) 100%
+		),
+		#000;
+
+	--user-chat-txt-color: white;
+	--assistant-chat-txt-color: white;
 }

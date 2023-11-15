@@ -156,9 +156,14 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">Visa Interview and Immigration Preparation with Simulated Scenarios</div>
+								<div class="featureTextTitle">
+									Visa Interview and Immigration Preparation with Simulated Scenarios
+								</div>
 								<div class="featureTextDesc">
-									Access a tailored compilation of anticipated questions and answers for your visa interview and immigration, personalized to your unique situation. Additionally, immerse yourself in simulated mock visa interviews and immigration scenarios that closely match your current circumstances.
+									Access a tailored compilation of anticipated questions and answers for your visa
+									interview and immigration, personalized to your unique situation. Additionally,
+									immerse yourself in simulated mock visa interviews and immigration scenarios that
+									closely match your current circumstances.
 								</div>
 							</div>
 						</div>
@@ -253,7 +258,15 @@
 						<div class="featureMainCardFull">
 							<div class="featureTextTitle">What gives ImmiGPT a competitive edge ?</div>
 							<div class="featureTextDesc">
-								ImmiGPT simplifies the complex immigration process by addressing critical market gaps. Unlike Other GPT’s, ImmiGPT ensures access to real-time, up-to-date information eliminating knowledge restrictions. Its specialized training data ensures precise advice, focusing on immigration laws. The platform's unique reasoning module, paired with Large Language Model technology, facilitates logical reasoning, inference, and decision-making, offering personalized solutions. ImmiGPT stands as an innovative, efficient, and personalized alternative, empowering clients to navigate the complexities of immigration confidently and achieve their goals without unnecessary stress or delay.
+								ImmiGPT simplifies the complex immigration process by addressing critical market
+								gaps. Unlike Other GPT’s, ImmiGPT ensures access to real-time, up-to-date
+								information eliminating knowledge restrictions. Its specialized training data
+								ensures precise advice, focusing on immigration laws. The platform's unique
+								reasoning module, paired with Large Language Model technology, facilitates logical
+								reasoning, inference, and decision-making, offering personalized solutions. ImmiGPT
+								stands as an innovative, efficient, and personalized alternative, empowering clients
+								to navigate the complexities of immigration confidently and achieve their goals
+								without unnecessary stress or delay.
 							</div>
 						</div>
 					</div>
@@ -293,14 +306,12 @@
 								</svg>
 							</div>
 							<div class="featureTextWrap">
-								<div class="featureTextTitle">
-									Web Search Functionality
-								</div>
+								<div class="featureTextTitle">Web Search Functionality</div>
 								<div class="featureTextDesc">
-									Enhance your search experience with our web search function, extracting precise and
-								organized responses directly from the web that are relevant to your queries. This
-								enables you to bypass the manual web scraping hassle, saving time and ensuring
-								accurate, up-to-date information tailored to your needs.
+									Enhance your search experience with our web search function, extracting precise
+									and organized responses directly from the web that are relevant to your queries.
+									This enables you to bypass the manual web scraping hassle, saving time and
+									ensuring accurate, up-to-date information tailored to your needs.
 								</div>
 							</div>
 						</div>
@@ -565,9 +576,7 @@
 						</div>
 						<div class="logoTitle">ImmiGPT</div>
 					</div>
-					<div class="footerAboutDesc">
-						A Generative AI For Immigration And Travel
-					</div>
+					<div class="footerAboutDesc">A Generative AI For Immigration And Travel</div>
 				</div>
 				<div class="footerLinksWrap">
 					<div class="linkSection">
@@ -877,7 +886,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #f7f7f7;
+		background-color: var(--secondary-background-color);
 	}
 
 	.pricingDetailSubTitle {
