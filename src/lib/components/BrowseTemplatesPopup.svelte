@@ -856,8 +856,8 @@
 				},
 				{
 					imageUrl: [
-						"/assets/images/templates/Professional/o1.png",
-						"/assets/images/templates/Professional/o1.1.png",
+						"/assets/images/templates/Professional/o1 Petition 1.jpg",
+						"/assets/images/templates/Professional/o1 Petition 2.jpg",
 					],
 					resumeTitle: "O-1 Extraordinary Ability Visa Petition Letter",
 					resumeDescription: "",
@@ -961,6 +961,46 @@
 					prompt:
 						" Generate a compelling [fieldValue1] visa petition letter addressed to USCIS on behalf of [fieldValue2], by [fieldValue4]. Present a detailed overview of the professional relationship between the petitioner and the beneficiary, highlighting their roles, responsibilities, and achievements within the company. Provide a comprehensive history of the petitioner's business in the U.S., underscoring the necessity and benefits of transferring the beneficiary to a U.S.-based role as a [fieldValue3]. Include information about the petitioner's current immigration status and any pertinent immigration history, ensuring clarity and compliance with USCIS guidelines. Clearly articulate the reasons for the [fieldValue1] visa application, emphasizing the essential role the beneficiary plays in the company's operations and the advantages of having their expertise in the U.S. Describe any potential challenges or disruptions to business operations if the [fieldValue1] visa is not granted. Attach supporting documentation, such as organizational charts, employment contracts, letters of recommendation, and evidence of the beneficiary's qualifications and achievements. Ensure that the letter aligns with USCIS regulations for L-1 visa petitions, providing a strong and compelling case for the approval of the visa application. Note: Do not mention yourself as an immigration officer.",
 				},	
+				{
+					imageUrl: ["/assets/images/templates/Professional/Asylum Petition Letter 01.jpg",
+					"/assets/images/templates/Professional/Asylum Petition Letter 02.jpg",
+									],
+
+					resumeTitle: "Asylum Visa Petition Letter",
+					resumeDescription: "",
+					id: "professional-9",
+					tag: "Professional",
+					inputFields: [
+						{
+							name: "Full Name",
+							label: "Ex: John Kim",
+							fieldType: "textfield",
+							fieldValue: "",
+					
+						},
+						{
+							name: "Home Country",
+							label: "Ex: India, Nepal",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Brief reason for seeking asylum and Any specific details about persecution ",
+							label: "Ex: Life threat from XYZ ",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: " Any additional information or requests",
+							label: "Ex: None",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+	
+					],
+					prompt:
+						" Generate a compelling asylum petition letter addressed to the USCIS on behalf of [fieldValue1]. Clearly outline the reasons for seeking asylum, highlighting the specific persecution fears based on factors such as race, religion, nationality, political opinion, or membership in a particular social group. Provide a detailed summary of incidents or circumstances in [fieldValue2]], your home country that have led to your fear of persecution. Emphasize the urgency and seriousness of the situation. Include any supporting evidence, such as newspaper articles, medical reports, or affidavits from witnesses. Conclude by expressing your sincere request for the asylum officer's thorough consideration of your application. Keep the letter formal, detailed, and in line with USCIS guidelines. Here is a brief reason for seeking asylum and details about persecution - [fieldValue3]. [fieldValue4]. Note: Do not mention yourself as an immigration officer.",
+				},
 			],
 		},
 		{
