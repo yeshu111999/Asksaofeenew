@@ -37,7 +37,7 @@
 						radius="xl"
 						size="md"
 					>
-						Sign up
+						<span style="color: #222 !important;">Sign up</span>
 					</Button>
 					<Button on:click={() => (loginModalOpen = true)} color="dark" radius="xl" size="md">
 						Login
@@ -48,19 +48,20 @@
 		<div class="landPgHeroWrap">
 			<div class="landPgHeroDetailWrap">
 				<div class="landPgHeroTitle1">A Generative AI</div>
-				<div class="landPgHeroTitle2">For Immigration and Travel</div>
+				<div class="landPgHeroTitle2">For Immigration and Travels</div>
 				<div class="landPgHeroDesc">
 					ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
 					responses to your Travel and Immigration concerns.
 				</div>
 			</div>
 			<div class="landPgHeroMailSection2">
-				<div class="landPgHeroMailInputWrap">
+				<!-- <div class="landPgHeroMailInputWrap">
 					<input class="landPgHeroMailInput" type="text" placeholder="Enter Email address" />
 					<Button on:click={() => (loginModalOpen = true)} color="dark" radius="xl" size="xs"
 						>Try now</Button
 					>
-				</div>
+				</div> -->
+				<Button color="dark" radius="xl" size="lg">Get Started It’s Free</Button>
 				<div class="freePlanWrap">
 					<div class="freeIconWrap">
 						<svg
@@ -88,7 +89,7 @@
 					</div>
 					<div class="freePlanTitle">Free Plan Available</div>
 				</div>
-				<img src="/assets/images/previewImm.png" style="margin-top: 16px;" alt="" />
+				<img src="/assets/images/immpng.png" style="margin-top: 16px;" alt="" />
 			</div>
 		</div>
 		<div class="featureDetailSection">

@@ -919,12 +919,13 @@
 					],
 					prompt:
 						" Generate a detailed letter to USCIS requesting a family-based green card for [fieldValue2], [fieldValue3] of the petitioner [fieldValue1]. Provide a comprehensive overview of the relationship, including the familial ties, history, and any significant events that emphasize the genuine nature of the relationship. Detail the petitioner's current immigration status and any relevant immigration history. Clearly articulate the reasons and circumstances necessitating the green card application, emphasizing the need for family reunification and the potential hardships that may arise if the green card is not granted. Include any supporting documentation or evidence that strengthens the case, such as family photographs, affidavits from family members, or other relevant proofs of the bona fide relationship. Ensure that the letter adheres to USCIS guidelines and regulations for family-based green card petitions. Note- Please don't mention yourself as an immigration officer.",
-				},	
+				},
 				{
-					imageUrl: ["/assets/images/templates/Professional/L-1 Visa Petition Letter 1.jpg",
-					"/assets/images/templates/Professional/L-1 Visa Petition Letter 2.jpg",
-					"/assets/images/templates/Professional/L-1 Visa Petition Letter 3.jpg",
-				],
+					imageUrl: [
+						"/assets/images/templates/Professional/L-1 Visa Petition Letter 1.jpg",
+						"/assets/images/templates/Professional/L-1 Visa Petition Letter 2.jpg",
+						"/assets/images/templates/Professional/L-1 Visa Petition Letter 3.jpg",
+					],
 
 					resumeTitle: "L-1 Visa Petition Letter",
 					resumeDescription: "",
@@ -936,7 +937,6 @@
 							label: "Ex: L-1A,L-1B",
 							fieldType: "textfield",
 							fieldValue: "",
-					
 						},
 						{
 							name: "Beneficiary's Full Name",
@@ -956,15 +956,15 @@
 							fieldType: "textfield",
 							fieldValue: "",
 						},
-	
 					],
 					prompt:
 						" Generate a compelling [fieldValue1] visa petition letter addressed to USCIS on behalf of [fieldValue2], by [fieldValue4]. Present a detailed overview of the professional relationship between the petitioner and the beneficiary, highlighting their roles, responsibilities, and achievements within the company. Provide a comprehensive history of the petitioner's business in the U.S., underscoring the necessity and benefits of transferring the beneficiary to a U.S.-based role as a [fieldValue3]. Include information about the petitioner's current immigration status and any pertinent immigration history, ensuring clarity and compliance with USCIS guidelines. Clearly articulate the reasons for the [fieldValue1] visa application, emphasizing the essential role the beneficiary plays in the company's operations and the advantages of having their expertise in the U.S. Describe any potential challenges or disruptions to business operations if the [fieldValue1] visa is not granted. Attach supporting documentation, such as organizational charts, employment contracts, letters of recommendation, and evidence of the beneficiary's qualifications and achievements. Ensure that the letter aligns with USCIS regulations for L-1 visa petitions, providing a strong and compelling case for the approval of the visa application. Note: Do not mention yourself as an immigration officer.",
-				},	
+				},
 				{
-					imageUrl: ["/assets/images/templates/Professional/Asylum Petition Letter 01.jpg",
-					"/assets/images/templates/Professional/Asylum Petition Letter 02.jpg",
-									],
+					imageUrl: [
+						"/assets/images/templates/Professional/Asylum Petition Letter 01.jpg",
+						"/assets/images/templates/Professional/Asylum Petition Letter 02.jpg",
+					],
 
 					resumeTitle: "Asylum Visa Petition Letter",
 					resumeDescription: "",
@@ -976,7 +976,6 @@
 							label: "Ex: John Kim",
 							fieldType: "textfield",
 							fieldValue: "",
-					
 						},
 						{
 							name: "Home Country",
@@ -996,7 +995,6 @@
 							fieldType: "textfield",
 							fieldValue: "",
 						},
-	
 					],
 					prompt:
 						" Generate a compelling asylum petition letter addressed to the USCIS on behalf of [fieldValue1]. Clearly outline the reasons for seeking asylum, highlighting the specific persecution fears based on factors such as race, religion, nationality, political opinion, or membership in a particular social group. Provide a detailed summary of incidents or circumstances in [fieldValue2]], your home country that have led to your fear of persecution. Emphasize the urgency and seriousness of the situation. Include any supporting evidence, such as newspaper articles, medical reports, or affidavits from witnesses. Conclude by expressing your sincere request for the asylum officer's thorough consideration of your application. Keep the letter formal, detailed, and in line with USCIS guidelines. Here is a brief reason for seeking asylum and details about persecution - [fieldValue3]. [fieldValue4]. Note: Do not mention yourself as an immigration officer.",
@@ -1199,7 +1197,11 @@
 				<div class="header">
 					<p class="title">Browse Templates</p>
 					<button class="close-btn" on:click={closePopup}>
-						<img src="/assets/icons/close-icon-black.svg" alt="" />
+						{#if $currentTheme == "light"}
+							<img src="/assets/icons/close-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/close-icon-white.svg" alt="" />
+						{/if}
 					</button>
 				</div>
 				<p class="description">
@@ -1211,17 +1213,15 @@
 						bind:activeTabIndex
 						initialTab={activeTabIndex}
 						variant="default"
-						color={$theme == "dark"
-							? "rgba(255, 255, 255, 0.2)"
-							: "var(--primary-btn-color)" + themeVariable == "dark"
-							? "rgba(255, 255, 255, 0.2)"
-							: "var(--primary-btn-color)"}
+						color={$currentTheme == "dark" ? "white" : "black"}
 						on:change={renderDescriptionTab}
 					>
 						<Tabs.Tab
 							label="Student"
 							class={$theme == "light" ? "light" : "dark"}
-							style={activeTabIndex == 0 ? "font-weight:600;" : ""}
+							style={activeTabIndex == 0
+								? "font-weight:600;color:var(--primary-text-color) !important;"
+								: ""}
 						>
 							<div class="tabDetailsWrapInternal">
 								{#each activeTemplates as template, i}
@@ -1266,11 +1266,19 @@
 			{:else if showSelectedTemplate}
 				<div class="header">
 					<Button color="transparent" className="back-btn" on:click={closeShowTemplatePopup}>
-						<ThickArrowLeft size={24} color="#000" slot="leftIcon" />
+						<ThickArrowLeft
+							size={24}
+							color={$currentTheme == "light" ? "black" : "white"}
+							slot="leftIcon"
+						/>
 						<p class="title">Back to Templates</p>
 					</Button>
 					<button class="close-btn" on:click={closeShowTemplatePopup}>
-						<img src="/assets/icons/close-icon-black.svg" alt="" />
+						{#if $currentTheme == "light"}
+							<img src="/assets/icons/close-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/close-icon-white.svg" alt="" />
+						{/if}
 					</button>
 				</div>
 				<div class="body template-body scrollbar-custom">
@@ -1323,7 +1331,7 @@
 						<div class="buttons-wrapper">
 							<Button
 								disabled={isTemplateDisabled}
-								color="var(--primary-btn-color)"
+								color={$currentTheme == "light" ? "black" : "white"}
 								on:click={useTemplate}><p>Use Template</p></Button
 							>
 						</div>
@@ -1338,9 +1346,13 @@
 	<div class="overlay">
 		<div class="popup">
 			<div class="close-wrapper">
-				<button on:click={closePreview} class="close-btn"
-					><img src="/assets/icons/close-icon-black.svg" alt="" /></button
-				>
+				<button on:click={closePreview} class="close-btn">
+					{#if $currentTheme == "light"}
+						<img src="/assets/icons/close-icon-black.svg" alt="" />
+					{:else}
+						<img src="/assets/icons/close-icon-white.svg" alt="" />
+					{/if}
+				</button>
 			</div>
 			<div class="preview-container scrollbar-custom">
 				{#each selectedTemplate.imageUrl as image}
@@ -1385,7 +1397,7 @@
 		flex-direction: column;
 		/* align-items: center; */
 		border-radius: 4px;
-		background: var(--brand-colors-pure-white, #fff);
+		background: var(--secondary-background-color);
 		width: 60%;
 		height: 95vh;
 	}
@@ -1396,11 +1408,11 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border-bottom: 1px solid #e1e1e1;
+		border-bottom: 1px solid var(--primary-border-color);
 	}
 
 	.title {
-		color: #000;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 18px;
 		font-style: normal;
@@ -1409,7 +1421,7 @@
 	}
 
 	.description {
-		color: rgba(0, 0, 0, 0.54);
+		color: var(--secondary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
@@ -1443,7 +1455,7 @@
 	}
 
 	.templateTitle {
-		color: #000;
+		color: var(--primary-text-color);
 
 		font-family: Inter;
 		font-size: 24px;
@@ -1453,7 +1465,7 @@
 	}
 
 	.templateDescription {
-		color: rgba(0, 0, 0, 0.45);
+		color: var(--secondary-text-color);
 
 		font-family: Inter;
 		font-size: 14px;
@@ -1466,7 +1478,7 @@
 		border-radius: 48px;
 		/* background: #000; */
 		/* color: #fff; */
-		background: var(--primary-btn-color);
+		background: var(--use-template-btn-color);
 		display: inline-flex;
 		padding: 12px 24px;
 		justify-content: center;
@@ -1477,7 +1489,7 @@
 
 	.use-template-btn p {
 		/* background: var(--primary-btn-color); */
-		color: #fff;
+		color: var(--use-template-btn-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;

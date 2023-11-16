@@ -109,7 +109,7 @@
 				<Tabs.Tab
 					label="Student"
 					class={classes.root + $currentTheme == "light" ? "light" : "dark"}
-					style={activeHomeTabIndex == 0 ? "font-weight:500;" : ""}
+					style={activeHomeTabIndex == 0 ? "font-weight:600;color:var(--primary-text-color);" : ""}
 				>
 					{#if activeHomeTabIndex == 0}
 						<div class="tabDetailsWrapInternal">

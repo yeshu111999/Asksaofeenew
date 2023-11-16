@@ -36,7 +36,7 @@
 	}
 
 	.title {
-		color: #000;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 15px;
 		font-style: normal;
@@ -45,7 +45,7 @@
 	}
 
 	.description {
-		color: rgba(0, 0, 0, 0.45);
+		color: var(--secondary-text-color);
 		font-family: Inter;
 		font-size: 13px;
 		font-style: normal;
@@ -104,11 +104,11 @@
 		align-items: center;
 		gap: 8px;
 		border-radius: 48px;
-		background: var(--primary-btn-color);
+		background: var(--use-template-btn-color);
 	}
 
 	.use-template-btn p {
-		color: #fff;
+		color: var(--use-template-btn-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;

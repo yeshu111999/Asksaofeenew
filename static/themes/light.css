@@ -4,8 +4,11 @@
 	--primary-btn-disabled-color: gray;
 
 	--primary-text-color: black;
+	--secondary-text-color: black;
+
 	--primary-background-color: white;
 	--secondary-background-color: white;
+
 	--primary-box-shadow-color: #e1e1e1;
 	--primary-border-color: #e1e1e1;
 	--profile-bg-color: #ECECEC;
@@ -19,6 +22,9 @@
 	--new-search-btn-text-color: white;
 	--primary-border: 1px solid #e1e1e1;
 
+	--use-template-btn-color: black;
+	--use-template-btn-text-color: white;
+
 	--user-chat-bg-color: #fff;
 	--user-chat-border-color: #e1e1e1;
 	--assistant-chat-bg-color: linear-gradient(0deg,
@@ -28,4 +34,7 @@
 
 	--user-chat-txt-color: white;
 	--assistant-chat-txt-color: white;
+	--text-input-bg-color: white;
+	--text-input-border-color: #e1e1e1;
+	--text-input-placeholder: #929292;
 }
