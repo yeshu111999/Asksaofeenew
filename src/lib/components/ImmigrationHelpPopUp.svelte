@@ -2,9 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import { Button, TextInput, NativeSelect } from "@svelteuidev/core";
 
-	import ResumeTemplate from "./BrowseTemplates/ResumeTemplate.svelte";
-
-	import { theme } from "$lib/stores/theme";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	let dispatch = createEventDispatcher();
 	export let showTemplatesPopup = false;
@@ -58,7 +56,11 @@
 			<div class="header">
 				<p class="title">Immigration Help</p>
 				<button class="close-btn" on:click={closePopup}>
-					<img src="/assets/icons/close-icon-black.svg" alt="" />
+					{#if $currentTheme == "light"}
+						<img src="/assets/icons/close-icon-black.svg" alt="" />
+					{:else}
+						<img src="/assets/icons/close-icon-white.svg" alt="" />
+					{/if}
 				</button>
 			</div>
 			<div class="visaprep">
@@ -120,7 +122,7 @@
 				>
 				<Button
 					disabled={!isValidSubmit}
-					color="var(--primary-btn-color)"
+					color={$currentTheme == "light" ? "black" : "white"}
 					loading={submitLoader}
 					on:click={prepareimmiHelpPrompt}>Submit</Button
 				>
@@ -149,7 +151,7 @@
 		flex-direction: column;
 		/* align-items: center; */
 		border-radius: 4px;
-		background: var(--brand-colors-pure-white, #fff);
+		background: var(--secondary-background-color);
 		width: 35%;
 		/* height: 620px; */
 	}
@@ -160,7 +162,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border-bottom: 1px solid #e1e1e1;
+		border-bottom: 1px solid var(--primary-border-color);
 	}
 	.footer {
 		padding: 24px;
@@ -168,18 +170,12 @@
 		display: flex;
 		justify-content: right;
 		align-items: center;
-		border-top: 1px solid #e1e1e1;
+		border-top: 1px solid var(--primary-border-color);
 		gap: 12px;
-	}
-	.footer-text {
-		color: #335fd1;
-		font-size: 14px;
-		font-weight: 600;
-		cursor: pointer;
 	}
 
 	.title {
-		color: #000;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 18px;
 		font-style: normal;
@@ -187,62 +183,6 @@
 		line-height: normal;
 	}
 
-	.description {
-		color: rgba(0, 0, 0, 0.54);
-		font-family: Inter;
-		font-size: 14px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 19px;
-		padding: 12px 16px;
-	}
-
-	.description-amount {
-		color: rgba(0, 0, 0, 0.54);
-		font-family: Inter;
-		font-size: 14px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 19px;
-	}
-
-	.body {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		padding: 16px;
-		overflow-y: auto;
-	}
-
-	.tabDetailsWrapInternal {
-		display: flex;
-		gap: 12px;
-		flex-wrap: wrap;
-		width: 100%;
-		height: 100%;
-		overflow-y: auto;
-		padding: 12px 0;
-		/* justify-content: center; */
-	}
-	.features {
-		display: flex;
-		flex-direction: row;
-		padding: 8px 0px;
-	}
-	.plan-content {
-		border-right: 1px solid #e1e1e1;
-		flex: auto;
-		padding: 16px;
-	}
-	.plan-container {
-		display: flex;
-	}
-	.plan-button {
-		padding: 16px 0px;
-	}
-	.tick-gap {
-		margin-right: 8px;
-	}
 	.visaprep-container {
 		padding: 12px;
 	}

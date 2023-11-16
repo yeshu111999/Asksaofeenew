@@ -17,10 +17,15 @@
 }
 
 .buttons-wrapper .svelteui-Button-root p {
-	color: var(--use-template-btn-text-color);
+	color: var(--use-template-btn-text-color) !important;
 }
 
 .svelteui-InputWrapper-root .svelteui-Input-root .svelteui-Input-input {
 	background-color: var(--text-input-bg-color) !important;
 	border: 1px solid var(--text-input-border-color);
+	color: var(--primary-text-color);
+}
+
+.svelteui-Button-root {
+	color: var(--use-template-btn-text-color);
 }
