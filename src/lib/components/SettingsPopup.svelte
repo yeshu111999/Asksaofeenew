@@ -471,10 +471,20 @@
 									</p>
 								</div>
 								<div class="input-wrapper">
-									<TextInput bind:value={firstName} label="First Name" placeholder="First Name" />
+									<TextInput
+										bind:value={firstName}
+										class="textInputClass"
+										label="First Name"
+										placeholder="First Name"
+									/>
 								</div>
 								<div class="input-wrapper">
-									<TextInput bind:value={lastName} label="Last Name" placeholder="Last Name" />
+									<TextInput
+										bind:value={lastName}
+										className="textInputClass"
+										label="Last Name"
+										placeholder="Last Name"
+									/>
 								</div>
 								<div class="input-wrapper">
 									<TextInput
@@ -654,12 +664,19 @@
 		opacity: 1;
 	}
 
+	.textInputClass {
+		/* background-color: var(--primary-background-color); */
+		background-color: red;
+		color: var(--primary-text-color);
+	}
+
 	.popup {
 		display: flex;
 		flex-direction: column;
 		/* align-items: center; */
 		border-radius: 4px;
-		background: var(--brand-colors-pure-white, #fff);
+		/* background: var(--brand-colors-pure-white, #fff); */
+		background-color: var(--primary-background-color);
 		width: 700px;
 		height: 720px;
 	}
@@ -674,7 +691,8 @@
 	}
 
 	.title {
-		color: #000;
+		/* color: #000; */
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 18px;
 		font-style: normal;
@@ -719,8 +737,7 @@
 	}
 
 	.text-btn p {
-		color: rgba(0, 0, 0, 0.54);
-
+		color: var(--secondary-btn-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
@@ -729,8 +746,7 @@
 	}
 
 	.text-btn.active p {
-		color: rgba(0, 0, 0, 0.87);
-
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
@@ -773,8 +789,7 @@
 	}
 
 	.section-header {
-		color: #000;
-
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 16px;
 		font-style: normal;
@@ -797,8 +812,7 @@
 	}
 
 	.mini-title {
-		color: rgba(0, 0, 0, 0.87);
-
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
@@ -807,7 +821,7 @@
 	}
 
 	.description {
-		color: rgba(0, 0, 0, 0.5);
+		color: var(--primary-text-color);
 
 		font-family: Inter;
 		font-size: 13px;

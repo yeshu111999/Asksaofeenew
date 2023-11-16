@@ -4,6 +4,10 @@
 	import { ChevronDown, ChevronUp, Padding } from "radix-icons-svelte";
 	import HelpCentreCard from "$lib/components/helpCentre/HelpCentreCard.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
+	import { currentTheme } from "$lib/stores/themeStore";
+	import { page } from "$app/stores";
+	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME, PUBLIC_ORIGIN } from "$env/static/public";
+	import { base } from "$app/paths";
 	let collapseFlags = false;
 	let showRaiseAnIssuePopup = false;
 
@@ -250,6 +254,53 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{PUBLIC_APP_NAME}</title>
+	<meta name="description" content="The first open source alternative to ChatGPT. 💪" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@huggingface" />
+	<meta property="og:title" content={PUBLIC_APP_NAME} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{PUBLIC_ORIGIN || $page.url.origin}{base}" />
+	<meta
+		property="og:image"
+		content="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/thumbnail.png"
+	/>
+	<link
+		rel="icon"
+		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/favicon.svg"
+		type="image/svg+xml"
+	/>
+	<link
+		rel="icon"
+		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/favicon.png"
+		type="image/png"
+	/>
+	<!-- Icon Support for iOS Bookmark Home Screen -->
+	<link
+		rel="apple-touch-icon"
+		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/touch-icon-ipad-retina.png"
+		sizes="167x167"
+		type="image/png"
+	/>
+	<link
+		rel="apple-touch-icon"
+		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/touch-icon-ipad.png"
+		sizes="152x152"
+		type="image/png"
+	/>
+	<link
+		rel="apple-touch-icon"
+		href="{PUBLIC_ORIGIN ||
+			$page.url.origin}{base}/{PUBLIC_APP_ASSETS}/touch-icon-iphone-retina.png"
+		sizes="180x180"
+		type="image/png"
+	/>
+	<!-- <meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} /> -->
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
+	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
+</svelte:head>
+
 <div class="containerGridWrap scrollbar-custom">
 	<div class="containerGrid ">
 		<div class="help-centre-wrapper">
@@ -396,7 +447,8 @@
 	}
 	.help-centre-wrapper {
 		padding: 32px;
-		background: #fafafa;
+		/* background: #fafafa; */
+		/* background-color: var(--secondary-background-color); */
 	}
 
 	.facTitleWrap {
@@ -409,14 +461,14 @@
 	}
 
 	.faqTitle {
-		color: #222;
+		color: var(--primary-text-color);
 		font-size: 32px;
 		font-weight: 600;
 		font-family: Inter;
 	}
 
 	.faqDesc {
-		color: rgba(0, 0, 0, 0.5);
+		color: var(--secondary-btn-color);
 		font-size: 14px;
 		font-family: Inter;
 		font-weight: 400;
@@ -460,7 +512,7 @@
 	}
 
 	.card-description {
-		color: rgba(0, 0, 0, 0.5);
+		color: var(--description-color);
 		text-align: center;
 		font-family: Inter;
 		font-size: 14px;

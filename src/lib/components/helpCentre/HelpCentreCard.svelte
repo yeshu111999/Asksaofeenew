@@ -21,8 +21,8 @@
 		align-items: center;
 		gap: 16px;
 		border-radius: 12px;
-		border: 1px solid #e1e1e1;
-		background: #fff;
+		border: var(--primary-border);
+		background: var(--secondary-card-color);
 		width: 270px;
 		height: 100%;
 		cursor: pointer;
@@ -35,7 +35,7 @@
 	}
 
 	.title {
-		color: #323232;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 16px;
 		font-style: normal;

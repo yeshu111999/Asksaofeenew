@@ -8,20 +8,22 @@
 	--secondary-background-color: white;
 	--primary-box-shadow-color: #e1e1e1;
 	--primary-border-color: #e1e1e1;
+	--profile-bg-color: #ECECEC;
+	--secondary-card-color: rgba(255, 255, 255, 0.50);
+	--description-color: rgba(0, 0, 0, 0.7);
 
 	--secondary-btn-color: gray;
 	--secondary-btn-text-color: black;
 
 	--new-search-btn-color: black;
 	--new-search-btn-text-color: white;
+	--primary-border: 1px solid #e1e1e1;
 
 	--user-chat-bg-color: #fff;
 	--user-chat-border-color: #e1e1e1;
-	--assistant-chat-bg-color: linear-gradient(
-			0deg,
+	--assistant-chat-bg-color: linear-gradient(0deg,
 			rgba(255, 255, 255, 0.95) 0%,
-			rgba(255, 255, 255, 0.95) 100%
-		),
+			rgba(255, 255, 255, 0.95) 100%),
 		#000;
 
 	--user-chat-txt-color: white;

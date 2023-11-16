@@ -1027,7 +1027,8 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 32px;
-		background: var(--secondary-background-color);
+		/* background: var(--secondary-background-color); */
+		background: var(--profile-bg-color);
 	}
 
 	.profile-image p {

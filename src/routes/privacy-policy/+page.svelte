@@ -79,7 +79,7 @@
 	}
 
 	.text-btn p {
-		color: rgba(0, 0, 0, 0.54);
+		color: var(--secondary-btn-color);
 		text-align: left;
 		font-family: Inter;
 		font-size: 14px;
@@ -89,8 +89,7 @@
 	}
 
 	.text-btn.active p {
-		color: rgba(0, 0, 0, 0.87);
-
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
