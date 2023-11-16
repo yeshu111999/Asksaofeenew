@@ -4,7 +4,9 @@
 
 	--primary-background-color: #171717;
 	--secondary-background-color: #1e1e1e;
+
 	--primary-text-color: white;
+	--secondary-text-color: rgba(255, 255, 255, 0.45);
 
 	--primary-border-color: #3d3d3d;
 
@@ -13,6 +15,9 @@
 
 	--new-search-btn-color: rgba(255, 255, 255, 0.8);
 	--new-search-btn-text-color: black;
+
+	--use-template-btn-color: white;
+	--use-template-btn-text-color: black;
 
 	--user-chat-bg-color: #282828;
 	--user-chat-border-color: #282828;
@@ -24,4 +29,7 @@
 		#fff;
 	--user-chat-txt-color: white;
 	--assistant-chat-txt-color: white;
+
+	--text-input-bg-color: #1e1e1e;
+	--text-input-border-color: #605f5f;
 }
