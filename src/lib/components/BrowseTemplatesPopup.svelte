@@ -1093,9 +1093,7 @@
 						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3].Please don't mention yourself as an immigration officer. ",
 				},
 				{
-					imageUrl: [
-						"/assets/images/templates/Tourist/Bankstatement1.jpg",
-					],
+					imageUrl: ["/assets/images/templates/Tourist/Bankstatement1.jpg"],
 					resumeTitle: "Bank Statement Letter",
 					resumeDescription: "",
 					id: "tourist-4",
@@ -1124,9 +1122,7 @@
 						" Generate a brief letter from the bank addressed to To Whom It May Concern containing the following details Account holder's Name-[fieldValue1] , Outstanding balance-[fieldValue2] , Number of days that the balance is being maintained -[fieldValue3].",
 				},
 				{
-					imageUrl: [
-						"/assets/images/templates/Tourist/Invitationletter1.jpg",
-					],
+					imageUrl: ["/assets/images/templates/Tourist/Invitationletter1.jpg"],
 					resumeTitle: "Invitation Letter",
 					resumeDescription: "",
 					id: "tourist-5",
@@ -1168,7 +1164,6 @@
 							fieldType: "textfield",
 							fieldValue: "",
 						},
-
 					],
 					prompt:
 						" Generate a brief invitation letter for a tourist named [fieldValue1] from [fieldValue2], who is travelling to [fieldValue3] for [fieldValue4]. The letter is from [fieldValue5], Who is [fieldValue6] of the Tourist. Please include details about the length of the stay and accommodation arrangements. Note: Please do not mention yourself as an Immigration Officer.",
@@ -1299,7 +1294,7 @@
 					>
 						<Tabs.Tab
 							label="Student"
-							class={$theme == "light" ? "light" : "dark"}
+							class={activeTabIndex == 0 ? "active" : ""}
 							style={activeTabIndex == 0
 								? "font-weight:600;color:var(--primary-text-color) !important;"
 								: ""}
@@ -1316,7 +1311,13 @@
 								{/each}
 							</div>
 						</Tabs.Tab>
-						<Tabs.Tab label="Professional" style={activeTabIndex == 1 ? "font-weight:600;" : ""}>
+						<Tabs.Tab
+							label="Professional"
+							class={activeTabIndex == 1 ? "active" : ""}
+							style={activeTabIndex == 1
+								? "font-weight:600;color:var(--primary-text-color) !important;"
+								: ""}
+						>
 							<div class="tabDetailsWrapInternal">
 								{#each activeTemplates as template, i}
 									<ResumeTemplate
@@ -1329,7 +1330,13 @@
 								{/each}
 							</div>
 						</Tabs.Tab>
-						<Tabs.Tab label="Tourist" style={activeTabIndex == 2 ? "font-weight:600;" : ""}>
+						<Tabs.Tab
+							label="Tourist"
+							class={activeTabIndex == 2 ? "active" : ""}
+							style={activeTabIndex == 2
+								? "font-weight:600;color:var(--primary-text-color) !important;"
+								: ""}
+						>
 							<div class="tabDetailsWrapInternal">
 								{#each activeTemplates as template, i}
 									<ResumeTemplate
