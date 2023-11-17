@@ -235,8 +235,8 @@
 	onMount(() => {
 		let token = Cookies.get("token");
 		if (!token) {
-			loginModalVisible = true;
-			//goto("/home");
+			//loginModalVisible = true;
+			goto("/");
 		}
 		if (token) {
 			canLogin = false;

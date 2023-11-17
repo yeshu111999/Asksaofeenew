@@ -8,6 +8,7 @@
 	import Cookies from "js-cookie";
 
 	let loginModalOpen = false;
+	let showSignUp = false;
 	let settings;
 	let token;
 
@@ -33,17 +34,28 @@
 		goto("/home");
 	}
 
-	// onMount(() => {
-	// 	token = Cookies.get("token");
-	// 	if (!token) {
-	// 		goto("/home");
-	// 	}
-	// });
+	function showLoginPopup() {
+		loginModalOpen = true;
+		showSignUp = false;
+	}
+
+	function showSignUpPopup() {
+		loginModalOpen = true;
+		showSignUp = true;
+	}
+
+	onMount(() => {
+		loginModalOpen = false;
+		// token = Cookies.get("token");
+		// if (token) {
+		// 	goto("/home");
+		// }
+	});
 </script>
 
 <div class="landingPageWrap scrollbar-custom">
 	{#if loginModalOpen}
-		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
+		<LoginModal {showSignUp} {settings} on:close={() => (loginModalOpen = false)} />
 	{/if}
 	<div class="landingPageWrapChild">
 		<div class="landBarWrap">
@@ -55,10 +67,17 @@
 					<div class="logoTitle">ImmiGPT</div>
 				</div>
 				<div class="authBtnWrap">
-					<Button on:click={() => gotoHome()} variant="default" color="dark" radius="xl" size="md">
+					<Button
+						on:click={() => showSignUpPopup()}
+						variant="default"
+						color="dark"
+						radius="xl"
+						size="md"
+					>
 						<span style="color: #222 !important;">Sign up</span>
 					</Button>
-					<Button on:click={() => gotoHome()} color="dark" radius="xl" size="md">Login</Button>
+					<Button on:click={() => showLoginPopup()} color="dark" radius="xl" size="md">Login</Button
+					>
 				</div>
 			</div>
 		</div>

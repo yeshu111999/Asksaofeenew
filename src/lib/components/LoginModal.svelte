@@ -22,7 +22,7 @@
 	let responseData = ""; // Store the response data here
 	let isLoading = false;
 	let loginError = false;
-	let showSignUp = false;
+	export let showSignUp = false;
 	let showForgotPwd = false;
 
 	let emailId = "";
@@ -848,6 +848,10 @@
 				toggleContents("none");
 			}
 		});
+
+		if (showSignUp) {
+			toggleSignup();
+		}
 	});
 
 	afterUpdate(() => {
