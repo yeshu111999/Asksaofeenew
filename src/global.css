@@ -26,6 +26,17 @@
 	color: var(--primary-text-color);
 }
 
+.wrapper .svelteui-InputWrapper-root .svelteui-Input-root .svelteui-Input-input {
+	background-color: #fff !important;
+	border: 1px solid #605f5f !important;
+	color: #000 !important;
+}
+
+.wrapper .svelteui-InputWrapper-root .svelteui-InputWrapper-label,
+.wrapper .svelteui-Tab-label {
+	color: #000 !important;
+}
+
 .svelteui-Button-root {
 	color: var(--use-template-btn-text-color);
 }
