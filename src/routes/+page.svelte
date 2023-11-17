@@ -555,21 +555,21 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="trySection">
-			<div class="tryWrap">
-				<div class="tryTextWrap">
-					<div class="tryTitle">Experience the power of ImmiGPT for Free</div>
-					<div class="tryDesc">Try it now and explore the possibilities!</div>
+		<div class="expSection">
+			<div class="expWrap">
+				<div class="expTextWrap">
+					<div class="expTitle">Experience the power of ImmiGPT for Free</div>
+					<div class="expDesc">Try it now and explore the possibilities!</div>
 				</div>
 				<Button
 					on:click={() => (loginModalOpen = true)}
 					variant="default"
 					color="dark"
 					radius="xl"
-					size="md">Get Started</Button
+					size="md"><span style="color:#000 !important">Get Started</span></Button
 				>
 			</div>
-		</div> -->
+		</div>
 		<div class="trySection">
 			<div class="tryWrap">
 				<div class="tryTextWrap">
@@ -627,7 +627,7 @@
 						<div class="logoWrap">
 							<img width="40px" src="/assets/images/sl-neg.png" alt="immigpt" />
 						</div>
-						<div class="logoTitle">ImmiGPT</div>
+						<div class="logoTitleWhite">ImmiGPT</div>
 					</div>
 					<div class="footerAboutDesc">A Generative AI For Immigration And Travel</div>
 					<svg
@@ -794,11 +794,18 @@
 		align-items: center;
 	}
 
-	.logoTitle {
+	.logoTitleWhite {
 		font-size: 16px;
 		font-family: Inter;
 		font-weight: 600;
 		color: #fff;
+	}
+
+	.logoTitle {
+		font-size: 16px;
+		font-family: Inter;
+		font-weight: 600;
+		/* color: #fff; */
 	}
 
 	.landPgHeroWrap {
@@ -1131,6 +1138,48 @@
 		text-align: left;
 	}
 
+	.expSection {
+		background-color: #000;
+		padding: 16px;
+		min-height: 400px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.expWrap {
+		color: #fff;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		align-items: center;
+		max-width: 1240px;
+	}
+
+	.expTextWrap {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		align-items: center;
+	}
+
+	.expTitle {
+		color: white;
+		font-size: 40px;
+		font-family: Inter;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	.expDesc {
+		color: #c6c6c6;
+		font-size: 16px;
+		font-family: Inter;
+		font-weight: 400;
+		line-height: 24px;
+		text-align: center;
+	}
 	.footerSection {
 		padding: 16px;
 		min-height: 400px;

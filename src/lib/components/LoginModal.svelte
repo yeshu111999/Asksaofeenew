@@ -855,20 +855,6 @@
 	});
 </script>
 
-/* * Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
-Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
-Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
-Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */ /* * Filename: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui\src\lib\components\LoginModal.svelte * Path: c:\Users\Madan
-Kumar\OneDrive\Pictures\immigpt_chat_ui * Created Date: Saturday, September 30th 2023, 12:46:05 pm *
-Author: Madan Kumar T * * Copyright (c) 2023 Trinom Digital Pvt Ltd */
-
 <Modal>
 	<div class="wrapper">
 		<div class="header">
