@@ -108,8 +108,14 @@
 			>
 				<Tabs.Tab
 					label="Student"
-					class={classes.root + $currentTheme == "light" ? "light" : "dark"}
-					style={activeHomeTabIndex == 0 ? "font-weight:600;color:var(--primary-text-color);" : ""}
+					class={classes.root + activeHomeTabIndex == 0
+						? "active"
+						: "" + $currentTheme == "light"
+						? "light"
+						: "dark"}
+					style={activeHomeTabIndex == 0
+						? "font-weight:600;color:var(--primary-text-color) !important;"
+						: ""}
 				>
 					{#if activeHomeTabIndex == 0}
 						<div class="tabDetailsWrapInternal">
@@ -130,8 +136,10 @@
 				</Tabs.Tab>
 				<Tabs.Tab
 					label="Professional"
-					class={classes.root}
-					style={activeHomeTabIndex == 1 ? "font-weight:500;" : ""}
+					class={classes.root + activeHomeTabIndex == 1 ? "active" : ""}
+					style={activeHomeTabIndex == 1
+						? "font-weight:600;color:var(--primary-text-color) !important;"
+						: ""}
 				>
 					{#if activeHomeTabIndex == 1}
 						<div class="tabDetailsWrapInternal">
@@ -150,8 +158,10 @@
 				</Tabs.Tab>
 				<Tabs.Tab
 					label="Tourist"
-					class={classes.root}
-					style={activeHomeTabIndex == 2 ? "font-weight:500;" : ""}
+					class={classes.root + activeHomeTabIndex == 2 ? "active" : ""}
+					style={activeHomeTabIndex == 2
+						? "font-weight:600;color:var(--primary-text-color) !important;"
+						: ""}
 				>
 					{#if activeHomeTabIndex == 2}
 						<div class="tabDetailsWrapInternal">
