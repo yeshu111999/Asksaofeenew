@@ -1092,6 +1092,87 @@
 					prompt:
 						"Generate a brief financial support letter on behalf of the applicant's relative to support their tourism plans by using the following details - Name of the Applicant - [fieldValue1], Relation to the Applicant - [fieldValue2], Destination Country - [fieldValue3].Please don't mention yourself as an immigration officer. ",
 				},
+				{
+					imageUrl: [
+						"/assets/images/templates/Tourist/Bankstatement1.jpg",
+					],
+					resumeTitle: "Bank Statement Letter",
+					resumeDescription: "",
+					id: "tourist-4",
+					tag: "Tourist",
+					inputFields: [
+						{
+							name: " Account Holder's Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Outstanding balance",
+							label: "Ex: 10000$",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Number of days that the balance is being maintained",
+							label: "Ex: 30 Days",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						" Generate a brief letter from the bank addressed to To Whom It May Concern containing the following details Account holder's Name-[fieldValue1] , Outstanding balance-[fieldValue2] , Number of days that the balance is being maintained -[fieldValue3].",
+				},
+				{
+					imageUrl: [
+						"/assets/images/templates/Tourist/Invitationletter1.jpg",
+					],
+					resumeTitle: "Invitation Letter",
+					resumeDescription: "",
+					id: "tourist-5",
+					tag: "Tourist",
+					inputFields: [
+						{
+							name: " Tourist's Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Source Country",
+							label: "Ex: India",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Destination Country",
+							label: "Ex: UK",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Reason for Travel",
+							label: "Ex: Tourism",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Your Full Name",
+							label: "Ex: Kim",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Your Relationship with the Tourist",
+							label: "Ex: Brother",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+
+					],
+					prompt:
+						" Generate a brief invitation letter for a tourist named [fieldValue1] from [fieldValue2], who is travelling to [fieldValue3] for [fieldValue4]. The letter is from [fieldValue5], Who is [fieldValue6] of the Tourist. Please include details about the length of the stay and accommodation arrangements. Note: Please do not mention yourself as an Immigration Officer.",
+				},
 			],
 		},
 	];
