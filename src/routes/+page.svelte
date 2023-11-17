@@ -1,5 +1,5 @@
 <script>
-	import { Button } from "@svelteuidev/core";
+	// import { Button } from "@svelteuidev/core";
 	import LoginModal from "$lib/components/LoginModal.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
 	import AboutUsPopup from "$lib/components/AboutUsPopup.svelte";
@@ -78,7 +78,7 @@
 					<div class="logoTitle">ImmiGPT</div>
 				</div>
 				<div class="authBtnWrap">
-					<Button
+					<!-- <Button
 						on:click={() => showSignUpPopup()}
 						variant="default"
 						color="dark"
@@ -86,9 +86,16 @@
 						size="md"
 					>
 						<span style="color: #222 !important;">Sign up</span>
-					</Button>
-					<Button on:click={() => showLoginPopup()} color="dark" radius="xl" size="md">Login</Button
+					</Button> -->
+					<button on:click={() => showSignUpPopup()} class="signUpBtn"
+						><span style="color: #222 !important;">Sign up</span></button
 					>
+					<button on:click={() => showLoginPopup()} class="loginBtn"
+						><span style="color: #fff !important;">Login</span></button
+					>
+					<!-- <Button on:click={() => showLoginPopup()} color="dark" radius="xl" size="md"
+						><span style="color: #fff !important;">Login</span></Button
+					> -->
 				</div>
 			</div>
 		</div>
@@ -108,8 +115,11 @@
 						>Try now</Button
 					>
 				</div> -->
-				<Button color="dark" radius="xl" on:click={() => (loginModalOpen = true)} size="lg"
-					>Get Started It’s Free</Button
+				<!-- <Button color="dark" radius="xl" on:click={() => (loginModalOpen = true)} size="lg"
+					><span style="color: #fff !important;">Get Started It’s Free</span></Button
+				> -->
+				<button on:click={() => (loginModalOpen = true)} class="getStartedBtn"
+					><span style="color: #fff !important;">Get Started It’s Free</span></button
 				>
 				<div class="freePlanWrap">
 					<div class="freeIconWrap">
@@ -481,8 +491,11 @@
 							</div>
 							<div class="detailText"><span style="color: #fff;">.</span></div>
 						</div>
-						<Button fullSize color="dark" radius="md"
+						<!-- <Button fullSize color="dark" radius="md"
 							><span style="color: #fff">Choose Plan</span></Button
+						> -->
+						<button on:click={() => (loginModalOpen = true)} class="choosePlanBtn"
+							><span style="color: #fff !important;">Choose Plan</span></button
 						>
 					</div>
 					<div class="pricingDetailMainCard">
@@ -578,8 +591,11 @@
 								</svg> Access Beta features
 							</div>
 						</div>
-						<Button fullSize color="dark" radius="md"
+						<!-- <Button fullSize color="dark" radius="md"
 							><span style="color: #fff">Choose Plan</span></Button
+						> -->
+						<button on:click={() => (loginModalOpen = true)} class="choosePlanBtn"
+							><span style="color: #fff !important;">Choose Plan</span></button
 						>
 					</div>
 				</div>
@@ -591,12 +607,15 @@
 					<div class="expTitle">Experience the power of ImmiGPT for Free</div>
 					<div class="expDesc">Try it now and explore the possibilities!</div>
 				</div>
-				<Button
+				<!-- <Button
 					on:click={() => (loginModalOpen = true)}
 					variant="default"
 					color="dark"
 					radius="xl"
 					size="md"><span style="color:#000 !important">Get Started</span></Button
+				> -->
+				<button on:click={() => (loginModalOpen = true)} class="getStartedSmallBtn"
+					><span style="color: #000 !important;">Get Started</span></button
 				>
 			</div>
 		</div>
@@ -811,6 +830,68 @@
 		flex-direction: row;
 		gap: 12px;
 	}
+	.signUpBtn {
+		padding: 8px 16px;
+		display: flex;
+		justify-content: center;
+		border: 0.7px solid #222;
+		border-radius: 20px;
+		color: #000;
+		font-weight: 700;
+	}
+
+	.loginBtn {
+		padding: 8px 24px;
+		display: flex;
+		justify-content: center;
+		background-color: #000;
+		border-radius: 20px;
+		color: #fff;
+		font-weight: 700;
+	}
+
+	.getStartedBtn {
+		padding: 12px 32px;
+		display: flex;
+		justify-content: center;
+		background-color: #000;
+		border-radius: 40px;
+		color: #fff;
+		font-weight: 700;
+		font-size: 20px;
+	}
+
+	.getStartedBtn {
+		padding: 12px 32px;
+		display: flex;
+		justify-content: center;
+		background-color: #000;
+		border-radius: 40px;
+		color: #fff;
+		font-weight: 700;
+		font-size: 20px;
+	}
+
+	.getStartedSmallBtn {
+		padding: 8px 24px;
+		display: flex;
+		justify-content: center;
+		background-color: #fff;
+		border-radius: 20px;
+		color: #000;
+		font-weight: 700;
+	}
+
+	.choosePlanBtn {
+		padding: 8px 24px;
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		background-color: #000;
+		border-radius: 8px;
+		color: #fff;
+		font-weight: 700;
+	}
 
 	.landingPageWrap {
 		display: flex;
@@ -834,6 +915,7 @@
 		position: fixed;
 		background-color: #fff;
 		z-index: 10;
+		box-shadow: 2px 0 24px rgb(219, 219, 219);
 	}
 
 	.landBarWidthWrap {
@@ -870,7 +952,7 @@
 		font-size: 16px;
 		font-family: Inter;
 		font-weight: 600;
-		/* color: #fff; */
+		color: #000;
 	}
 
 	.landPgHeroWrap {

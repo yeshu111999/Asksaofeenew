@@ -967,13 +967,14 @@
 								disabled={showOtpInputs || OTPVerified}
 								label="Email"
 								placeholder="Email"
+								className="loginModal"
 							/>
 						</div>
 						{#if emailId && !isEmailValid}
 							<p class="error">Enter a valid Email Id</p>
 						{/if}
 						<div class="sendOTP">
-							<p>Mobile Number</p>
+							<p style="color: #000;">Mobile Number</p>
 							<div class="mobile-number-section">
 								<div class="country-code" id="country-code">
 									<div class="dropdown">
@@ -1338,6 +1339,7 @@
 		gap: 16px;
 		box-shadow: 0px 1px 12px 0px rgba(0, 0, 0, 0.08);
 		background: white;
+		/* background: var(--primary-background-color); */
 	}
 
 	.login-popup::-webkit-scrollbar {
@@ -1351,7 +1353,8 @@
 	}
 
 	.coutryCodeText {
-		color: var(--primary-text-color);
+		/* color: var(--primary-text-color); */
+		color: #222;
 	}
 
 	.app-title {
@@ -1362,6 +1365,7 @@
 		letter-spacing: 0em;
 		text-align: left;
 		text-align: center;
+		color: #000;
 	}
 
 	.login-text {
@@ -1372,6 +1376,7 @@
 		letter-spacing: 0em;
 		text-align: left;
 		text-align: center;
+		color: #000;
 	}
 
 	.welcome-text {
@@ -1381,6 +1386,7 @@
 		line-height: 19px;
 		letter-spacing: 0em;
 		text-align: center;
+		color: #000;
 	}
 
 	.header {
@@ -1551,6 +1557,17 @@
 		width: 80px;
 		overflow: hidden;
 		cursor: pointer;
+	}
+
+	.svelteui-InputWrapper-root .svelteui-InputWrapper-label,
+	.svelteui-Tab-label label {
+		color: #000 !important;
+	}
+
+	.svelteui-InputWrapper-root .svelteui-Input-root .svelteui-Input-input {
+		background-color: #fff !important;
+		border: 1px solid #605f5f;
+		color: #000;
 	}
 
 	@media (max-width: 600px) {

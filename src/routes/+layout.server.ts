@@ -7,8 +7,12 @@ import { defaultModel, models, oldModels, validateModel } from "$lib/server/mode
 import { authCondition, requiresUser } from "$lib/server/auth";
 import { DEFAULT_SETTINGS } from "$lib/types/Settings";
 import { SERPAPI_KEY, SERPER_API_KEY, MESSAGES_BEFORE_LOGIN } from "$env/static/private";
+import Cookies from "js-cookie";
 
 export const load: LayoutServerLoad = async ({ locals, depends, url }) => {
+	if (Cookies.get("token")) {
+		throw redirect(308, "/home");
+	}
 	const { conversations } = collections;
 	const urlModel = url.searchParams.get("model");
 
