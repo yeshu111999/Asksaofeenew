@@ -517,7 +517,7 @@
 				</div>
 			</div>
 		{/if}
-		<div class="right-body">
+		<div class="right-body scrollbar-custom">
 			{#if logoutConfirmationModal}
 				<ConfirmationModal
 					on:close={() => (logoutConfirmationModal = false)}
@@ -730,11 +730,13 @@
 		width: 100%;
 		display: flex;
 		height: calc(100vh - 70px);
+		/* padding-bottom: 70px; */
 	}
 
 	.right-body {
 		height: 100%;
 		width: 100%;
+		overflow-y: auto;
 	}
 
 	.new-search-btn {
@@ -911,7 +913,7 @@
 
 		.left-menu-mobile {
 			width: 240px;
-			height: calc(100vh - 70px);
+			height: 100%;
 			flex-shrink: 0;
 			background: var(--primary-background-color);
 			box-shadow: 1px 0px 0px 0px #e1e1e1;
@@ -928,6 +930,10 @@
 
 		.ham {
 			display: block;
+		}
+
+		.right-body {
+			padding-bottom: 70px;
 		}
 	}
 </style>
