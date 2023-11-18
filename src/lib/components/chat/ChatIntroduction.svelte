@@ -304,4 +304,10 @@
 		font-size: 24px;
 		color: var(--primary-text-color);
 	}
+
+	@media (max-width: 786px) {
+		.appTitle {
+			display: none;
+		}
+	}
 </style>

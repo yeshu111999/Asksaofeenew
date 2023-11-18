@@ -452,9 +452,9 @@
 				<div class="left-menu-top">
 					<a class="new-search-btn" href={`${base}/`}>
 						{#if $currentTheme == "dark"}
-							<img src="/assets/icons/search-icon-white.svg" alt="" />
-						{:else}
 							<img src="/assets/icons/search-icon-black.svg" alt="" />
+						{:else}
+							<img src="/assets/icons/search-icon-white.svg" alt="" />
 						{/if}
 						<p>New Search</p>
 					</a>
@@ -465,16 +465,16 @@
 						<div class="recent-searches">
 							{#each data.conversations as conv}
 								<!-- <a
-								class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
-								href="{base}/conversation/{conv.id}"
-							>
-								{#if conv.id === $page.params.id}
-									<img src="/assets/icons/search-icon-white.svg" alt="" />
-								{:else}
-									<img src="/assets/icons/search-icon-black.svg" alt="" />
-								{/if}
-								<p>{conv.title}</p>
-							</a> -->
+									class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
+									href="{base}/conversation/{conv.id}"
+								>
+									{#if conv.id === $page.params.id}
+										<img src="/assets/icons/search-icon-white.svg" alt="" />
+									{:else}
+										<img src="/assets/icons/search-icon-black.svg" alt="" />
+									{/if}
+									<p>{conv.title}</p>
+								</a> -->
 								<NavConversationItem
 									on:editConversationTitle={(ev) =>
 										editConversationTitle(ev.detail.id, ev.detail.title)}
@@ -485,34 +485,50 @@
 									on:conversationSelected={closeBurger}
 									{conv}
 								/>
-								<!-- on:deleteConversation={(ev) => {deleteConversation(ev.detail)}} -->
+								<!-- on:deleteConversation={(ev) => deleteConversation(ev.detail)} -->
 							{/each}
 						</div>
 					</div>
 					<div class="left-menu-bottom">
 						<button class="icon-text" on:click={toggleBrowseTemplatesPopup}>
-							<img src="/assets/icons/template-icon-black.svg" alt="" />
+							{#if $currentTheme == "light"}
+								<img src="/assets/icons/template-icon-black.svg" alt="" />
+							{:else}
+								<img src="/assets/icons/template-icon-white.svg" alt="" />
+							{/if}
 							<p>Browse Templates</p>
 						</button>
 						<!-- <button class="icon-text">
-						<img src="/assets/icons/chat-icon-black.svg" alt="" />
-						<p>P2P Chatter</p>
-					</button> -->
+							<img src="/assets/icons/chat-icon-black.svg" alt="" />
+							<p>P2P Chatter</p>
+						</button> -->
 						<button class="icon-text" on:click={toggleVisaPreperationPopUp}>
-							<img src="/assets/icons/visa-icon-black.svg" alt="" />
+							{#if $currentTheme == "light"}
+								<img src="/assets/icons/visa-icon-black.svg" alt="" />
+							{:else}
+								<img src="/assets/icons/visa-icon-white.svg" alt="" />
+							{/if}
 							<p>Visa Preparation</p>
 						</button>
 						<button class="icon-text" on:click={toggleImmigrationHelpPopUp}>
-							<img src="/assets/icons/help-icon-black.svg" alt="" />
+							{#if $currentTheme == "light"}
+								<img src="/assets/icons/help-icon-black.svg" alt="" />
+							{:else}
+								<img src="/assets/icons/help-icon-white.svg" alt="" />
+							{/if}
 							<p>Immigration Help</p>
 						</button>
 						<button on:click={openBlogs} class="icon-text">
-							<img src="/assets/icons/visa-icon-black.svg" alt="" />
+							{#if $currentTheme == "light"}
+								<img src="/assets/icons/visa-icon-black.svg" alt="" />
+							{:else}
+								<img src="/assets/icons/visa-icon-white.svg" alt="" />
+							{/if}
 							<p>Blogs</p>
 						</button>
 						<!-- <div class="button-wrapper">
-						<button class="upgrade-btn"> Upgrade to Pro </button>
-					</div> -->
+							<button class="upgrade-btn"> Upgrade to Pro </button>
+						</div> -->
 					</div>
 				</div>
 			</div>

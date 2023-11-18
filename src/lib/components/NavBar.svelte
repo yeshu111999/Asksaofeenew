@@ -593,6 +593,7 @@
 	<div class="ham">
 		<Burger
 			opened={menuToggleFlag}
+			color={$currentTheme == "light" ? "#222" : "#fff"}
 			on:click={() => {
 				menuToggleFlag = !menuToggleFlag;
 				dispatch("hamClick");

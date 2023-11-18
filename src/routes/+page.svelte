@@ -100,6 +100,9 @@
 			</div>
 		</div>
 		<div class="landPgHeroWrap">
+			<div class="landImageWrap">
+				<img style="object-fit: cover;" src="/assets/images/heroimmi.jpg" alt="hero" />
+			</div>
 			<div class="landPgHeroDetailWrap">
 				<div class="landPgHeroTitle1">A Generative AI</div>
 				<div class="landPgHeroTitle2">For Immigration and Travel</div>
@@ -818,6 +821,13 @@
 </div>
 
 <style>
+	.landImageWrap {
+		/* margin-top: 90px; */
+		/* object-fit: cover; */
+		/* min-height: 100vh; */
+		padding: 0;
+	}
+
 	.landPgHeroMailInput {
 		padding: 8px;
 		border: none;
@@ -958,7 +968,7 @@
 	.landPgHeroWrap {
 		display: flex;
 		flex-direction: column;
-		padding: 16px;
+		/* padding: 16px; */
 		align-items: center;
 		gap: 32px;
 		min-height: 100vh;
@@ -975,6 +985,7 @@
 		align-items: center;
 		align-items: center;
 		max-width: 700px;
+		padding: 16px 0 16px 0;
 	}
 
 	.landPgHeroMailSection2 {

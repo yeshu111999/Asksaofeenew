@@ -52,3 +52,9 @@
 .active .svelteui-Tab-label {
 	color: var(--primary-text-color);
 }
+
+*,
+::before,
+::after {
+	border: none;
+}
