@@ -1,5 +1,6 @@
 :root {
 	--primary-btn-color: black;
+	--primary-btn-color2: black;
 	--primary-btn-text-color: white;
 
 	--primary-background-color: #171717;
@@ -26,11 +27,9 @@
 
 	--user-chat-bg-color: #282828;
 	--user-chat-border-color: #282828;
-	--assistant-chat-bg-color: linear-gradient(
-			0deg,
+	--assistant-chat-bg-color: linear-gradient(0deg,
 			rgba(13, 13, 13, 0.95) 0%,
-			rgba(13, 13, 13, 0.95) 100%
-		),
+			rgba(13, 13, 13, 0.95) 100%),
 		#fff;
 	--user-chat-txt-color: white;
 	--assistant-chat-txt-color: white;

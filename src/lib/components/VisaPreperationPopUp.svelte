@@ -136,7 +136,7 @@
 					disabled={!isValidSubmit}
 					color={$currentTheme == "light" ? "black" : "white"}
 					loading={submitLoader}
-					on:click={prepareVisaPrompt}>Submit</Button
+					on:click={prepareVisaPrompt}><span class="submitBtn">Submit</span></Button
 				>
 			</div>
 		</div>
@@ -269,6 +269,10 @@
 		gap: 12px;
 		align-items: end;
 		width: 100%;
+	}
+
+	.submitBtn {
+		/* color: var(--primary-btn-color); */
 	}
 
 	@media (max-width: 1000px) {
