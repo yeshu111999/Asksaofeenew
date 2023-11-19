@@ -226,10 +226,9 @@
 		</div>
 		{#if isAuthor && !loading && message.content}
 			<div
-				class="absolute bottom-1 right-0 flex max-md:transition-all md:bottom-0 md:group-hover:visible md:group-hover:opacity-100
-					{message.score ? 'visible opacity-100' : 'invisible max-md:-translate-y-4 max-md:opacity-0'}
-					{isTapped || isCopied ? 'max-md:visible max-md:translate-y-0 max-md:opacity-100' : ''}
-				"
+				class="absolute bottom-1 right-0 flex max-md:transition-all md:bottom-0"
+				class:liked={message.score === 1}
+				class:visible={isTapped || isCopied}
 			>
 				<Tooltip opened={message.score === 1 && toolTap} label="Liked" position="bottom">
 					<button
@@ -551,7 +550,7 @@
 	}
 
 	.responseTextWrap {
-		padding: 16px 16px 24px 16px;
+		padding: 16px 16px 40px 16px;
 	}
 
 	div[contenteditable="true"]:focus {
@@ -560,5 +559,13 @@
 
 	.responseText {
 		color: var(--primary-text-color);
+	}
+
+	.liked {
+		visible: opacity-100;
+	}
+
+	.visible {
+		visible: opacity-100;
 	}
 </style>
