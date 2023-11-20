@@ -19,6 +19,9 @@
 	import { PUBLIC_APP_ASSETS, PUBLIC_APP_NAME } from "$env/static/public";
 	import { SvelteUIProvider } from "@svelteuidev/core";
 
+	import { currentTheme } from "$lib/stores/themeStore";
+	import Analytics from "$lib/components/Analytics.svelte";
+
 	export let data;
 
 	let isNavOpen = false;
@@ -158,8 +161,12 @@
 		sizes="180x180"
 		type="image/png"
 	/>
+	<!-- <meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} /> -->
+	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
+	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
 </svelte:head>
 
+<Analytics />
 <div
 	class="grid h-full w-screen grid-cols-1 grid-rows-[auto,1fr] overflow-hidden text-smd dark:text-gray-300 "
 >
@@ -208,3 +215,7 @@
 		<slot />
 	</SvelteUIProvider>
 </div>
+
+<style>
+	@import "../global.css";
+</style>

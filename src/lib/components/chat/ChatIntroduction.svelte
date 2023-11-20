@@ -13,6 +13,7 @@
 	import { findCurrentModel } from "$lib/utils/models";
 	import { createStyles, Tabs } from "@svelteuidev/core";
 	import { theme } from "$lib/stores/theme";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let currentModel: Model;
 	export let settings: LayoutData["settings"];
@@ -56,7 +57,7 @@
 		root: {
 			"&.active": {
 				backgroundColor: "rgba(255, 255, 255, 0.2)",
-				borderRadius: 8,
+				// borderRadius: 8,
 			},
 		},
 	}));
@@ -72,10 +73,13 @@
 	});
 </script>
 
-<div class="my-auto grid gap-8 lg:grid-cols-3" style="display:flex;flex-direction:column;">
+<div
+	class="grid lg:grid-cols-3"
+	style="display:flex;flex-direction:column; align-items:center; margin-bottom:16px; gap: 8px;"
+>
 	<div class="lg:col-span-1">
 		<div>
-			<div class="mb-3 flex items-center text-2xl font-semibold">
+			<!-- <div class="mb-3 flex items-center text-2xl font-semibold">
 				<Logo classNames="mr-1 flex-none" />
 				{PUBLIC_APP_NAME}
 				<div
@@ -83,86 +87,103 @@
 				>
 					v{PUBLIC_VERSION}
 				</div>
-			</div>
-			<p class="text-base text-gray-600 dark:text-gray-400">
+			</div> -->
+			<!-- <p class="text-base text-gray-600 dark:text-gray-400">
 				<strong>Generative AI for Immigration & Travel</strong>
-			</p>
+			</p> -->
+			<span class="appTitle">ImmiGPT</span>
 		</div>
 	</div>
-	<div class="lg:col-span-2 lg:pl-24">
-		<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
-			<div class="tabDetailsWrap">
-				<span class="tabDetailsTitle">What immiGPT will do for</span>
-			</div>
-			<div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
-				<!-- <Tabs variant="unstyled" position="apart"> -->
-				<Tabs
-					variant="pills"
-					color={$theme == "dark"
-						? "rgba(255, 255, 255, 0.2)"
-						: "black" + themeVariable == "dark"
-						? "rgba(255, 255, 255, 0.2)"
-						: "black"}
-					position="apart"
-					orientation="vertical"
-					on:change={renderDescriptionTab}
+	<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+		<div class="tabDetailsWrap">
+			<span class="tabDetailsTitle">What immiGPT will do for</span>
+		</div>
+		<div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
+			<!-- <Tabs variant="unstyled" position="apart"> -->
+			<Tabs
+				variant="default"
+				color={$currentTheme == "light" ? "black" : "white"}
+				position="center"
+				on:change={renderDescriptionTab}
+			>
+				<Tabs.Tab
+					label="Student"
+					class={classes.root + activeHomeTabIndex == 0
+						? "active"
+						: "" + $currentTheme == "light"
+						? "light"
+						: "dark"}
+					style={activeHomeTabIndex == 0
+						? "font-weight:600;color:var(--primary-text-color) !important;"
+						: ""}
 				>
-					<Tabs.Tab label="Student" class={classes.root + $theme == "light" ? "light" : "dark"}>
-						{#if activeHomeTabIndex == 0}
-							<div class="tabDetailsWrapInternal">
-								<span class="tabDetailsDescription">
-									ImmiGPT provides a comprehensive guide on student visa requirements, assist in
-									document generation, and interactive interview preparation using our custom AI
-									model for various countries across the globe.
-								</span>
-								<span class="tabDetailsSubTitle"> What is SOP ? </span>
-								<span class="tabDetailsDescription">
-									<!-- A Statement of Purpose or SOP lives up to its name by clearly outlining the
-									student's purpose of applying to a particular university for admission into a
-									specific course. -->
-									{renderedText}
-								</span>
-							</div>
-						{/if}
-					</Tabs.Tab>
-					<Tabs.Tab label="Professional" class={classes.root}>
-						{#if activeHomeTabIndex == 1}
-							<div class="tabDetailsWrapInternal">
-								<span class="tabDetailsDescription">
-									ImmiGPT offers detailed guidance on work visa options, eligibility, and
-									application processes like US H1B for over 10 countries.
-								</span>
-								<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
-								<span class="tabDetailsDescription">
-									<!-- Yes, you will have to meet the H1B visa requirements for Indian citizens and provide
-									the required documents. -->
-									{renderedText}
-								</span>
-							</div>
-						{/if}
-					</Tabs.Tab>
-					<Tabs.Tab label="Tourist" class={classes.root}>
-						{#if activeHomeTabIndex == 2}
-							<div class="tabDetailsWrapInternal">
-								<span class="tabDetailsDescription">
-									ImmiGPT provides a detailed breakdown of family-sponsored visa
-									requirements,business immigration options for entrepreneurs, investors, artists,
-									entertainers and performers etc., guiding users through each step and ensuring all
-									criteria is met.
-								</span>
-								<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
-								<span class="tabDetailsDescription">
-									<!-- Dallas is known for being the home base of the Dallas Cowboys, its delectable
-									southern cuisines, major global companies, and its vibrant art and music scene. -->
-									{renderedText}
-								</span>
-							</div>
-						{/if}
-					</Tabs.Tab>
-				</Tabs>
-			</div>
+					{#if activeHomeTabIndex == 0}
+						<div class="tabDetailsWrapInternal">
+							<span class="tabDetailsDescription">
+								ImmiGPT provides a comprehensive guide on student visa requirements, assist in
+								document generation, and interactive interview preparation using our custom AI model
+								for various countries across the globe.
+							</span>
+							<span class="tabDetailsSubTitle"> What is SOP ? </span>
+							<span class="tabDetailsDescription">
+								<!-- A Statement of Purpose or SOP lives up to its name by clearly outlining the
+								student's purpose of applying to a particular university for admission into a
+								specific course. -->
+								{renderedText}
+							</span>
+						</div>
+					{/if}
+				</Tabs.Tab>
+				<Tabs.Tab
+					label="Professional"
+					class={classes.root + activeHomeTabIndex == 1 ? "active" : ""}
+					style={activeHomeTabIndex == 1
+						? "font-weight:600;color:var(--primary-text-color) !important;"
+						: ""}
+				>
+					{#if activeHomeTabIndex == 1}
+						<div class="tabDetailsWrapInternal">
+							<span class="tabDetailsDescription">
+								ImmiGPT offers detailed guidance on work visa options, eligibility, and application
+								processes like US H1B for over 10 countries.
+							</span>
+							<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
+							<span class="tabDetailsDescription">
+								<!-- Yes, you will have to meet the H1B visa requirements for Indian citizens and provide
+								the required documents. -->
+								{renderedText}
+							</span>
+						</div>
+					{/if}
+				</Tabs.Tab>
+				<Tabs.Tab
+					label="Tourist"
+					class={classes.root + activeHomeTabIndex == 2 ? "active" : ""}
+					style={activeHomeTabIndex == 2
+						? "font-weight:600;color:var(--primary-text-color) !important;"
+						: ""}
+				>
+					{#if activeHomeTabIndex == 2}
+						<div class="tabDetailsWrapInternal">
+							<span class="tabDetailsDescription">
+								ImmiGPT provides a detailed breakdown of family-sponsored visa requirements,business
+								immigration options for entrepreneurs, investors, artists, entertainers and
+								performers etc., guiding users through each step and ensuring all criteria is met.
+							</span>
+							<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
+							<span class="tabDetailsDescription">
+								<!-- Dallas is known for being the home base of the Dallas Cowboys, its delectable
+								southern cuisines, major global companies, and its vibrant art and music scene. -->
+								{renderedText}
+							</span>
+						</div>
+					{/if}
+				</Tabs.Tab>
+			</Tabs>
 		</div>
 	</div>
+	<!-- <div class="lg:col-span-2 lg:pl-24">
+	</div> -->
 	<!-- <div class="lg:col-span-2 lg:pl-24">
 		{#each announcementBanners as banner}
 			<AnnouncementBanner classNames="mb-4" title={banner.title}>
@@ -224,10 +245,12 @@
 		padding: 10px 8px 0px 8px;
 		/* width: fit-content; */
 		width: 100%;
+		color: var(--primary-text-color);
 	}
 
 	.tabBodyWrap {
-		border: #fff solid 2px;
+		/* border: #fff solid 2px; */
+		border: var(--primary-border-color) solid 1px;
 		border-radius: 12px;
 		display: flex;
 		flex-direction: column;
@@ -237,12 +260,13 @@
 	}
 
 	.tabBodyWrap.light {
-		border: black solid 1px;
+		/*	border: black solid 1px;*/
+		border: var(--primary-border-color) solid 1px;
 	}
 
 	.tabDetailsWrap {
 		display: flex;
-		justify-content: left;
+		justify-content: center;
 		width: 100%;
 		padding: 8px;
 	}
@@ -250,6 +274,8 @@
 	.tabDetailsTitle {
 		font-size: 16px;
 		font-weight: 600;
+		text-align: center;
+		color: var(--primary-text-color);
 	}
 
 	.tabDetailsWrapInternal {
@@ -258,14 +284,30 @@
 		width: 100%;
 		padding: 8px;
 		gap: 8px;
+		color: var(--primary-text-color);
 	}
 
 	.tabDetailsSubTitle {
 		font-weight: 600;
 		font-size: 16px;
+		text-align: center;
 	}
 
 	.tabDetailsDescription {
 		font-size: 14px;
+		text-align: center;
+	}
+
+	.appTitle {
+		text-align: center;
+		font-weight: 700;
+		font-size: 24px;
+		color: var(--primary-text-color);
+	}
+
+	@media (max-width: 786px) {
+		.appTitle {
+			display: none;
+		}
 	}
 </style>

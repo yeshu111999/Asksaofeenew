@@ -13,11 +13,15 @@
 		Grid,
 		Checkbox,
 		ActionIcon,
+		Notification,
 	} from "@svelteuidev/core";
+	import axios from "axios";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
 	import { theme } from "$lib/stores/theme";
-	import { Pencil1 } from "radix-icons-svelte";
+	import { Pencil1, Cross2, Check } from "radix-icons-svelte";
+	// const FormData = require("form-data");
+	import FormData from "form-data";
 	let editing = false;
 	let oldValues = []; // Store the original values
 	let fields = [
@@ -45,6 +49,7 @@
 	let passEditFlag = false;
 	let chooseCategoryEditFlag = false;
 	let chooseCountryEditFlag = false;
+	let profilePic = "";
 
 	let collegeEditFlag = false;
 	let courseCountryEditFlag = false;
@@ -52,6 +57,8 @@
 	let gradYearEditFlag = false;
 	let experienceEditFlag = false;
 	let companyCountryEditFlag = false;
+	let apiErrorFlag = false;
+	let apiSuccessFlag = false;
 
 	const useStyles = createStyles((themes) => ({
 		root: {
@@ -68,7 +75,7 @@
 	$: isDisableUpdate =
 		oldName != name ||
 		(oldPassword && newPassword && confirmPassword && newPassword == confirmPassword);
-	let profileImageUrl = "https://picsum.photos/200/300";
+	let profileImageUrl = "https://picsum.photos/300/300";
 
 	onMount(() => {
 		name = Cookies.get("name");
@@ -79,6 +86,77 @@
 		oldName = name;
 		initial = oldName[0];
 	});
+
+	const getUserDetails = async () => {
+		let headers = {
+			Authorization: "Bearer " + Cookies.get("token"),
+		};
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+		let response = await axios
+			.get("https://backend.immigpt.net/getUserProfile", { headers: headers })
+			.then((response) => {
+				// console.log("response", response);
+				(name = response.data.username),
+					(email = response.data.email),
+					(profilePic = response.data.profilePic);
+
+				// 	name: name,
+				// email: email,
+				// mobileNumber: mobileNumber,
+				// oldPassword: oldPassword,
+				// newPassword: newPassword,
+				// confirmPassword: confirmPassword,
+			})
+			.catch((error) => {
+				console.log("error", error);
+			});
+		console.log("response", response);
+	};
+
+	const updateUserDetails = async () => {
+		saveChangesLoader = true;
+		let headers = {
+			Authorization: "Bearer " + Cookies.get("token"),
+		};
+		let gauth = Cookies.get("gauth");
+		if (gauth) {
+			headers["Google-Auth"] = "True";
+		}
+		let body = {
+			name: name,
+			email: email,
+			mobileNumber: mobileNumber,
+			oldPassword: oldPassword,
+			newPassword: newPassword,
+			confirmPassword: confirmPassword,
+		};
+		let data = new FormData();
+		data.append("request", JSON.stringify(body));
+		let config = {
+			method: "post",
+			maxBodyLength: Infinity,
+			url: "https://backend.immigpt.net/updateUserProfile",
+			headers: headers,
+			data: data,
+		};
+		axios
+			.request(config)
+			.then((response) => {
+				console.log(JSON.stringify(response.data));
+				saveChangesLoader = false;
+				apiSuccessFlag = true;
+			})
+			.catch((error) => {
+				console.log(error);
+				saveChangesLoader = false;
+				apiErrorFlag = true;
+			});
+	};
+
+	getUserDetails();
 
 	let questions = [
 		"Help in writing LOR",
@@ -198,7 +276,7 @@
 		</div>
 		<div class="card-body">
 			{#if editing}
-				<Tabs
+				<!-- <Tabs
 					variant="pills"
 					color={$theme == "dark"
 						? "rgba(255, 255, 255, 0.2)"
@@ -206,8 +284,7 @@
 						? "rgba(255, 255, 255, 0.2)"
 						: "rgb(11, 67, 116)"}
 				>
-					<!-- position="apart" -->
-					<!-- orientation="vertical" -->
+					
 					<Tabs.Tab label="About" class={classes.root + $theme == "light" ? "light" : "dark"}>
 						<div class="tab-wrapper">
 							{#each fields as field, index (field.name)}
@@ -244,25 +321,13 @@
 											</div>
 										{/if}
 									{:else if field.name === "Email"}
-										<!-- {#if !mailEditFlag} -->
 										<div style="display: flex; gap: 8px; align-items: center">
 											<span>{email}</span>
-											<!-- <ActionIcon variant="hover" on:click={() => (mailEditFlag = true)}>
-													<Pencil1 />
-												</ActionIcon> -->
+											
 										</div>
-										<!-- {:else if mailEditFlag}
-											<TextInput
-												placeholder={field.name}
-												type="text"
-												bind:value={email}
-												id={field.name.toLowerCase()}
-											/> -->
-										<!-- {/if} -->
+										
 									{:else if field.name === "Mobile"}
-										<!-- <div>
-											<span>{mobileNumber}</span>
-										</div> -->
+										
 										{#if !mobileEditFlag}
 											<div style="display: flex; gap: 8px; align-items: center">
 												<span>{mobileNumber}</span>
@@ -279,12 +344,6 @@
 											/>
 										{/if}
 									{:else}
-										<!-- <TextInput
-											placeholder={field.name}
-											type="text"
-											bind:value={name}
-											id={field.name.toLowerCase()}
-										/> -->
 										{#if !nameEditFlag}
 											<div style="display: flex; gap: 8px; align-items: center">
 												<span>{name}</span>
@@ -376,7 +435,6 @@
 								<Grid.Col span={4}>
 									<div class="input-wrapper">
 										<label for="">College name</label>
-										<!-- <TextInput placeholder="Enter college name" bind:value={'SASTRA'} /> -->
 										{#if !collegeEditFlag}
 											<div style="display: flex; gap: 8px; align-items: center">
 												<span>SASTRA</span>
@@ -484,8 +542,6 @@
 					</Tabs.Tab>
 					<Tabs.Tab label="Resume" class={classes.root + ($theme == "light" ? "light" : "dark")}>
 						<div class="tab-wrapper">
-							<!-- Add content for the "Documents" tab here -->
-							<!-- Add document upload fields or any other content you want for this tab -->
 							<div class="file-upload">
 								<label for="file">Upload your resume</label>
 								<input type="file" name="file" id="file" />
@@ -497,7 +553,7 @@
 										<Checkbox size="sm" />
 										<p class="question">{i + 1 + " ) " + question}</p>
 									</div>
-									<!-- <p class="question">{i + 1 + " ) " + question}</p> -->
+									
 								{/each}
 							</div>
 							<Button
@@ -509,7 +565,163 @@
 							>
 						</div>
 					</Tabs.Tab>
-				</Tabs>
+				</Tabs> -->
+				<div class="header">
+					<p class="title">Edit Profile</p>
+				</div>
+
+				<div class="tab-wrapper">
+					<div class="profile-image-wrap image-edit">
+						{#if selectedImage}
+							<img
+								src={selectedImage}
+								alt="Selected Image"
+								style="width: 150px; height:150px;  object-fit: cover; border-radius: 75px"
+							/>
+						{/if}
+						{#if !selectedImage}
+							<div class="profile-image">
+								<span class="initial">{initial}</span>
+							</div>
+						{/if}
+						<input
+							type="file"
+							accept="image/*"
+							on:change={handleImageSelect}
+							style="display: none"
+							bind:this={fileInput}
+						/>
+						<!-- <button on:click={() => fileInput.click()} class="profile-image-edit-wrap"
+							>Edit profile</button
+						> -->
+						<ActionIcon variant="hover" on:click={() => fileInput.click()}>
+							<Pencil1 />
+						</ActionIcon>
+					</div>
+					{#each fields as field, index (field.name)}
+						<div>
+							<label for={field.name.toLowerCase()}>{field.name}:</label>
+							{#if field.name === "Password"}
+								{#if !passEditFlag}
+									<div style="display: flex; gap: 8px; align-items: center">
+										<span>**********</span>
+										<ActionIcon variant="hover" on:click={() => (passEditFlag = true)}>
+											<Pencil1 />
+										</ActionIcon>
+									</div>
+								{:else if passEditFlag}
+									<div class="password-fields">
+										<PasswordInput
+											type="text"
+											placeholder="Old Password"
+											bind:value={oldPassword}
+											id="oldPassword"
+										/>
+										<PasswordInput
+											type="text"
+											placeholder="New Password"
+											bind:value={newPassword}
+											id="newPassword"
+										/>
+										<PasswordInput
+											type="text"
+											placeholder="Confirm Password"
+											bind:value={confirmPassword}
+											id="confirmPassword"
+										/>
+									</div>
+								{/if}
+							{:else if field.name === "Email"}
+								<!-- {#if !mailEditFlag} -->
+								<div style="display: flex; gap: 8px; align-items: center">
+									<span>{email}</span>
+									<!-- <ActionIcon variant="hover" on:click={() => (mailEditFlag = true)}>
+											<Pencil1 />
+										</ActionIcon> -->
+								</div>
+								<!-- {:else if mailEditFlag}
+									<TextInput
+										placeholder={field.name}
+										type="text"
+										bind:value={email}
+										id={field.name.toLowerCase()}
+									/> -->
+								<!-- {/if} -->
+							{:else if field.name === "Mobile"}
+								<!-- <div>
+									<span>{mobileNumber}</span>
+								</div> -->
+								{#if !mobileEditFlag}
+									<div style="display: flex; gap: 8px; align-items: center">
+										<span>{mobileNumber}</span>
+										<ActionIcon variant="hover" on:click={() => (mobileEditFlag = true)}>
+											<Pencil1 />
+										</ActionIcon>
+									</div>
+								{:else if mobileEditFlag}
+									<TextInput
+										placeholder={field.name}
+										type="text"
+										bind:value={mobileNumber}
+										id={field.name.toLowerCase()}
+									/>
+								{/if}
+							{:else}
+								<!-- <TextInput
+									placeholder={field.name}
+									type="text"
+									bind:value={name}
+									id={field.name.toLowerCase()}
+								/> -->
+								{#if !nameEditFlag}
+									<div style="display: flex; gap: 8px; align-items: center">
+										<span>{name}</span>
+										<ActionIcon variant="hover" on:click={() => (nameEditFlag = true)}>
+											<Pencil1 />
+										</ActionIcon>
+									</div>
+								{:else if nameEditFlag}
+									<TextInput
+										placeholder={field.name}
+										type="text"
+										bind:value={name}
+										id={field.name.toLowerCase()}
+									/>
+								{/if}
+							{/if}
+						</div>
+					{/each}
+					<div class="button-container">
+						<Button
+							loading={saveChangesLoader}
+							color="#3b82f6"
+							gradient={{ from: "grape", to: "pink", deg: 35 }}
+							on:click={updateUserDetails}>Save Changes</Button
+						>
+						<!-- on:click={saveChanges}>Save Changes</Button -->
+						<!-- disabled={!isDisableUpdate} -->
+					</div>
+					{#if apiErrorFlag}
+						<Notification
+							icon={Cross2}
+							color="red"
+							closeButtonProps={{ title: "Hide notification" }}
+							on:click={() => (apiErrorFlag = false)}
+						>
+							Error in updating details
+						</Notification>
+					{/if}
+					{#if apiSuccessFlag}
+						<Notification
+							icon={Check}
+							color="green"
+							closeButtonProps={{ title: "Hide notification" }}
+							on:click={() => (apiSuccessFlag = false)}
+						>
+							Details updated successfully
+						</Notification>
+					{/if}
+				</div>
 			{:else}
 				<div class="profile-image-container">
 					<!-- <img src={profileImageUrl} alt="Profile" class="profile-image" /> -->
@@ -717,6 +929,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
+	}
+
+	.image-edit {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		justify-content: center;
 	}
 
 	@media (max-width: 600px) {

@@ -15,6 +15,7 @@
 	import WebSearchToggle from "../WebSearchToggle.svelte";
 	import LoginModal from "../LoginModal.svelte";
 	import type { WebSearchUpdate } from "$lib/types/MessageUpdate";
+	import { visaPrompt } from "$lib/stores/promptStore";
 
 	export let messages: Message[] = [];
 	export let loading = false;
@@ -25,12 +26,20 @@
 	export let settings: LayoutData["settings"];
 	export let webSearchMessages: WebSearchUpdate[] = [];
 	import { theme } from "$lib/stores/theme";
+	import CookieConsent from "../CookieConsent.svelte";
 
 	export let loginRequired = false;
 	$: isReadOnly = !models.some((model) => model.id === currentModel.id);
 
 	let loginModalOpen = false;
-	let message: string;
+	$: message = $visaPrompt;
+
+	$: {
+		let msg = $visaPrompt;
+		if (msg.length > 0) {
+			handleSubmit();
+		}
+	}
 
 	const dispatch = createEventDispatcher<{
 		message: string;
@@ -43,10 +52,16 @@
 		if (loading) return;
 		dispatch("message", message);
 		message = "";
+		visaPrompt.set("");
 	};
 </script>
 
-<div class="relative min-h-0 min-w-0" style={$theme == "light" ? "background-color:#dfdfdf;" : ""}>
+<div
+	class="relative min-h-0 min-w-0"
+	style={$theme == "light"
+		? "background-color: var(--secondary-background-color); overflow-y: auto; height: calc(100vh - 70px)"
+		: "background-color: var(--secondary-background-color); overflow-y: auto; height: calc(100vh - 70px)"}
+>
 	{#if loginModalOpen}
 		<LoginModal {settings} on:close={() => (loginModalOpen = false)} />
 	{/if}
@@ -67,7 +82,7 @@
 		}}
 	/>
 	<div
-		class="dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center bg-gradient-to-t from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
+		class="solidBootomWrap dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
 	>
 		<div class="flex w-full pb-3 max-md:justify-between">
 			{#if settings?.searchEnabled}
@@ -82,12 +97,13 @@
 		</div>
 		<form
 			on:submit|preventDefault={handleSubmit}
-			class="relative flex w-full max-w-4xl flex-1 items-center rounded-xl border bg-gray-100 focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
+			style="background-color: var(--secondary-background-color); border-radius: 8px; overflow:hidden; border: 1px solid var(--user-chat-border-color);"
+			class="relative flex w-full max-w-4xl flex-1 items-center border focus-within:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus-within:border-gray-500 
 			{isReadOnly ? 'opacity-30' : ''}"
 		>
 			<div class="flex w-full flex-1 border-none bg-transparent">
 				<ChatInput
-					placeholder="Ask anything"
+					placeholder="Ask for anything"
 					bind:value={message}
 					on:submit={handleSubmit}
 					on:keypress={() => {
@@ -115,15 +131,39 @@
 						disabled={!message || isReadOnly}
 						type="submit"
 					>
-						<CarbonSendAltFilled />
+						<!-- <CarbonSendAltFilled /> -->
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M5.323 19.8781L19.752 13.1791C20.75 12.7161 20.75 11.2821 19.752 10.8191L5.323 4.12205C4.288 3.64205 3.193 4.66005 3.58 5.74305L5.813 11.9971L3.58 18.2581C3.193 19.3401 4.288 20.3581 5.323 19.8781Z"
+								stroke="#323232"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M5.81 12H20.5"
+								stroke="#323232"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
 					</button>
 				{/if}
 			</div>
 		</form>
-		<div class="mt-2 flex justify-between self-stretch px-1 text-xs text-gray-400/90 max-sm:gap-2">
+		<div class="mt-2 flex justify-between self-stretch px-1 text-xs max-sm:gap-2">
 			<p>
 				Model: <a
-					href={currentModel.modelUrl || "https://huggingface.co/" + currentModel.name}
+					href="https://immigpt.blog/"
 					target="_blank"
 					rel="noreferrer"
 					class="hover:underline">{currentModel.displayName}</a
@@ -143,3 +183,9 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.solidBootomWrap {
+		background-color: var(--secondary-background-color);
+	}
+</style>

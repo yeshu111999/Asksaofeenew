@@ -5,9 +5,17 @@
 	import { ERROR_MESSAGES, error } from "$lib/stores/errors";
 	import { pendingMessage } from "$lib/stores/pendingMessage";
 	import { findCurrentModel } from "$lib/utils/models";
+	import Cookies from "js-cookie";
+	import { onMount } from "svelte";
 
 	export let data;
 	let loading = false;
+
+	onMount(() => {
+		if (!Cookies.get("token")) {
+			goto("/");
+		}
+	});
 
 	async function createConversation(message: string) {
 		try {

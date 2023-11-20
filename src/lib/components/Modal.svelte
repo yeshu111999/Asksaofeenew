@@ -47,14 +47,14 @@
 		bind:this={backdropEl}
 		on:click={handleBackdropClick}
 		transition:fade={{ easing: cubicOut, duration: 300 }}
-		class="scrollbar-hide fixed inset-0 z-40 flex items-center justify-center bg-black/80 p-8 backdrop-blur-sm dark:bg-black/50"
+		class="overlay"
 	>
 		<div
 			role="dialog"
 			tabindex="-1"
 			bind:this={modalEl}
 			on:keydown={handleKeydown}
-			class="scrollbar-hide max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-2xl bg-white shadow-2xl outline-none sm:-mt-10 sm:max-h-screen {width}"
+			class="popup-container"
 		>
 			<slot />
 		</div>
@@ -70,5 +70,18 @@
 	}
 	.scrollbar-hide {
 		-ms-overflow-style: none;
+	}
+
+	.overlay, .popup-container {
+		width: 100vw;
+		height: 100vh;
+		background-color: #DDDDDD;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		z-index: 99;
 	}
 </style>

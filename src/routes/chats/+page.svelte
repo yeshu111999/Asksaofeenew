@@ -22,6 +22,7 @@
 
 	import { theme } from "$lib/stores/theme";
 	import { ChatBubble } from "radix-icons-svelte";
+	import { browser } from "$app/environment";
 
 	let searchInput = "";
 	let chatSection;
@@ -74,7 +75,12 @@
 
 	let isReadOnly = false;
 	let loading = false;
-	let themeVariable = localStorage.getItem("theme");
+	// let themeVariable = localStorage.getItem("theme");
+	let themeVariable = "light";
+	if (browser) {
+		let tempTheme = window.localStorage.getItem("theme");
+		// themeVariable = tempTheme ? tempTheme : themeVariable;
+	}
 
 	let activeClassVariable = "active-chat";
 	let addFriendsLoading = false;
@@ -141,12 +147,17 @@
 	}
 
 	async function getContacts() {
+		let headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		};
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers["Google-Auth"] = "True";
+		}
 		await fetch("https://backend.immigpt.net/users/myContacts?length=100", {
 			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
+			headers: headers,
 		})
 			.then(async (response) => {
 				if (response.status == 200) {
@@ -162,13 +173,12 @@
 	}
 
 	onMount(async () => {
-		console.log("check", localStorage.getItem("theme"));
+		//console.log("check", localStorage.getItem("theme"));
 		userId = Cookies.get("email");
 		token = Cookies.get("token");
 
-		themeVariable == "light"
-			? (activeClassVariable = "active-chat-light")
-			: (activeClassVariable = "active-chat");
+		// themeVariable == "light"
+		true ? (activeClassVariable = "active-chat-light") : (activeClassVariable = "active-chat");
 
 		console.log(userId, token);
 		getContacts();
@@ -310,8 +320,9 @@
 					className="search-box"
 					style={themeVariable == "light"
 						? "border-radius:8px;color:#222;"
-						: "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"}
+						: "border-radius:8px;color:#222;"}
 				/>
+				<!-- : "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"} -->
 				<!-- style="background-color:#343a40;border:none;border-radius:8px;color:#FFF;" -->
 			</div>
 			<div class="list-of-friends">
@@ -408,8 +419,9 @@
 						className="search-box"
 						style={themeVariable == "light"
 							? "border-radius:8px;color:#222;"
-							: "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"}
+							: "border-radius:8px;color:#222;"}
 					/>
+					<!-- : "background-color:#343a40;border:none;border-radius:8px;color:#FFF;"} -->
 				</div>
 				<div class="search-results">
 					{#if searchResults}

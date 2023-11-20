@@ -147,17 +147,10 @@
 >
 	<div>
 		<!-- <Tabs on:change={onActiveChange} variant="pills"> -->
-		{#if $theme == "dark"}
-			<Tabs on:change={onActiveChange} variant="unstyled">
-				<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
-				<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
-			</Tabs>
-		{:else if $theme == "light"}
-			<Tabs on:change={onActiveChange} variant="unstyled">
-				<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
-				<Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} />
-			</Tabs>
-		{/if}
+		<Tabs on:change={onActiveChange} variant="unstyled" grow="true">
+			<Tabs.Tab label={PUBLIC_APP_NAME} class={classes.root} icon={LogoSmall} />
+			<!-- <Tabs.Tab label="Chats" class={classes.root} icon={ChatBubble} /> -->
+		</Tabs>
 	</div>
 	<div>
 		<Divider style="width:100%" />

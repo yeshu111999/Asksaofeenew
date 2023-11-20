@@ -8,6 +8,7 @@
 	import SectionPolicies from "$lib/components/SectionPolicies.svelte";
 	import { theme } from "$lib/stores/theme";
 
+	let contentSection;
 	let activeTab = 0;
 	let tabs = [
 		{
@@ -33,19 +34,22 @@
 	$: activeContent = tabs[activeTab].label;
 	function switchTab(index) {
 		activeTab = index;
+		if (contentSection) {
+			contentSection.scrollTop = 0;
+		}
 	}
 </script>
 
 <div class="container">
 	<SectionWrapper header="Explore">
-		<div class="container">
-			<div class={$theme == "dark" ? "labels dark" : "labels"}>
-				{#each tabs as tab, index (tab.label)}
-					<button class={activeTab === index ? "active " : " "} on:click={() => switchTab(index)}>
-						{tab.label}
-					</button>
-				{/each}
-			</div>
+		<div class={$theme == "dark" ? "labels dark" : "labels"}>
+			{#each tabs as tab, index (tab.label)}
+				<button class={activeTab === index ? "active " : " "} on:click={() => switchTab(index)}>
+					{tab.label}
+				</button>
+			{/each}
+		</div>
+		<div class="content" bind:this={contentSection}>
 			<div class="tab-content">
 				{#if activeContent == "About us"}
 					<div class="section-container">
@@ -85,6 +89,9 @@
 		width: 100%;
 		border-bottom: 1px solid #e2e0dc;
 		padding-bottom: 12px;
+		position: absolute;
+		padding: 20px 40px 10px 40px;
+		height: 80px;
 	}
 
 	.labels::-webkit-scrollbar {
@@ -129,6 +136,13 @@
 
 	.section-container {
 		padding-top: 12px;
+	}
+
+	.content {
+		margin-top: 80px;
+		height: 80vh;
+		overflow-y: auto;
+		padding: 0 40px 40px 40px;
 	}
 	/* :root {
 		--primary-color: #185ee0;

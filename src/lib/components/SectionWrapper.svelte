@@ -24,15 +24,17 @@
 
 <style>
 	.wrapper {
-		padding: 35px 100px;
+		/* padding: 35px 100px; */
 		height: 100vh;
+		width: 100vw;
 		background-color: #343a40;
 		display: flex;
 		align-items: center;
 	}
 	.wrapper-light {
-		padding: 35px 100px;
+		/* padding: 35px 100px; */
 		height: 100vh;
+		width: 100vw;
 		background-color: #fff;
 		display: flex;
 		align-items: center;
@@ -48,6 +50,7 @@
 		width: 100%;
 		color: white;
 		flex-direction: column;
+		height: 100%;
 	}
 	.section-container-light {
 		display: flex;
@@ -59,17 +62,18 @@
 		color: black;
 		flex-direction: column;
 		width: 100%;
+		height: 100%;
 	}
 
 	.content {
-		padding: 40px;
-		height: 80vh;
-		overflow-y: auto;
+		/* padding: 40px;
+		height: 92vh;
+		overflow-y: auto; */
 	}
 	.top-bar {
 		padding: 12px 40px;
 		background-color: gray;
-		border-radius: 8px;
+		/* border-radius: 8px; */
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -106,7 +110,7 @@
 
 		.content {
 			height: 100%;
-			padding: 20px;
+			/* padding: 20px; */
 		}
 
 		.top-bar {
