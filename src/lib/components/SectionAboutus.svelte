@@ -34,6 +34,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
+		height: 80vh;
+		overflow-y: auto;
 	}
 
 	p {

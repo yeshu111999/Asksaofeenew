@@ -46,8 +46,11 @@
 		/* align-items: center; */
 		border-radius: 4px;
 		background: var(--brand-colors-pure-white, #fff);
-		width: 65%;
-		height: auto;
+		/* width: 65%; */
+		/* height: auto; */
+		max-width: 1240px;
+		/* height: 80vh;
+		overflow-y: auto; */
 	}
 
 	.body {
@@ -98,15 +101,15 @@
 
 	@media (max-width: 1000px) {
 		.popup {
-			width: 70%;
+			/* width: 70%; */
 		}
 	}
 
 	@media (max-width: 600px) {
 		.popup {
-			width: 90%;
-			height: auto;
-			overflow-y: auto;
+			/* width: 90%; */
+			/* height: auto; */
+			/* overflow-y: auto; */
 		}
 	}
 </style>

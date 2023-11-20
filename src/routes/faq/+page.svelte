@@ -351,6 +351,7 @@
 									<b>{faq.faqTitle}</b>
 								</span>
 								<svg
+									style="min-width: 16px;"
 									width="16"
 									height="16"
 									viewBox="0 0 16 16"
@@ -488,7 +489,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
-		width: 80%;
+		width: 100%;
+		max-width: 1240px;
 	}
 
 	.faqQuestion {

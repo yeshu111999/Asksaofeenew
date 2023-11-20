@@ -1462,5 +1462,9 @@
 		.landingPageWrap {
 			padding-bottom: 50px;
 		}
+
+		.flexRow {
+			justify-content: space-evenly;
+		}
 	}
 </style>
