@@ -9,5 +9,12 @@
 	on:click
 	class="btn flex h-9 rounded-lg border bg-white px-3 py-1 shadow-sm transition-all hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 {classNames}"
 >
-	<CarbonStopFilledAlt class="-ml-1 mr-1 h-[1.25rem] w-[1.1875rem] text-gray-400" /> Stop generating
+	<CarbonStopFilledAlt class="-ml-1 mr-1 h-[1.25rem] w-[1.1875rem] text-gray-400" />
+	<div class="stopText">Stop generating</div>
 </button>
+
+<style>
+	.stopText {
+		color: var(--primary-btn-color);
+	}
+</style>

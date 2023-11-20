@@ -97,7 +97,7 @@
 	}
 
 	.description {
-		color: rgba(0, 0, 0, 0.5);
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;

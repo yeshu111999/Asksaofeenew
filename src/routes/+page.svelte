@@ -48,9 +48,9 @@
 		console.log("url", app);
 		let url = "";
 		if (app == "AppStore") {
-			url = "https://play.google.com/store/apps/details?id=com.etuloverduolc.immigpt";
-		} else if (app == "PlayStore") {
 			url = "https://apps.apple.com/us/app/immigpt/id6449792784";
+		} else if (app == "PlayStore") {
+			url = "https://play.google.com/store/apps/details?id=com.etuloverduolc.immigpt";
 		}
 		window.open(url, "_blank");
 	}

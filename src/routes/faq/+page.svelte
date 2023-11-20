@@ -358,9 +358,10 @@
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
 								>
+									<!-- stroke="#323739" -->
 									<path
 										d="M4 6L8 10L12 6"
-										stroke="#323739"
+										stroke={$currentTheme == "light" ? "#323739" : "#fff"}
 										stroke-width="1.5"
 										stroke-linecap="round"
 										stroke-linejoin="round"
@@ -407,12 +408,18 @@
 				{/if}
 			</div>
 			{#if !showAll}
-				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;"
-					>Show More</Button
+				<Button
+					color="#e4e4e4"
+					on:click={toggleShowAll}
+					ripple
+					style="color:black; margin-bottom: 100px;">Show More</Button
 				>
 			{:else}
-				<Button color="#e4e4e4" on:click={toggleShowAll} ripple style="color:black;"
-					>Show Less</Button
+				<Button
+					color="#e4e4e4"
+					on:click={toggleShowAll}
+					ripple
+					style="color:black; margin-bottom: 100px;">Show Less</Button
 				>
 			{/if}
 		</div>
@@ -511,6 +518,7 @@
 		flex-direction: column;
 		gap: 8px;
 		border: #e1e1e1 solid 1px;
+		border-radius: 8px;
 	}
 
 	.card-description {

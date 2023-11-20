@@ -19,6 +19,7 @@
 	import CarbonThumbsDown from "~icons/carbon/thumbs-down";
 	import { PUBLIC_SEP_TOKEN } from "$lib/constants/publicSepToken";
 	import type { Model } from "$lib/types/Model";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	import OpenWebSearchResults from "../OpenWebSearchResults.svelte";
 	import type { WebSearchUpdate } from "$lib/types/MessageUpdate";
@@ -218,7 +219,7 @@
 								src="https://www.google.com/s2/favicons?sz=64&domain_url={hostname}"
 								alt="{title} favicon"
 							/>
-							<div>{hostname.replace(/^www\./, "")}</div>
+							<div class="sourceText">{hostname.replace(/^www\./, "")}</div>
 						</a>
 					{/each}
 				</div>
@@ -259,7 +260,7 @@
 								stroke-width="1.5"
 								stroke-linecap="round"
 								stroke-linejoin="round"
-								fill={message.score === 1 ? "#222" : ""}
+								fill={message.score === 1 ? ($currentTheme == "light" ? "#222" : "#ccc") : ""}
 							/>
 							<path
 								d="M8 11.072L11.649 6.321C12.328 5.436 13.654 5.414 14.363 6.275V6.275C14.628 6.596 14.772 7 14.772 7.416V10.687H17.868C18.469 10.687 19.03 10.987 19.364 11.486L19.693 11.977C19.988 12.418 20.074 12.967 19.927 13.476L18.568 18.198C18.346 18.969 17.641 19.5 16.839 19.5H10.55C10.05 19.5 9.572 19.292 9.232 18.926L8 17.6"
@@ -267,7 +268,7 @@
 								stroke-width="1.5"
 								stroke-linecap="round"
 								stroke-linejoin="round"
-								fill={message.score === 1 ? "#222" : ""}
+								fill={message.score === 1 ? ($currentTheme == "light" ? "#222" : "#ccc") : ""}
 							/>
 						</svg>
 					</button>
@@ -319,13 +320,15 @@
 						</svg>
 					</button>
 				</Tooltip>
-				<CopyToClipBoardBtn
-					on:click={() => {
-						isCopied = true;
-					}}
-					classNames="ml-1.5 !rounded-sm !p-1 !text-sm !text-gray-400 focus:!ring-0 hover:!text-gray-500 dark:!text-gray-400 dark:hover:!text-gray-300 !border-none !shadow-none"
-					value={message.content}
-				/>
+				<Tooltip label="Copied" position="bottom">
+					<CopyToClipBoardBtn
+						on:click={() => {
+							isCopied = true;
+						}}
+						classNames="ml-1.5 !rounded-sm !p-1 !text-sm !text-gray-400 focus:!ring-0 hover:!text-gray-500 dark:!text-gray-400 dark:hover:!text-gray-300 !border-none !shadow-none"
+						value={message.content}
+					/>
+				</Tooltip>
 			</div>
 		{/if}
 	</div>
@@ -513,6 +516,9 @@
 {/if}
 
 <style>
+	.sourceText {
+		color: var(--primary-btn-color);
+	}
 	.userChatGroup {
 		background-color: var(--user-chat-bg-color);
 		border-radius: 8px;

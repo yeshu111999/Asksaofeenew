@@ -3,6 +3,7 @@
 	import { TextInput, Button, PasswordInput, Modal } from "@svelteuidev/core";
 	import { error } from "$lib/stores/errors";
 	import { base } from "$app/paths";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	import Cookies from "js-cookie";
 	import { goto } from "$app/navigation";
@@ -413,7 +414,31 @@
 			<div class="header">
 				<p class="title">Settings</p>
 				<button class="close-btn" on:click={closePopup}>
-					<img src="/assets/icons/close-icon-black.svg" alt="" />
+					<!-- <img src="/assets/icons/close-icon-black.svg" alt="" /> -->
+					<svg
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M6 18L18 6"
+							stroke={$currentTheme == "light" ? "#222" : "white"}
+							stroke-opacity="0.87"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+						<path
+							d="M18 18L6 6"
+							stroke={$currentTheme == "light" ? "#222" : "white"}
+							stroke-opacity="0.87"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
 				</button>
 			</div>
 			<div class="body">

@@ -1252,6 +1252,7 @@
 	$: isTemplateDisabled = selectedTemplate.inputFields.some((field) => field.fieldValue === "");
 	$: activeTemplates = templates[activeTabIndex].resumeTemplates;
 	$: activeInputFields = selectedTemplate.inputFields;
+	let isTemplateUseBtnDisabled = true;
 
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
@@ -1417,10 +1418,9 @@
 							{/each}
 						{/if}
 						<div class="buttons-wrapper">
-							<Button
-								disabled={isTemplateDisabled}
-								color={$currentTheme == "light" ? "black" : "white"}
-								on:click={useTemplate}><p>Use Template</p></Button
+							<!-- color={$currentTheme == "light" ? "black" : "white"} -->
+							<Button disabled={isTemplateUseBtnDisabled} on:click={useTemplate}
+								><p>Use Template</p></Button
 							>
 						</div>
 					</div>
