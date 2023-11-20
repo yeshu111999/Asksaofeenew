@@ -8,7 +8,6 @@ const stripe = new Stripe(STRIPE_API_KEY, { apiVersion: "2023-10-16" });
 export const actions: Actions = {
 	checkout: async ({ request }) => {
 		const priceId = (await request.formData()).get("price-id");
-		console.log("priceId", priceId);
 		let url: string | null;
 
 		if (!priceId || typeof priceId !== "string") {
