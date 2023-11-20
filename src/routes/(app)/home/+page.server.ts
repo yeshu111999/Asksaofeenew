@@ -32,7 +32,6 @@ export const actions: Actions = {
 		}
 
 		if (url) {
-			console.log(url);
 			throw redirect(303, url);
 		}
 	},
