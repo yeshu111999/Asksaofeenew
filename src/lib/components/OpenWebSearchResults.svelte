@@ -30,8 +30,13 @@
 		{:else}
 			<CarbonCheckmark class="my-auto text-gray-500" />
 		{/if}
-		<span class="px-2 font-medium" class:text-red-700={error} class:dark:text-red-500={error}
-			>Web search
+		<span
+			class="web-search-text px-2 font-medium"
+			class:text-red-700={error}
+			class:dark:text-red-500={error}
+			>Web search -
+			<span class="click-here desktop">Click here to open</span>
+			<span class="click-here mobile">click here</span>
 		</span>
 		<div class="my-auto transition-all" class:rotate-90={detailsOpen}>
 			<CarbonCaretRight />
@@ -110,5 +115,27 @@
 
 	details summary::-webkit-details-marker {
 		display: none;
+	}
+
+	.web-search-text {
+		color: black;
+	}
+
+	.click-here.mobile {
+		display: none;
+	}
+
+	.click-here.desktop {
+		display: inline-block;
+	}
+
+	@media (max-width: 600px) {
+		.click-here.mobile {
+			display: inline-block;
+		}
+
+		.click-here.desktop {
+			display: none;
+		}
 	}
 </style>
