@@ -26,7 +26,8 @@
 	--use-template-btn-text-color: black;
 
 	--user-chat-bg-color: #282828;
-	--user-chat-border-color: #282828;
+	/* --user-chat-border-color: #282828; */
+	--user-chat-border-color: #565656;
 	--assistant-chat-bg-color: linear-gradient(0deg,
 			rgba(13, 13, 13, 0.95) 0%,
 			rgba(13, 13, 13, 0.95) 100%),

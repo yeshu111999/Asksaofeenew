@@ -5,6 +5,7 @@
 	import ResumeTemplate from "../BrowseTemplates/ResumeTemplate.svelte";
 
 	import { theme } from "$lib/stores/theme";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	let dispatch = createEventDispatcher();
 	export let showTemplatesPopup = false;
@@ -27,7 +28,12 @@
 			<div class="header">
 				<p class="title">Upgrade Plan</p>
 				<button class="close-btn" on:click={closePopup}>
-					<img src="/assets/icons/close-icon-black.svg" alt="" />
+					<!-- <img src="/assets/icons/close-icon-black.svg" alt="" /> -->
+					{#if $currentTheme == "light"}
+						<img src="/assets/icons/close-icon-black.svg" alt="" />
+					{:else}
+						<img src="/assets/icons/close-icon-white.svg" alt="" />
+					{/if}
 				</button>
 			</div>
 			<div class="plan-container">
@@ -115,7 +121,8 @@
 		flex-direction: column;
 		/* align-items: center; */
 		border-radius: 4px;
-		background: var(--brand-colors-pure-white, #fff);
+		/* background: var(--brand-colors-pure-white, #fff); */
+		background: var(--secondary-background-color);
 		width: 45%;
 		/* height: 620px; */
 	}
@@ -138,14 +145,14 @@
 	}
 	.footer-text {
 		/* color: #335fd1; */
-		color: var(--primary-btn-color);
+		color: var(--secondary-text-color);
 		font-size: 14px;
 		font-weight: 600;
 		cursor: pointer;
 	}
 
 	.title {
-		color: #000;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 18px;
 		font-style: normal;
@@ -154,7 +161,7 @@
 	}
 
 	.description {
-		color: rgba(0, 0, 0, 0.54);
+		color: var(--secondary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
@@ -164,7 +171,8 @@
 	}
 
 	.description-amount {
-		color: rgba(0, 0, 0, 0.54);
+		/* color: rgba(0, 0, 0, 0.54); */
+		color: var(--secondary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;

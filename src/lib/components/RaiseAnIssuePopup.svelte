@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onMount } from "svelte";
 	import { TextInput, Button, Textarea } from "@svelteuidev/core";
 	import Cookies from "js-cookie";
+	import { currentTheme } from "$lib/stores/themeStore";
 
 	let dispatch = createEventDispatcher();
 	export let showRaiseAnIssuePopup = false;
@@ -55,7 +56,12 @@
 			<div class="header">
 				<p class="title">Contact Us</p>
 				<button class="close-btn" on:click={closePopup}>
-					<img src="/assets/icons/close-icon-black.svg" alt="" />
+					<!-- <img src="/assets/icons/close-icon-black.svg" alt="" /> -->
+					{#if $currentTheme == "light"}
+						<img src="/assets/icons/close-icon-black.svg" alt="" />
+					{:else}
+						<img src="/assets/icons/close-icon-white.svg" alt="" />
+					{/if}
 				</button>
 			</div>
 			<div class="body">
@@ -85,10 +91,11 @@
 				<div class="buttons-wrapper">
 					<Button color="#e4e4e4" on:click={closePopup} ripple style="color:black;">Cancel</Button>
 					{#if issue && issueDescription}
+						<!-- style="background-color:  var(--primary-btn-color)" -->
 						<Button
-							style="background-color:  var(--primary-btn-color)"
 							on:click={submitContactForm}
-							ripple>Submit</Button
+							color={$currentTheme == "light" ? "black" : "white"}
+							ripple><span class="submitBtn">Submit</span></Button
 						>
 					{:else}
 						<Button color="dark" disabled ripple>Submit</Button>
@@ -119,7 +126,8 @@
 		flex-direction: column;
 		/* align-items: center; */
 		border-radius: 4px;
-		background: var(--brand-colors-pure-white, #fff);
+		/* background: var(--brand-colors-pure-white, #fff); */
+		background: var(--secondary-background-color);
 		width: auto;
 		height: auto;
 	}
@@ -139,11 +147,12 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		border-bottom: 1px solid #e1e1e1;
+		/* border-bottom: 1px solid #e1e1e1; */
+		border-bottom: 1px solid var(--primary-border-color);
 	}
 
 	.title {
-		color: #000;
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 18px;
 		font-style: normal;
@@ -158,16 +167,17 @@
 	}
 
 	.contact-details p {
-		color: rgba(0, 0, 0, 0.87);
+		color: var(--primary-text-color);
 		font-family: Inter;
 		font-size: 14px;
 		font-style: normal;
-		font-weight: 400;
+		font-weight: 600;
 		line-height: normal;
 	}
 
 	.contact-details p span.gray {
-		color: rgba(0, 0, 0, 0.5);
+		color: var(--primary-text-color);
+		font-weight: 400;
 	}
 
 	@media (max-width: 1000px) {

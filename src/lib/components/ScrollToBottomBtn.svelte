@@ -2,6 +2,8 @@
 	import { fade } from "svelte/transition";
 	import { onDestroy } from "svelte";
 	import IconChevron from "./icons/IconChevron.svelte";
+	import { currentTheme } from "$lib/stores/themeStore";
+	import { Button } from "@svelteuidev/core";
 
 	export let scrollNode: HTMLElement;
 	export { className as class };

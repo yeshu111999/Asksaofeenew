@@ -16,6 +16,8 @@
 	import LoginModal from "../LoginModal.svelte";
 	import type { WebSearchUpdate } from "$lib/types/MessageUpdate";
 	import { visaPrompt } from "$lib/stores/promptStore";
+	import { currentTheme } from "$lib/stores/themeStore";
+	import { Button } from "@svelteuidev/core";
 
 	export let messages: Message[] = [];
 	export let loading = false;
@@ -143,14 +145,14 @@
 								fill-rule="evenodd"
 								clip-rule="evenodd"
 								d="M5.323 19.8781L19.752 13.1791C20.75 12.7161 20.75 11.2821 19.752 10.8191L5.323 4.12205C4.288 3.64205 3.193 4.66005 3.58 5.74305L5.813 11.9971L3.58 18.2581C3.193 19.3401 4.288 20.3581 5.323 19.8781Z"
-								stroke="#323232"
+								stroke={$currentTheme == "light" ? "#323232" : "#fff"}
 								stroke-width="1.5"
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							/>
 							<path
 								d="M5.81 12H20.5"
-								stroke="#323232"
+								stroke={$currentTheme == "light" ? "#323232" : "#fff"}
 								stroke-width="1.5"
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -171,14 +173,18 @@
 				for validity and accuracy when used legally.
 			</p>
 			{#if messages.length}
-				<button
+				<Button size="xs" variant="subtle" on:click={() => dispatch("share")}>
+					<CarbonExport class="text-[.6rem] sm:mr-1.5 sm:text-primary-500" />
+					<div class="max-sm:hidden">Share this conversation</div>
+				</Button>
+				<!-- <button
 					class="flex flex-none items-center hover:text-gray-400 hover:underline max-sm:rounded-lg max-sm:bg-gray-50 max-sm:px-2.5 dark:max-sm:bg-gray-800"
 					type="button"
 					on:click={() => dispatch("share")}
 				>
 					<CarbonExport class="text-[.6rem] sm:mr-1.5 sm:text-primary-500" />
 					<div class="max-sm:hidden">Share this conversation</div>
-				</button>
+				</button> -->
 			{/if}
 		</div>
 	</div>

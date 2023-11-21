@@ -44,6 +44,10 @@
 	color: var(--primary-btn-color2);
 }
 
+.buttons-wrapper .svelteui-Button-root {
+	color: var(--primary-btn-color2);
+}
+
 
 .svelteui-Tabs-wrapper {
 	border-bottom: 2px solid var(--primary-border-color) !important;

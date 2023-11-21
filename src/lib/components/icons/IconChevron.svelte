@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { currentTheme } from "$lib/stores/themeStore";
 	export let classNames = "";
 </script>
 
@@ -10,9 +11,10 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
+	<!-- stroke="currentColor" -->
 	<path
 		d="M1.67236 1L7.67236 7L13.6724 1"
-		stroke="currentColor"
+		stroke={$currentTheme == "light" ? "#222" : "#222"}
 		stroke-width="2"
 		stroke-linecap="round"
 		stroke-linejoin="round"
