@@ -10,7 +10,7 @@
 	let loginModalOpen = false;
 	let showSignUp = false;
 	let settings;
-	let token;
+	let token = "";
 
 	let showRaiseAnIssuePopup = false;
 	function openRaiseAnIssuePopup() {
@@ -55,9 +55,16 @@
 		window.open(url, "_blank");
 	}
 
+	$: tokenTemp = token;
+
+	function closeLoginPopup() {
+		token = Cookies.get("token");
+		loginModalOpen = false;
+	}
+
 	onMount(() => {
 		loginModalOpen = false;
-		// token = Cookies.get("token");
+		token = Cookies.get("token");
 		// if (token) {
 		// 	goto("/home");
 		// }
@@ -66,7 +73,7 @@
 
 <div class="landingPageWrap scrollbar-custom">
 	{#if loginModalOpen}
-		<LoginModal {showSignUp} {settings} on:close={() => (loginModalOpen = false)} />
+		<LoginModal {showSignUp} {settings} on:close={() => closeLoginPopup} />
 	{/if}
 	<div class="landingPageWrapChild">
 		<div class="landBarWrap">

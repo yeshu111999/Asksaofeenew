@@ -22,6 +22,9 @@
 	import { currentTheme } from "$lib/stores/themeStore";
 	import Analytics from "$lib/components/Analytics.svelte";
 
+	import { navigating } from "$app/stores";
+	import PageLoader from "$lib/components/PageLoader.svelte";
+
 	export let data;
 
 	let isNavOpen = false;
@@ -108,14 +111,19 @@
 
 	let loginModalVisible = false;
 
+	let token = "";
+
 	onMount(() => {
-		let token = Cookies.get("token");
-		if (!token) {
-			loginModalVisible = true;
-		}
+		token = Cookies.get("token");
 		if (token) {
-			canLogin = false;
+			goto("/home");
 		}
+		// if (!token) {
+		// 	loginModalVisible = true;
+		// }
+		// if (token) {
+		// 	canLogin = false;
+		// }
 	});
 </script>
 
@@ -163,7 +171,7 @@
 	/>
 	<!-- <meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} /> -->
 	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
-	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
+	<link rel="stylesheet" href={`../../themes/${$currentTheme}.css`} />
 </svelte:head>
 
 <Analytics />

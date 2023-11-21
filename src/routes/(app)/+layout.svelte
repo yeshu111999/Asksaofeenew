@@ -301,8 +301,8 @@
 		sizes="180x180"
 		type="image/png"
 	/>
-	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
-	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />
+	<!-- <meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
+	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} /> -->
 </svelte:head>
 
 <!-- <div
@@ -844,7 +844,7 @@
 		/* height: calc(100vh -390px); */
 		min-height: auto;
 		overflow-y: auto;
-		max-height: calc(100% - 200px);
+		max-height: calc(100% - 228px);
 	}
 
 	.recent-search-btn p {
