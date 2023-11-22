@@ -10,9 +10,6 @@ import { SERPAPI_KEY, SERPER_API_KEY, MESSAGES_BEFORE_LOGIN } from "$env/static/
 import Cookies from "js-cookie";
 
 export const load: LayoutServerLoad = async ({ locals, depends, url }) => {
-	if (Cookies.get("token")) {
-		throw redirect(302, "/home");
-	}
 	const { conversations } = collections;
 	const urlModel = url.searchParams.get("model");
 
