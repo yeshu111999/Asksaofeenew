@@ -3,8 +3,10 @@
 	src: url("/fonts/Inter-Regular.ttf");
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap');
+
 * {
-	font-family: "Inter" !important;
+	font-family: "Inter";
 }
 
 :root {

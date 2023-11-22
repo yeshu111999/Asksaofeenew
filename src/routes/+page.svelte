@@ -79,9 +79,9 @@
 		<div class="landBarWrap">
 			<div class="landBarWidthWrap">
 				<div class="logoTitleWrap">
-					<div class="logoWrap">
+					<!-- <div class="logoWrap">
 						<img width="40px" src="/assets/images/statue-liberty.jpg" alt="immigpt" />
-					</div>
+					</div> -->
 					<div class="logoTitle">ImmiGPT</div>
 				</div>
 				<div class="authBtnWrap">
@@ -95,10 +95,10 @@
 						<span style="color: #222 !important;">Sign up</span>
 					</Button> -->
 					<button on:click={() => showSignUpPopup()} class="signUpBtn"
-						><span style="color: #222 !important;">Sign up</span></button
+						><span style="color: #fff !important;">Sign up</span></button
 					>
 					<button on:click={() => showLoginPopup()} class="loginBtn"
-						><span style="color: #fff !important;">Login</span></button
+						><span style="color: #222 !important;">Login</span></button
 					>
 					<!-- <Button on:click={() => showLoginPopup()} color="dark" radius="xl" size="md"
 						><span style="color: #fff !important;">Login</span></Button
@@ -108,26 +108,55 @@
 		</div>
 		<div class="landPgHeroWrap">
 			<div class="landImageWrap">
-				<img style="object-fit: cover;" src="/assets/images/heroimmi.jpg" alt="hero" />
+				<!-- <img style="" src="/assets/images/heroimmi.png" alt="hero" /> -->
+				<div class="landStartContentWrap">
+					<div class="landPgStartTitle1">A Generative AI</div>
+					<div class="landPgStartTitle2">For Immigration and Travel</div>
+					<div class="landPgStartDesc">
+						ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
+						responses to your Travel and Immigration concerns.
+					</div>
+					<button on:click={() => (loginModalOpen = true)} class="getStartedBtn"
+						><span style="color: #5454F0 !important;">Get Started It’s Free</span></button
+					>
+					<div class="freePlanWrap">
+						<div class="freeIconWrap">
+							<svg
+								width="17"
+								height="17"
+								viewBox="0 0 17 17"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<circle
+									cx="8.50006"
+									cy="8.50006"
+									r="6.0025"
+									stroke="#00C850"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M6.12842 8.72613L7.57369 10.1714L7.56435 10.1621L10.825 6.90137"
+									stroke="#00C850"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</div>
+						<div class="freePlanTitle">Free Plan Available</div>
+					</div>
+				</div>
 			</div>
-			<div class="landPgHeroDetailWrap">
+			<!-- <div class="landPgHeroDetailWrap">
 				<div class="landPgHeroTitle1">A Generative AI</div>
 				<div class="landPgHeroTitle2">For Immigration and Travel</div>
 				<div class="landPgHeroDesc">
 					ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
 					responses to your Travel and Immigration concerns.
 				</div>
-			</div>
-			<div class="landPgHeroMailSection2">
-				<!-- <div class="landPgHeroMailInputWrap">
-					<input class="landPgHeroMailInput" type="text" placeholder="Enter Email address" />
-					<Button on:click={() => (loginModalOpen = true)} color="dark" radius="xl" size="xs"
-						>Try now</Button
-					>
-				</div> -->
-				<!-- <Button color="dark" radius="xl" on:click={() => (loginModalOpen = true)} size="lg"
-					><span style="color: #fff !important;">Get Started It’s Free</span></Button
-				> -->
+			</div> -->
+			<!-- <div class="landPgHeroMailSection2">
 				<button on:click={() => (loginModalOpen = true)} class="getStartedBtn"
 					><span style="color: #fff !important;">Get Started It’s Free</span></button
 				>
@@ -159,12 +188,13 @@
 					<div class="freePlanTitle">Free Plan Available</div>
 				</div>
 				<img src="/assets/images/immpng.png" style="margin-top: 16px;" alt="" />
-			</div>
+			</div> -->
 		</div>
 		<div class="featureDetailSection">
 			<div class="featureDetailsWrap">
 				<div class="featureSubTitle">WHAT'S INSIDE</div>
-				<div class="featureTitle">Explore the Infinite</div>
+				<!-- <div class="featureTitle">Explore the Infinite</div> -->
+				<div class="featureTitle">Using ImmiGPT, Find answers to All of your Questions</div>
 				<div class="featureCardsWrap">
 					<div class="featureMainCard">
 						<div class="featureDetailCard">
@@ -309,6 +339,9 @@
 					</div>
 					<div class="featureMainCard">
 						<div class="featureMainCardFull">
+							<div class="featureMainTiltedTrouble">
+								<!-- <img src="/assets/images/tiltedpun.png" alt="" /> -->
+							</div>
 							<div class="featureTextTitle">What gives ImmiGPT a competitive edge ?</div>
 							<div class="featureTextDesc">
 								ImmiGPT simplifies the complex immigration process by addressing critical market
@@ -505,7 +538,7 @@
 							><span style="color: #fff">Choose Plan</span></Button
 						> -->
 						<button on:click={() => (loginModalOpen = true)} class="choosePlanBtn"
-							><span style="color: #fff !important;">Choose Plan</span></button
+							><span style="color: #7E7E7E !important;">Choose Plan</span></button
 						>
 					</div>
 					<div class="pricingDetailMainCard">
@@ -605,7 +638,7 @@
 							><span style="color: #fff">Choose Plan</span></Button
 						> -->
 						<button on:click={() => (loginModalOpen = true)} class="choosePlanBtn"
-							><span style="color: #fff !important;">Choose Plan</span></button
+							><span style="color: #7E7E7E !important;">Choose Plan</span></button
 						>
 					</div>
 				</div>
@@ -749,10 +782,20 @@
 				</div>
 				<div class="previewAppWrap">
 					<div class="previewImage1">
-						<img width="200px" src="/assets/images/90002.png" alt="" />
+						<img
+							width="200px"
+							style="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); border-top-left-radius: 24px; border-top-right-radius: 24px"
+							src="/assets/images/90002.png"
+							alt=""
+						/>
 					</div>
 					<div class="previewImage2">
-						<img width="200px" src="/assets/images/90001.png" alt="" />
+						<img
+							width="200px"
+							style="box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); border-bottom-left-radius: 24px; border-bottom-right-radius: 24px"
+							src="/assets/images/90001.png"
+							alt=""
+						/>
 					</div>
 				</div>
 			</div>
@@ -761,9 +804,9 @@
 			<div class="footerWrap">
 				<div class="footerAbout">
 					<div class="logoTitleWrap">
-						<div class="logoWrap">
+						<!-- <div class="logoWrap">
 							<img width="40px" src="/assets/images/sl-neg.png" alt="immigpt" />
-						</div>
+						</div> -->
 						<div class="logoTitleWhite">ImmiGPT</div>
 					</div>
 					<div class="footerAboutDesc">A Generative AI For Immigration And Travel</div>
@@ -828,11 +871,54 @@
 </div>
 
 <style>
+	@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
+
 	.landImageWrap {
 		/* margin-top: 90px; */
 		/* object-fit: cover; */
-		/* min-height: 100vh; */
+		min-height: 100vh;
 		padding: 0;
+		background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+			url("/assets/images/heroimmi.png");
+		background-repeat: no-repeat, repeat;
+		background-size: cover;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	.landStartContentWrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 16px;
+		height: 100%;
+		width: 100%;
+		max-width: 1240px;
+		padding: 16px;
+	}
+
+	.landPgStartTitle1 {
+		color: #e9e9ff;
+		font-size: 48px;
+		font-family: Inter;
+		font-weight: bolder;
+		font-style: italic;
+	}
+
+	.landPgStartTitle2 {
+		color: #e9e9ff;
+		font-size: 48px;
+		font-family: Inter;
+		font-weight: bolder;
+	}
+
+	.landPgStartDesc {
+		color: #c0c0c0;
+		font-size: 16px;
+		font-family: Inter;
+		font-weight: 400;
 	}
 
 	.landPgHeroMailInput {
@@ -851,9 +937,9 @@
 		padding: 8px 16px;
 		display: flex;
 		justify-content: center;
-		border: 0.7px solid #222;
+		border: 0.7px solid #fff;
 		border-radius: 20px;
-		color: #000;
+		color: #fff;
 		font-weight: 700;
 	}
 
@@ -861,13 +947,24 @@
 		padding: 8px 24px;
 		display: flex;
 		justify-content: center;
-		background-color: #000;
+		background-color: #fff;
 		border-radius: 20px;
-		color: #fff;
+		color: #000;
 		font-weight: 700;
 	}
 
 	.getStartedBtn {
+		padding: 12px 32px;
+		display: flex;
+		justify-content: center;
+		background-color: #fff;
+		border-radius: 40px;
+		color: #5454f0;
+		font-weight: 700;
+		font-size: 14px;
+	}
+
+	/* .getStartedBtn {
 		padding: 12px 32px;
 		display: flex;
 		justify-content: center;
@@ -876,18 +973,7 @@
 		color: #fff;
 		font-weight: 700;
 		font-size: 20px;
-	}
-
-	.getStartedBtn {
-		padding: 12px 32px;
-		display: flex;
-		justify-content: center;
-		background-color: #000;
-		border-radius: 40px;
-		color: #fff;
-		font-weight: 700;
-		font-size: 20px;
-	}
+	} */
 
 	.getStartedSmallBtn {
 		padding: 8px 24px;
@@ -904,10 +990,11 @@
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		background-color: #000;
+		background-color: #fff;
 		border-radius: 8px;
-		color: #fff;
+		color: #7e7e7e;
 		font-weight: 700;
+		border: 1px solid #7e7e7e;
 	}
 
 	.landingPageWrap {
@@ -930,9 +1017,13 @@
 		width: 100%;
 		justify-content: center;
 		position: fixed;
-		background-color: #fff;
+		/* background-color: #fff; */
 		z-index: 10;
-		box-shadow: 2px 0 24px rgb(219, 219, 219);
+		/* box-shadow: 2px 0 24px rgb(219, 219, 219); */
+		background: rgba(84, 84, 240, 0.25);
+		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 
 	.landBarWidthWrap {
@@ -960,16 +1051,16 @@
 
 	.logoTitleWhite {
 		font-size: 16px;
-		font-family: Inter;
+		font-family: "Montserrat Alternates";
 		font-weight: 600;
 		color: #fff;
 	}
 
 	.logoTitle {
 		font-size: 16px;
-		font-family: Inter;
+		font-family: "Montserrat Alternates";
 		font-weight: 600;
-		color: #000;
+		color: #fff;
 	}
 
 	.landPgHeroWrap {
@@ -980,8 +1071,8 @@
 		gap: 32px;
 		min-height: 100vh;
 		height: auto;
-		margin-top: 74px;
-		margin-bottom: 74px;
+		/* margin-top: 74px; */
+		/* margin-bottom: 74px; */
 		justify-content: center;
 	}
 
@@ -1057,7 +1148,7 @@
 	}
 
 	.freePlanTitle {
-		color: #545454;
+		color: #c0c0c0;
 		font-size: 14px;
 		font-family: Inter;
 		font-weight: 400;
@@ -1065,7 +1156,7 @@
 
 	.featureDetailSection {
 		min-height: 100vh;
-		background-color: #000;
+		background-color: #5454f0;
 		padding: 16px;
 		display: flex;
 		justify-content: center;
@@ -1081,11 +1172,14 @@
 	}
 
 	.featureSubTitle {
-		color: #777777;
+		color: #dbdbdb;
 		font-size: 14px;
 		font-family: Inter;
 		font-weight: 500;
 		text-transform: uppercase;
+		padding: 8px 16px;
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.2);
 	}
 
 	.featureTitle {
@@ -1151,10 +1245,20 @@
 	}
 
 	.featureTextDesc {
-		color: #979797;
+		color: #fff;
 		font-size: 16px;
 		font-family: Inter;
 		font-weight: 400;
+	}
+
+	.featureMainTiltedTrouble {
+		backface-visibility: visible;
+		background-image: linear-gradient(rgb(104, 104, 239), rgba(0, 0, 0, 0)),
+			url("/assets/images/tiltedpun.png");
+		background-repeat: no-repeat, repeat;
+		background-size: cover;
+		height: 250px;
+		padding: 16px;
 	}
 
 	.pricingDetailSection {
@@ -1163,7 +1267,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #fff;
+		background-color: #ebebfa;
 	}
 
 	.pricingDetailSubTitle {
@@ -1172,6 +1276,9 @@
 		font-family: Inter;
 		font-weight: 500;
 		text-transform: uppercase;
+		padding: 8px 16px;
+		border-radius: 16px;
+		background: rgb(255, 255, 255);
 	}
 
 	.pricingDetailTitle {
@@ -1207,7 +1314,7 @@
 		background-color: #fff;
 		padding: 24px;
 		border-radius: 16px;
-		border: 2px solid #d9d9d9;
+		border: 1px solid #d9d9d9;
 		width: 100%;
 		/* max-width: 400px; */
 	}
@@ -1243,7 +1350,7 @@
 	}
 
 	.trySection {
-		background-color: #e8e8e8;
+		background-color: #fff;
 		padding: 0 16px;
 		min-height: 400px;
 		width: 100%;
@@ -1304,7 +1411,7 @@
 	}
 
 	.expSection {
-		background-color: #000;
+		background-color: #1d1d52;
 		padding: 16px;
 		min-height: 400px;
 		width: 100%;
@@ -1352,7 +1459,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: #000;
+		background-color: #1d1d52;
 	}
 
 	.footerAbout {
