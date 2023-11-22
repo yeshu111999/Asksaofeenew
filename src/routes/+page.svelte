@@ -64,7 +64,7 @@
 
 	onMount(() => {
 		loginModalOpen = false;
-		token = Cookies.get("token");
+		// token = Cookies.get("token");
 		// if (token) {
 		// 	goto("/home");
 		// }

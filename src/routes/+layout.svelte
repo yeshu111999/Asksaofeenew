@@ -102,22 +102,11 @@
 
 	$: if ($error) onError();
 
-	const requiresLogin =
-		!$page.error &&
-		!$page.route.id?.startsWith("/r/") &&
-		(data.requiresLogin
-			? !data.user
-			: !data.settings.ethicsModalAcceptedAt && !!PUBLIC_APP_DISCLAIMER);
-
-	let loginModalVisible = false;
-
-	let token = "";
-
 	onMount(() => {
-		token = Cookies.get("token");
-		if (token) {
-			goto("/home");
-		}
+		// token = Cookies.get("token");
+		// if (token) {
+		// 	goto("/home");
+		// }
 		// if (!token) {
 		// 	loginModalVisible = true;
 		// }

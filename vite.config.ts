@@ -9,4 +9,9 @@ export default defineConfig({
 			compiler: "svelte",
 		}),
 	],
+	server: {
+		hmr: {
+			overlay: false,
+		},
+	},
 });

@@ -39,6 +39,7 @@
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 	import VisaPreperationPopUp from "$lib/components/VisaPreperationPopUp.svelte";
 	import ImmigrationHelpPopUp from "$lib/components/ImmigrationHelpPopUp.svelte";
+	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let data;
@@ -581,6 +582,7 @@
 	on:immiHelpPrompt={immiHelpPrompt}
 />
 
+<!-- <PaymentPopup showPopup={true} /> -->
 <style>
 	.chgatsScroll::-webkit-scrollbar {
 		width: 5px;

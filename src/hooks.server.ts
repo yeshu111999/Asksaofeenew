@@ -1,5 +1,5 @@
 import { COOKIE_NAME, MESSAGES_BEFORE_LOGIN } from "$env/static/private";
-import type { Handle } from "@sveltejs/kit";
+import { redirect, type Handle } from "@sveltejs/kit";
 import {
 	PUBLIC_GOOGLE_ANALYTICS_ID,
 	PUBLIC_DEPRECATED_GOOGLE_ANALYTICS_ID,
@@ -11,14 +11,27 @@ import { base } from "$app/paths";
 import { refreshSessionCookie, requiresUser } from "$lib/server/auth";
 import { ERROR_MESSAGES } from "$lib/stores/errors";
 
-export const handle: Handle = async ({ event, resolve}) => {
+export const handle: Handle = async ({ event, resolve }) => {
+	const loginToken = event.cookies.get("token");
+
+	if (event.url.pathname.startsWith("/home") || event.url.pathname.startsWith("/conversation")) {
+		if (!loginToken) {
+			throw redirect(303, "/");
+		}
+	}
+	if (event.url.pathname == "/") {
+		if (loginToken) {
+			throw redirect(303, "/home");
+		}
+	}
+
 	const token = event.cookies.get(COOKIE_NAME);
 
 	event.locals.sessionId = token || crypto.randomUUID();
 
 	const user = await collections.users.findOne({ sessionId: event.locals.sessionId });
-	const userId =  event.cookies.get("userId");
-	if(userId){
+	const userId = event.cookies.get("userId");
+	if (userId) {
 		event.locals.userId = userId;
 	}
 
