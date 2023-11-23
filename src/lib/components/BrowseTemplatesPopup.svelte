@@ -999,6 +999,44 @@
 					prompt:
 						" Generate a compelling asylum petition letter addressed to the USCIS on behalf of [fieldValue1]. Clearly outline the reasons for seeking asylum, highlighting the specific persecution fears based on factors such as race, religion, nationality, political opinion, or membership in a particular social group. Provide a detailed summary of incidents or circumstances in [fieldValue2]], your home country that have led to your fear of persecution. Emphasize the urgency and seriousness of the situation. Include any supporting evidence, such as newspaper articles, medical reports, or affidavits from witnesses. Conclude by expressing your sincere request for the asylum officer's thorough consideration of your application. Keep the letter formal, detailed, and in line with USCIS guidelines. Here is a brief reason for seeking asylum and details about persecution - [fieldValue3]. [fieldValue4]. Note: Do not mention yourself as an immigration officer.",
 				},
+				{
+					imageUrl: [
+						"/assets/images/templates/Professional/RFE.jpg",
+											],
+
+					resumeTitle: "Request for Evidence(RFE)",
+					resumeDescription: "",
+					id: "professional-10",
+					tag: "Professional",
+					inputFields: [
+					 	{
+					 		name: "Full Name",
+					 		label: "Ex: John Kim",
+					 		fieldType: "textfield",
+					 		fieldValue: "",
+					 	},
+					// 	{
+					// 		name: "Home Country",
+					// 		label: "Ex: India, Nepal",
+					// 		fieldType: "textfield",
+					// 		fieldValue: "",
+					// 	},
+					// 	{
+					// 		name: "Brief reason for seeking asylum and Any specific details about persecution ",
+					// 		label: "Ex: Life threat from XYZ ",
+					// 		fieldType: "textfield",
+					// 		fieldValue: "",
+					// 	},
+					// 	{
+					// 		name: " Any additional information or requests",
+					// 		label: "Ex: None",
+					// 		fieldType: "textfield",
+					// 		fieldValue: "",
+					// 	},
+					 ],
+					prompt:
+						" Imagine you are a seasoned immigration attorney tasked with responding to a Request for Evidence (RFE) from USCIS. Your client is seeking a visa or immigration benefit. Follow these steps for each RFE question: 1). Identify the RFE Question: When I present an RFE question, carefully read it to understand the specific information or clarification USCIS is seeking. 2). Request Details from the Client: Ask me for all the necessary details needed to comprehensively answer that question. This may include the client's background, specific circumstances surrounding their case, and any relevant documentation or information they have. 3). Provide a Detailed Response: Once I provide the requested details, respond with a detailed and persuasive answer. Your response should include legal arguments, supporting documentation, relevant case law, or precedents. Aim to present a well-structured and convincing argument to enhance the chances of the client's immigration application being approved. 4). Prompt for the Next Question: After answering a question, prompt me for the next one. Continue this process until I instruct you to stop. Remember, your role is that of an attorney and your goal is to advocate for your client's case in the most effective way possible. Note: Do not mention yourself as an immigration officer.",
+				},
 			],
 		},
 		{
@@ -1167,6 +1205,136 @@
 					],
 					prompt:
 						" Generate a brief invitation letter for a tourist named [fieldValue1] from [fieldValue2], who is travelling to [fieldValue3] for [fieldValue4]. The letter is from [fieldValue5], Who is [fieldValue6] of the Tourist. Please include details about the length of the stay and accommodation arrangements. Note: Please do not mention yourself as an Immigration Officer.",
+				},
+				{
+					imageUrl: ["/assets/images/templates/Tourist/affidavit1.jpg"],
+					resumeTitle: "Affidavit of Finanical Support for a Friend/Relative certified by the CA",
+					resumeDescription: "",
+					id: "tourist-6",
+					tag: "Tourist",
+					inputFields: [
+						{
+							name: " Full Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Address",
+							label: "Ex: 100,Miyapur, Hyderabad",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Immigrant's Name",
+							label: "Ex: Kim",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Relationship with Immigrant ",
+							label: "Ex: Brother",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Type of Visa ",
+							label: "Ex: Tourism",
+							fieldType: "textfield",
+							fieldValue: "",
+						},{
+							name: "Destination Country ",
+							label: "Ex: USA",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						" Generate an brief affidavit of financial support by [fieldValue1], residing at [fieldValue2] prepared for [fieldValue3], who is [fieldValue4] of [fieldValue1], applying for a [fieldValue5] to [fieldValue6]. The affidavit should detail [fieldValue7]'s financial ability, certified by the CA, to support [fieldValue3] during their stay. Please include details about [fieldValue1]'s employment, annual income, commitment to support, and ensure the inclusion of a statement regarding the legal significance of this document. Conclude with the certification by the Chartered Accountant (CA), including their contact details, registration number, and official stamp or signature. Note: Please do not mention yourself as an Immigration Officer.",
+				},
+				{
+					imageUrl: ["/assets/images/templates/Tourist/affidavit2.jpg"],
+					resumeTitle: "Affidavit of Income based on salary, certified by the CA",
+					resumeDescription: "",
+					id: "tourist-7",
+					tag: "Tourist",
+					inputFields: [
+						{
+							name: " Full Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Address",
+							label: "Ex: 100,Miyapur, Hyderabad",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Purpose of Visit",
+							label: "Ex: Visa Application",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Company Name ",
+							label: "Ex: Google",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Job Title ",
+							label: "Ex: Sr. Software Engineer",
+							fieldType: "textfield",
+							fieldValue: "",
+						},{
+							name: "Annual Income ",
+							label: "Ex: $70000",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						" Generate a brief income affidavit issued and certified by a Chartered Accountant for [fieldvalue1], residing at [fieldValue2]. This affidavit, for the purpose of [fieldValue3], should detail [fieldValue1]'s employment at [fieldvalue4], their role as [fieldvalue5], and their annual income of [fieldValue6]. Ensure the inclusion of a statement regarding the legal significance of this document. Conclude with the certification by the Chartered Accountant (CA), including their contact details, registration number, and official stamp or signature. Note: Please do not mention yourself as an Immigration Officer.",
+				},
+				{
+					imageUrl: [
+						"/assets/images/templates/Tourist/affidavit3.1.jpg",
+						"/assets/images/templates/Tourist/affidavit3.2.jpg",
+					],
+					resumeTitle: "Net Worth Affidavit, certified by the CA",
+					resumeDescription: "",
+					id: "tourist-8",
+					tag: "Tourist",
+					inputFields: [
+						{
+							name: " Full Name",
+							label: "Ex: John Doe",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Purpose",
+							label: "Ex: Immigration",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "Purpose of Visit",
+							label: "Ex: Visa Application",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						{
+							name: "List of Properties ",
+							label: "Ex: 3 acres of agriculture land",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+					],
+					prompt:
+						" Generate a brief net worth affidavit prepared by a Chartered Accountant for [fieldValue1], detailing my assets and liabilities for the purpose of [fieldValue2]. Include [fieldValue1]’s properties at [fieldValue3], investments, and liabilities, with valuations and verifications done by the CA. Ensure the inclusion of a statement regarding the legal significance of this document. Conclude with the certification by the Chartered Accountant (CA), including their contact details, registration number, and official stamp or signature. Note: Please do not mention yourself as an Immigration Officer.",
 				},
 			],
 		},
