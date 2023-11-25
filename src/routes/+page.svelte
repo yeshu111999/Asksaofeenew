@@ -85,24 +85,20 @@
 					<div class="logoTitle">ImmiGPT</div>
 				</div>
 				<div class="authBtnWrap">
-					<!-- <Button
-						on:click={() => showSignUpPopup()}
-						variant="default"
-						color="dark"
-						radius="xl"
-						size="md"
-					>
-						<span style="color: #222 !important;">Sign up</span>
-					</Button> -->
 					<button on:click={() => showSignUpPopup()} class="signUpBtn"
 						><span style="color: #fff !important;">Sign up</span></button
 					>
 					<button on:click={() => showLoginPopup()} class="loginBtn"
 						><span style="color: #222 !important;">Login</span></button
 					>
-					<!-- <Button on:click={() => showLoginPopup()} color="dark" radius="xl" size="md"
-						><span style="color: #fff !important;">Login</span></Button
+				</div>
+				<div class="authBtnWrap2">
+					<!-- <button on:click={() => showSignUpPopup()} class="signUpBtn"
+						><span style="color: #fff !important;">Sign up</span></button
 					> -->
+					<button on:click={() => showLoginPopup()} class="loginBtn"
+						><span style="color: #fff !important;">Login</span></button
+					>
 				</div>
 			</div>
 		</div>
@@ -110,8 +106,8 @@
 			<div class="landImageWrap">
 				<!-- <img style="" src="/assets/images/heroimmi.png" alt="hero" /> -->
 				<div class="landStartContentWrap">
-					<div class="landPgStartTitle1">A Generative AI</div>
-					<div class="landPgStartTitle2">For Immigration and Travel</div>
+					<div class="landPgStartTitle1">Ultimate guide for</div>
+					<div class="landPgStartTitle2">Travel and Immigration</div>
 					<div class="landPgStartDesc">
 						ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
 						responses to your Travel and Immigration concerns.
@@ -146,6 +142,35 @@
 						</div>
 						<div class="freePlanTitle">Free Plan Available</div>
 					</div>
+				</div>
+			</div>
+			<div class="landImageWrap2">
+				<div class="freePlanWrap2">
+					<div class="freeIconWrap">
+						<svg
+							width="17"
+							height="17"
+							viewBox="0 0 17 17"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<circle
+								cx="8.50006"
+								cy="8.50006"
+								r="6.0025"
+								stroke="#00C850"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M6.12842 8.72613L7.57369 10.1714L7.56435 10.1621L10.825 6.90137"
+								stroke="#00C850"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</div>
+					<div class="freePlanTitle">Free Plan Available</div>
 				</div>
 			</div>
 			<!-- <div class="landPgHeroDetailWrap">
@@ -887,6 +912,14 @@
 		justify-content: center;
 	}
 
+	.authBtnWrap2 {
+		display: none;
+	}
+
+	.landImageWrap2 {
+		display: none;
+	}
+
 	.landStartContentWrap {
 		display: flex;
 		flex-direction: column;
@@ -1068,11 +1101,8 @@
 		flex-direction: column;
 		/* padding: 16px; */
 		align-items: center;
-		gap: 32px;
+		/* gap: 32px; */
 		min-height: 100vh;
-		height: auto;
-		/* margin-top: 74px; */
-		/* margin-bottom: 74px; */
 		justify-content: center;
 	}
 
@@ -1520,6 +1550,90 @@
 		.featureCardsWrap {
 			display: flex;
 			flex-direction: column;
+		}
+
+		.landBarWrap {
+			background: rgba(255, 255, 255, 1);
+			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+		}
+
+		.authBtnWrap {
+			display: none;
+			justify-content: center;
+			gap: 8px;
+			align-items: center;
+		}
+
+		.authBtnWrap2 {
+			display: flex;
+			justify-content: center;
+			gap: 8px;
+			align-items: center;
+		}
+
+		.logoTitle {
+			color: #222;
+		}
+
+		.landImageWrap {
+			/* background-image: linear-gradient(rgba(235, 235, 247, 1), rgba(0, 0, 0, 0.5)),
+				url("/assets/images/heroimmi.png"); */
+			background: linear-gradient(98deg, #ebebf7 100%, rgba(235, 235, 247, 0) 100%);
+			background-color: #ebebf7;
+			background-repeat: no-repeat, repeat;
+			min-height: calc(50vh - 73px);
+			/* flex: 1; */
+			margin-top: 72px;
+		}
+
+		.landImageWrap2 {
+			display: block;
+			background-image: linear-gradient(rgba(235, 235, 247, 1), rgba(0, 0, 0, 0.5)),
+				url("/assets/images/heroimmi.png");
+			background-repeat: no-repeat, repeat;
+			background-size: cover;
+			width: 100%;
+			height: 50vh;
+			/* flex: 1; */
+		}
+
+		.loginBtn {
+			background-color: #5454f0;
+		}
+
+		.freePlanWrap {
+			display: none;
+		}
+
+		.landStartContentWrap {
+			justify-content: end;
+			align-items: center;
+		}
+
+		.landPgStartDesc {
+			color: #545454;
+			font-size: 14px;
+			text-align: center;
+		}
+
+		.freePlanWrap2 {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.landPgStartTitle1 {
+			color: #03035c;
+			font-size: 30px;
+			text-align: center;
+		}
+
+		.landPgStartTitle2 {
+			color: #5454f0;
+			font-size: 30px;
+			text-align: center;
 		}
 
 		.pricingDetailCardsWrap {
