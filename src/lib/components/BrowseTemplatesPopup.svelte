@@ -1001,7 +1001,7 @@
 				},
 				{
 					imageUrl: [
-						"/assets/images/templates/Professional/RFE.jpg",
+						"/assets/images/templates/Professional/REQUEST.jpg",
 											],
 
 					resumeTitle: "Request for Evidence(RFE)",
