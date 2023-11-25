@@ -3,12 +3,21 @@
 	import { TextInput, Button, Textarea } from "@svelteuidev/core";
 	import Cookies from "js-cookie";
 	import { currentTheme } from "$lib/stores/themeStore";
+	import Notification from "./Notification.svelte";
 
 	let dispatch = createEventDispatcher();
 	export let showRaiseAnIssuePopup = false;
 
 	let issue = "";
 	let issueDescription = "";
+
+	let showNotification = false;
+	let notificationType = "success";
+	let notificationMsg = "";
+
+	function closeNotification() {
+		showNotification = false;
+	}
 
 	function closePopup() {
 		dispatch("closeRaiseAnIssuePopup");
@@ -36,11 +45,23 @@
 				if (response.ok) {
 					const responseData = await response.json();
 					console.log("API Response:", responseData);
+					showNotification = true;
+					notificationMsg = responseData.message;
+					notificationType = "success";
+					closePopup();
 				} else {
 					console.error("API Request Error:", response.status, response.statusText);
+					showNotification = true;
+					notificationMsg = response.statusText;
+					notificationType = "error";
+					closePopup();
 				}
 			} catch (error) {
 				console.error("API Request Error:", error);
+				showNotification = true;
+				notificationMsg = "Something went wrong!! Please try again!";
+				notificationType = "error";
+				closePopup();
 			}
 	}
 
@@ -48,7 +69,19 @@
 		console.log("issue submitted");
 		closePopup();
 	}
+
+	onMount(() => {
+		issue = "";
+		issueDescription = "";
+	});
 </script>
+
+<Notification
+	on:closeNotification={closeNotification}
+	{showNotification}
+	{notificationType}
+	message={notificationMsg}
+/>
 
 {#if showRaiseAnIssuePopup}
 	<div class="overlay">
