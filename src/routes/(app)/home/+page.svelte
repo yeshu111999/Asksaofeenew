@@ -10,14 +10,17 @@
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
 	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
+	import PageSpinner from "$lib/components/PageSpinner.svelte";
 
 	export let data;
 	let loading = false;
+	let isLoading = false;
 	let showPaymentPopup = false;
 	let paymentType = "";
 	let sessionId = "";
 
 	onMount(() => {
+		isLoading = true;
 		if (!Cookies.get("token")) {
 			goto("/");
 		}
@@ -25,6 +28,12 @@
 			sessionId = $page.data.sessionId;
 			onPayment();
 		}
+		if ($page.data.isFailure) {
+			isLoading = false;
+			paymentType = "failure";
+			showPaymentPopup = true;
+		}
+		isLoading = false;
 	});
 
 	async function onPayment() {
@@ -50,14 +59,18 @@
 				paymentType = "success";
 				showPaymentPopup = true;
 			}
-
+			isLoading = false;
 			const responseData = await response.json();
 			console.log("payment response", responseData);
 
 			// You can update the component state or perform further actions based on the response
 		} catch (err) {
 			console.error("Error making API request:", err.message);
+			paymentType = "failure";
+			showPaymentPopup = true;
+			isLoading = false;
 		}
+		isLoading = false;
 	}
 
 	function closePaymentPopup() {
@@ -107,4 +120,7 @@
 	settings={data.settings}
 />
 
+{#if isLoading}
+	<PageSpinner />
+{/if}
 <PaymentPopup type={paymentType} showPopup={showPaymentPopup} on:closePopup={closePaymentPopup} />

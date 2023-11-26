@@ -7,8 +7,8 @@ const stripe = new Stripe(STRIPE_API_KEY, { apiVersion: "2023-10-16" });
 
 export async function load({ url }) {
 	const sessionId = url.searchParams.get("session_id");
-	console.log("session id", sessionId);
-	return { sessionId };
+	const isFailure = url.searchParams.get("failure");
+	return { sessionId, isFailure };
 }
 
 export const actions: Actions = {
@@ -29,7 +29,7 @@ export const actions: Actions = {
 				],
 				mode: "subscription",
 				success_url: `${request.headers.get("origin")}/home?session_id={CHECKOUT_SESSION_ID}`,
-				cancel_url: `${request.headers.get("origin")}/home`,
+				cancel_url: `${request.headers.get("origin")}/home?failure=true`,
 			});
 
 			url = session.url;
