@@ -30,7 +30,7 @@ export const POST: RequestHandler = async ({ request, url }) => {
 					quantity: 1,
 				},
 			],
-			success_url: `${url.origin}/home`,
+			success_url: `${url.origin}/home?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${url.origin}/home`,
 		});
 
