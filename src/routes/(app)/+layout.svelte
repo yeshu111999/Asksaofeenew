@@ -39,6 +39,7 @@
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 	import VisaPreperationPopUp from "$lib/components/VisaPreperationPopUp.svelte";
 	import ImmigrationHelpPopUp from "$lib/components/ImmigrationHelpPopUp.svelte";
+	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
 
 	export let data;
@@ -238,20 +239,21 @@
 			//loginModalVisible = true;
 			goto("/");
 		}
-		if (token) {
-			canLogin = false;
-			//getRecentSearches();
-			userName = Cookies.get("name");
-			userMail = Cookies.get("email");
-			if (userName) {
-				let nameList = userName?.split(" ");
-				if (nameList.length > 1) {
-					profileImg = nameList[0][0] + nameList[1][0];
-				} else {
-					profileImg = nameList[0][0];
+		if ($page.url.pathname)
+			if (token) {
+				canLogin = false;
+				//getRecentSearches();
+				userName = Cookies.get("name");
+				userMail = Cookies.get("email");
+				if (userName) {
+					let nameList = userName?.split(" ");
+					if (nameList.length > 1) {
+						profileImg = nameList[0][0] + nameList[1][0];
+					} else {
+						profileImg = nameList[0][0];
+					}
 				}
 			}
-		}
 		//document.addEventListener("click", handleOutsideClick);
 	});
 
@@ -581,6 +583,7 @@
 	on:immiHelpPrompt={immiHelpPrompt}
 />
 
+<!-- <PaymentPopup showPopup={true} /> -->
 <style>
 	.chgatsScroll::-webkit-scrollbar {
 		width: 5px;

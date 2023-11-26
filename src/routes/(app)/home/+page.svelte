@@ -7,15 +7,62 @@
 	import { findCurrentModel } from "$lib/utils/models";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
+	import { page } from "$app/stores";
+	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 
 	export let data;
 	let loading = false;
+	let showPaymentPopup = false;
+	let paymentType = "";
+	let sessionId = "";
 
 	onMount(() => {
 		if (!Cookies.get("token")) {
 			goto("/");
 		}
+		if ($page.data.sessionId) {
+			sessionId = $page.data.sessionId;
+			onPayment();
+		}
 	});
+
+	async function onPayment() {
+		const apiUrl = "https://backend.immigpt.ai/planUpgrade";
+
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"X-ImmiGPT-Id": sessionId,
+				"Google-Auth": "True",
+				Authorization: "Bearer " + Cookies.get("token"),
+			},
+		};
+
+		try {
+			const response = await fetch(apiUrl, requestOptions);
+
+			if (!response.ok) {
+				paymentType = "failure";
+				showPaymentPopup = true;
+			} else {
+				paymentType = "success";
+				showPaymentPopup = true;
+			}
+
+			const responseData = await response.json();
+			console.log("payment response", responseData);
+
+			// You can update the component state or perform further actions based on the response
+		} catch (err) {
+			console.error("Error making API request:", err.message);
+		}
+	}
+
+	function closePaymentPopup() {
+		showPaymentPopup = false;
+		goto("/home");
+	}
 
 	async function createConversation(message: string) {
 		try {
@@ -58,3 +105,5 @@
 	models={data.models}
 	settings={data.settings}
 />
+
+<PaymentPopup type={paymentType} showPopup={showPaymentPopup} on:closePopup={closePaymentPopup} />
