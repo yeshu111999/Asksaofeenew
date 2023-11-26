@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { base } from "$app/paths";
+	import { page } from "$app/stores";
+	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
 	import ChatWindow from "$lib/components/chat/ChatWindow.svelte";
 	import { ERROR_MESSAGES, error } from "$lib/stores/errors";
 	import { pendingMessage } from "$lib/stores/pendingMessage";
@@ -15,7 +17,70 @@
 		if (!Cookies.get("token")) {
 			goto("/");
 		}
+
+		const isSessionIdPresent = $page.url.searchParams.has("session_id");
+		console.log("Session id present :" + isSessionIdPresent);
+		if (isSessionIdPresent) {
+			const sessionId = $page.url.searchParams.get("session_id");
+			upgradetopro(sessionId);
+		}
 	});
+
+	const upgradetopro = async (sessionId: string | null) => {
+		// saveChangesLoader = true;
+		let headers = new Headers({
+			Authorization: "Bearer " + Cookies.get("token"),
+		});
+		headers.append("X-ImmiGPT-Id", sessionId!);
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+		// let body = {
+		// 	username: firstName + " " + lastName,
+		// 	email: userMail,
+		// 	firstName: firstName,
+		// 	lastName: lastName,
+		// 	phoneNumber: mobileNumber,
+		// };
+
+		// let formData = new FormData();
+		// formData.append("request", JSON.stringify(body));
+		// formData.append("file", imageFile);
+
+		let config = {
+			method: "POST",
+			headers: headers,
+		};
+
+		try {
+			const response = await fetch("https://backend.immigpt.ai/planUpgrade", config);
+
+			if (response.ok) {
+				const data = await response.json();
+				console.log(JSON.stringify(data));
+				// saveChangesLoader = false;
+				// showUpdateDetailsSuccess = true;
+				// setTimeout(() => {
+				// 	showUpdateDetailsSuccess = false;
+				// });
+				// apiSuccessFlag = true;
+			} else {
+				const error = await response.json();
+				console.log(error);
+				// saveChangesLoader = false;
+				// showUpdateDetailsError = true;
+				// updateDetailsError = error.message ? error.message : "Something went wrong!! Try again";
+				// apiErrorFlag = true;
+			}
+		} catch (error) {
+			console.error(error);
+			// saveChangesLoader = false;
+			// showUpdateDetailsError = true;
+			// updateDetailsError = "Something went wrong!! Try again";
+			// apiErrorFlag = true;
+		}
+	};
 
 	async function createConversation(message: string) {
 		try {

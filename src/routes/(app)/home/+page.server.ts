@@ -22,7 +22,7 @@ export const actions: Actions = {
 					},
 				],
 				mode: "subscription",
-				success_url: `${request.headers.get("origin")}/home`,
+				success_url: `${request.headers.get("origin")}/home?session_id={CHECKOUT_SESSION_ID}`,
 				cancel_url: `${request.headers.get("origin")}/home`,
 			});
 
