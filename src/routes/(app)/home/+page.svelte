@@ -9,7 +9,6 @@
 	import { findCurrentModel } from "$lib/utils/models";
 	import Cookies from "js-cookie";
 	import { onMount } from "svelte";
-	import { page } from "$app/stores";
 	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 
 	export let data;
