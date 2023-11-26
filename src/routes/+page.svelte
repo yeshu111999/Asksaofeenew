@@ -93,11 +93,11 @@
 					>
 				</div>
 				<div class="authBtnWrap2">
-					<!-- <button on:click={() => showSignUpPopup()} class="signUpBtn"
+					<button on:click={() => showSignUpPopup()} class="signUpBtn"
 						><span style="color: #fff !important;">Sign up</span></button
-					> -->
+					>
 					<button on:click={() => showLoginPopup()} class="loginBtn"
-						><span style="color: #fff !important;">Login</span></button
+						><span style="color: #222 !important;">Login</span></button
 					>
 				</div>
 			</div>
@@ -142,35 +142,6 @@
 						</div>
 						<div class="freePlanTitle">Free Plan Available</div>
 					</div>
-				</div>
-			</div>
-			<div class="landImageWrap2">
-				<div class="freePlanWrap2">
-					<div class="freeIconWrap">
-						<svg
-							width="17"
-							height="17"
-							viewBox="0 0 17 17"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<circle
-								cx="8.50006"
-								cy="8.50006"
-								r="6.0025"
-								stroke="#00C850"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M6.12842 8.72613L7.57369 10.1714L7.56435 10.1621L10.825 6.90137"
-								stroke="#00C850"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-					</div>
-					<div class="freePlanTitle">Free Plan Available</div>
 				</div>
 			</div>
 			<!-- <div class="landPgHeroDetailWrap">
@@ -912,10 +883,6 @@
 		justify-content: center;
 	}
 
-	.authBtnWrap2 {
-		display: none;
-	}
-
 	.landImageWrap2 {
 		display: none;
 	}
@@ -1553,8 +1520,8 @@
 		}
 
 		.landBarWrap {
-			background: rgba(255, 255, 255, 1);
-			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+			/* background: rgba(255, 255, 255, 1);
+			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
 		}
 
 		.authBtnWrap {
@@ -1572,18 +1539,16 @@
 		}
 
 		.logoTitle {
-			color: #222;
+			color: #fff;
 		}
 
 		.landImageWrap {
-			/* background-image: linear-gradient(rgba(235, 235, 247, 1), rgba(0, 0, 0, 0.5)),
-				url("/assets/images/heroimmi.png"); */
-			background: linear-gradient(98deg, #ebebf7 100%, rgba(235, 235, 247, 0) 100%);
+			background-image: linear-gradient(rgba(29, 29, 82, 0.8), rgba(29, 29, 82, 0.8)),
+				url("/assets/images/heroimmi.png");
+			/* background: linear-gradient(98deg, #ebebf7 100%, rgba(235, 235, 247, 0) 100%); */
 			background-color: #ebebf7;
 			background-repeat: no-repeat, repeat;
-			min-height: calc(50vh - 73px);
-			/* flex: 1; */
-			margin-top: 72px;
+			min-height: 100vh;
 		}
 
 		.landImageWrap2 {
@@ -1598,20 +1563,20 @@
 		}
 
 		.loginBtn {
-			background-color: #5454f0;
+			/* background-color: #5454f0; */
 		}
 
 		.freePlanWrap {
-			display: none;
+			/* display: none; */
 		}
 
 		.landStartContentWrap {
-			justify-content: end;
+			justify-content: center;
 			align-items: center;
 		}
 
 		.landPgStartDesc {
-			color: #545454;
+			color: #c0c0c0;
 			font-size: 14px;
 			text-align: center;
 		}
@@ -1625,13 +1590,13 @@
 		}
 
 		.landPgStartTitle1 {
-			color: #03035c;
+			color: #fff;
 			font-size: 30px;
 			text-align: center;
 		}
 
 		.landPgStartTitle2 {
-			color: #5454f0;
+			color: #fff;
 			font-size: 30px;
 			text-align: center;
 		}
