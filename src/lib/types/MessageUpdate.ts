@@ -27,8 +27,14 @@ export type WebSearchUpdate = {
 
 export type StatusUpdate = {
 	type: "status";
-	status: "started" | "pending" | "finished" | "error";
+	status: "started" | "pending" | "finished" | "error" | "title";
 	message?: string;
+};
+
+export type ErrorUpdate = {
+	type: "error";
+	message: string;
+	name: string;
 };
 
 export type MessageUpdate =
@@ -36,4 +42,5 @@ export type MessageUpdate =
 	| TextStreamUpdate
 	| AgentUpdate
 	| WebSearchUpdate
-	| StatusUpdate;
+	| StatusUpdate
+	| ErrorUpdate;

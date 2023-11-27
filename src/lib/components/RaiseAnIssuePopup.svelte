@@ -35,7 +35,6 @@
 
 				if (response.ok) {
 					const responseData = await response.json();
-					console.log("API Response:", responseData);
 				} else {
 					console.error("API Request Error:", response.status, response.statusText);
 				}

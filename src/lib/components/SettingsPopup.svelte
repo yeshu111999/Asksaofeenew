@@ -75,7 +75,6 @@
 	}
 
 	function isImageURL(url, callback) {
-		console.log("url", url);
 		const img = new Image();
 
 		img.onload = function () {
@@ -96,7 +95,6 @@
 		if (file) {
 			const imageURL = URL.createObjectURL(file);
 			profilePic = imageURL;
-			console.log("profile pic", profilePic);
 
 			// Create a FormData object and send the image to the backend
 			const formData = new FormData();
@@ -177,7 +175,6 @@
 
 			if (response.ok) {
 				const data = await response.json();
-				console.log(JSON.stringify(data));
 				saveChangesLoader = false;
 				showUpdatePasswordSuccess = true;
 				setTimeout(() => {
@@ -283,12 +280,10 @@
 	}
 
 	function toggleClearChat() {
-		console.log("clear chat");
 		openClearChatPopup = true;
 	}
 
 	function toggleDeleteAccount() {
-		console.log("delete account");
 		openDeleteAccountPopup = true;
 	}
 
@@ -315,7 +310,6 @@
 			}
 
 			if (response.ok) {
-				console.log("All conversations deleted successfully");
 				openClearChatPopup = false;
 				goto("/");
 			} else {
@@ -349,7 +343,6 @@
 			const response = await fetch("https://backend.immigpt.net/deleteAccount", config);
 
 			if (response.ok) {
-				console.log("Account deleted successfully");
 				openDeleteAccountPopup = false;
 				logOut();
 			} else {

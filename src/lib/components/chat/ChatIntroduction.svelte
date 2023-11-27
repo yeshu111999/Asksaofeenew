@@ -29,7 +29,6 @@
 
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
-		console.log("index", index);
 		activeHomeTabIndex = index;
 		renderedText = "";
 		let textlist = [
@@ -43,7 +42,6 @@
 		setInterval(() => {
 			if (i < words.length) {
 				renderedText += words[i] + " ";
-				console.log("words[i]", words[i], i);
 				i += 1;
 			}
 		}, 100);

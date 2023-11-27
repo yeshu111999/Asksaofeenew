@@ -31,7 +31,6 @@
 		let headers = {
 			Authorization: "Bearer " + this.token,
 		};
-		console.log("headers", headers);
 		let gauth = Cookies.get("gauth");
 		if (gauth) {
 			headers["Google-Auth"] = "True";

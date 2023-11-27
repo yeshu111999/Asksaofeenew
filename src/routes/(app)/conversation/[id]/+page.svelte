@@ -15,6 +15,7 @@
 	import type { Message } from "$lib/types/Message";
 	import { PUBLIC_APP_DISCLAIMER } from "$env/static/public";
 	import type { MessageUpdate, WebSearchUpdate } from "$lib/types/MessageUpdate";
+	import titleUpdate from "$lib/stores/titleUpdate";
 
 	export let data;
 
@@ -81,11 +82,11 @@
 			const reader = response?.body?.pipeThrough(encoder).getReader();
 			let finalAnswer = "";
 
+			let prev_input_chunk = [""];
+
 			// this is a bit ugly
 			// we read the stream until we get the final answer
 			while (finalAnswer === "") {
-				// await new Promise((r) => setTimeout(r, 25));
-
 				// check for abort
 				if (isAborted) {
 					reader?.cancel();
@@ -104,13 +105,18 @@
 						return;
 					}
 
+					value = prev_input_chunk.pop() + value;
+
 					// if it's not done we parse the value, which contains all messages
 					const inputs = value.split("\n");
-					inputs.forEach((el: string) => {
+					inputs.forEach(async (el: string) => {
 						try {
-							let update = JSON.parse(el) as MessageUpdate;
+							const update = JSON.parse(el) as MessageUpdate;
 							if (update.type === "finalAnswer") {
 								finalAnswer = update.text;
+								reader.cancel();
+								loading = false;
+								pending = false;
 								invalidate(UrlDependency.Conversation);
 							} else if (update.type === "stream") {
 								pending = false;
@@ -128,9 +134,30 @@
 								}
 							} else if (update.type === "webSearch") {
 								webSearchMessages = [...webSearchMessages, update];
+							} else if (update.type === "status") {
+								if (update.status === "title" && update.message) {
+									const conv = data.conversations.find(({ id }) => id === $page.params.id);
+									if (conv) {
+										conv.title = update.message;
+
+										$titleUpdate = {
+											title: update.message,
+											convId: $page.params.id,
+										};
+									}
+								} else if (update.status === "error") {
+									$error = update.message ?? "An error has occurred";
+								}
+							} else if (update.type === "error") {
+								error.set(update.message);
+								reader.cancel();
 							}
 						} catch (parseError) {
 							// in case of parsing error we wait for the next message
+
+							if (el === inputs[inputs.length - 1]) {
+								prev_input_chunk.push(el);
+							}
 							return;
 						}
 					});

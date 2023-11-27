@@ -1000,40 +1000,38 @@
 						" Generate a compelling asylum petition letter addressed to the USCIS on behalf of [fieldValue1]. Clearly outline the reasons for seeking asylum, highlighting the specific persecution fears based on factors such as race, religion, nationality, political opinion, or membership in a particular social group. Provide a detailed summary of incidents or circumstances in [fieldValue2]], your home country that have led to your fear of persecution. Emphasize the urgency and seriousness of the situation. Include any supporting evidence, such as newspaper articles, medical reports, or affidavits from witnesses. Conclude by expressing your sincere request for the asylum officer's thorough consideration of your application. Keep the letter formal, detailed, and in line with USCIS guidelines. Here is a brief reason for seeking asylum and details about persecution - [fieldValue3]. [fieldValue4]. Note: Do not mention yourself as an immigration officer.",
 				},
 				{
-					imageUrl: [
-						"/assets/images/templates/Professional/REQUEST.jpg",
-											],
+					imageUrl: ["/assets/images/templates/Professional/REQUEST.jpg"],
 
 					resumeTitle: "Request for Evidence(RFE)",
 					resumeDescription: "",
 					id: "professional-10",
 					tag: "Professional",
 					inputFields: [
-					 	{
-					 		name: "Full Name",
-					 		label: "Ex: John Kim",
-					 		fieldType: "textfield",
-					 		fieldValue: "",
-					 	},
-					// 	{
-					// 		name: "Home Country",
-					// 		label: "Ex: India, Nepal",
-					// 		fieldType: "textfield",
-					// 		fieldValue: "",
-					// 	},
-					// 	{
-					// 		name: "Brief reason for seeking asylum and Any specific details about persecution ",
-					// 		label: "Ex: Life threat from XYZ ",
-					// 		fieldType: "textfield",
-					// 		fieldValue: "",
-					// 	},
-					// 	{
-					// 		name: " Any additional information or requests",
-					// 		label: "Ex: None",
-					// 		fieldType: "textfield",
-					// 		fieldValue: "",
-					// 	},
-					 ],
+						{
+							name: "Full Name",
+							label: "Ex: John Kim",
+							fieldType: "textfield",
+							fieldValue: "",
+						},
+						// 	{
+						// 		name: "Home Country",
+						// 		label: "Ex: India, Nepal",
+						// 		fieldType: "textfield",
+						// 		fieldValue: "",
+						// 	},
+						// 	{
+						// 		name: "Brief reason for seeking asylum and Any specific details about persecution ",
+						// 		label: "Ex: Life threat from XYZ ",
+						// 		fieldType: "textfield",
+						// 		fieldValue: "",
+						// 	},
+						// 	{
+						// 		name: " Any additional information or requests",
+						// 		label: "Ex: None",
+						// 		fieldType: "textfield",
+						// 		fieldValue: "",
+						// 	},
+					],
 					prompt:
 						" Imagine you are a seasoned immigration attorney tasked with responding to a Request for Evidence (RFE) from USCIS. Your client is seeking a visa or immigration benefit. Follow these steps for each RFE question: 1). Identify the RFE Question: When I present an RFE question, carefully read it to understand the specific information or clarification USCIS is seeking. 2). Request Details from the Client: Ask me for all the necessary details needed to comprehensively answer that question. This may include the client's background, specific circumstances surrounding their case, and any relevant documentation or information they have. 3). Provide a Detailed Response: Once I provide the requested details, respond with a detailed and persuasive answer. Your response should include legal arguments, supporting documentation, relevant case law, or precedents. Aim to present a well-structured and convincing argument to enhance the chances of the client's immigration application being approved. 4). Prompt for the Next Question: After answering a question, prompt me for the next one. Continue this process until I instruct you to stop. Remember, your role is that of an attorney and your goal is to advocate for your client's case in the most effective way possible. Note: Do not mention yourself as an immigration officer.",
 				},
@@ -1242,7 +1240,8 @@
 							label: "Ex: Tourism",
 							fieldType: "textfield",
 							fieldValue: "",
-						},{
+						},
+						{
 							name: "Destination Country ",
 							label: "Ex: USA",
 							fieldType: "textfield",
@@ -1288,7 +1287,8 @@
 							label: "Ex: Sr. Software Engineer",
 							fieldType: "textfield",
 							fieldValue: "",
-						},{
+						},
+						{
 							name: "Annual Income ",
 							label: "Ex: $70000",
 							fieldType: "textfield",
@@ -1387,7 +1387,6 @@
 		let index = event.detail.index;
 		selectedTemplate = templates[0].resumeTemplates[index];
 		showSelectedTemplate = true;
-		console.log("student template", index);
 	}
 
 	function selectedProfessionalTemplate(event) {
@@ -1411,7 +1410,6 @@
 			const userInputValue = field.fieldValue;
 			selectedTemplate.prompt = selectedTemplate.prompt.replaceAll(placeholder, userInputValue);
 		}
-		console.log("selectedTemplate", selectedTemplate);
 		visaPrompt.set(selectedTemplate.prompt);
 		dispatch("closeBurger");
 		closePopup();
@@ -1423,12 +1421,10 @@
 
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
-		console.log("index", index);
 		activeTabIndex = index;
 	};
 
 	onMount(() => {
-		console.log("template mounted");
 		activeTabIndex = 0;
 		activeTemplates = templates[activeTabIndex].resumeTemplates;
 	});

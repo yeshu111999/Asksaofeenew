@@ -93,7 +93,6 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 
 	// fetch the model
 	const model = models.find((m) => m.id === conv.model);
-	console.log("Locals userId:"+locals.userId);
 	const settings = await collections.settings.findOne(authCond);
 
 	if (!model) {
@@ -127,6 +126,19 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 		];
 	})() satisfies Message[];
 
+	await collections.conversations.updateOne(
+		{
+			_id: convId,
+		},
+		{
+			$set: {
+				messages,
+				title: conv.title,
+				updatedAt: new Date(),
+			},
+		}
+	);
+
 	// we now build the stream
 	const stream = new ReadableStream({
 		async start(controller) {
@@ -137,15 +149,48 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 					updates.push(newUpdate);
 				}
 				controller.enqueue(JSON.stringify(newUpdate) + "\n");
+
+				if (newUpdate.type === "finalAnswer") {
+					// 4096 of spaces to make sure the browser doesn't blocking buffer that holding the response
+					controller.enqueue(" ".repeat(4096));
+				}
 			}
 
 			update({ type: "status", status: "started" });
+
+			const summarizeIfNeeded = (async () => {
+				if (conv.title.startsWith("Untitled") && messages.length === 1) {
+					try {
+						conv.title = (await summarize(newPrompt)) ?? conv.title;
+						update({ type: "status", status: "title", message: conv.title });
+					} catch (e) {
+						console.error(e);
+					}
+				}
+			})();
+
+			await collections.conversations.updateOne(
+				{
+					_id: convId,
+				},
+				{
+					$set: {
+						messages,
+						title: conv.title,
+						updatedAt: new Date(),
+					},
+				}
+			);
 
 			let webSearchResults: WebSearch | undefined;
 
 			if (webSearch) {
 				webSearchResults = await runWebSearch(conv, newPrompt, update);
 			}
+
+			messages[messages.length - 1].webSearch = webSearchResults;
+
+			conv.messages = messages;
 
 			// we can now build the prompt using the messages
 			const prompt = await buildPrompt({
@@ -172,51 +217,6 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 				usedFetch = aws.fetch.bind(aws) as typeof fetch;
 			}
 
-			async function saveLast(generated_text: string) {
-				if (!conv) {
-					throw new Error("Conversation not found");
-				}
-
-				const lastMessage = messages[messages.length - 1];
-
-				if (lastMessage) {
-					// We could also check if PUBLIC_ASSISTANT_MESSAGE_TOKEN is present and use it to slice the text
-					if (generated_text.startsWith(prompt)) {
-						generated_text = generated_text.slice(prompt.length);
-					}
-
-					generated_text = trimSuffix(
-						trimPrefix(generated_text, "<|startoftext|>"),
-						PUBLIC_SEP_TOKEN
-					).trimEnd();
-
-					// remove the stop tokens
-					for (const stop of [...(model?.parameters?.stop ?? []), "<|endoftext|>"]) {
-						if (generated_text.endsWith(stop)) {
-							generated_text = generated_text.slice(0, -stop.length).trimEnd();
-						}
-					}
-					lastMessage.content = generated_text;
-					await collections.conversations.updateOne(
-						{
-							_id: convId,
-						},
-						{
-							$set: {
-								messages,
-								title: conv.title.startsWith("Untitled") ? (await summarize(newPrompt)) ?? conv.title : conv.title,
-								updatedAt: new Date(),
-							},
-						}
-					);
-
-					update({
-						type: "finalAnswer",
-						text: generated_text,
-					});
-				}
-			}
-
 			const tokenStream = textGenerationStream(
 				{
 					parameters: {
@@ -234,17 +234,18 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 			);
 
 			for await (const output of tokenStream) {
-				// if not generated_text is here it means the generation is not done
+
 				if (!output.generated_text) {
 					// else we get the next token
 					if (!output.token.special) {
-						const lastMessage = messages[messages.length - 1];
 						update({
 							type: "stream",
 							token: output.token.text,
 						});
 
 						// if the last message is not from assistant, it means this is the first token
+						const lastMessage = messages[messages.length - 1];
+
 						if (lastMessage?.from !== "assistant") {
 							// so we create a new message
 							messages = [
@@ -262,10 +263,12 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 								},
 							];
 						} else {
+							// abort check
 							const date = abortedGenerations.get(convId.toString());
 							if (date && date > promptedAt) {
-								saveLast(lastMessage.content);
+								break;
 							}
+
 							if (!output) {
 								break;
 							}
@@ -275,15 +278,19 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 						}
 					}
 				} else {
-					saveLast(output.generated_text);
+					// add output.generated text to the last message
+					messages = [
+						...messages.slice(0, -1),
+						{
+							...messages[messages.length - 1],
+							content: output.generated_text,
+							updates: updates,
+							updatedAt: new Date(),
+						},
+					];
 				}
 			}
-		},
-		async cancel() {
-			const conversation = await collections.conversations.findOne({
-				_id: convId,
-				...authCond,
-			});
+
 			await collections.conversations.updateOne(
 				{
 					_id: convId,
@@ -291,7 +298,29 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 				{
 					$set: {
 						messages,
-						title: conversation?.title ?? (await summarize(newPrompt)) ?? conv.title,
+						title: conv?.title,
+						updatedAt: new Date(),
+					},
+				}
+			);
+
+			update({
+				type: "finalAnswer",
+				text: messages[messages.length - 1].content,
+			});
+
+			await summarizeIfNeeded;
+			return;
+		},
+		async cancel() {
+			await collections.conversations.updateOne(
+				{
+					_id: convId,
+				},
+				{
+					$set: {
+						messages,
+						title: conv.title,
 						updatedAt: new Date(),
 					},
 				}

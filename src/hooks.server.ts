@@ -13,15 +13,17 @@ import { ERROR_MESSAGES } from "$lib/stores/errors";
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const loginToken = event.cookies.get("token");
-
-	if (event.url.pathname.startsWith("/home") || event.url.pathname.startsWith("/conversation")) {
-		if (!loginToken) {
-			throw redirect(303, "/");
+	
+	if(!event.request.headers.has("internal")) {
+		if (event.url.pathname.startsWith("/home") || event.url.pathname.startsWith("/conversation")) {
+			if (!loginToken) {
+				throw redirect(303, "/");
+			}
 		}
-	}
-	if (event.url.pathname == "/") {
-		if (loginToken) {
-			throw redirect(303, "/home");
+		if (event.url.pathname == "/") {
+			if (loginToken) {
+				throw redirect(303, "/home");
+			}
 		}
 	}
 
