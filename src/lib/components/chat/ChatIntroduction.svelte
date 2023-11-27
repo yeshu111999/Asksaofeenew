@@ -29,7 +29,6 @@
 
 	const renderDescriptionTab = (event) => {
 		const { index, key } = event.detail;
-		console.log("index", index);
 		activeHomeTabIndex = index;
 		renderedText = "";
 		let textlist = [
@@ -37,16 +36,16 @@
 			"Yes, you will have to meet the H1B visa requirements for Indian citizens and provide the required documents.",
 			"Dallas is known for being the home base of the Dallas Cowboys, its delectable southern cuisines, major global companies, and its vibrant art and music scene.",
 		];
-		let words = textlist[index].split(" ");
-		let i = 0;
+		renderedText = textlist[index];
+		// let words = textlist[index].split(" ");
+		// let i = 0;
 		// for (i = 0; i < 10; i++) {
-		setInterval(() => {
-			if (i < words.length) {
-				renderedText += words[i] + " ";
-				console.log("words[i]", words[i], i);
-				i += 1;
-			}
-		}, 100);
+		// setInterval(() => {
+		// 	if (i < words.length) {
+		// 		renderedText += words[i] + " ";
+		// 		i += 1;
+		// 	}
+		// }, 100);
 		// i += 1;
 		// }
 	};
@@ -257,6 +256,7 @@
 		justify-content: center;
 		align-items: center;
 		padding: 16px;
+		min-height: 300px;
 	}
 
 	.tabBodyWrap.light {

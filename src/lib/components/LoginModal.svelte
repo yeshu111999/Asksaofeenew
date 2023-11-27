@@ -320,7 +320,6 @@
 
 	function searchCountry(arr, query) {
 		query = query.toLowerCase();
-		console.log("query", query);
 		return arr.filter((item) => item.toLowerCase().includes(query));
 	}
 
@@ -367,26 +366,19 @@
 			console.log("index", i, inputs[i].value);
 			inputs[i].addEventListener("keydown", function (event: any) {
 				if (event.key === "Backspace") {
-					console.log("backspace");
-
 					inputs[i].value = "";
 					if (i !== 0) inputs[i - 1].focus();
 				} else {
-					console.log("key", event.keyCode);
 					if (i === inputs.length - 1 && inputs[i].value !== "") {
-						console.log("a");
-
 						return true;
 					} else if (
 						(event.keyCode > 47 && event.keyCode < 58) ||
 						(event.keyCode > 95 && event.keyCode < 106)
 					) {
-						console.log("b");
 						inputs[i].value = event.key;
 						if (i !== inputs.length - 1) inputs[i + 1].focus();
 						event.preventDefault();
 					} else if (event.keyCode > 64 && event.keyCode < 91) {
-						console.log("c");
 						inputs[i].value = String.fromCharCode(event.keyCode);
 						if (i !== inputs.length - 1) inputs[i + 1].focus();
 						event.preventDefault();
@@ -473,7 +465,6 @@
 			body: JSON.stringify(params),
 		})
 			.then(async (response) => {
-				console.log("response", response);
 				if (response.status == 200) {
 					let data = await response.json();
 					var idToken = jwtCredentials.credential;
@@ -485,7 +476,6 @@
 					Cookies.set("name", profileData.name, { expires: expirationTime });
 					Cookies.set("userId", payload.userId);
 					Cookies.set("Google-Auth", "true", { expires: expirationTime });
-					console.log("email id", profileData.email);
 					window.location.href = "/";
 				}
 			})
@@ -505,7 +495,6 @@
 		Cookies.set("email", email, { expires: expirationTime });
 		Cookies.set("name", fullName, { expires: expirationTime });
 		Cookies.set("imageUrl", imageUrl, { expires: expirationTime });
-		console.log("email id", email);
 		window.location.href = "/";
 	}
 
@@ -543,7 +532,6 @@
 				body: JSON.stringify(loginData),
 			})
 				.then(async (response) => {
-					console.log("response", response);
 					if (response.status == 200) {
 						let data = await response.json();
 						const expirationTime = new Date();
@@ -615,7 +603,6 @@
 		// var payload = Buffer.from(base64Payload, 'base64');
 		// return JSON.parse(payload.toString());
 		var payload = JSON.parse(atob(base64Payload));
-		console.log(payload);
 		return payload;
 	}
 
@@ -640,8 +627,6 @@
 			})
 				.then(async (response) => {
 					let data = await response.json();
-					console.log("data", data.message);
-					console.log("data", data);
 					if (response.status == 200) {
 						const expirationTime = new Date();
 						expirationTime.setTime(expirationTime.getTime() + 1 * 60 * 60 * 1000);
@@ -786,12 +771,10 @@
 	}
 
 	function toggleForgotPwd() {
-		console.log("toggle forgot pwd");
 		showForgotPwd = true;
 	}
 
 	function openEmailApp() {
-		console.log("Open Email App");
 		window.open("https://mail.google.com", "_blank");
 	}
 
@@ -843,7 +826,6 @@
 		fetchCountryData();
 		document.addEventListener("click", (event) => {
 			// const dropCon = document.getElementById("country-code");
-			console.log("dropCon", dropCon);
 			if (!dropCon?.contains(event.target)) {
 				toggleContents("none");
 			}

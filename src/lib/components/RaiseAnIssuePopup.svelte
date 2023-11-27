@@ -44,7 +44,6 @@
 
 				if (response.ok) {
 					const responseData = await response.json();
-					console.log("API Response:", responseData);
 					showNotification = true;
 					notificationMsg = responseData.message;
 					notificationType = "success";

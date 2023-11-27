@@ -87,12 +87,10 @@
 	}
 
 	function visaPromptMethod(prompt) {
-		console.log("prompt", prompt.detail);
 		visaPrompt.set(prompt.detail);
 		closeBurger();
 	}
 	function immiHelpPrompt(prompt) {
-		console.log("prompt", prompt.detail);
 		visaPrompt.set(prompt.detail);
 		closeBurger();
 	}
@@ -186,9 +184,7 @@
 		showRaiseAnIssuePopup = false;
 	}
 
-	function onIssueSubmit() {
-		console.log("issue submitted");
-	}
+	function onIssueSubmit() {}
 
 	onDestroy(() => {
 		clearTimeout(errorToastTimeout);
@@ -197,7 +193,6 @@
 	$: if ($error) onError();
 
 	function changeTheme() {
-		console.log("hello");
 		if ($currentTheme == "light") {
 			currentTheme.set("blue");
 		} else {

@@ -8,9 +8,7 @@
 		dispatch("closePaymentPopup");
 	}
 
-	onMount(() => {
-		console.log("");
-	});
+	onMount(() => {});
 </script>
 
 {#if showPopup}

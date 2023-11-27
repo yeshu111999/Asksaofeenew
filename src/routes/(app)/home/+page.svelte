@@ -20,7 +20,6 @@
 	async function createConversation(message: string) {
 		try {
 			loading = true;
-			console.log(data.settings.activeModel);
 			const res = await fetch(`${base}/conversation`, {
 				method: "POST",
 				headers: {
