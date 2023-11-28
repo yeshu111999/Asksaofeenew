@@ -97,8 +97,30 @@
 		<div class="tabDetailsWrap">
 			<span class="tabDetailsTitle">What immiGPT will do for</span>
 		</div>
-		<div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
-			<!-- <Tabs variant="unstyled" position="apart"> -->
+		<div class="tabs-section">
+			<div class="question">
+				<span class="tabDetailsSubTitle"> What is SOP ? </span>
+				<span class="tabDetailsDescription">
+					A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
+					purpose of applying to a particular university for admission into a specific course.
+				</span>
+			</div>
+			<div class="question">
+				<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
+				<span class="tabDetailsDescription">
+					Yes, you will have to meet the H1B visa requirements for Indian citizens and provide the
+					required documents.
+				</span>
+			</div>
+			<div class="question">
+				<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
+				<span class="tabDetailsDescription">
+					Dallas is known for being the home base of the Dallas Cowboys, its delectable southern
+					cuisines, major global companies, and its vibrant art and music scene.
+				</span>
+			</div>
+		</div>
+		<!-- <div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
 			<Tabs
 				variant="default"
 				color={$currentTheme == "light" ? "black" : "white"}
@@ -125,9 +147,7 @@
 							</span>
 							<span class="tabDetailsSubTitle"> What is SOP ? </span>
 							<span class="tabDetailsDescription">
-								<!-- A Statement of Purpose or SOP lives up to its name by clearly outlining the
-								student's purpose of applying to a particular university for admission into a
-								specific course. -->
+								
 								{renderedText}
 							</span>
 						</div>
@@ -148,8 +168,7 @@
 							</span>
 							<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
 							<span class="tabDetailsDescription">
-								<!-- Yes, you will have to meet the H1B visa requirements for Indian citizens and provide
-								the required documents. -->
+								
 								{renderedText}
 							</span>
 						</div>
@@ -171,15 +190,14 @@
 							</span>
 							<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
 							<span class="tabDetailsDescription">
-								<!-- Dallas is known for being the home base of the Dallas Cowboys, its delectable
-								southern cuisines, major global companies, and its vibrant art and music scene. -->
+								
 								{renderedText}
 							</span>
 						</div>
 					{/if}
 				</Tabs.Tab>
 			</Tabs>
-		</div>
+		</div> -->
 	</div>
 	<!-- <div class="lg:col-span-2 lg:pl-24">
 	</div> -->
@@ -257,6 +275,23 @@
 		align-items: center;
 		padding: 16px;
 		min-height: 300px;
+	}
+
+	.tabs-section {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.question {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.question .tabDetailsSubTitle,
+	.question .tabDetailsDescription {
+		text-align: left;
 	}
 
 	.tabBodyWrap.light {

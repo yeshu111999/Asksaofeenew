@@ -112,8 +112,8 @@
 			<div class="landImageWrap">
 				<!-- <img style="" src="/assets/images/heroimmi.png" alt="hero" /> -->
 				<div class="landStartContentWrap">
-					<div class="landPgStartTitle1">Ultimate guide for</div>
-					<div class="landPgStartTitle2">Travel and Immigration</div>
+					<div class="landPgStartTitle1">A Generative AI for</div>
+					<div class="landPgStartTitle2">Immigration and Travel</div>
 					<div class="landPgStartDesc">
 						ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
 						responses to your Travel and Immigration concerns.
