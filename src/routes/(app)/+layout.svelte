@@ -228,26 +228,54 @@
 		}
 	}
 
+	const getUserDetails = async () => {
+		let headers = new Headers({
+			Authorization: "Bearer " + Cookies.get("token"),
+		});
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+
+		try {
+			const response = await fetch("https://backend.immigpt.net/getUserProfile", {
+				method: "GET",
+				headers: headers,
+			});
+
+			if (response.ok) {
+				const userData = await response.json();
+				console.log("user data", userData);
+			} else {
+				const err = await response.text();
+				console.log("Error fetching user details: " + err);
+			}
+		} catch (err) {
+			console.error("An error occurred:", err);
+		}
+	};
+
 	onMount(() => {
 		let token = Cookies.get("token");
 		if (!token) {
 			//loginModalVisible = true;
 			goto("/");
 		}
-		if (token) {
-			canLogin = false;
-			//getRecentSearches();
-			userName = Cookies.get("name");
-			userMail = Cookies.get("email");
-			if (userName) {
-				let nameList = userName?.split(" ");
-				if (nameList.length > 1) {
-					profileImg = nameList[0][0] + nameList[1][0];
-				} else {
-					profileImg = nameList[0][0];
+		if ($page.url.pathname)
+			if (token) {
+				canLogin = false;
+				//getRecentSearches();
+				userName = Cookies.get("name");
+				userMail = Cookies.get("email");
+				if (userName) {
+					let nameList = userName?.split(" ");
+					if (nameList.length > 1) {
+						profileImg = nameList[0][0] + nameList[1][0];
+					} else {
+						profileImg = nameList[0][0];
+					}
 				}
 			}
-		}
 		//document.addEventListener("click", handleOutsideClick);
 	});
 

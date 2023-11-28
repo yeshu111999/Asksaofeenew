@@ -391,10 +391,6 @@
 			}
 		}
 		getUserDetails();
-		let panda =
-			"https://immigpt.s3.amazonaws.com/profilePic/360c8b587ded262ac3cb95625c5294d7592422c43e53858576e480ce457f5629.png";
-		// isImageURL(profilePic, (flag) => (imageAccessFlag = flag));
-		// isImageURL(panda, (flag) => (imageAccessFlag = flag));
 	});
 	afterUpdate(() => {
 		isImageURL(profilePic, (flag) => (imageAccessFlag = flag));
