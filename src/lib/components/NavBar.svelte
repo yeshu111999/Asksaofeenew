@@ -613,8 +613,8 @@
 		{/if}
 		<p class="title">ImmiGPT</p>
 	</button>
-	<div id="google_translate_element" />
 	<div class="user-profile">
+		<div id="google_translate_element" />
 		<div class="button-wrapper" on:click={toggleUpgardetoProPopup}>
 			<button class="upgrade-btn">
 				<svg
