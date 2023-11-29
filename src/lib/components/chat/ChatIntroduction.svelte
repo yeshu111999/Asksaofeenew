@@ -119,36 +119,36 @@
 			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
 				<img src="assets/icons/professionals-icon.svg" alt="" />
 				<div class="question top">
-					<span class="tabDetailsSubTitle">Student</span>
+					<span class="tabDetailsSubTitle">Professionals</span>
 					<span class="tabDetailsDescription">
-						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
-						through our AI model for student visa requirements worldwide
+						ImmiGPT offers detailed guidance on work visa options, eligibility, and application
+						processes like US H1B for over 10 countries
 					</span>
 				</div>
 				<!-- <Divider /> -->
 				<div class="question">
-					<span class="tabDetailsSubTitle"> What is SOP ? </span>
+					<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
 					<span class="tabDetailsDescription">
-						A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
-						purpose of applying to a particular university for admission into a specific course.
+						Yes, you will have to meet the H1B visa requirements for Indian citizens and provide the
+						required documents.
 					</span>
 				</div>
 			</div>
 			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
 				<img src="assets/icons/tourists-icon.svg" alt="" />
 				<div class="question top">
-					<span class="tabDetailsSubTitle">Student</span>
+					<span class="tabDetailsSubTitle">Tourists</span>
 					<span class="tabDetailsDescription">
-						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
-						through our AI model for student visa requirements worldwide
+						ImmiGPT guides users through family-sponsored and business immigration steps, ensuring
+						all criteria are met for visas and entrepreneurial opportunities.
 					</span>
 				</div>
 				<!-- <Divider /> -->
 				<div class="question">
-					<span class="tabDetailsSubTitle"> What is SOP ? </span>
+					<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
 					<span class="tabDetailsDescription">
-						A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
-						purpose of applying to a particular university for admission into a specific course.
+						Dallas is known for being the home base of the Dallas Cowboys, its delectable southern
+						cuisines, major global companies, and its vibrant art and music scene
 					</span>
 				</div>
 			</div>
@@ -318,7 +318,7 @@
 		border-radius: 12px;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		/* justify-content: center; */
 		/* align-items: center; */
 		padding: 16px;
 		min-height: 300px;
@@ -330,6 +330,7 @@
 	.question.top {
 		border-bottom: 1px solid #d6d6d6;
 		padding-bottom: 16px;
+		min-height: 150px;
 	}
 
 	.tabs-section {
