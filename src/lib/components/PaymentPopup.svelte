@@ -15,6 +15,11 @@
 		dispatch("closePopup");
 	}
 
+	function retry() {
+		showPopup = false;
+		dispatch("retryPayment");
+	}
+
 	onMount(() => {
 		console.log("payment popup called");
 		if (type == "success") {
@@ -53,7 +58,7 @@
 					<button class="main-btn">Explore PRO features</button>
 					<button on:click={closePopup} class="secondary-btn">Continue browsing</button>
 				{:else}
-					<button class="main-btn">Retry Payment</button>
+					<button on:click={retry} class="main-btn">Retry Payment</button>
 					<button on:click={closePopup} class="secondary-btn">Cancel Upgrade</button>
 				{/if}
 			</div>

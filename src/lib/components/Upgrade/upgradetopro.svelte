@@ -2,10 +2,8 @@
 	import { createEventDispatcher } from "svelte";
 	import { Button } from "@svelteuidev/core";
 
-	import ResumeTemplate from "../BrowseTemplates/ResumeTemplate.svelte";
-
-	import { theme } from "$lib/stores/theme";
 	import { currentTheme } from "$lib/stores/themeStore";
+	import { retryPayment } from "$lib/stores/paymentStore";
 
 	let dispatch = createEventDispatcher();
 	export let showTemplatesPopup = false;
@@ -19,6 +17,18 @@
 
 	function contactUs() {
 		dispatch("contactUs");
+	}
+
+	function handleUpgrade() {
+		// Your logic for handling the button click action
+		const form = document.getElementById("upgradeForm");
+		form.submit();
+	}
+
+	// Watch for changes in planStore
+	$: if ($retryPayment == true) {
+		handleUpgrade();
+		retryPayment.set(false);
 	}
 </script>
 
@@ -65,7 +75,7 @@
 					<p>Pro</p>
 					<p class="description-amount">$10/Month</p>
 					<div class="plan-button">
-						<form method="POST" action="?/checkout">
+						<form id="upgradeForm" method="POST" action="?/checkout">
 							<input type="hidden" name="price-id" value="price_1OELxvLDxrOrP8vt6aoIyZxU" />
 							<Button fullSize style="background-color:var(--primary-btn-color);"
 								>Upgrade Plan</Button

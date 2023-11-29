@@ -11,13 +11,20 @@
 	import { onMount } from "svelte";
 	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 	import PageSpinner from "$lib/components/PageSpinner.svelte";
+	import { retryPayment } from "$lib/stores/paymentStore";
 
 	export let data;
+	let showUpgrade = false;
 	let loading = false;
 	let isLoading = false;
 	let showPaymentPopup = false;
 	let paymentType = "";
 	let sessionId = "";
+
+	$: if ($retryPayment == true) {
+		showUpgrade = true;
+		retryPayment.set(false);
+	}
 
 	onMount(() => {
 		isLoading = true;
@@ -35,6 +42,16 @@
 		}
 		isLoading = false;
 	});
+
+	function retry() {
+		retryPayment.set(true);
+		showPaymentPopup = false;
+		goto("/home");
+	}
+
+	function toggleUpgardetoProPopup() {
+		showUpgrade = false;
+	}
 
 	async function onPayment() {
 		const apiUrl = "https://backend.immigpt.ai/planUpgrade";
@@ -122,4 +139,13 @@
 {#if isLoading}
 	<PageSpinner />
 {/if}
-<PaymentPopup type={paymentType} showPopup={showPaymentPopup} on:closePopup={closePaymentPopup} />
+<PaymentPopup
+	on:retryPayment={retry}
+	type={paymentType}
+	showPopup={showPaymentPopup}
+	on:closePopup={closePaymentPopup}
+/>
+
+{#if showUpgrade}
+	<Upgradetopro showTemplatesPopup={showUpgrade} on:closeTemplatesPopup={toggleUpgardetoProPopup} />
+{/if}

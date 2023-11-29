@@ -11,7 +11,7 @@
 	import ModelCardMetadata from "../ModelCardMetadata.svelte";
 	import type { LayoutData } from "../../../routes/$types";
 	import { findCurrentModel } from "$lib/utils/models";
-	import { createStyles, Tabs } from "@svelteuidev/core";
+	import { createStyles, Tabs, Divider } from "@svelteuidev/core";
 	import { theme } from "$lib/stores/theme";
 	import { currentTheme } from "$lib/stores/themeStore";
 
@@ -90,22 +90,69 @@
 			<!-- <p class="text-base text-gray-600 dark:text-gray-400">
 				<strong>Generative AI for Immigration & Travel</strong>
 			</p> -->
-			<span class="appTitle">ImmiGPT</span>
+			<span class="appTitle">How can i assist you?</span>
 		</div>
 	</div>
-	<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
-		<div class="tabDetailsWrap">
+	<div class={$theme == "light" ? "light " : " dark"}>
+		<!-- <div class="tabDetailsWrap">
 			<span class="tabDetailsTitle">What immiGPT will do for</span>
-		</div>
+		</div> -->
 		<div class="tabs-section">
-			<div class="question">
-				<span class="tabDetailsSubTitle"> What is SOP ? </span>
-				<span class="tabDetailsDescription">
-					A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
-					purpose of applying to a particular university for admission into a specific course.
-				</span>
+			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+				<img src="assets/icons/student-icon.svg" alt="" />
+				<div class="question top">
+					<span class="tabDetailsSubTitle">Student</span>
+					<span class="tabDetailsDescription">
+						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
+						through our AI model for student visa requirements worldwide
+					</span>
+				</div>
+				<!-- <Divider /> -->
+				<div class="question">
+					<span class="tabDetailsSubTitle"> What is SOP ? </span>
+					<span class="tabDetailsDescription">
+						A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
+						purpose of applying to a particular university for admission into a specific course.
+					</span>
+				</div>
 			</div>
-			<div class="question">
+			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+				<img src="assets/icons/professionals-icon.svg" alt="" />
+				<div class="question top">
+					<span class="tabDetailsSubTitle">Student</span>
+					<span class="tabDetailsDescription">
+						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
+						through our AI model for student visa requirements worldwide
+					</span>
+				</div>
+				<!-- <Divider /> -->
+				<div class="question">
+					<span class="tabDetailsSubTitle"> What is SOP ? </span>
+					<span class="tabDetailsDescription">
+						A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
+						purpose of applying to a particular university for admission into a specific course.
+					</span>
+				</div>
+			</div>
+			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+				<img src="assets/icons/tourists-icon.svg" alt="" />
+				<div class="question top">
+					<span class="tabDetailsSubTitle">Student</span>
+					<span class="tabDetailsDescription">
+						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
+						through our AI model for student visa requirements worldwide
+					</span>
+				</div>
+				<!-- <Divider /> -->
+				<div class="question">
+					<span class="tabDetailsSubTitle"> What is SOP ? </span>
+					<span class="tabDetailsDescription">
+						A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
+						purpose of applying to a particular university for admission into a specific course.
+					</span>
+				</div>
+			</div>
+			<!-- <div class="question">
 				<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
 				<span class="tabDetailsDescription">
 					Yes, you will have to meet the H1B visa requirements for Indian citizens and provide the
@@ -118,7 +165,7 @@
 					Dallas is known for being the home base of the Dallas Cowboys, its delectable southern
 					cuisines, major global companies, and its vibrant art and music scene.
 				</span>
-			</div>
+			</div> -->
 		</div>
 		<!-- <div class={$theme == "light" ? "light tabWrap" : "tabWrap dark"}>
 			<Tabs
@@ -272,14 +319,22 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		/* align-items: center; */
 		padding: 16px;
 		min-height: 300px;
+		display: flex;
+		gap: 20px;
+		align-items: baseline;
+	}
+
+	.question.top {
+		border-bottom: 1px solid #d6d6d6;
+		padding-bottom: 16px;
 	}
 
 	.tabs-section {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		gap: 12px;
 	}
 
