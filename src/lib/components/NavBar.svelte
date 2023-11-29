@@ -194,7 +194,12 @@
 		window.open("/privacy-policy", "_blank");
 	}
 
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+	}
+
 	onMount(() => {
+		googleTranslateElementInit();
 		let token = Cookies.get("token");
 		if (!token) {
 			loginModalVisible = true;
@@ -609,6 +614,7 @@
 		<p class="title">ImmiGPT</p>
 	</button>
 	<div class="user-profile">
+		<div id="google_translate_element" />
 		<div class="button-wrapper" on:click={toggleUpgardetoProPopup}>
 			<button class="upgrade-btn">
 				<svg
