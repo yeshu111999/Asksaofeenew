@@ -68,6 +68,7 @@
 	export let isAuthor = true;
 	export let readOnly = false;
 	export let isTapped = false;
+	export let toll = 1;
 
 	export let webSearchMessages: WebSearchUpdate[];
 
@@ -75,6 +76,7 @@
 
 	const handleToolClick = () => {
 		toolTap = true;
+		console.log("toll", toll);
 		setTimeout(() => {
 			toolTap = false;
 		}, 1000);
