@@ -55,13 +55,6 @@
 	}>();
 
 	const handleSubmit = () => {
-		console.log("Mesage in chatwindow:" + message);
-		console.log(
-			"Message dispatch :" +
-				(promptSplit.length > 1
-					? JSON.stringify({ content: promptSplit[0], placeHolder: promptSplit[1] })
-					: JSON.stringify({ content: message, placeHolder: undefined }))
-		);
 		if (loading) return;
 		dispatch(
 			"message",

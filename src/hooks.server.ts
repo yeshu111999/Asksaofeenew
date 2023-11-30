@@ -20,7 +20,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				throw redirect(303, "/");
 			}
 		}
-		if (event.url.pathname == "/") {
+		if (event.url.pathname == "/" && !event.url.pathname.startsWith("/actuator/health")) {
 			if (loginToken) {
 				throw redirect(303, "/home");
 			}
