@@ -68,6 +68,7 @@
 	export let isAuthor = true;
 	export let readOnly = false;
 	export let isTapped = false;
+	export let toll = 1;
 
 	export let webSearchMessages: WebSearchUpdate[];
 
@@ -75,6 +76,7 @@
 
 	const handleToolClick = () => {
 		toolTap = true;
+		console.log("toll", toll);
 		setTimeout(() => {
 			toolTap = false;
 		}, 1000);
@@ -140,6 +142,14 @@
 		}
 	});
 
+	let templeRef = 1;
+
+	const refComp = () => {
+		templeRef += 1;
+		setTimeout(refComp, 2000);
+	};
+	refComp();
+
 	let editMessage = message.content;
 	let editFlag = false;
 
@@ -198,20 +208,21 @@
 			{#if !message.content && (webSearchIsDone || (webSearchMessages && webSearchMessages.length === 0))}
 				<IconLoading />
 			{/if}
-
-			<div
-				class="responseText prose max-w-none dark:prose-invert max-sm:prose-sm prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-base prose-pre:bg-gray-800 dark:prose-pre:bg-gray-900"
-				bind:this={contentEl}
-			>
-				{#each tokens as token}
-					{#if token.type === "code"}
-						<CodeBlock lang={token.lang} code={unsanitizeMd(token.text)} />
-					{:else}
-						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-						{@html marked.parse(token.raw, options)}
-					{/if}
-				{/each}
-			</div>
+			{#key templeRef}
+				<div
+					class="responseText prose max-w-none dark:prose-invert max-sm:prose-sm prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-base prose-pre:bg-gray-800 dark:prose-pre:bg-gray-900"
+					bind:this={contentEl}
+				>
+					{#each tokens as token}
+						{#if token.type === "code"}
+							<CodeBlock lang={token.lang} code={unsanitizeMd(token.text)} />
+						{:else}
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+							{@html marked.parse(token.raw, options)}
+						{/if}
+					{/each}
+				</div>
+			{/key}
 			<!-- Web Search sources -->
 			{#if webSearchSources?.length}
 				<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm">

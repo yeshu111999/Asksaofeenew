@@ -53,16 +53,19 @@
 			: "chat-intro-alone mx-auto flex flex-col px-5 xl:max-w-4xl"}
 	>
 		{#each messages as message, i}
-			<ChatMessage
-				loading={loading && i === messages.length - 1}
-				{message}
-				{isAuthor}
-				{readOnly}
-				model={currentModel}
-				webSearchMessages={i === messages.length - 1 ? webSearchMessages : []}
-				on:retry
-				on:vote
-			/>
+			{#key i}
+				<ChatMessage
+					loading={loading && i === messages.length - 1}
+					{message}
+					{isAuthor}
+					{readOnly}
+					model={currentModel}
+					webSearchMessages={i === messages.length - 1 ? webSearchMessages : []}
+					toll={i}
+					on:retry
+					on:vote
+				/>
+			{/key}
 		{:else}
 			<ChatIntroduction {settings} {models} {currentModel} on:message />
 		{/each}
