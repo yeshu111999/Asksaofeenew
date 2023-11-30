@@ -36,7 +36,10 @@
 	let loginRequired = false;
 
 	// this function is used to send new message to the backends
-	async function writeMessage(message: string, messageId = randomUUID()) {
+	async function writeMessage(event: string, messageId = randomUUID()) {
+		const eventMap = JSON.parse(JSON.stringify(event));
+		var message = eventMap.content;
+		var placeHolder = eventMap.placeHolder;
 		if (!message.trim()) return;
 
 		try {
@@ -56,7 +59,7 @@
 			// slice up to the point of the retry
 			messages = [
 				...messages.slice(0, retryMessageIndex),
-				{ from: "user", content: message, id: messageId },
+				{ from: "user", content: message, id: messageId, templatePlaceHolder: placeHolder },
 			];
 
 			const responseId = randomUUID();
@@ -66,6 +69,7 @@
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					inputs: message,
+					templatePlaceHolder: placeHolder,
 					id: messageId,
 					response_id: responseId,
 					is_retry: isRetry,
@@ -247,7 +251,7 @@
 	{messages}
 	bind:webSearchMessages
 	on:message={(event) => writeMessage(event.detail)}
-	on:retry={(event) => writeMessage(event.detail.content, event.detail.id)}
+	on:retry={(event) => writeMessage(event.detail, event.detail.id)}
 	on:vote={(event) => voteMessage(event.detail.score, event.detail.id)}
 	on:share={() => shareConversation($page.params.id, data.title)}
 	on:stop={() => (isAborted = true)}

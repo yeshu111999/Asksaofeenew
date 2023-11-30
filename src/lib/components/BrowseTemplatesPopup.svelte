@@ -1410,7 +1410,7 @@
 			const userInputValue = field.fieldValue;
 			selectedTemplate.prompt = selectedTemplate.prompt.replaceAll(placeholder, userInputValue);
 		}
-		visaPrompt.set(selectedTemplate.prompt);
+		visaPrompt.set(selectedTemplate.prompt + ":::" + "Generate " + selectedTemplate.resumeTitle);
 		dispatch("closeBurger");
 		closePopup();
 	}

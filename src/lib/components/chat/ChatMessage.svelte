@@ -80,6 +80,8 @@
 		}, 1000);
 	};
 
+	readOnly = message.from == "user" && message.templatePlaceHolder != undefined;
+
 	const dispatch = createEventDispatcher<{
 		retry: { content: string; id: Message["id"] };
 		vote: { score: Message["score"]; id: Message["id"] };
@@ -340,7 +342,7 @@
 		<!-- <div class="max-w-full whitespace-break-spaces break-words rounded-2xl px-5 py-3.5 text-gray-500 dark:text-gray-400"> -->
 		<div class="responseTextStyle text-black-500 dark:text-black-400 max-w-full  break-words">
 			{#if !editFlag}
-				{message.content.trim()}
+				{message.templatePlaceHolder ?? message.content.trim()}
 			{/if}
 			{#if editFlag}
 				<!-- <TextInput

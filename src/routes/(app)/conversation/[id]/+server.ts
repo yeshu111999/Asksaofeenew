@@ -34,18 +34,19 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 		id: messageId,
 		is_retry,
 		web_search: webSearch,
+		templatePlaceHolder: templatePlaceHolder, 
 		userId: paramUserId
 	} = z
 		.object({
 			inputs: z.string().trim().min(1),
 			id: z.optional(z.string().uuid()),
 			response_id: z.optional(z.string().uuid()),
+			templatePlaceHolder: z.optional(z.string().trim()),
 			is_retry: z.optional(z.boolean()),
 			web_search: z.optional(z.boolean()),
 			userId: z.optional(z.string().trim())
 		})
 		.parse(json);
-
 	
 	const userId = paramUserId ?? locals.userId ?? locals.sessionId;
 	const authCond = paramUserId ? {userId : paramUserId} : authCondition(locals)
@@ -110,7 +111,7 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 			}
 			return [
 				...conv.messages.slice(0, retryMessageIdx),
-				{ content: newPrompt, from: "user", id: messageId as Message["id"], updatedAt: new Date() },
+				{ content: newPrompt, from: "user", id: messageId as Message["id"], updatedAt: new Date(), templatePlaceHolder: templatePlaceHolder},
 			];
 		} // else append the message at the bottom
 
@@ -119,6 +120,7 @@ export async function POST({ request, fetch, locals, params, getClientAddress })
 			{
 				content: newPrompt,
 				from: "user",
+				templatePlaceHolder: templatePlaceHolder,
 				id: (messageId as Message["id"]) || crypto.randomUUID(),
 				createdAt: new Date(),
 				updatedAt: new Date(),

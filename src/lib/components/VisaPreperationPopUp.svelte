@@ -18,6 +18,7 @@
 	let travelReason = "";
 	let visaType = "";
 	let visapreppromt = "";
+	let placeHolderPrompt = "";
 	let submitLoader = false;
 
 	$: isValidSubmit = visaInterviewType && travelFrom && travelTo && travelReason && visaType;
@@ -26,14 +27,17 @@
 	}
 
 	function visaPrompt() {
+		visapreppromt = visapreppromt + ":::" + placeHolderPrompt;
 		dispatch("visaPrompt", visapreppromt);
 	}
 
 	function prepareVisaPrompt() {
 		submitLoader = true;
 		if (visaInterviewType == "Visa Interview Preparation") {
+			placeHolderPrompt = `Please provide a comprehensive list of important and expected questions, along with suggested answers, to prepare for the ${visaType} visa interview when applying for a ${visaType} visa to enter ${travelTo} from ${travelFrom} for ${travelReason}.`;
 			visapreppromt = `Please provide a comprehensive list of important and expected questions, along with suggested answers, to prepare for the ${visaType} visa interview. The questions should be based on the traveller's current scenario. Specifically, consider that the traveller is applying for a ${visaType} visa to enter ${travelTo} from ${travelFrom} for ${travelReason}. Tailor the questions to cover all aspects that are typically asked during a ${visaType} visa interview. Additionally, suggest answers that are clear, honest, and provide relevant information. break the interview questions into, personal, professional, job details, company or sponsor details. don't restrict yourself and give me around 25-30 questions and answers, continue automatically if the generation is truncated.`;
 		} else {
+			placeHolderPrompt = `Provide mock interview questions for a ${visaType} visa to enter ${travelTo} from ${travelFrom}. The purpose of the travel is ${travelReason}`;
 			visapreppromt = `Imagine you're a visa interview officer at ${travelTo} Embassy/Consulate, and you are conducting a visa interview for a traveller. The traveller is applying for a ${visaType} visa to enter ${travelTo} from ${travelFrom}. The purpose of the travel is ${travelReason}, and it is crucial to evaluate the traveller's eligibility for the visa. Please structure your questions to assess the traveller's intent, ties to their home country, financial stability, and any other relevant factors. Ensure that your questions adhere to standard visa interview protocols and guidelines. Please ensure to ask one question at a time and consider follow-up questions for clarification only when necessary. Note: Please maintain context and avoid going out of context in this entire conversation.`;
 		}
 		visaPrompt();
@@ -44,6 +48,7 @@
 		travelReason = "";
 		visaType = "";
 		visapreppromt = "";
+		placeHolderPrompt = "";
 		closePopup();
 		// console.log("prompt", visapreppromt);
 	}

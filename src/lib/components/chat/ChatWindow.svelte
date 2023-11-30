@@ -34,25 +34,41 @@
 	$: isReadOnly = !models.some((model) => model.id === currentModel.id);
 
 	let loginModalOpen = false;
+	let promptSplit: string[];
+
 	$: message = $visaPrompt;
 
 	$: {
 		let msg = $visaPrompt;
+		promptSplit = $visaPrompt.split(":::");
+		// message = promptSplit[0];
 		if (msg.length > 0) {
 			handleSubmit();
 		}
 	}
 
 	const dispatch = createEventDispatcher<{
-		message: string;
+		message: { content: string; placeHolder?: string };
 		share: void;
 		stop: void;
-		retry: { id: Message["id"]; content: string };
+		retry: { id: Message["id"]; content: string; placeHolder?: string };
 	}>();
 
 	const handleSubmit = () => {
+		console.log("Mesage in chatwindow:" + message);
+		console.log(
+			"Message dispatch :" +
+				(promptSplit.length > 1
+					? JSON.stringify({ content: promptSplit[0], placeHolder: promptSplit[1] })
+					: JSON.stringify({ content: message, placeHolder: undefined }))
+		);
 		if (loading) return;
-		dispatch("message", message);
+		dispatch(
+			"message",
+			promptSplit.length > 1
+				? { content: promptSplit[0], placeHolder: promptSplit[1] }
+				: { content: message, placeHolder: undefined }
+		);
 		message = "";
 		visaPrompt.set("");
 	};
