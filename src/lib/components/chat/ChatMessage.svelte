@@ -7,7 +7,7 @@
 	import { page } from "$app/stores";
 	import Cookies from "js-cookie";
 	import { TextInput, Button, Tooltip } from "@svelteuidev/core";
-
+	import { goto } from "$app/navigation";
 	import CodeBlock from "../CodeBlock.svelte";
 	import CopyToClipBoardBtn from "../CopyToClipBoardBtn.svelte";
 	import Tooltips from "../Tooltip.svelte";
@@ -125,6 +125,7 @@
 	afterUpdate(() => {
 		loadingEl?.$destroy();
 		clearTimeout(pendingTimeout);
+		refreshPage();
 
 		// Add loading animation to the last message if update takes more than 600ms
 		if (loading) {
@@ -164,6 +165,11 @@
 		setTimeout(() => {
 			isCopied = false;
 		}, 1000);
+	}
+
+	function refreshPage() {
+		const currentPath = window.location.href;
+		goto(currentPath);
 	}
 </script>
 
@@ -225,6 +231,11 @@
 						</a>
 					{/each}
 				</div>
+			{/if}
+			{#if !loading && !webSearchSources?.length}
+				<button class="refresh-btn" on:click={refreshPage}
+					>Click here to see the web resources</button
+				>
 			{/if}
 		</div>
 		{#if isAuthor && !loading && message.content}
@@ -575,5 +586,11 @@
 
 	.visible {
 		visible: opacity-100;
+	}
+
+	.refresh-btn {
+		border: 1px solid #ececec;
+		padding: 2px 5px 2px 5px;
+		border-radius: 4px;
 	}
 </style>

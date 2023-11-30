@@ -41,6 +41,7 @@
 	import ImmigrationHelpPopUp from "$lib/components/ImmigrationHelpPopUp.svelte";
 	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
+	import { retryPayment } from "$lib/stores/paymentStore";
 
 	export let data;
 
@@ -61,10 +62,17 @@
 
 	let showSettingsPopup = false;
 	let showBrowseTemplatesPopup = false;
-	let showUpgardetoProPopup = false;
+	let showUpgradetoProPopup = false;
 	let showVisaPreperationPopUp = false;
 	let showImmigrationHelpPopUp = false;
 	let menuToggleFlag = false;
+
+	$: {
+		// Check if retryPayment is true
+		if ($retryPayment) {
+			showUpgradetoProPopup = true;
+		}
+	}
 
 	function closeBurger() {
 		menuToggleFlag = false;
@@ -83,7 +91,7 @@
 	}
 
 	function toggleUpgardetoProPopup() {
-		showUpgardetoProPopup = !showUpgardetoProPopup;
+		showUpgradetoProPopup = !showUpgradetoProPopup;
 	}
 
 	function visaPromptMethod(prompt) {
@@ -261,7 +269,7 @@
 			//loginModalVisible = true;
 			goto("/");
 		}
-		if ($page.url.pathname)
+		if ($page.url.pathname) {
 			if (token) {
 				canLogin = false;
 				//getRecentSearches();
@@ -276,7 +284,7 @@
 					}
 				}
 			}
-		//document.addEventListener("click", handleOutsideClick);
+		}
 	});
 
 	// onDestroy(() => {
@@ -590,7 +598,7 @@
 	on:closeBurger={closeBurger}
 />
 <Upgradetopro
-	showTemplatesPopup={showUpgardetoProPopup}
+	showTemplatesPopup={showUpgradetoProPopup}
 	on:closeTemplatesPopup={toggleUpgardetoProPopup}
 	on:contactUs={openRaiseAnIssuePopup}
 />
