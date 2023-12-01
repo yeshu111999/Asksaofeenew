@@ -195,7 +195,8 @@
 	}
 
 	function googleTranslateElementInit() {
-		new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+		// new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+		google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
 	}
 
 	onMount(() => {
@@ -614,7 +615,12 @@
 		<p class="title">ImmiGPT</p>
 	</button>
 	<div class="user-profile">
-		<div id="google_translate_element" />
+		<div class="dropdown">
+			<button class="dropbtn">Language</button>
+			<div class="dropdown-content">
+				<div id="google_translate_element" />
+			</div>
+		</div>
 		<div class="button-wrapper" on:click={toggleUpgardetoProPopup}>
 			<button class="upgrade-btn">
 				<svg
@@ -934,6 +940,10 @@
 <style>
 	.chgatsScroll::-webkit-scrollbar {
 		width: 5px;
+	}
+
+	select {
+		color: #fff !important;
 	}
 
 	.chgatsScroll::-webkit-scrollbar-track {
@@ -1266,6 +1276,33 @@
 
 	.icon-text p {
 		color: var(--primary-text-color);
+	}
+
+	.dropbtn {
+		background-color: #000;
+		color: white;
+		padding: 10px 16px;
+		font-size: 16px;
+		border: none;
+		border-radius: 8px;
+	}
+
+	.dropdown {
+		/* position: relative; */
+		/* display: inline-block; */
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #ffffff;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 2000;
+	}
+
+	.dropdown:hover .dropdown-content {
+		display: block;
 	}
 
 	@media screen and (max-width: 786px) {
