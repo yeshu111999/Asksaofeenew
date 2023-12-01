@@ -179,6 +179,7 @@
 
 	function refreshPage() {
 		const currentPath = window.location.href;
+		console.log("current path", currentPath);
 		goto(currentPath);
 	}
 </script>
@@ -208,21 +209,19 @@
 			{#if !message.content && (webSearchIsDone || (webSearchMessages && webSearchMessages.length === 0))}
 				<IconLoading />
 			{/if}
-			{#key templeRef}
-				<div
-					class="responseText prose max-w-none dark:prose-invert max-sm:prose-sm prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-base prose-pre:bg-gray-800 dark:prose-pre:bg-gray-900"
-					bind:this={contentEl}
-				>
-					{#each tokens as token}
-						{#if token.type === "code"}
-							<CodeBlock lang={token.lang} code={unsanitizeMd(token.text)} />
-						{:else}
-							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							{@html marked.parse(token.raw, options)}
-						{/if}
-					{/each}
-				</div>
-			{/key}
+			<div
+				class="responseText prose max-w-none dark:prose-invert max-sm:prose-sm prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-base prose-pre:bg-gray-800 dark:prose-pre:bg-gray-900"
+				bind:this={contentEl}
+			>
+				{#each tokens as token}
+					{#if token.type === "code"}
+						<CodeBlock lang={token.lang} code={unsanitizeMd(token.text)} />
+					{:else}
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						{@html marked.parse(token.raw, options)}
+					{/if}
+				{/each}
+			</div>
 			<!-- Web Search sources -->
 			{#if webSearchSources?.length}
 				<div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm">
@@ -243,11 +242,11 @@
 					{/each}
 				</div>
 			{/if}
-			{#if !loading && !webSearchSources?.length}
-				<button class="refresh-btn" on:click={refreshPage}
+			<!-- {#if !loading && webSearchIsDone && !webSearchSources?.length}
+				<button class="refresh-btn" on:click={() => refreshPage()}
 					>Click here to see the web resources</button
 				>
-			{/if}
+			{/if} -->
 		</div>
 		{#if isAuthor && !loading && message.content}
 			<div
