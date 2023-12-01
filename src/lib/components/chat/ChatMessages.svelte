@@ -50,8 +50,9 @@
 	<div
 		class={messages.length > 0
 			? "chat-intro mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl"
-			: "chat-intro-alone mx-auto flex flex-col px-5 xl:max-w-4xl"}
+			: "chat-intro mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl"}
 	>
+		<!-- : "chat-intro-alone mx-auto flex flex-col px-5 xl:max-w-4xl"} -->
 		{#each messages as message, i}
 			{#key i}
 				<ChatMessage

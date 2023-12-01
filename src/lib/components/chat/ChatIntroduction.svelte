@@ -93,12 +93,15 @@
 			<span class="appTitle">How can i assist you?</span>
 		</div>
 	</div>
-	<div class={$theme == "light" ? "light " : " dark"}>
+	<div
+		style="display: flex; width: 100%; overflow-y:auto;"
+		class={$theme == "light" ? "light " : " dark"}
+	>
 		<!-- <div class="tabDetailsWrap">
 			<span class="tabDetailsTitle">What immiGPT will do for</span>
 		</div> -->
 		<div class="tabs-section">
-			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+			<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
 				<img src="assets/icons/student-icon.svg" alt="" />
 				<div class="question top">
 					<span class="tabDetailsSubTitle">Student</span>
@@ -116,7 +119,7 @@
 					</span>
 				</div>
 			</div>
-			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+			<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
 				<img src="assets/icons/professionals-icon.svg" alt="" />
 				<div class="question top">
 					<span class="tabDetailsSubTitle">Professionals</span>
@@ -134,7 +137,7 @@
 					</span>
 				</div>
 			</div>
-			<div style="width:30%" class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
+			<div class={$theme == "light" ? "light tabBodyWrap" : "tabBodyWrap dark"}>
 				<img src="assets/icons/tourists-icon.svg" alt="" />
 				<div class="question top">
 					<span class="tabDetailsSubTitle">Tourists</span>
@@ -399,6 +402,12 @@
 	@media (max-width: 786px) {
 		.appTitle {
 			display: none;
+		}
+
+		.tabs-section {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
 		}
 	}
 </style>
