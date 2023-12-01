@@ -145,7 +145,3 @@
 	showPopup={showPaymentPopup}
 	on:closePopup={closePaymentPopup}
 />
-
-{#if showUpgrade}
-	<Upgradetopro showTemplatesPopup={showUpgrade} on:closeTemplatesPopup={toggleUpgardetoProPopup} />
-{/if}

@@ -1,15 +1,14 @@
 <script>
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 	import { Button } from "@svelteuidev/core";
 
 	import { currentTheme } from "$lib/stores/themeStore";
 	import { retryPayment } from "$lib/stores/paymentStore";
 
 	let dispatch = createEventDispatcher();
+	let retryValue = false;
+	let upgradeForm;
 	export let showTemplatesPopup = false;
-
-	let themeVariable = "light";
-	let renderedText = "";
 
 	function closePopup() {
 		dispatch("closeTemplatesPopup");
@@ -19,17 +18,41 @@
 		dispatch("contactUs");
 	}
 
-	function handleUpgrade() {
-		// Your logic for handling the button click action
-		const form = document.getElementById("upgradeForm");
-		form.submit();
+	async function handleUpgrade() {
+		const formData = new FormData();
+		formData.append("price-id", "price_1OELxvLDxrOrP8vt6aoIyZxU");
+		// Add more form data as needed
+
+		try {
+			const response = await fetch("?/checkout", {
+				method: "POST",
+				body: formData,
+			});
+
+			if (response.ok) {
+				console.log("Upgrade successful!");
+			} else {
+				console.error("Upgrade failed!");
+			}
+		} catch (error) {
+			console.error("Upgrade failed:", error);
+		}
 	}
 
 	// Watch for changes in planStore
-	$: if ($retryPayment == true) {
-		handleUpgrade();
-		retryPayment.set(false);
+	$: {
+		// Check if retryPayment is true
+		if ($retryPayment) {
+			handleUpgrade();
+			retryPayment.set(false); // Set the store value to false
+		}
 	}
+
+	onMount(() => {
+		if ($retryPayment == true) {
+			retryValue = true;
+		}
+	});
 </script>
 
 {#if showTemplatesPopup}
@@ -75,7 +98,7 @@
 					<p>Pro</p>
 					<p class="description-amount">$10/Month</p>
 					<div class="plan-button">
-						<form id="upgradeForm" method="POST" action="?/checkout">
+						<form bind:this={upgradeForm} method="POST" action="?/checkout">
 							<input type="hidden" name="price-id" value="price_1OELxvLDxrOrP8vt6aoIyZxU" />
 							<Button fullSize style="background-color:var(--primary-btn-color);"
 								>Upgrade Plan</Button
