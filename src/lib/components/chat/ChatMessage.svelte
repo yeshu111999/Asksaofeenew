@@ -127,7 +127,6 @@
 	afterUpdate(() => {
 		loadingEl?.$destroy();
 		clearTimeout(pendingTimeout);
-		refreshPage();
 
 		// Add loading animation to the last message if update takes more than 600ms
 		if (loading) {
@@ -139,6 +138,11 @@
 					});
 				}
 			}, 600);
+		}
+		if (contentEditableDiv) {
+			contentEditableDiv.focus();
+			document.execCommand("selectAll", false, null);
+			document.getSelection().collapseToEnd();
 		}
 	});
 
@@ -152,6 +156,7 @@
 
 	let editMessage = message.content;
 	let editFlag = false;
+	let contentEditableDiv;
 
 	let searchUpdates: WebSearchUpdate[] = [];
 
@@ -177,10 +182,37 @@
 		}, 1000);
 	}
 
-	function refreshPage() {
-		const currentPath = window.location.href;
-		console.log("current path", currentPath);
-		goto(currentPath);
+	// function refreshPage() {
+	// 	const currentPath = window.location.href;
+	// 	console.log("current path", currentPath);
+	// 	//goto(currentPath);
+	// }
+
+	function handleKeyDown(event) {
+		// Prevent losing focus on Enter key
+		if (event.key === "Enter") {
+			event.preventDefault();
+		}
+	}
+
+	function startEditing() {
+		editFlag = true;
+		isTapped = false;
+		isCopied = false;
+		editMessage = message.content; // Initialize editMessage with the original content
+		focusOnEditableDiv();
+	}
+
+	function focusOnEditableDiv() {
+		if (contentEditableDiv) {
+			contentEditableDiv.focus();
+			const range = document.createRange();
+			const sel = window.getSelection();
+			range.selectNodeContents(contentEditableDiv);
+			range.collapse(false);
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
 	}
 </script>
 
@@ -380,8 +412,10 @@
 				/><br /> -->
 				<div
 					contenteditable="true"
+					bind:this={contentEditableDiv}
 					on:input={updateDivContent}
 					on:paste={handlePaste}
+					on:keydown={handleKeyDown}
 					style="width: 100%"
 				>
 					{editMessage}
@@ -431,7 +465,7 @@
 						<button
 							class="cursor-pointer rounded-lg border border-gray-100 p-1 text-xs text-gray-400 group-hover:block hover:text-gray-500 dark:border-gray-800 dark:text-gray-400 dark:hover:text-gray-300 md:hidden lg:-right-2"
 							type="button"
-							on:click={() => (editFlag = true)}
+							on:click={startEditing}
 						>
 							<!-- title="Edit" -->
 							<!-- on:click={() => dispatch("retry", { content: message.content, id: message.id })} -->

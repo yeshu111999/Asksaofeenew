@@ -2,7 +2,7 @@
 	import type { Message } from "$lib/types/Message";
 	import { snapScrollToBottom } from "$lib/actions/snapScrollToBottom";
 	import ScrollToBottomBtn from "$lib/components/ScrollToBottomBtn.svelte";
-	import { tick } from "svelte";
+	import { createEventDispatcher, tick } from "svelte";
 	import { randomUUID } from "$lib/utils/randomUuid";
 	import type { Model } from "$lib/types/Model";
 	import type { LayoutData } from "../../../routes/$types";
@@ -19,6 +19,8 @@
 	export let settings: LayoutData["settings"];
 	export let models: Model[];
 	export let readOnly: boolean;
+
+	let dispatch = createEventDispatcher();
 
 	let chatContainer: HTMLElement;
 
@@ -63,7 +65,9 @@
 					model={currentModel}
 					webSearchMessages={i === messages.length - 1 ? webSearchMessages : []}
 					toll={i}
-					on:retry
+					on:retry={(ev) => {
+						if (!loading) dispatch("retry", ev.detail);
+					}}
 					on:vote
 				/>
 			{/key}
