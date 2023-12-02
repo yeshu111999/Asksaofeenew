@@ -5,7 +5,7 @@
 	<div class="header">
 		<p class="title">Cancellation and Refund Policy</p>
 		<p class="description">
-			At immiGPT.net, we prioritize customer satisfaction and strive to provide the most accurate
+			At immiGPT.ai, we prioritize customer satisfaction and strive to provide the most accurate
 			and timely information to help you navigate your immigration needs. We understand that there
 			may be instances when you need to cancel your subscription. Here’s what you need to know about
 			our cancellation and refund policies:
@@ -16,7 +16,7 @@
 		<div class="list-content">
 			<p class="description">
 				1. How to Cancel: To cancel your subscription, please send us an email at <a
-					href="mailto:hello@immiGPT.net">hello@immiGPT.net</a
+					href="mailto:hello@immiGPT.ai">hello@immiGPT.ai</a
 				>
 				stating
 			</p>
@@ -63,7 +63,7 @@
 		<p class="section-title">Contact Us</p>
 		<p class="description">
 			If you have any questions about this policy, or require assistance with your subscription,
-			feel free to reach out to us at <a href="mailto:hello@immiGPT.net">hello@immiGPT.net</a> Our team
+			feel free to reach out to us at <a href="mailto:hello@immiGPT.ai">hello@immiGPT.ai</a> Our team
 			is committed to assisting you promptly and professionally.
 		</p>
 	</div>
