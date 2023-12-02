@@ -116,7 +116,7 @@
 				</div>
 				<div class="contact-details">
 					<p>
-						<span class="gray">You can also find us at</span> iamk.swaroop@gmail.com
+						<span class="gray">You can also find us at</span> hello@immigpt.ai
 						<span class="gray"> and </span> +1 9727994702
 					</p>
 				</div>
