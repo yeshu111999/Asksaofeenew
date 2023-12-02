@@ -265,12 +265,48 @@
 		}
 	};
 
+	function getGeolocation() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(
+				async (position) => {
+					const latitude = position.coords.latitude;
+					const longitude = position.coords.longitude;
+
+					console.log("latitude, longitude", latitude, longitude);
+
+					// Use a reverse geocoding API to get country information
+					// const reverseGeocodingApi = `https://geocode.xyz/${latitude},${longitude}?json=1`;
+
+					// try {
+					//     const response = await fetch(reverseGeocodingApi);
+					//     const data = await response.json();
+
+					//     // Display the country information
+					//     const country = data.country;
+					// } catch (error) {
+					//     console.error('Error fetching country information:', error);
+					// }
+				},
+				(error) => {
+					console.error("Error getting geolocation:", error);
+				}
+			);
+		} else {
+			console.error("Geolocation is not supported in this browser.");
+		}
+	}
+
+	async function getClientIP() {
+		getGeolocation();
+	}
+
 	onMount(async () => {
 		let token = Cookies.get("token");
 		if (!token) {
 			//loginModalVisible = true;
 			goto("/");
 		}
+		getClientIP();
 		if ($page.url.pathname) {
 			if (token) {
 				canLogin = false;
@@ -290,7 +326,6 @@
 
 		await getUserDetails();
 	});
-
 	// onDestroy(() => {
 	// 	document.removeEventListener("click", handleOutsideClick);
 	// });
