@@ -4,7 +4,7 @@
 	import { pendingMessageIdToRetry } from "$lib/stores/pendingMessageIdToRetry";
 	import { onMount } from "svelte";
 	import { page } from "$app/stores";
-	import { invalidate } from "$app/navigation";
+	import { invalidate, invalidateAll } from "$app/navigation";
 	import { base } from "$app/paths";
 	import { shareConversation } from "$lib/shareConversation";
 	import { UrlDependency } from "$lib/types/UrlDependency";
@@ -121,7 +121,7 @@
 								reader.cancel();
 								loading = false;
 								pending = false;
-								invalidate(UrlDependency.Conversation);
+								invalidateAll();
 							} else if (update.type === "stream") {
 								pending = false;
 

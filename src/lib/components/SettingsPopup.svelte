@@ -541,7 +541,7 @@
 							<p class="section-header">Change password</p>
 							<p class="description">
 								If you no longer want to use ImmiGPT, You can permanently delete your account. You
-								don’t undo this action
+								can’t undo this action
 							</p>
 							<div>
 								<PasswordInput
@@ -596,7 +596,7 @@
 							<p class="section-header">Delete Account</p>
 							<p class="description">
 								If you no longer want to use ImmiGPT, You can permanently delete your account. You
-								don’t undo this action
+								can’t undo this action
 							</p>
 							<Button
 								variant="outline"
@@ -615,7 +615,7 @@
 							<div class="modal-body">
 								<p class="description">
 									If you no longer want to use ImmiGPT, You can permanently delete your account. You
-									don’t undo this action
+									can’t undo this action
 								</p>
 								<div class="buttons-wrapper">
 									<!-- <button class="button black" on:click={deleteAccount}
@@ -641,7 +641,7 @@
 							<!-- <p class="title">Are you sure you want to delete your account?</p> -->
 							<div class="modal-body">
 								<p class="description">
-									All your conversations will be permanently deleted from your account. You don’t
+									All your conversations will be permanently deleted from your account. You can’t
 									undo this action
 								</p>
 								<div class="buttons-wrapper">

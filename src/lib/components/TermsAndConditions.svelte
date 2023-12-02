@@ -8,10 +8,10 @@
 	<div class="section">
 		<p class="section-title">Agreement between User and ImmiGPT</p>
 		<p class="description">
-			Welcome to immigpt.net. The immigpt.net website (the "Site") is comprised of various web pages
+			Welcome to immigpt.ai. The immigpt.ai website is comprised of various web pages
 			operated by Cloud Revolute Inc ("Cloud revolute"). immigpt.net is offered to you conditioned
 			on your acceptance without modification of the terms, conditions, and notices contained herein
-			(the "Terms"). Your use of immigpt.net constitutes your agreement to all such Terms. Please
+			(the "Terms"). Your use of immigpt.ai constitutes your agreement to all such Terms. Please
 			read these terms carefully, and keep a copy of them for your reference. immigpt.net is a Chat,
 			Advisory, Blog and Forum Site. immiGPT is the premier digital solution designed to simplify
 			and streamline your immigration and travel needs. Harnessing the power of AI, our platform
@@ -28,7 +28,7 @@
 	<div class="section">
 		<p class="section-title">Privacy</p>
 		<p class="description">
-			Your use of immigpt.net is subject to Cloud revolute's Privacy Policy. Please review our
+			Your use of immigpt.ai is subject to Cloud revolute's Privacy Policy. Please review our
 			Privacy Policy, which also governs the Site and informs users of our data collection
 			practices.
 		</p>
@@ -37,7 +37,7 @@
 	<div class="section">
 		<p class="section-title">Electronic Communication</p>
 		<p class="description">
-			Visiting immigpt.net or sending emails to Cloud revolute constitutes electronic
+			Visiting immigpt.ai or sending emails to Cloud revolute constitutes electronic
 			communications. You consent to receive electronic communications and you agree that all
 			agreements, notices, disclosures and other communications that we provide to you
 			electronically, via email and on the Site, satisfy any legal requirement that such
