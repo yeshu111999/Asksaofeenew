@@ -201,6 +201,7 @@
 
 <style>
 	.solidBootomWrap {
+		background-color: rgb(255, 255, 255);
 		background-color: var(--secondary-background-color);
 	}
 </style>

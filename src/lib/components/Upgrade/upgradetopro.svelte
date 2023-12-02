@@ -98,10 +98,8 @@
 					<p>Pro</p>
 					<p class="description-amount">$10/Month</p>
 					<div class="plan-button">
-						<Button fullSize style="background-color:var(--primary-btn-color);"
-								>Coming Soon</Button
-							>						
-							<!-- <form bind:this={upgradeForm} method="POST" action="?/checkout">
+						<Button fullSize style="background-color:var(--primary-btn-color);">Coming Soon</Button>
+						<!-- <form bind:this={upgradeForm} method="POST" action="?/checkout">
 							<input type="hidden" name="price-id" value="price_1OELxvLDxrOrP8vt6aoIyZxU" />
 							<Button fullSize style="background-color:var(--primary-btn-color);"
 								>Upgrade Plan</Button
@@ -256,5 +254,11 @@
 	}
 	.tick-gap {
 		margin-right: 8px;
+	}
+
+	@media (max-width: 768px) {
+		.popup {
+			width: 100%;
+		}
 	}
 </style>
