@@ -72,7 +72,7 @@
 		// if (token) {
 		// 	goto("/home");
 		// }
-		googleTranslateElementInit();
+		//googleTranslateElementInit();
 	});
 </script>
 
