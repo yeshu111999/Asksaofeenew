@@ -294,6 +294,7 @@
 <div class="top-navbar">
 	<div class="ham">
 		<Burger
+			size="sm"
 			opened={menuToggleFlag}
 			color={$currentTheme == "light" ? "#222" : "#fff"}
 			on:click={() => {
@@ -304,7 +305,7 @@
 	</div>
 	<button class="logoWrap" on:click={gotoHome}>
 		{#if $currentTheme == "light"}
-			<img src="/assets/images/statue-liberty.jpg" width="40px" />
+			<img class="logoImage" src="/assets/images/statue-liberty.jpg" width="40px" />
 			<!-- {:else}
 			<img src="/assets/images/logo.svg" width="25px" /> -->
 		{/if}
@@ -312,7 +313,14 @@
 	</button>
 	<div class="user-profile">
 		<div class="dropdown">
-			<button class="dropbtn">Language</button>
+			<button class="upgrade-btn">
+				<img
+					width="30px"
+					style="min-width: 30px;"
+					src="/assets/icons/language-translator-icon.svg"
+					alt=""
+				/>
+			</button>
 			<div class="dropdown-content">
 				<div id="google_translate_element" />
 			</div>
@@ -340,6 +348,28 @@
 					</svg>
 
 					Upgrade to Pro
+				</button>
+			</div>
+			<div class="button-wrapper-mobile">
+				<button class="upgrade-btn" on:click={toggleUpgardetoProPopup}>
+					<svg
+						width="20"
+						height="20"
+						viewBox="0 0 20 20"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							fill-rule="evenodd"
+							clip-rule="evenodd"
+							d="M10.8059 2.5L3.95837 11.6667H10L9.19421 17.5L16.0417 8.33333H10L10.8059 2.5Z"
+							stroke="#fff"
+							stroke-opacity="0.87"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>Pro
 				</button>
 			</div>
 		{/if}
@@ -842,6 +872,9 @@
 	.button-wrapper {
 		padding: 0 20px 0 20px;
 	}
+	.button-wrapper-mobile {
+		display: none;
+	}
 
 	.upgrade-btn {
 		display: flex;
@@ -957,7 +990,7 @@
 
 	.logoWrap {
 		display: flex;
-		gap: 8px;
+		gap: 4px;
 		justify-content: center;
 		align-items: center;
 		border: none;
@@ -997,6 +1030,8 @@
 		min-width: 160px;
 		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 		z-index: 2000;
+		padding: 8px;
+		border-radius: 8px;
 	}
 
 	.dropdown:hover .dropdown-content {
@@ -1005,6 +1040,31 @@
 
 	@media screen and (max-width: 786px) {
 		.left-menu {
+			display: none;
+		}
+
+		.upgrade-btn {
+			display: flex;
+			width: 100%;
+			padding: 6px 10px;
+			justify-content: center;
+			align-items: center;
+			gap: 8px;
+			border-radius: 8px;
+			background: var(--primary-btn-color);
+			color: var(--primary-btn-text-color, white);
+		}
+
+		.title {
+			color: var(--primary-text-color);
+			font-family: Inter;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: normal;
+		}
+
+		.logoImage {
 			display: none;
 		}
 
@@ -1023,6 +1083,9 @@
 		}
 		.button-wrapper {
 			display: none;
+		}
+		.button-wrapper-mobile {
+			display: block;
 		}
 
 		.ham {
