@@ -119,7 +119,7 @@
 						responses to your Travel and Immigration concerns.
 					</div>
 					<button on:click={() => (loginModalOpen = true)} class="getStartedBtn"
-						><span style="color: #5454F0 !important;">Get Started It’s Free</span></button
+						><span style="color: #5454F0 !important;">Get Started</span></button
 					>
 					<div class="freePlanWrap">
 						<div class="freeIconWrap">
