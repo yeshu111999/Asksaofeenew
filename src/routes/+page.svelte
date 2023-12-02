@@ -112,7 +112,7 @@
 			<div class="landImageWrap">
 				<!-- <img style="" src="/assets/images/heroimmi.png" alt="hero" /> -->
 				<div class="landStartContentWrap">
-					<div class="landPgStartTitle1">A Generative AI </div>
+					<div class="landPgStartTitle1">A Generative AI</div>
 					<div class="landPgStartTitle2">For Immigration and Travel</div>
 					<div class="landPgStartDesc">
 						ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
@@ -1538,6 +1538,21 @@
 			justify-content: center;
 			gap: 8px;
 			align-items: center;
+		}
+
+		.landImageWrap {
+			/* margin-top: 90px; */
+			/* object-fit: cover; */
+			min-height: 100vh;
+			padding: 0;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+				url("/assets/images/heroimmi.png");
+			background-repeat: no-repeat, repeat;
+			background-size: cover;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			background-position: center;
 		}
 
 		.authBtnWrap2 {
