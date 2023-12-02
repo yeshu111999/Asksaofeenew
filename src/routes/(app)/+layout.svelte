@@ -596,6 +596,7 @@
 	showTemplatesPopup={showBrowseTemplatesPopup}
 	on:closeTemplatesPopup={toggleBrowseTemplatesPopup}
 	on:closeBurger={closeBurger}
+	on:upgradeToPro={toggleUpgardetoProPopup}
 />
 <Upgradetopro
 	showTemplatesPopup={showUpgradetoProPopup}
