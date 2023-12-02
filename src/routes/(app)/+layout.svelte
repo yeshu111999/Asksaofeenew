@@ -223,6 +223,7 @@
 	let userName;
 	let userMail;
 	let profileImg;
+	let proUser = false;
 
 	let themeVariable = $currentTheme;
 
@@ -254,6 +255,7 @@
 			if (response.ok) {
 				const userData = await response.json();
 				console.log("user data", userData);
+				proUser = userData.proUser;
 			} else {
 				const err = await response.text();
 				console.log("Error fetching user details: " + err);
@@ -263,7 +265,7 @@
 		}
 	};
 
-	onMount(() => {
+	onMount(async () => {
 		let token = Cookies.get("token");
 		if (!token) {
 			//loginModalVisible = true;
@@ -285,6 +287,8 @@
 				}
 			}
 		}
+
+		await getUserDetails();
 	});
 
 	// onDestroy(() => {
@@ -392,6 +396,7 @@
 		{menuToggleFlag}
 		on:hamClick={() => (menuToggleFlag = !menuToggleFlag)}
 		on:logoutClick={() => (logoutConfirmationModal = !logoutConfirmationModal)}
+		{proUser}
 	/>
 
 	<div class="navbar-body">

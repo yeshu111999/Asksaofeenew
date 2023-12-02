@@ -139,11 +139,11 @@
 				}
 			}, 600);
 		}
-		if (contentEditableDiv) {
-			contentEditableDiv.focus();
-			document.execCommand("selectAll", false, null);
-			document.getSelection().collapseToEnd();
-		}
+		// if (contentEditableDiv) {
+		// 	contentEditableDiv.focus();
+		// 	document.execCommand("selectAll", false, null);
+		// 	document.getSelection().collapseToEnd();
+		// }
 	});
 
 	let templeRef = 1;
