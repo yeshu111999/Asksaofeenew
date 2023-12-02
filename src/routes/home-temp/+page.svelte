@@ -61,7 +61,7 @@
 						>Try now</Button
 					>
 				</div> -->
-				<Button color="dark" radius="xl" size="lg">Get Started It’s Free</Button>
+				<Button color="dark" radius="xl" size="lg">Get Started</Button>
 				<div class="freePlanWrap">
 					<div class="freeIconWrap">
 						<svg

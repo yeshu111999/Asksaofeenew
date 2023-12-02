@@ -139,11 +139,11 @@
 				}
 			}, 600);
 		}
-		if (contentEditableDiv) {
-			contentEditableDiv.focus();
-			document.execCommand("selectAll", false, null);
-			document.getSelection().collapseToEnd();
-		}
+		// if (contentEditableDiv) {
+		// 	contentEditableDiv.focus();
+		// 	document.execCommand("selectAll", false, null);
+		// 	document.getSelection().collapseToEnd();
+		// }
 	});
 
 	let templeRef = 1;
@@ -223,7 +223,7 @@
 		on:keypress={() => (isTapped = !isTapped)}
 	>
 		<div style="padding: 22px 0px 16px 16px; min-width: 32px; max-width: 32px">
-			<img alt="" src="https://huggingface.co/avatars/2edb18bd0206c16b433841a47f53fa8e.svg" />
+			<img alt="" src="/assets/images/statue-liberty.jpg" />
 		</div>
 		<!-- class="h-3 w-3 flex-none select-none rounded-full shadow-lg"
 			style="padding: 16px; width: 32px;" -->
