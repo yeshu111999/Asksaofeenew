@@ -59,7 +59,7 @@
 			Protecting your private information is our priority. This Statement of Privacy applies to
 			immiGPT, and Cloude Revolute Inc and governs data collection and usage. For the purposes of
 			this Privacy Policy, unless otherwise noted, all references to Cloude Revolute Inc include
-			immiGPT.net and Cloud Revolute. The Cloud Revolute application is a immiGPT is the premier
+			immiGPT.ai and Cloud Revolute. The Cloud Revolute application is a immiGPT is the premier
 			digital solution designed to simplify and streamline your immigration and travel needs.
 			Harnessing the power of AI, our platform offers personalized guidance on visa applications,
 			work and study opportunities abroad, family-sponsored visas, and more. Whether you're a
