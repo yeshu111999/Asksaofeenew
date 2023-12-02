@@ -200,6 +200,22 @@
 		google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
 	}
 
+	function closeMenu() {
+		console.log("closing menu");
+		//menuToggleFlag = false;
+		dispatch("closeMenu");
+	}
+
+	function handleBodyClick(event) {
+		const target = event.target;
+		const hamBurgerMenu = document.querySelector(".ham"); // Adjust this selector based on your actual HTML structure
+
+		// Check if the click is outside the hamburger menu
+		if (hamBurgerMenu && !hamBurgerMenu.contains(target)) {
+			closeMenu();
+		}
+	}
+
 	onMount(() => {
 		googleTranslateElementInit();
 		let token = Cookies.get("token");
@@ -221,6 +237,11 @@
 				}
 			}
 		}
+		document.body.addEventListener("click", handleBodyClick);
+
+		return () => {
+			document.body.removeEventListener("click", handleBodyClick);
+		};
 	});
 </script>
 

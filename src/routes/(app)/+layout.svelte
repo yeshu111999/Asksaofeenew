@@ -397,6 +397,7 @@
 		on:hamClick={() => (menuToggleFlag = !menuToggleFlag)}
 		on:logoutClick={() => (logoutConfirmationModal = !logoutConfirmationModal)}
 		{proUser}
+		on:closeMenu={() => (menuToggleFlag = false)}
 	/>
 
 	<div class="navbar-body">
