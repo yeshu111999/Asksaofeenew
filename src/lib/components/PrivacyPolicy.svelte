@@ -149,7 +149,7 @@
 			Cloud Revolute welcomes your questions or comments regarding this Statement of Privacy. If you
 			believe that Cloud Revolute has not adhered to this Statement, please contact Cloud Revolute
 			at: Cloude Revolute Inc 1800 valley view ln Farmers Branch, Texas 75234 Email Address:
-			iamk.swaroop@gmail.com Telephone number: 9727994702 Effective as of September 07, 2023
+			hello@immigpt.ai Telephone number: +1 9727994702 Effective as of September 07, 2023
 		</p>
 	</div>
 </div>
