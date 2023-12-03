@@ -55,7 +55,7 @@
 
 	async function onPayment() {
 		const apiUrl = "https://backend.immigpt.ai/planUpgrade";
-		let gauth = Cookies.get("gauth");
+		let gauth = Cookies.get("Google-Auth");
 
 		let requestOptions = {
 			method: "POST",
@@ -66,9 +66,10 @@
 				Authorization: "Bearer " + Cookies.get("token"),
 			},
 		};
-		if (gauth) {
+		console.log("request", requestOpt
 			requestOptions.headers["Google-Auth"] = "True";
 		}
+		console.log("request", requestOptions);
 
 		try {
 			const response = await fetch(apiUrl, requestOptions);
