@@ -7,8 +7,13 @@
 
 	let dispatch = createEventDispatcher();
 
-	let title = "";
-	let description = "";
+	let successTitle = "Plan Upgrade Successful 🥳";
+	let successDescription =
+		"You Enjoy premium features with ImmiGPT's PRO plan. Thanks for choosing the PRO experience";
+
+	let failureTitle = "Oops! Payment Failed ☹️";
+	let failureDescription =
+		"There seems to be an issue with processing our payment. Please check your payment details and try again";
 
 	function closePopup() {
 		showPopup = false;
@@ -19,19 +24,6 @@
 		showPopup = false;
 		dispatch("retryPayment");
 	}
-
-	onMount(() => {
-		console.log("payment popup called");
-		if (type == "success") {
-			title = "Plan Upgrade Successful 🥳";
-			description =
-				"YouEnjoy premium features with ImmiGPT's PRO plan. Thanks for choosing the PRO experience";
-		} else {
-			title = "Oops! Payment Failed ☹️";
-			description =
-				"There seems to be an issue with processing our payment. Please check your payment details and try again";
-		}
-	});
 </script>
 
 {#if showPopup}
@@ -50,8 +42,8 @@
 				</div>
 			</div>
 			<div class="body">
-				<p class="title">{title}</p>
-				<p class="description">{description}</p>
+				<p class="title">{type == "success" ? successTitle : failureTitle}</p>
+				<p class="description">{type == "failue" ? successDescription : failureDescription}</p>
 			</div>
 			<div class="footer">
 				{#if type == "success"}
