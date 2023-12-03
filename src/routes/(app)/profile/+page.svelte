@@ -121,7 +121,7 @@
 		let headers = {
 			Authorization: "Bearer " + Cookies.get("token"),
 		};
-		let gauth = Cookies.get("gauth");
+		let gauth = Cookies.get("Google-Auth");
 		if (gauth) {
 			headers["Google-Auth"] = "True";
 		}
