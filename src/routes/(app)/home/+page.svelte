@@ -66,7 +66,8 @@
 				Authorization: "Bearer " + Cookies.get("token"),
 			},
 		};
-		console.log("request", requestOpt
+		console.log("request", requestOptions);
+		if (gauth) {
 			requestOptions.headers["Google-Auth"] = "True";
 		}
 		console.log("request", requestOptions);
