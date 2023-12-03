@@ -20,10 +20,10 @@
 			<button on:click={showUpgradeToPro} class="use-template-btn"><p>Upgrade to unlock</p></button>
 		</div>
 	</div>
-	<!-- <div class="text-content">
+	<div class="text-content">
 		<p class="title">{resumeTitle}</p>
-		<p class="description">{resumeDescription}</p>
-	</div> -->
+		<!-- <p class="description">{resumeDescription}</p> -->
+	</div>
 </div>
 
 <style>

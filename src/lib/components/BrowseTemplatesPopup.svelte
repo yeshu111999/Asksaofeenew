@@ -485,16 +485,7 @@
 								: ""}
 						>
 							<div class="tabDetailsWrapInternal">
-								{#each activeTemplates as template, i}
-									<ResumeTemplate
-										on:selectedTemplate={selectedStudentTemplate}
-										index={i}
-										imageUrl={template.imageUrl[0]}
-										resumeTitle={template.resumeTitle}
-										resumeDescription={template.resumeDescription}
-									/>
-								{/each}
-								{#if activeTemplates.length == 2}
+								<!-- {#if activeTemplates.length == 2}
 									<DuplicateResumeTemplate
 										on:selectedTemplate={selectedStudentTemplate}
 										index={3}
@@ -503,6 +494,28 @@
 										resumeDescription={activeTemplates[0].resumeDescription}
 										on:upgradeToPro={showUpgradeToPro}
 									/>
+								{/if} -->
+								{#if activeTemplates[0].prompt}
+									{#each activeTemplates as template, i}
+										<ResumeTemplate
+											on:selectedTemplate={selectedStudentTemplate}
+											index={i}
+											imageUrl={template.imageUrl[0]}
+											resumeTitle={template.resumeTitle}
+											resumeDescription={template.resumeDescription}
+										/>
+									{/each}
+								{:else}
+									{#each activeTemplates as template, i}
+										<DuplicateResumeTemplate
+											on:selectedTemplate={selectedStudentTemplate}
+											index={i}
+											imageUrl={"/assets/images/templates/Student/SOPs/SOP Highlighting Academic Background.jpeg"}
+											resumeTitle={template.resumeTitle}
+											resumeDescription={template.resumeTitle}
+											on:upgradeToPro={showUpgradeToPro}
+										/>
+									{/each}
 								{/if}
 							</div>
 						</Tabs.Tab>
@@ -514,7 +527,7 @@
 								: ""}
 						>
 							<div class="tabDetailsWrapInternal">
-								{#each activeTemplates as template, i}
+								<!-- {#each activeTemplates as template, i}
 									<ResumeTemplate
 										on:selectedTemplate={selectedProfessionalTemplate}
 										index={i}
@@ -532,6 +545,28 @@
 										resumeDescription={activeTemplates[0].resumeDescription}
 										on:upgradeToPro={showUpgradeToPro}
 									/>
+								{/if} -->
+								{#if activeTemplates[0].prompt}
+									{#each activeTemplates as template, i}
+										<ResumeTemplate
+											on:selectedTemplate={selectedStudentTemplate}
+											index={i}
+											imageUrl={template.imageUrl[0]}
+											resumeTitle={template.resumeTitle}
+											resumeDescription={template.resumeDescription}
+										/>
+									{/each}
+								{:else}
+									{#each activeTemplates as template, i}
+										<DuplicateResumeTemplate
+											on:selectedTemplate={selectedStudentTemplate}
+											index={i}
+											imageUrl={"/assets/images/templates/Student/SOPs/SOP Highlighting Academic Background.jpeg"}
+											resumeTitle={template.resumeTitle}
+											resumeDescription={template.resumeTitle}
+											on:upgradeToPro={showUpgradeToPro}
+										/>
+									{/each}
 								{/if}
 							</div>
 						</Tabs.Tab>
@@ -543,7 +578,7 @@
 								: ""}
 						>
 							<div class="tabDetailsWrapInternal">
-								{#each activeTemplates as template, i}
+								<!-- {#each activeTemplates as template, i}
 									<ResumeTemplate
 										on:selectedTemplate={selectedTouristsTemplate}
 										index={i}
@@ -561,6 +596,28 @@
 										resumeDescription={activeTemplates[0].resumeDescription}
 										on:upgradeToPro={showUpgradeToPro}
 									/>
+								{/if} -->
+								{#if activeTemplates[0].prompt}
+									{#each activeTemplates as template, i}
+										<ResumeTemplate
+											on:selectedTemplate={selectedStudentTemplate}
+											index={i}
+											imageUrl={template.imageUrl[0]}
+											resumeTitle={template.resumeTitle}
+											resumeDescription={template.resumeDescription}
+										/>
+									{/each}
+								{:else}
+									{#each activeTemplates as template, i}
+										<DuplicateResumeTemplate
+											on:selectedTemplate={selectedStudentTemplate}
+											index={i}
+											imageUrl={"/assets/images/templates/Student/SOPs/SOP Highlighting Academic Background.jpeg"}
+											resumeTitle={template.resumeTitle}
+											resumeDescription={template.resumeTitle}
+											on:upgradeToPro={showUpgradeToPro}
+										/>
+									{/each}
 								{/if}
 							</div>
 						</Tabs.Tab>
