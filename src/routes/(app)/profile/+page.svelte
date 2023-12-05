@@ -96,7 +96,7 @@
 			headers.append("Google-Auth", "True");
 		}
 		let response = await axios
-			.get("https://backend.immigpt.net/getUserProfile", { headers: headers })
+			.get("https://backend.immigpt.ai/getUserProfile", { headers: headers })
 			.then((response) => {
 				// console.log("response", response);
 				(name = response.data.username),
@@ -138,7 +138,7 @@
 		let config = {
 			method: "post",
 			maxBodyLength: Infinity,
-			url: "https://backend.immigpt.net/updateUserProfile",
+			url: "https://backend.immigpt.ai/updateUserProfile",
 			headers: headers,
 			data: data,
 		};
@@ -216,7 +216,7 @@
 				email: email,
 				username: name,
 			};
-			await fetch("https://backend.immigpt.net/updateUserProfile", {
+			await fetch("https://backend.immigpt.ai/updateUserProfile", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -241,7 +241,7 @@
 				newPassword: newPassword,
 				oldPassword: oldPassword,
 			};
-			await fetch("https://backend.immigpt.net/updatePassword", {
+			await fetch("https://backend.immigpt.ai/updatePassword", {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",

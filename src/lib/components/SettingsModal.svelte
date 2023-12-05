@@ -36,7 +36,7 @@
 			headers["Google-Auth"] = "True";
 		}
 		axios
-			.post("https://backend.immigpt.net/deleteAccount", {}, { headers: headers })
+			.post("https://backend.immigpt.ai/deleteAccount", {}, { headers: headers })
 			.then((response: any) => {
 				console.log("response", response);
 			})

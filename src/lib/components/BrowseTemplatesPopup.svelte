@@ -336,14 +336,14 @@
 			Authorization: "Bearer " + Cookies.get("token"),
 		};
 		// axios
-		// 	.get("https://backend.immigpt.net/templates", {}, { headers: headers })
+		// 	.get("https://backend.immigpt.ai/templates", {}, { headers: headers })
 		// 	.then((response) => {
 		// 		templates = response.data.templates;
 		// 	})
 		// 	.catch((error) => {
 		// 		console.log("error", error);
 		// 	});
-		await fetch("https://backend.immigpt.net/templates", {
+		await fetch("https://backend.immigpt.ai/templates", {
 			method: "GET",
 			headers: {
 				Authorization: "Bearer " + Cookies.get("token"),

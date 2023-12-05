@@ -127,7 +127,7 @@
 		}
 
 		try {
-			const response = await fetch("https://backend.immigpt.net/getUserProfile", {
+			const response = await fetch("https://backend.immigpt.ai/getUserProfile", {
 				method: "GET",
 				headers: headers,
 			});
@@ -171,7 +171,7 @@
 		};
 
 		try {
-			const response = await fetch("https://backend.immigpt.net/updatePassword", config);
+			const response = await fetch("https://backend.immigpt.ai/updatePassword", config);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -233,7 +233,7 @@
 		};
 
 		try {
-			const response = await fetch("https://backend.immigpt.net/updateUserProfile", config);
+			const response = await fetch("https://backend.immigpt.ai/updateUserProfile", config);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -340,7 +340,7 @@
 		};
 
 		try {
-			const response = await fetch("https://backend.immigpt.net/deleteAccount", config);
+			const response = await fetch("https://backend.immigpt.ai/deleteAccount", config);
 
 			if (response.ok) {
 				openDeleteAccountPopup = false;

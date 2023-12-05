@@ -247,7 +247,7 @@
 		}
 
 		try {
-			const response = await fetch("https://backend.immigpt.net/getUserProfile", {
+			const response = await fetch("https://backend.immigpt.ai/getUserProfile", {
 				method: "GET",
 				headers: headers,
 			});

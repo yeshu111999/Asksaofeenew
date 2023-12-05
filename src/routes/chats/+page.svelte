@@ -155,7 +155,7 @@
 		if (gauth) {
 			headers["Google-Auth"] = "True";
 		}
-		await fetch("https://backend.immigpt.net/users/myContacts?length=100", {
+		await fetch("https://backend.immigpt.ai/users/myContacts?length=100", {
 			method: "GET",
 			headers: headers,
 		})
@@ -189,7 +189,7 @@
 			if (searchFriendsInput != "") {
 				console.log("search friends", searchFriendsInput);
 				await fetch(
-					`https://backend.immigpt.net/users/searchUsers?searchValue=${searchFriendsInput}&length=10`,
+					`https://backend.immigpt.ai/users/searchUsers?searchValue=${searchFriendsInput}&length=10`,
 					{
 						method: "GET",
 						headers: {
@@ -238,7 +238,7 @@
 			users: usersData,
 		};
 
-		await fetch(`https://backend.immigpt.net/users/sendFriendRequest`, {
+		await fetch(`https://backend.immigpt.ai/users/sendFriendRequest`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

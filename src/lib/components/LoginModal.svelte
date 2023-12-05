@@ -457,7 +457,7 @@
 			username: email,
 			password: "",
 		};
-		await fetch("https://backend.immigpt.net/signup?isGoogleSignIn=true", {
+		await fetch("https://backend.immigpt.ai/signup?isGoogleSignIn=true", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -503,7 +503,7 @@
 			isLoading = true; // Set loading flag while making the API call
 
 			// // Replace the URL with your API endpoint
-			// const response = await axios.post("https://backend.immigpt.net/login", {
+			// const response = await axios.post("https://backend.immigpt.ai/login", {
 			// 	// Replace this with the data you want to send in the POST request
 			// 	// For example, if you have a JSON payload, you can define it here
 			// 	email: emailId,
@@ -524,7 +524,7 @@
 				email: emailId,
 				password: password,
 			};
-			await fetch("https://backend.immigpt.net/login", {
+			await fetch("https://backend.immigpt.ai/login", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -618,7 +618,7 @@
 				username: firstName + " " + lastName,
 				phoneNumber: countryCode.split("(")[0].trim() + mobileNumber,
 			};
-			await fetch("https://backend.immigpt.net/signup", {
+			await fetch("https://backend.immigpt.ai/signup", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -674,7 +674,7 @@
 				phoneNumber:
 					countryCode.split(" ")[0].replace("(", "").replace(")", "").trim() + mobileNumber,
 			};
-			await fetch("https://backend.immigpt.net/generateOTP", {
+			await fetch("https://backend.immigpt.ai/generateOTP", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -738,7 +738,7 @@
 					countryCode.split(" ")[0].replace("(", "").replace(")", "").trim() + mobileNumber,
 				otp: otp,
 			};
-			await fetch("https://backend.immigpt.net/verifyOTP", {
+			await fetch("https://backend.immigpt.ai/verifyOTP", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -796,7 +796,7 @@
 		} else {
 			resetLoader = true;
 
-			await fetch("https://backend.immigpt.net/sendResetPasswordMail?email=" + fpEmailId, {
+			await fetch("https://backend.immigpt.ai/sendResetPasswordMail?email=" + fpEmailId, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

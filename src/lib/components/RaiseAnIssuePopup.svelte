@@ -24,7 +24,7 @@
 	}
 
 	async function submitContactForm() {
-		const apiUrl = "https://backend.immigpt.net/contactUs";
+		const apiUrl = "https://backend.immigpt.ai/contactUs";
 		const requestBody = {
 			issue: issue,
 			description: issueDescription,
