@@ -4,6 +4,7 @@
 
 	import { currentTheme } from "$lib/stores/themeStore";
 	import { retryPayment } from "$lib/stores/paymentStore";
+	import { goto } from "$app/navigation";
 
 	let dispatch = createEventDispatcher();
 	let retryValue = false;
@@ -46,6 +47,10 @@
 			handleUpgrade();
 			retryPayment.set(false); // Set the store value to false
 		}
+	}
+
+	function gotoPayment() {
+		goto("/home/payment");
 	}
 
 	onMount(() => {
@@ -99,12 +104,17 @@
 					<p class="description-amount">$10/Month</p>
 					<div class="plan-button">
 						<!-- <Button fullSize style="background-color:var(--primary-btn-color);">Coming Soon</Button> -->
-						<form bind:this={upgradeForm} method="POST" action="?/checkout">
+						<!-- <form bind:this={upgradeForm} method="POST" action="?/checkout">
 							<input type="hidden" name="price-id" value="price_1OELxvLDxrOrP8vt6aoIyZxU" />
 							<Button fullSize style="background-color:var(--primary-btn-color);"
 								>Upgrade Plan</Button
 							>
-						</form>
+						</form> -->
+						<Button
+							on:click={gotoPayment}
+							fullSize
+							style="background-color:var(--primary-btn-color);">Upgrade Plan</Button
+						>
 					</div>
 					<p>Plan includes:</p>
 					<div class="features">
