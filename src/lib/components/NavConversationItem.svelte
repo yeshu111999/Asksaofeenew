@@ -72,101 +72,109 @@
 	<!-- {#if conv.id === $page.params.id}
 		<img src="/assets/icons/search-icon-white.svg" alt="" />
 	{:else} -->
-	{#if $currentTheme == "light" || conv.id === $page.params.id}
-		<img src="/assets/icons/search-icon-black.svg" alt="" />
-	{:else}
-		<img src="/assets/icons/search-icon-white.svg" alt="" />
-	{/if}
-	<!-- {/if} -->
-	<!--{#if confirmDelete}
+	<div class="left-wrapper">
+		{#if $currentTheme == "light" || conv.id === $page.params.id}
+			<img src="/assets/icons/search-icon-black.svg" alt="" />
+		{:else}
+			<img src="/assets/icons/search-icon-white.svg" alt="" />
+		{/if}
+		<!-- {/if} -->
+		<!--{#if confirmDelete}
 		<span style="color:gray" class=""> Delete </span>
 	{/if}-->
-	{#if isEditing}
-		<input
-			style="width:130px"
-			type="text"
-			bind:value={conv.title}
-			bind:this={inputField}
-			on:input={() => focusInput()}
-			on:click|preventDefault={(e) => e.stopPropagation()}
-		/>
-		<button
-			type="button"
-			class="icon-button active"
-			title="save"
-			on:click|preventDefault={() => {
-				isEditing = false;
-				sessionName = inputField.value;
-				dispatch("editConversationTitle", { id: conv.id, title: inputField.value });
-			}}
-		>
-			<CarbonCheckmark class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
-		</button>
-		<button
-			type="button"
-			class="icon-button active"
-			title="Cancel"
-			on:click|preventDefault={() => {
-				isEditing = false;
-			}}
-		>
-			<CarbonClose class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
-		</button>
-	{:else}
-		<p>{conv.title}</p>
-	{/if}
-	{#if confirmDelete}
-		<button
-			type="button"
-			class="icon-button"
-			title="Confirm delete action"
-			on:click|preventDefault={() => {
-				confirmDelete = false;
-				dispatch("deleteConversation", conv.id);
-			}}
-		>
-			<CarbonCheckmark class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
-		</button>
-		<button
-			type="button"
-			class="icon-button"
-			title="Cancel delete action"
-			on:click|preventDefault={() => {
-				confirmDelete = false;
-			}}
-		>
-			<CarbonClose class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
-		</button>
-	{:else if !isEditing}
-		<button
-			type="button"
-			class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
-			title="Edit conversation title"
-			on:click={() => {
-				focusInput();
-			}}
-			on:click|preventDefault={editSessionName}
-		>
-			<!-- <CarbonEdit class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" /> -->
-			<img src="/assets/icons/edit-icon-black.svg" alt="" />
-		</button>
+		{#if isEditing}
+			<input
+				style="width:130px"
+				type="text"
+				bind:value={conv.title}
+				bind:this={inputField}
+				on:input={() => focusInput()}
+				on:click|preventDefault={(e) => e.stopPropagation()}
+			/>
+			<button
+				type="button"
+				class="icon-button active"
+				title="save"
+				on:click|preventDefault={() => {
+					isEditing = false;
+					sessionName = inputField.value;
+					dispatch("editConversationTitle", { id: conv.id, title: inputField.value });
+				}}
+			>
+				<CarbonCheckmark
+					class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+				/>
+			</button>
+			<button
+				type="button"
+				class="icon-button active"
+				title="Cancel"
+				on:click|preventDefault={() => {
+					isEditing = false;
+				}}
+			>
+				<CarbonClose class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
+			</button>
+		{:else}
+			<p>{conv.title}</p>
+		{/if}
+	</div>
+	<div class="right-wrapper">
+		{#if confirmDelete}
+			<button
+				type="button"
+				class="icon-button"
+				title="Confirm delete action"
+				on:click|preventDefault={() => {
+					confirmDelete = false;
+					dispatch("deleteConversation", conv.id);
+				}}
+			>
+				<CarbonCheckmark
+					class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+				/>
+			</button>
+			<button
+				type="button"
+				class="icon-button"
+				title="Cancel delete action"
+				on:click|preventDefault={() => {
+					confirmDelete = false;
+				}}
+			>
+				<CarbonClose class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" />
+			</button>
+		{:else if !isEditing}
+			<button
+				type="button"
+				class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
+				title="Edit conversation title"
+				on:click={() => {
+					focusInput();
+				}}
+				on:click|preventDefault={editSessionName}
+			>
+				<!-- <CarbonEdit class="text-xs text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" /> -->
+				<img src="/assets/icons/edit-icon-black.svg" alt="" />
+			</button>
 
-		<button
-			type="button"
-			class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
-			title="Delete conversation"
-			on:click|preventDefault={(event) => {
-				//if (event.shiftKey) {
-				dispatch("deleteConversation", conv.id);
-				//} else {
-				//	confirmDelete = true;
-				//}
-			}}
-		>
-			<!-- <CarbonTrashCan class="text-xs text-gray-400  hover:text-gray-500 dark:hover:text-gray-300" /> -->
-			<img src="/assets/icons/delete-icon-black.svg" alt="" />
-		</button>
-	{/if}
+			<button
+				type="button"
+				class="icon-button {conv.id === $page.params.id ? 'active' : ''}"
+				title="Delete conversation"
+				on:click|preventDefault={(event) => {
+					//if (event.shiftKey) {
+					dispatch("deleteConversation", conv.id);
+					//} else {
+					//	confirmDelete = true;
+					//}
+				}}
+			>
+				<!-- <CarbonTrashCan class="text-xs text-gray-400  hover:text-gray-500 dark:hover:text-gray-300" /> -->
+				<img src="/assets/icons/delete-icon-black.svg" alt="" />
+			</button>
+		{/if}
+	</div>
 </button>
 
 <!-- <a
@@ -245,7 +253,7 @@
 		width: 100%;
 		padding: 10px 16px;
 		align-items: center;
-		gap: 8px;
+		justify-content: space-between;
 	}
 
 	.recent-search-btn.active {
@@ -269,7 +277,8 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 1;
-		flex: 1 0 0;
+		/* flex: 1 0 0; */
+		text-align: left;
 	}
 
 	.icon-button {
@@ -278,5 +287,17 @@
 
 	.icon-button.active {
 		display: block;
+	}
+
+	.left-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.right-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 4px;
 	}
 </style>

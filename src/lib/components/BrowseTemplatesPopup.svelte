@@ -331,23 +331,17 @@
 		},
 	];
 	const getTemplates = async () => {
-		console.log("templates works", templates);
 		let headers = {
 			Authorization: "Bearer " + Cookies.get("token"),
 		};
-		// axios
-		// 	.get("https://backend.immigpt.ai/templates", {}, { headers: headers })
-		// 	.then((response) => {
-		// 		templates = response.data.templates;
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log("error", error);
-		// 	});
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers["Google-Auth"] = "True";
+		}
+		console.log("headers", headers);
 		await fetch("https://backend.immigpt.ai/templates", {
 			method: "GET",
-			headers: {
-				Authorization: "Bearer " + Cookies.get("token"),
-			},
+			headers: headers,
 		})
 			.then(async (response) => {
 				// templates = response.data.templates;

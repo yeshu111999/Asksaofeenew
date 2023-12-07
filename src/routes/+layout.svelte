@@ -23,7 +23,7 @@
 	import Analytics from "$lib/components/Analytics.svelte";
 
 	import { navigating } from "$app/stores";
-	import PageLoader from "$lib/components/PageLoader.svelte";
+	import PageSpinner from "$lib/components/PageSpinner.svelte";
 
 	export let data;
 
@@ -209,6 +209,9 @@
 		<LoginModal settings={data.settings} />
 	{/if} -->
 	<SvelteUIProvider>
+		{#if $navigating}
+			<PageSpinner />
+		{/if}
 		<slot />
 	</SvelteUIProvider>
 </div>
