@@ -54,7 +54,20 @@
 		(oldMobileNumber != mobileNumber && mobileNumber.length == 10);
 	$: showSavePwd = password.length > 4 && newPassword.length > 4 && password != newPassword;
 
-	let tabs = ["Profile Information", "Change Password", "Clear Chat", "Delete Account"];
+	let tabs = [
+		"Profile Information",
+		"Change Password",
+		"Clear Chat",
+		"Billing Info",
+		"Delete Account",
+	];
+
+	let tableData = [
+		{ col1: "Nov 1, 2023", col2: "$10", col3: "Card ending with 7081", col4: "Data 4" },
+		{ col1: "OCT 1, 2023", col2: "$10", col3: "Card ending with 7081", col4: "Data 8" },
+		{ col1: "SEP 1, 2023", col2: "$10", col3: "Card ending with 7081", col4: "Data 8" },
+		// Add more data as needed
+	];
 
 	function closePopup() {
 		dispatch("closeSettingsPopup");
@@ -70,6 +83,9 @@
 			scrollToSection("clear-convo");
 		}
 		if (activeTab == 3) {
+			scrollToSection("billing-info");
+		}
+		if (activeTab == 4) {
 			scrollToSection("delete-account");
 		}
 	}
@@ -591,6 +607,47 @@
 							>
 						</div>
 					</section>
+					<section id="billing-info">
+						<div class="section">
+							<p class="section-header">Current Plan</p>
+							<div class="pro-wrapper">
+								<div class="pro-left">
+									<p class="pro-title">PRO</p>
+									<p class="pro-description">
+										You will be charged an amount $10 on your next billing date on 17/12/23
+									</p>
+								</div>
+								<div class="pro-right">
+									<p class="pro-title end">$10/Month</p>
+									<p class="downgrade">Downgrade Plan</p>
+								</div>
+							</div>
+							<div class="billing-history">
+								<p class="pro-title">Billing History</p>
+								<table>
+									<thead>
+										<tr>
+											<th>BILLING DATE</th>
+											<th>AMOUNT</th>
+											<th>PAYMENT METHOD</th>
+											<th />
+										</tr>
+									</thead>
+									<tbody>
+										{#each tableData as row (row.col1)}
+											<tr>
+												<td>{row.col1}</td>
+												<td>{row.col2}</td>
+												<td>{row.col3}</td>
+												<td><button><img src="assets/icons/download-icon.svg" alt="" /></button></td
+												>
+											</tr>
+										{/each}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</section>
 					<section id="delete-account">
 						<div class="section">
 							<p class="section-header">Delete Account</p>
@@ -729,7 +786,7 @@
 	.right-body {
 		width: calc(100% - 177px);
 		overflow-y: auto;
-		max-height: calc(100% - 73px);
+		height: 100%;
 	}
 
 	.right-body::-webkit-scrollbar {
@@ -918,6 +975,43 @@
 		width: 100%;
 	}
 
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+	}
+
+	th,
+	td {
+		padding: 10px;
+		text-align: left;
+	}
+
+	th {
+		background-color: #f7f7f7;
+		color: #808080;
+
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+		text-transform: uppercase;
+	}
+
+	td {
+		color: rgba(0, 0, 0, 0.87);
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	tr:not(:last-child) {
+		border-bottom: 1px solid #e1e1e1;
+	}
+
 	.button {
 		display: flex;
 		padding: 12px 16px;
@@ -964,6 +1058,44 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+	}
+
+	.pro-wrapper {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #e1e1e1;
+	}
+
+	.pro-wrapper .pro-left {
+		max-width: 55%;
+	}
+
+	.pro-title {
+		font-weight: 600;
+	}
+
+	.pro-title.end {
+		text-align: end;
+	}
+
+	.downgrade {
+		text-align: end;
+		color: rgba(0, 55, 198, 0.87);
+
+		font-family: Inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+	}
+
+	.pro-left,
+	.pro-right {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
 	}
 
 	@media screen and (max-width: 786px) {

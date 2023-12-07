@@ -13,7 +13,7 @@
 	<meta property="og:title" content={PUBLIC_APP_NAME} />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="{PUBLIC_ORIGIN || $page.url.origin}{base}" />
-	<meta
+	<!-- <meta
 		property="og:image"
 		content="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/thumbnail.png"
 	/>
@@ -27,7 +27,7 @@
 		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/favicon.png"
 		type="image/png"
 	/>
-	<!-- Icon Support for iOS Bookmark Home Screen -->
+	
 	<link
 		rel="apple-touch-icon"
 		href="{PUBLIC_ORIGIN || $page.url.origin}{base}/{PUBLIC_APP_ASSETS}/touch-icon-ipad-retina.png"
@@ -46,7 +46,7 @@
 			$page.url.origin}{base}/{PUBLIC_APP_ASSETS}/touch-icon-iphone-retina.png"
 		sizes="180x180"
 		type="image/png"
-	/>
+	/> -->
 	<!-- <meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} /> -->
 	<meta name="color-scheme" content={$currentTheme == "light" ? "light" : "dark"} />
 	<link rel="stylesheet" href={`themes/${$currentTheme}.css`} />

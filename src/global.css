@@ -3,7 +3,7 @@
 	src: url("/fonts/Inter-Regular.ttf");
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 
 * {
 	font-family: "Inter";
@@ -38,7 +38,7 @@
 	color: #000 !important;
 }
 
-.svelteui-Button-root {
+.buttons-wrapper .svelteui-Button-root {
 	color: var(--use-template-btn-text-color);
 }
 
@@ -49,7 +49,6 @@
 .buttons-wrapper .svelteui-Button-root {
 	color: var(--primary-btn-color2);
 }
-
 
 .svelteui-Tabs-wrapper {
 	border-bottom: 2px solid var(--primary-border-color) !important;
