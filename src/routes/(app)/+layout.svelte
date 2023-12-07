@@ -42,8 +42,11 @@
 	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 	import { currentTheme } from "$lib/stores/themeStore";
 	import { retryPayment } from "$lib/stores/paymentStore";
+	import PageSpinner from "$lib/components/PageSpinner.svelte";
+	import { navigating } from "$app/stores";
 
 	export let data;
+	let loading = false;
 
 	let isNavOpen = false;
 	let isSettingsOpen = false;
@@ -196,6 +199,7 @@
 
 	onDestroy(() => {
 		clearTimeout(errorToastTimeout);
+		loading = false;
 	});
 
 	$: if ($error) onError();
@@ -301,6 +305,7 @@
 	}
 
 	onMount(async () => {
+		loading = true;
 		let token = Cookies.get("token");
 		if (!token) {
 			//loginModalVisible = true;
@@ -325,6 +330,7 @@
 		}
 
 		await getUserDetails();
+		loading = false;
 	});
 	// onDestroy(() => {
 	// 	document.removeEventListener("click", handleOutsideClick);
@@ -426,6 +432,9 @@
 </div> -->
 <Analytics />
 
+{#if loading || $navigating}
+	<PageSpinner />
+{/if}
 <div class="navbar-container">
 	<NavBar
 		{menuToggleFlag}
