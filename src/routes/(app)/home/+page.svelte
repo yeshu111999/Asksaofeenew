@@ -12,11 +12,12 @@
 	import PaymentPopup from "$lib/components/PaymentPopup.svelte";
 	import PageSpinner from "$lib/components/PageSpinner.svelte";
 	import { retryPayment } from "$lib/stores/paymentStore";
+	import { Modal, Loader } from "@svelteuidev/core";
 
 	export let data;
 	let showUpgrade = false;
 	let loading = false;
-	let isLoading = false;
+	let isLoading = true;
 	let showPaymentPopup = false;
 	let paymentType = "";
 	let sessionId = "";
@@ -40,7 +41,7 @@
 			paymentType = "failure";
 			showPaymentPopup = true;
 		}
-		isLoading = false;
+		setTimeout(() => (isLoading = false), 3000);
 	});
 
 	function retry() {
@@ -134,17 +135,37 @@
 	}
 </script>
 
-<ChatWindow
+{#if isLoading}
+	<PageSpinner />
+	<!-- <Modal centered opened={true} withCloseButton={false}>
+		<div style="display: flex; justify-content: center; width: 100%">
+			<Loader variant="bars" color="gray" />
+		</div>
+	</Modal> -->
+{:else if !isLoading}
+	<!-- <Modal opened={true}>
+		<PageSpinner />
+	</Modal> -->
+	<ChatWindow
+		on:message={(ev) => createConversation(ev.detail)}
+		{loading}
+		currentModel={findCurrentModel([...data.models, ...data.oldModels], data.settings.activeModel)}
+		models={data.models}
+		settings={data.settings}
+	/>
+{/if}
+
+<!-- <ChatWindow
 	on:message={(ev) => createConversation(ev.detail)}
 	{loading}
 	currentModel={findCurrentModel([...data.models, ...data.oldModels], data.settings.activeModel)}
 	models={data.models}
 	settings={data.settings}
-/>
+/> -->
 
-{#if isLoading}
+<!-- {#if isLoading}
 	<PageSpinner />
-{/if}
+{/if} -->
 <PaymentPopup
 	on:retryPayment={retry}
 	type={paymentType}
