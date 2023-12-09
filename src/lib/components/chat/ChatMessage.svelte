@@ -477,11 +477,12 @@
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
 							>
+								<!-- stroke="black" -->
 								<path
 									fill-rule="evenodd"
 									clip-rule="evenodd"
 									d="M5.293 15.619L15.619 5.293C16.009 4.903 16.642 4.903 17.032 5.293L18.708 6.969C19.098 7.359 19.098 7.992 18.708 8.382L8.381 18.707C8.194 18.895 7.94 19 7.675 19H5V16.325C5 16.06 5.105 15.806 5.293 15.619Z"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -489,7 +490,7 @@
 								/>
 								<path
 									d="M13.75 7.16L16.84 10.25"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -517,7 +518,7 @@
 							>
 								<path
 									d="M11.46 4.271C10.494 4.315 9.52101 4.524 8.58001 4.932C5.06301 6.458 3.16601 10.152 3.75601 13.771"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -525,7 +526,7 @@
 								/>
 								<path
 									d="M19.125 16.216C19.569 15.357 19.875 14.41 19.992 13.392C20.43 9.583 18.178 6.094 14.749 4.795"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -533,7 +534,7 @@
 								/>
 								<path
 									d="M8.88501 2.844L11.726 3.811L10.344 6.207"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -541,7 +542,7 @@
 								/>
 								<path
 									d="M21.6501 14.702L19.3921 16.679L18.0081 14.284"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -549,7 +550,7 @@
 								/>
 								<path
 									d="M4.99804 19.827L4.41504 16.883L7.18104 16.882"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
@@ -557,7 +558,7 @@
 								/>
 								<path
 									d="M4.94702 16.884C5.46902 17.699 6.13602 18.437 6.95902 19.047C10.039 21.33 14.187 21.126 17.026 18.805"
-									stroke="black"
+									stroke={$currentTheme == "light" ? "#222" : "#ddd"}
 									stroke-opacity="0.87"
 									stroke-width="1.5"
 									stroke-linecap="round"
