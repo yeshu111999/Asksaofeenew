@@ -3,7 +3,7 @@
 
 <div class="overlay">
 	<div class="popup">
-		<svg
+		<!-- <svg
 			version="1.1"
 			id="L4"
 			xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +41,8 @@
 					begin="0.3"
 				/>
 			</circle>
-		</svg>
-		<!-- <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
+		</svg> -->
+		<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
 			<rect width="72" height="72" rx="16" fill="#EEEEFF" />
 			<path
 				d="M36.0006 18V22.5002"
@@ -105,7 +105,7 @@
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			/>
-		</svg> -->
+		</svg>
 	</div>
 </div>
 
