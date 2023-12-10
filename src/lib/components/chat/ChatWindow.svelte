@@ -202,6 +202,6 @@
 <style>
 	.solidBootomWrap {
 		background-color: var(--secondary-background-color);
-		z-index: 19999;
+		z-index: 998;
 	}
 </style>

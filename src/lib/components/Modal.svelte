@@ -72,16 +72,17 @@
 		-ms-overflow-style: none;
 	}
 
-	.overlay, .popup-container {
+	.overlay,
+	.popup-container {
 		width: 100vw;
 		height: 100vh;
-		background-color: #DDDDDD;
+		background-color: #dddddd;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		overflow: hidden;
 		position: absolute;
 		top: 0;
-		z-index: 99;
+		z-index: 999;
 	}
 </style>
