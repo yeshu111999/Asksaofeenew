@@ -543,7 +543,7 @@
 								{#if activeTemplates[0].prompt}
 									{#each activeTemplates as template, i}
 										<ResumeTemplate
-											on:selectedTemplate={selectedStudentTemplate}
+											on:selectedTemplate={selectedProfessionalTemplate}
 											index={i}
 											imageUrl={template.imageUrl[0]}
 											resumeTitle={template.resumeTitle}
@@ -553,7 +553,7 @@
 								{:else}
 									{#each activeTemplates as template, i}
 										<DuplicateResumeTemplate
-											on:selectedTemplate={selectedStudentTemplate}
+											on:selectedTemplate={selectedProfessionalTemplate}
 											index={i}
 											imageUrl={"/assets/images/templates/Student/SOPs/SOP Highlighting Academic Background.jpeg"}
 											resumeTitle={template.resumeTitle}
@@ -594,7 +594,7 @@
 								{#if activeTemplates[0].prompt}
 									{#each activeTemplates as template, i}
 										<ResumeTemplate
-											on:selectedTemplate={selectedStudentTemplate}
+											on:selectedTemplate={selectedTouristsTemplate}
 											index={i}
 											imageUrl={template.imageUrl[0]}
 											resumeTitle={template.resumeTitle}
@@ -604,7 +604,7 @@
 								{:else}
 									{#each activeTemplates as template, i}
 										<DuplicateResumeTemplate
-											on:selectedTemplate={selectedStudentTemplate}
+											on:selectedTemplate={selectedTouristsTemplate}
 											index={i}
 											imageUrl={"/assets/images/templates/Student/SOPs/SOP Highlighting Academic Background.jpeg"}
 											resumeTitle={template.resumeTitle}
@@ -746,7 +746,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 20;
+		z-index: 1000;
 		opacity: 1;
 	}
 

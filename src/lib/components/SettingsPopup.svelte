@@ -731,7 +731,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 20;
+		z-index: 1000;
 		opacity: 1;
 	}
 
