@@ -107,7 +107,7 @@
 					<span class="tabDetailsSubTitle">Student</span>
 					<span class="tabDetailsDescription">
 						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
-						through our AI model for student visa requirements worldwide
+						through our AI model for student visa requirements worldwide.
 					</span>
 				</div>
 				<!-- <Divider /> -->
@@ -125,7 +125,7 @@
 					<span class="tabDetailsSubTitle">Professionals</span>
 					<span class="tabDetailsDescription">
 						ImmiGPT offers detailed guidance on work visa options, eligibility, and application
-						processes like US H1B for over 10 countries
+						processes like US H1B for over 10 countries.
 					</span>
 				</div>
 				<!-- <Divider /> -->
@@ -151,7 +151,7 @@
 					<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
 					<span class="tabDetailsDescription">
 						Dallas is known for being the home base of the Dallas Cowboys, its delectable southern
-						cuisines, major global companies, and its vibrant art and music scene
+						cuisines, major global companies, and its vibrant art and music scene.
 					</span>
 				</div>
 			</div>
