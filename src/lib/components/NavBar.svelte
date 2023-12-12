@@ -1080,7 +1080,7 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
-			z-index: 10;
+			z-index: 1000;
 		}
 		.button-wrapper {
 			display: none;
