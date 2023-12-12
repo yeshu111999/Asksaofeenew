@@ -621,7 +621,7 @@
 				<ConfirmationModal
 					on:close={() => (logoutConfirmationModal = false)}
 					on:confirm={logOut}
-					confirmationText="Click confirm to logout"
+					confirmationText="Click confirm to Logout"
 				/>
 			{/if}
 			{#if deleteCoveConfirmationModal}
