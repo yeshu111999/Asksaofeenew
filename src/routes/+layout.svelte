@@ -210,9 +210,9 @@
 		<LoginModal settings={data.settings} />
 	{/if} -->
 	<SvelteUIProvider>
-		{#if $navigating}
+		<!-- {#if $navigating}
 			<PageSpinner />
-		{/if}
+		{/if} -->
 		<slot />
 	</SvelteUIProvider>
 </div>

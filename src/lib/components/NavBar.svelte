@@ -144,6 +144,7 @@
 	}
 
 	function openRaiseAnIssuePopup() {
+		showUpgardetoProPopup = false;
 		showRaiseAnIssuePopup = true;
 	}
 

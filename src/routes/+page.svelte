@@ -78,7 +78,12 @@
 
 <div class="landingPageWrap scrollbar-custom">
 	{#if loginModalOpen}
-		<LoginModal {showSignUp} {settings} on:close={() => closeLoginPopup} />
+		<LoginModal
+			{showSignUp}
+			{settings}
+			on:close={() => closeLoginPopup}
+			on:closeLoginPopup={closeLoginPopup}
+		/>
 	{/if}
 	<div class="landingPageWrapChild">
 		<div class="landBarWrap">
@@ -115,8 +120,8 @@
 					<div class="landPgStartTitle1">A Generative AI</div>
 					<div class="landPgStartTitle2">For Immigration and Travel</div>
 					<div class="landPgStartDesc">
-						ImmiGPT revolutionizes your journey with cutting-edge AI technology,providing instant
-						responses to your Travel and Immigration concerns.
+						ImmiGPT revolutionizes your journey with cutting-edge AI technology, providing instant
+						responses to your Immigration and Travel concerns.
 					</div>
 					<button on:click={() => (loginModalOpen = true)} class="getStartedBtn"
 						><span style="color: #5454F0 !important;">Get Started</span></button
@@ -341,20 +346,6 @@
 					</div>
 					<div class="featureMainCard">
 						<div class="featureMainCardFull">
-							<div class="featureMainTiltedTrouble">
-								<!-- <img src="/assets/images/tiltedpun.png" alt="" /> -->
-							</div>
-							<div class="featureTextTitle">Web Search Functionality</div>
-							<div class="featureTextDesc">
-								Enhance your search experience with our web search function, extracting precise and
-								organized responses directly from the web that are relevant to your queries. This
-								enables you to bypass the manual web scraping hassle, saving time and ensuring
-								accurate, up-to-date information tailored to your needs.
-							</div>
-						</div>
-					</div>
-					<div class="featureMainCard">
-						<div class="featureDetailCard">
 							<div class="featureIconWrap">
 								<svg
 									width="32"
@@ -401,6 +392,20 @@
 									empowering clients to navigate the complexities of immigration confidently and
 									achieve their goals without unnecessary stress or delay.
 								</div>
+							</div>
+						</div>
+					</div>
+					<div class="featureMainCard">
+						<div class="featureDetailCard">
+							<div class="featureMainTiltedTrouble">
+								<!-- <img src="/assets/images/tiltedpun.png" alt="" /> -->
+							</div>
+							<div class="featureTextTitle">Web Search Functionality</div>
+							<div class="featureTextDesc">
+								Enhance your search experience with our web search function, extracting precise and
+								organized responses directly from the web that are relevant to your queries. This
+								enables you to bypass the manual web scraping hassle, saving time and ensuring
+								accurate, up-to-date information tailored to your needs.
 							</div>
 						</div>
 						<div class="featureDetailCard">
@@ -481,7 +486,7 @@
 										stroke-linecap="round"
 										stroke-linejoin="round"
 									/>
-								</svg> Access to ImmiGPT Basic model
+								</svg> Access to ImmiGPT Basic Model
 							</div>
 							<div class="detailText">
 								<svg
@@ -498,24 +503,7 @@
 										stroke-linecap="round"
 										stroke-linejoin="round"
 									/>
-								</svg> Basic model updates
-							</div>
-							<div class="detailText">
-								<svg
-									width="16"
-									height="17"
-									viewBox="0 0 16 17"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M13.3333 4.83301L5.99996 12.1663L2.66663 8.83301"
-										stroke="#00B347"
-										stroke-width="1.5"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg> Access to templates
+								</svg> Access to Search Web Functionality
 							</div>
 							<div class="detailText">
 								<svg
@@ -533,6 +521,23 @@
 										stroke-linejoin="round"
 									/>
 								</svg> Access to Visa Preparation Centre
+							</div>
+							<div class="detailText">
+								<svg
+									width="16"
+									height="17"
+									viewBox="0 0 16 17"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M13.3333 4.83301L5.99996 12.1663L2.66663 8.83301"
+										stroke="#00B347"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg> Access to Immigration Help
 							</div>
 							<div class="detailText"><span style="color: #fff;">.</span></div>
 						</div>
@@ -582,24 +587,7 @@
 										stroke-linecap="round"
 										stroke-linejoin="round"
 									/>
-								</svg> Pro model updates
-							</div>
-							<div class="detailText">
-								<svg
-									width="16"
-									height="17"
-									viewBox="0 0 16 17"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M13.3333 4.83301L5.99996 12.1663L2.66663 8.83301"
-										stroke="#00B347"
-										stroke-width="1.5"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg> Access to templates
+								</svg> Access to Search Web Functionality
 							</div>
 							<div class="detailText">
 								<svg
@@ -633,7 +621,24 @@
 										stroke-linecap="round"
 										stroke-linejoin="round"
 									/>
-								</svg> Access Beta features
+								</svg> Access to Immigration Help
+							</div>
+							<div class="detailText">
+								<svg
+									width="16"
+									height="17"
+									viewBox="0 0 16 17"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M13.3333 4.83301L5.99996 12.1663L2.66663 8.83301"
+										stroke="#00B347"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg> Access to Templates
 							</div>
 						</div>
 						<!-- <Button fullSize color="dark" radius="md"
@@ -667,10 +672,10 @@
 		<div class="trySection">
 			<div class="tryWrap">
 				<div class="tryTextWrap">
-					<div class="tryTitle">Access your Travel Companion at pocket</div>
+					<div class="tryTitle">Access your Travel Companion, available right from your pocket</div>
 					<div class="tryDesc">
-						Find real time answers related to Travel and Immigration, Prepare and attempt mocks for
-						Visa interview, Compelling SOP assistance
+						Tailored for students, professionals, and tourists, ImmiGPT is your all-in-one solution
+						to Explore, Migrate and Thrive!
 					</div>
 					<div class="flexRow">
 						<div
@@ -1232,6 +1237,7 @@
 		backdrop-filter: blur(4px);
 		-webkit-backdrop-filter: blur(4px);
 		border-radius: 10px;
+		gap: 12px;
 	}
 
 	.featureIconWrap {

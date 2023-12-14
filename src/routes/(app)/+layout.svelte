@@ -188,6 +188,7 @@
 	}
 
 	function openRaiseAnIssuePopup() {
+		showUpgradetoProPopup = false;
 		showRaiseAnIssuePopup = true;
 	}
 
@@ -433,7 +434,7 @@
 </div> -->
 <Analytics />
 
-{#if loading || $navigating}
+{#if loading}
 	<PageSpinner />
 {/if}
 <div class="navbar-container">

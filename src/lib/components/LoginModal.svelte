@@ -18,12 +18,13 @@
 	let valueB = "";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import { afterUpdate, onMount } from "svelte";
+	import { afterUpdate, createEventDispatcher, onMount } from "svelte";
 	let responseData = ""; // Store the response data here
 	let isLoading = false;
 	let loginError = false;
 	export let showSignUp = false;
 	let showForgotPwd = false;
+	let dispatch = createEventDispatcher();
 
 	let emailId = "";
 	let fpEmailId = "";
@@ -836,6 +837,12 @@
 		}
 	});
 
+	function gotoHome() {
+		console.log("close login popup");
+		dispatch("closeLoginPopup");
+		goto("/");
+	}
+
 	afterUpdate(() => {
 		dropCon = document.querySelector(".country-code");
 	});
@@ -844,7 +851,11 @@
 <Modal>
 	<div class="wrapper">
 		<div class="header">
-			<p class="app-title">ImmiGPT</p>
+			<div class="app-title-top">
+				<button on:click={gotoHome}><img src="/assets/icons/back-icon-black.svg" alt="" /></button>
+				<p class="app-title">ImmiGPT</p>
+			</div>
+
 			{#if showSignUp && !showForgotPwd && !resetMailSent}
 				<p class="login-text">Create your account</p>
 				<p class="welcome-text">Enjoy benefits of ImmiGPT in seconds</p>
@@ -1550,6 +1561,13 @@
 		background-color: #fff !important;
 		border: 1px solid #605f5f;
 		color: #000;
+	}
+
+	.app-title-top {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		justify-content: center;
 	}
 
 	@media (max-width: 600px) {

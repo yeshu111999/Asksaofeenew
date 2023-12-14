@@ -48,6 +48,10 @@
 
 	let imageAccessFlag = false;
 
+	let isPro = false;
+	let subscriptionEndDate = "";
+	let paymentHistory = [];
+
 	$: showSaveOption =
 		oldFirstName != firstName ||
 		oldLastName != lastName ||
@@ -383,6 +387,98 @@
 		window.location.href = "/";
 	}
 
+	async function getBillingHistory() {
+		let headers = new Headers({
+			Authorization: "Bearer " + Cookies.get("token"),
+		});
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+
+		try {
+			const response = await fetch("https://backend.immigpt.ai/getPaymentHistory", {
+				method: "GET",
+				headers: headers,
+			});
+
+			if (response.ok) {
+				const userData = await response.json();
+				subscriptionEndDate = userData.subscriptionEndDate;
+				paymentHistory = userData.purchaseHistory;
+				console.log("billing details", userData);
+			} else {
+				const err = await response.text();
+				console.log("Error fetching payment details: " + err);
+			}
+		} catch (err) {
+			console.error("An error occurred:", err);
+		}
+	}
+	function convertDateFormat(inputDateString) {
+		// Create a Date object from the input string
+		var inputDate = new Date(inputDateString);
+
+		// Extract month, day, and year components
+		var monthNames = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+		var month = monthNames[inputDate.getMonth()];
+		var day = inputDate.getDate();
+		var year = inputDate.getFullYear();
+
+		// Format the date as "Mon DD, YYYY"
+		var formattedDate = month + " " + day + ", " + year;
+
+		return formattedDate;
+	}
+
+	function formatPurchaseAmount(purchaseAmount, currency) {
+		// Format the purchaseAmount based on the currency
+		var formattedAmount = "";
+
+		switch (currency) {
+			case "USD":
+				formattedAmount = "$" + purchaseAmount;
+				break;
+
+			case "INR":
+				formattedAmount = "₹" + purchaseAmount;
+				break;
+
+			case "EUR":
+				formattedAmount = "€" + purchaseAmount;
+				break;
+
+			case "GBP":
+				formattedAmount = "£" + purchaseAmount;
+				break;
+
+			case "JPY":
+				formattedAmount = "¥" + purchaseAmount;
+				break;
+
+			// Add more cases as needed for other currencies
+
+			default:
+				// Default to USD if the currency is not recognized
+				formattedAmount = "$" + purchaseAmount;
+		}
+
+		return formattedAmount;
+	}
+
 	onMount(() => {
 		token = Cookies.get("token");
 		if (token) {
@@ -407,6 +503,7 @@
 			}
 		}
 		getUserDetails();
+		getBillingHistory();
 	});
 	afterUpdate(() => {
 		isImageURL(profilePic, (flag) => (imageAccessFlag = flag));
@@ -611,41 +708,58 @@
 						<div class="section">
 							<p class="section-header">Current Plan</p>
 							<div class="pro-wrapper">
-								<div class="pro-left">
-									<p class="pro-title">PRO</p>
-									<p class="pro-description">
-										You will be charged an amount $10 on your next billing date on 17/12/23
-									</p>
-								</div>
-								<div class="pro-right">
-									<p class="pro-title end">$10/Month</p>
-									<p class="downgrade">Downgrade Plan</p>
-								</div>
+								{#if subscriptionEndDate}
+									<div class="pro-left">
+										<p class="pro-title">PRO</p>
+										<p class="pro-description">
+											You will be charged an amount $10 on your next billing date on {convertDateFormat(
+												subscriptionEndDate
+											)}
+										</p>
+									</div>
+									<div class="pro-right">
+										<p class="pro-title end">$10/Month</p>
+										<p class="downgrade">Downgrade Plan</p>
+									</div>
+								{:else}
+									<div class="pro-left">
+										<p class="pro-title">Basic</p>
+										<p class="pro-description">Upgrade to pro to unlock exciting features</p>
+									</div>
+									<div class="pro-right">
+										<p class="pro-title end">$10/Month</p>
+										<p class="downgrade">Upgrade Plan</p>
+									</div>
+								{/if}
 							</div>
-							<div class="billing-history">
-								<p class="pro-title">Billing History</p>
-								<table>
-									<thead>
-										<tr>
-											<th>BILLING DATE</th>
-											<th>AMOUNT</th>
-											<th>PAYMENT METHOD</th>
-											<th />
-										</tr>
-									</thead>
-									<tbody>
-										{#each tableData as row (row.col1)}
+							{#if paymentHistory?.length > 0}
+								<div class="billing-history">
+									<p class="pro-title">Billing History</p>
+									<table>
+										<thead>
 											<tr>
-												<td>{row.col1}</td>
-												<td>{row.col2}</td>
-												<td>{row.col3}</td>
-												<td><button><img src="assets/icons/download-icon.svg" alt="" /></button></td
-												>
+												<th>BILLING DATE</th>
+												<th>AMOUNT</th>
+												<!-- <th>PAYMENT METHOD</th> -->
+												<th />
 											</tr>
-										{/each}
-									</tbody>
-								</table>
-							</div>
+										</thead>
+										<tbody>
+											{#each paymentHistory as data (data.purchaseDate)}
+												<tr>
+													<td>{convertDateFormat(data.purchaseDate)}</td>
+													<td>{formatPurchaseAmount(data.purchaseAmount, data.currency)}</td>
+													<!-- <td>{row.col3}</td> -->
+													<td
+														><button><img src="assets/icons/download-icon.svg" alt="" /></button
+														></td
+													>
+												</tr>
+											{/each}
+										</tbody>
+									</table>
+								</div>
+							{/if}
 						</div>
 					</section>
 					<section id="delete-account">
