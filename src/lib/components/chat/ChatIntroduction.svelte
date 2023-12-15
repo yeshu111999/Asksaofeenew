@@ -90,7 +90,7 @@
 			<!-- <p class="text-base text-gray-600 dark:text-gray-400">
 				<strong>Generative AI for Immigration & Travel</strong>
 			</p> -->
-			<span class="appTitle">How can i assist you?</span>
+			<span class="appTitle">How Can I Assist You?</span>
 		</div>
 	</div>
 	<div
