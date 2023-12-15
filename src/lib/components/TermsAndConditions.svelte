@@ -9,10 +9,10 @@
 		<p class="section-title">Agreement between User and ImmiGPT</p>
 		<p class="description">
 			Welcome to immigpt.ai. The immigpt.ai website is comprised of various web pages
-			operated by Cloud Revolute Inc ("Cloud revolute"). immigpt.net is offered to you conditioned
+			operated by Cloud Revolute Inc ("Cloud revolute"). immigpt.ai is offered to you conditioned
 			on your acceptance without modification of the terms, conditions, and notices contained herein
 			(the "Terms"). Your use of immigpt.ai constitutes your agreement to all such Terms. Please
-			read these terms carefully, and keep a copy of them for your reference. immigpt.net is a Chat,
+			read these terms carefully, and keep a copy of them for your reference. immigpt.ai is a Chat,
 			Advisory, Blog and Forum Site. immiGPT is the premier digital solution designed to simplify
 			and streamline your immigration and travel needs. Harnessing the power of AI, our platform
 			offers personalized guidance on visa applications, work and study opportunities abroad,

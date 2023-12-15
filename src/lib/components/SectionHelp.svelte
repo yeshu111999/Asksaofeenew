@@ -8,7 +8,7 @@
 			<p class="title">Help & Support</p>
 			<p>
 				Navigating through immigration processes can sometimes be overwhelming, but with
-				immiGPT.net, you're never alone. Here's how we're equipped to assist you:
+				immiGPT.ai, you're never alone. Here's how we're equipped to assist you:
 			</p>
 			<ul>
 				<li>
@@ -23,7 +23,7 @@
 				<li>
 					<strong>Email Support:</strong> Can't find an answer in our FAQs? Our dedicated support
 					team is just an email away. Drop us a message at
-					<a href="mailto:hello@immiGPT.net">hello@immiGPT.net</a> with your queries, and we promise
+					<a href="mailto:hello@immiGPT.ai">hello@immiGPT.ai</a> with your queries, and we promise
 					a swift response.
 				</li>
 				<li>
@@ -38,7 +38,7 @@
 				</li>
 			</ul>
 			<p>
-				Remember, at <strong>immiGPT.net</strong>, our primary goal is to provide a seamless,
+				Remember, at <strong>immiGPT.ai</strong>, our primary goal is to provide a seamless,
 				informative, and supportive experience for all our users. We're here to help, guide, and
 				ensure your journey with us is nothing short of excellent.
 			</p>

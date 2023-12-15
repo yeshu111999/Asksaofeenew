@@ -51,7 +51,7 @@
 	<div class="section">
 		<p class="section-title">Electronic Communication</p>
 		<p class="description">
-			Visiting immigpt.net or sending emails to Cloud revolute constitutes electronic
+			Visiting immigpt.ai or sending emails to Cloud revolute constitutes electronic
 			communications. You consent to receive electronic communications and you agree that all
 			agreements, notices, disclosures and other communications that we provide to you
 			electronically, via email and on the Site, satisfy any legal requirement that such

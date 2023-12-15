@@ -33,7 +33,7 @@
 				Enter immiGPT – your personal AI guide, crafted to simplify the maze that is immigration.
 				With immiGPT, you're not just accessing a website; you're gaining a companion dedicated to
 				making your immigration journey as seamless as possible. Through the platform of
-				immiGPT.net, we bring clarity, precision, and simplicity to what can often feel like an
+				immiGPT.ai, we bring clarity, precision, and simplicity to what can often feel like an
 				overwhelming process.
 			</p>
 			<p>
@@ -74,14 +74,14 @@
 		<section>
 			<ul><li><p class="header">How immiGPT Works</p></li></ul>
 			<p>
-				Navigating immiGPT.net is a breeze. Begin by entering your immigration goals and watch as
+				Navigating immiGPT.ai is a breeze. Begin by entering your immigration goals and watch as
 				our advanced AI provides you with a tailored roadmap. And if you're on the go? Don't worry!
 				The immiGPT app ensures you have assistance, anytime, anywhere.
 			</p>
 			<p>Embarking on your immigration journey with immiGPT is as easy as 1-2-3:</p>
 			<ul>
 				<li>
-					<strong>Define Your Goal:</strong> Visit immiGPT.net and input your immigration aspirations,
+					<strong>Define Your Goal:</strong> Visit immiGPT.ai and input your immigration aspirations,
 					whether it's work, study, or family-related.
 				</li>
 				<li>
@@ -180,7 +180,7 @@
 				this vast ocean of data to find reliable and actionable advice.
 			</p>
 			<p>
-				immiGPT.net stands out as a beacon in this digital maze. Instead of overwhelming users with
+				immiGPT.ai stands out as a beacon in this digital maze. Instead of overwhelming users with
 				redundant or outdated information, immiGPT filters and tailors the content to cater to
 				individual needs. Our AI-driven platform ensures that when you search for insights or
 				require guidance on immigration topics, you receive precise, accurate, and timely advice.
@@ -188,7 +188,7 @@
 			<p>
 				In essence, as the digital realm becomes increasingly saturated with information, it becomes
 				imperative to find trusted sources that can guide one's immigration journey effectively.
-				immiGPT.net positions itself as that trusted ally, ensuring that the path to new
+				immiGPT.ai positions itself as that trusted ally, ensuring that the path to new
 				opportunities and dreams remains clear and accessible.
 			</p>
 		</section>

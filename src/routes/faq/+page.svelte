@@ -25,7 +25,7 @@
 		{
 			title: "Email & Support",
 			description:
-				"Can't find an answer in our FAQs? Our dedicated support team is just an email away. Drop us a message at hello@immiGPT.net with your queries, and we promise a swift response.",
+				"Can't find an answer in our FAQs? Our dedicated support team is just an email away. Drop us a message at hello@immiGPT.ai with your queries, and we promise a swift response.",
 		},
 		{
 			title: "Technical Issues",
@@ -308,7 +308,7 @@
 				<span class="faqTitle">Help Centre</span>
 				<p class="faqDesc">
 					Navigating through immigration processes can sometimes be overwhelming, but with
-					immiGPT.net, you're never alone. Here's how we're equipped to assist you.
+					immiGPT.ai, you're never alone. Here's how we're equipped to assist you.
 				</p>
 			</div>
 			<div class="faqCardWrap">
@@ -323,8 +323,8 @@
 								<p class="card-description">
 									<span
 										>Can't find an answer in our FAQs? Our dedicated support team is just an email
-										away. Drop us a message at <a href="mailto:hello@immiGPT.net"
-											>hello@immiGPT.net</a
+										away. Drop us a message at <a href="mailto:hello@immiGPT.ai"
+											>hello@immiGPT.ai</a
 										> with your queries, and we promise a swift response.</span
 									>
 								</p>
@@ -339,7 +339,7 @@
 				<span class="faqTitle">Frequently Asked Questions</span>
 				<p class="faqDesc">
 					Navigating through immigration processes can sometimes be overwhelming, but with
-					immiGPT.net, you're never alone. Here's how we're equipped to assist you.
+					immiGPT.ai, you're never alone. Here's how we're equipped to assist you.
 				</p>
 			</div>
 			<div class="faqQuestionWrap">
