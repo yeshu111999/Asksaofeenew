@@ -346,7 +346,7 @@
 					</div>
 					<div class="featureMainCard">
 						<div class="featureMainCardFull">
-							<div class="featureIconWrap">
+							<!-- <div class="featureIconWrap">
 								<svg
 									width="32"
 									height="32"
@@ -378,7 +378,8 @@
 										stroke-linejoin="round"
 									/>
 								</svg>
-							</div>
+							</div> -->
+							<div class="featureMainTiltedTrouble" />
 							<div class="featureTextWrap">
 								<div class="featureTextTitle">What gives ImmiGPT a competitive edge ?</div>
 								<div class="featureTextDesc">
@@ -397,8 +398,45 @@
 					</div>
 					<div class="featureMainCard">
 						<div class="featureDetailCard">
-							<div class="featureMainTiltedTrouble">
-								<!-- <img src="/assets/images/tiltedpun.png" alt="" /> -->
+							<!-- <div class="featureMainTiltedTrouble">
+								
+							</div> -->
+							<div class="featureIconWrap">
+								<svg
+									width="32"
+									height="32"
+									viewBox="0 0 32 32"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M16.5454 15.6495H9.33337V12.4935C9.33337 10.7482 10.748 9.3335 12.4934 9.3335H16.5454C18.2894 9.3335 19.7027 10.7468 19.7027 12.4908V12.4908C19.704 14.2348 18.2894 15.6495 16.5454 15.6495Z"
+										stroke="white"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M9.33337 15.6494H19.5094C21.2534 15.6494 22.6667 17.0627 22.6667 18.8067V19.5081C22.6667 21.2534 21.2534 22.6667 19.5094 22.6667H12.4934C10.748 22.6667 9.33337 21.2521 9.33337 19.5067V15.6494L9.33337 15.6494Z"
+										stroke="white"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M10 4H22.0053C25.316 4 28 6.684 28 9.99467V22.0067C28 25.316 25.316 28 22.0053 28H9.99467C6.684 28 4 25.316 4 22.0053V10C4 6.68667 6.68667 4 10 4V4Z"
+										stroke="white"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
 							</div>
 							<div class="featureTextTitle">Web Search Functionality</div>
 							<div class="featureTextDesc">
@@ -1400,7 +1438,7 @@
 	.tryTextWrap {
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: 24px;
 		align-items: left;
 		flex: 1;
 	}

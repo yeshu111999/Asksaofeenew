@@ -861,7 +861,7 @@
 				<p class="welcome-text">Enjoy benefits of ImmiGPT in seconds</p>
 			{:else if !showSignUp && !showForgotPwd && !resetMailSent}
 				<p class="login-text">Login to your account</p>
-				<p class="welcome-text">Welcome back ! Please Enter your details</p>
+				<p class="welcome-text">Welcome back! Please Enter your details</p>
 			{:else if showForgotPwd && !resetMailSent}
 				<p class="login-text">Forgot Password</p>
 				<p class="welcome-text">No worries, we’ll send you reset instructions.</p>
@@ -920,7 +920,7 @@
 						</div>
 						<div class="signin-text">
 							<!-- {#if !sentLink && !resetLoader} -->
-							<button class="signup-text" on:click={toggleForgotPwd}>Forgot password ?</button>
+							<button class="signup-text" on:click={toggleForgotPwd}>Forgot password?</button>
 							<!-- {:else if !resetLoader}
 							<p style="color: green;">
 								We have sent a reset password link <br /> to your mail. Please check

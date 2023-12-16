@@ -593,8 +593,7 @@
 										</div>
 									</div>
 									<p class="description">
-										Upload images up to 256x256 px. Your avatar shows up in your public profile and
-										your team notifications.
+										Upload images up to 256x256 px. Your avatar shows up in your public profile.
 									</p>
 								</div>
 								<div class="input-wrapper">
@@ -652,10 +651,10 @@
 					<section id="change-pwd">
 						<div class="section">
 							<p class="section-header">Change password</p>
-							<p class="description">
+							<!-- <p class="description">
 								If you no longer want to use ImmiGPT, You can permanently delete your account. You
 								can’t undo this action
-							</p>
+							</p> -->
 							<div>
 								<PasswordInput
 									bind:value={password}
@@ -697,7 +696,7 @@
 						<div class="section">
 							<p class="section-header">Clear Conversations</p>
 							<p class="description">
-								Clear Conversations empties your account of all past chats and messages.
+								The 'Clear Conversations' option deletes all past chats from your account.
 							</p>
 							<Button variant="default" class="upload-btn" on:click={toggleClearChat}
 								><p>Clear Chat</p></Button
@@ -719,7 +718,7 @@
 									</div>
 									<div class="pro-right">
 										<p class="pro-title end">$10/Month</p>
-										<p class="downgrade">Downgrade Plan</p>
+										<!-- <p class="downgrade">Downgrade Plan</p> -->
 									</div>
 								{:else}
 									<div class="pro-left">
@@ -741,19 +740,21 @@
 												<th>BILLING DATE</th>
 												<th>AMOUNT</th>
 												<!-- <th>PAYMENT METHOD</th> -->
-												<th />
+												<!-- <th /> -->
 											</tr>
 										</thead>
 										<tbody>
 											{#each paymentHistory as data (data.purchaseDate)}
 												<tr>
-													<td>{convertDateFormat(data.purchaseDate)}</td>
-													<td>{formatPurchaseAmount(data.purchaseAmount, data.currency)}</td>
+													<td class="td-text">{convertDateFormat(data.purchaseDate)}</td>
+													<td class="td-text"
+														>{formatPurchaseAmount(data.purchaseAmount, data.currency)}</td
+													>
 													<!-- <td>{row.col3}</td> -->
-													<td
+													<!-- <td
 														><button><img src="assets/icons/download-icon.svg" alt="" /></button
 														></td
-													>
+													> -->
 												</tr>
 											{/each}
 										</tbody>
@@ -767,7 +768,7 @@
 							<p class="section-header">Delete Account</p>
 							<p class="description">
 								If you no longer want to use ImmiGPT, You can permanently delete your account. You
-								can’t undo this action
+								can’t undo this action.
 							</p>
 							<Button
 								variant="outline"
@@ -786,7 +787,7 @@
 							<div class="modal-body">
 								<p class="description">
 									If you no longer want to use ImmiGPT, You can permanently delete your account. You
-									can’t undo this action
+									can’t undo this action.
 								</p>
 								<div class="buttons-wrapper">
 									<!-- <button class="button black" on:click={deleteAccount}
@@ -813,7 +814,7 @@
 							<div class="modal-body">
 								<p class="description">
 									All your conversations will be permanently deleted from your account. You can’t
-									undo this action
+									undo this action.
 								</p>
 								<div class="buttons-wrapper">
 									<!-- <button class="button black" on:click={deleteAccount}
@@ -911,6 +912,10 @@
 	}
 	.right-body {
 		-ms-overflow-style: none;
+	}
+
+	.td-text {
+		color: var(--primary-text-color);
 	}
 
 	.text-btn {

@@ -136,7 +136,7 @@
 </script>
 
 {#if isLoading}
-	<PageSpinner />
+	<!-- <PageSpinner /> -->
 	<!-- <Modal centered opened={true} withCloseButton={false}>
 		<div style="display: flex; justify-content: center; width: 100%">
 			<Loader variant="bars" color="gray" />

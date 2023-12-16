@@ -397,22 +397,32 @@
 		activeTabIndex = activeTabIndex;
 	}
 
+	function resetInputFields(template) {
+		console.log("templates", template);
+		template.inputFields.forEach((field) => {
+			field.fieldValue = "";
+		});
+	}
+
 	function selectedStudentTemplate(event) {
 		let index = event.detail.index;
 		selectedTemplate = templates[0]?.resumeTemplates[index];
 		showSelectedTemplate = true;
+		resetInputFields(selectedTemplate);
 	}
 
 	function selectedProfessionalTemplate(event) {
 		let index = event.detail.index;
 		selectedTemplate = templates[1]?.resumeTemplates[index];
 		showSelectedTemplate = true;
+		resetInputFields(selectedTemplate);
 	}
 
 	function selectedTouristsTemplate(event) {
 		let index = event.detail.index;
 		selectedTemplate = templates[2]?.resumeTemplates[index];
 		showSelectedTemplate = true;
+		resetInputFields(selectedTemplate);
 	}
 
 	function useTemplate() {
@@ -425,6 +435,7 @@
 			selectedTemplate.prompt = selectedTemplate.prompt.replaceAll(placeholder, userInputValue);
 		}
 		visaPrompt.set(selectedTemplate.prompt + ":::" + "Generate " + selectedTemplate.resumeTitle);
+		resetInputFields(selectedTemplate);
 		dispatch("closeBurger");
 		closePopup();
 	}
@@ -442,6 +453,10 @@
 		getTemplates();
 		activeTabIndex = 0;
 		activeTemplates = templates[activeTabIndex]?.resumeTemplates;
+		activeInputFields = activeInputFields.map((field) => ({
+			...field,
+			fieldValue: "",
+		}));
 	});
 </script>
 

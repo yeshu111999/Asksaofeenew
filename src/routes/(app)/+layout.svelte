@@ -434,9 +434,9 @@
 </div> -->
 <Analytics />
 
-{#if loading}
+<!-- {#if loading}
 	<PageSpinner />
-{/if}
+{/if} -->
 <div class="navbar-container">
 	<NavBar
 		{menuToggleFlag}
