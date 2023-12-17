@@ -225,6 +225,58 @@
 		}
 	};
 
+	const removeProfilePic = async () => {
+		saveChangesLoader = true;
+		let headers = new Headers({
+			Authorization: "Bearer " + Cookies.get("token"),
+			"Content-Type": "application/json",
+		});
+		let gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers.append("Google-Auth", "True");
+		}
+		let bodyData = {
+			username: firstName + " " + lastName,
+			firstName: firstName,
+			lastName: lastName,
+			removeProfilePic: "true",
+		};
+
+		let config = {
+			method: "POST",
+			headers: headers,
+			body: JSON.stringify(bodyData),
+		};
+
+		try {
+			const response = await fetch("https://backend.immigpt.ai/updateUserProfile", config);
+
+			if (response.ok) {
+				const data = await response.json();
+				console.log(JSON.stringify(data));
+				saveChangesLoader = false;
+				showUpdateDetailsSuccess = true;
+				setTimeout(() => {
+					showUpdateDetailsSuccess = false;
+				});
+				// apiSuccessFlag = true;
+			} else {
+				const error = await response.json();
+				console.log(error);
+				saveChangesLoader = false;
+				showUpdateDetailsError = true;
+				updateDetailsError = error.message ? error.message : "Something went wrong!! Try again";
+				// apiErrorFlag = true;
+			}
+		} catch (error) {
+			console.error(error);
+			saveChangesLoader = false;
+			showUpdateDetailsError = true;
+			updateDetailsError = "Something went wrong!! Try again";
+			// apiErrorFlag = true;
+		}
+	};
+
 	const updateUserDetails = async () => {
 		saveChangesLoader = true;
 		let headers = new Headers({
@@ -239,7 +291,6 @@
 			email: userMail,
 			firstName: firstName,
 			lastName: lastName,
-			phoneNumber: mobileNumber,
 		};
 
 		let formData = new FormData();
@@ -332,11 +383,13 @@
 			if (response.ok) {
 				openClearChatPopup = false;
 				goto("/");
+				window.location.href = "/";
 			} else {
 				const error = await response.text();
 				console.log("Error clearing all conversations: " + error);
 				openClearChatPopup = false;
 				goto("/");
+				window.location.href = "/";
 			}
 		} catch (err) {
 			console.error(err);
@@ -590,6 +643,9 @@
 												on:click={() => fileInput.click()}
 												class="upload-btn"><p>Upload Image</p></Button
 											>
+											<Button on:click={removeProfilePic} variant="default" class="upload-btn"
+												><p>Remove Image</p></Button
+											>
 										</div>
 									</div>
 									<p class="description">
@@ -620,13 +676,14 @@
 										placeholder="Email Address"
 									/>
 								</div>
-								<div class="input-wrapper">
+								<!-- <div class="input-wrapper">
 									<TextInput
+										disabled
 										bind:value={mobileNumber}
 										label="Phone Number"
 										placeholder="Phone Number"
 									/>
-								</div>
+								</div> -->
 								{#if showUpdateDetailsError}
 									<p class="error">{updateDetailsError}</p>
 								{/if}
@@ -639,7 +696,7 @@
 											><p>Save Info</p></button
 										> -->
 										<!-- <button class="button gray" on:click={cancel}><p>Cancel</p></button> -->
-										<Button color="dark" on:click={updateUserDetails} ripple>Save Info</Button>
+										<Button color="#e4e4e4" on:click={updateUserDetails} ripple>Save Info</Button>
 										<Button color="#e4e4e4" on:click={cancel} ripple style="color:black;"
 											>Cancel</Button
 										>
@@ -678,7 +735,7 @@
 									>
 									<button class="button gray" on:click={cancelPwd}><p>Cancel</p></button> -->
 
-									<Button color="dark" on:click={updatePassword} ripple>Change Password</Button>
+									<Button color="e4e4e4" on:click={updatePassword} ripple>Change Password</Button>
 									<Button color="#e4e4e4" on:click={cancelPwd} ripple style="color:black;"
 										>Cancel</Button
 									>
@@ -777,58 +834,98 @@
 								on:click={toggleDeleteAccount}><p>Delete Account</p></Button
 							>
 						</div>
-						<Modal
-							centered
-							opened={openDeleteAccountPopup}
-							on:close={closeDeleteAccountPopup}
-							title="Delete Account"
-						>
-							<!-- <p class="title">Are you sure you want to delete your account?</p> -->
-							<div class="modal-body">
-								<p class="description">
-									If you no longer want to use ImmiGPT, You can permanently delete your account. You
-									can’t undo this action.
-								</p>
-								<div class="buttons-wrapper">
-									<!-- <button class="button black" on:click={deleteAccount}
-									><p>Confirm</p></button
-								>
-								<button class="button gray" on:click={closeDeleteAccountPopup}><p>Cancel</p></button> -->
-									<Button color="dark" on:click={deleteAccount} ripple>Confirm</Button>
-									<Button
-										color="#e4e4e4"
-										on:click={closeDeleteAccountPopup}
-										ripple
-										style="color:black;">Cancel</Button
-									>
-								</div>
-							</div>
-						</Modal>
-						<Modal
-							centered
-							opened={openClearChatPopup}
-							on:close={closeClearChatPopup}
-							title="Clear all conversations"
-						>
-							<!-- <p class="title">Are you sure you want to delete your account?</p> -->
-							<div class="modal-body">
-								<p class="description">
-									All your conversations will be permanently deleted from your account. You can’t
-									undo this action.
-								</p>
-								<div class="buttons-wrapper">
-									<!-- <button class="button black" on:click={deleteAccount}
-									><p>Confirm</p></button
-								>
-								<button class="button gray" on:click={closeDeleteAccountPopup}><p>Cancel</p></button> -->
-									<Button color="dark" on:click={clearChat} ripple>Confirm</Button>
-									<Button color="#e4e4e4" on:click={closeClearChatPopup} ripple style="color:black;"
-										>Cancel</Button
-									>
-								</div>
-							</div>
-						</Modal>
 					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <Modal
+		centered
+		opened={openDeleteAccountPopup}
+		on:close={closeDeleteAccountPopup}
+		title="Delete Account"
+	>
+		<div class="modal-body">
+			<p class="description">
+				If you no longer want to use ImmiGPT, You can permanently delete your account. You can’t
+				undo this action.
+			</p>
+			<div class="buttons-wrapper">
+				<Button color="dark" on:click={deleteAccount} ripple>Confirm</Button>
+				<Button color="#e4e4e4" on:click={closeDeleteAccountPopup} ripple style="color:black;"
+					>Cancel</Button
+				>
+			</div>
+		</div>
+	</Modal> -->
+	<!-- <Modal
+		centered
+		style="z-index:9999;"
+		opened={openClearChatPopup}
+		on:close={closeClearChatPopup}
+		title="Clear all conversations"
+	>
+		
+		<div class="modal-body">
+			<p class="description">
+				All your conversations will be permanently deleted from your account. You can’t undo this
+				action.
+			</p>
+			<div class="buttons-wrapper">
+				
+				<Button color="dark" on:click={clearChat} ripple>Confirm</Button>
+				<Button color="#e4e4e4" on:click={closeClearChatPopup} ripple style="color:black;"
+					>Cancel</Button
+				>
+			</div>
+		</div>
+	</Modal> -->
+{/if}
+
+{#if openDeleteAccountPopup}
+	<div class="model-overlay">
+		<div class="model-popup">
+			<div class="modal-body">
+				<div class="model-header">
+					<p class="popup-title">Delete Account</p>
+					<button class="close-btn" on:click={closeDeleteAccountPopup}>
+						<img src="/assets/icons/close-icon-black.svg" alt="" />
+					</button>
+				</div>
+				<p class="description">
+					If you no longer want to use ImmiGPT, You can permanently delete your account. You can’t
+					undo this action.
+				</p>
+				<div class="buttons-wrapper">
+					<Button color="#e4e4e4" on:click={deleteAccount} ripple>Confirm</Button>
+					<Button color="#e4e4e4" on:click={closeDeleteAccountPopup} ripple style="color:black;"
+						>Cancel</Button
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+
+{#if openClearChatPopup}
+	<div class="model-overlay">
+		<div class="model-popup">
+			<div class="modal-body">
+				<div class="model-header">
+					<p class="popup-title">Clear all conversations</p>
+					<button class="close-btn" on:click={closeClearChatPopup}>
+						<img src="/assets/icons/close-icon-black.svg" alt="" />
+					</button>
+				</div>
+				<p class="description">
+					If you want to clear all your conversations, you can permanently clear your conversations.
+					You can’t undo this action.
+				</p>
+				<div class="buttons-wrapper">
+					<Button color="#e4e4e4" on:click={clearChat} ripple>Confirm</Button>
+					<Button color="#e4e4e4" on:click={closeClearChatPopup} ripple style="color:black;"
+						>Cancel</Button
+					>
 				</div>
 			</div>
 		</div>
@@ -848,6 +945,32 @@
 		align-items: center;
 		z-index: 1000;
 		opacity: 1;
+	}
+
+	.model-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.8);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 2000;
+		opacity: 1;
+	}
+
+	.model-popup {
+		padding: 20px;
+		background-color: var(--primary-background-color);
+		border-radius: 4px;
+	}
+
+	.model-header {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
 	}
 
 	.textInputClass {
@@ -1177,6 +1300,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+		z-index: 9999;
 	}
 
 	.pro-wrapper {
