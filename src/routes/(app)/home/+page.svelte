@@ -41,7 +41,8 @@
 			paymentType = "failure";
 			showPaymentPopup = true;
 		}
-		setTimeout(() => (isLoading = false), 3000);
+		isLoading = false;
+		// setTimeout(() => (isLoading = false), 3000);
 	});
 
 	function retry() {

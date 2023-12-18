@@ -47,6 +47,7 @@
 
 	export let data;
 	let loading = false;
+	let searchLoader = "";
 
 	let isNavOpen = false;
 	let isSettingsOpen = false;
@@ -307,6 +308,7 @@
 
 	onMount(async () => {
 		loading = true;
+		searchLoader = "Loading";
 		let token = Cookies.get("token");
 		if (!token) {
 			//loginModalVisible = true;
@@ -332,6 +334,7 @@
 
 		await getUserDetails();
 		loading = false;
+		searchLoader = "Loaded";
 	});
 	// onDestroy(() => {
 	// 	document.removeEventListener("click", handleOutsideClick);
@@ -462,30 +465,44 @@
 				<p class="recent-searches-text">Recent Searches</p>
 				<div class="left-menu-center chgatsScroll">
 					<div class="recent-searches">
-						{#each data.conversations as conv}
-							<!-- <a
-								class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
-								href="{base}/conversation/{conv.id}"
-							>
-								{#if conv.id === $page.params.id}
-									<img src="/assets/icons/search-icon-white.svg" alt="" />
-								{:else}
-									<img src="/assets/icons/search-icon-black.svg" alt="" />
-								{/if}
-								<p>{conv.title}</p>
-							</a> -->
-							<NavConversationItem
-								on:editConversationTitle={(ev) =>
-									editConversationTitle(ev.detail.id, ev.detail.title)}
-								on:deleteConversation={(ev) => {
-									tallId = ev.detail;
-									deleteCoveConfirmationModal = true;
-								}}
-								on:conversationSelected={closeBurger}
-								{conv}
-							/>
-							<!-- on:deleteConversation={(ev) => deleteConversation(ev.detail)} -->
-						{/each}
+						{#if searchLoader == "Loaded"}
+							{#each data.conversations as conv}
+								<!-- <a
+									class="recent-search-btn {conv.id === $page.params.id ? 'active' : ''}"
+									href="{base}/conversation/{conv.id}"
+								>
+									{#if conv.id === $page.params.id}
+										<img src="/assets/icons/search-icon-white.svg" alt="" />
+									{:else}
+										<img src="/assets/icons/search-icon-black.svg" alt="" />
+									{/if}
+									<p>{conv.title}</p>
+								</a> -->
+								<NavConversationItem
+									on:editConversationTitle={(ev) =>
+										editConversationTitle(ev.detail.id, ev.detail.title)}
+									on:deleteConversation={(ev) => {
+										tallId = ev.detail;
+										deleteCoveConfirmationModal = true;
+									}}
+									on:conversationSelected={closeBurger}
+									{conv}
+								/>
+								<!-- on:deleteConversation={(ev) => deleteConversation(ev.detail)} -->
+							{/each}
+						{:else}
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+							<div class={$currentTheme == "dark" ? "skeleton-loader-dark" : "skeleton-loader"} />
+						{/if}
 					</div>
 				</div>
 				<div class="left-menu-bottom">
@@ -717,6 +734,35 @@
 		height: 24px;
 	}
 
+	.skeleton-loader {
+		height: 35px; /* Adjust the height as needed */
+		width: 100%;
+		background-color: #f0f0f0; /* Adjust the background color */
+		border-radius: 4px; /* Adjust the border radius */
+		margin: 10px; /* Add margin between skeleton loaders */
+		opacity: 0;
+		animation: fadeIn 0.5s ease-out forwards;
+	}
+
+	.skeleton-loader-dark {
+		height: 35px; /* Adjust the height as needed */
+		width: 100%;
+		background-color: darkgrey; /* Adjust the background color */
+		border-radius: 4px; /* Adjust the border radius */
+		margin: 10px; /* Add margin between skeleton loaders */
+		opacity: 0;
+		animation: fadeIn 0.5s ease-out forwards;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
 	.popup-header {
 		padding: 24px;
 		width: 100%;
@@ -812,7 +858,7 @@
 	}
 
 	.left-menu {
-		width: 240px;
+		width: 240px !important;
 		height: calc(100vh - 70px);
 		flex-shrink: 0;
 		background: var(--primary-background-color);
