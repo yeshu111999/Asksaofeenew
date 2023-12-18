@@ -696,7 +696,11 @@
 											><p>Save Info</p></button
 										> -->
 										<!-- <button class="button gray" on:click={cancel}><p>Cancel</p></button> -->
-										<Button color="#e4e4e4" on:click={updateUserDetails} ripple>Save Info</Button>
+										<Button
+											color={$currentTheme == "light" ? "black" : "#e4e4e4"}
+											on:click={updateUserDetails}
+											ripple>Save Info</Button
+										>
 										<Button color="#e4e4e4" on:click={cancel} ripple style="color:black;"
 											>Cancel</Button
 										>
