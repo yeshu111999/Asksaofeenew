@@ -108,32 +108,65 @@
 		img.src = url;
 	}
 
-	const handleImageSelect = (event) => {
+	const handleImageSelect = async (event) => {
 		const file = event.target.files[0];
 		imageFile = file;
 
 		if (file) {
 			const imageURL = URL.createObjectURL(file);
 			profilePic = imageURL;
-
+			let headers = new Headers({
+				Authorization: "Bearer " + Cookies.get("token"),
+				// "Content-Type": "application/json",
+			});
+			let gauth = Cookies.get("Google-Auth");
+			if (gauth) {
+				headers.append("Google-Auth", "True");
+			}
+			let bodyData = {
+				username: firstName + " " + lastName,
+				firstName: firstName,
+				lastName: lastName,
+				removeProfilePic: "false",
+			};
 			// Create a FormData object and send the image to the backend
 			const formData = new FormData();
-			formData.append("image", file);
+			formData.append("request", JSON.stringify(bodyData));
+			formData.append("file", imageFile);
 
-			// fetch("/your-backend-endpoint", {
-			// 	method: "POST",
-			// 	body: formData,
-			// })
-			// 	.then((response) => {
-			// 		if (response.ok) {
-			// 			console.log("Image uploaded successfully.");
-			// 		} else {
-			// 			console.error("Error uploading image.");
-			// 		}
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error("Error:", error);
-			// 	});
+			let config = {
+				method: "POST",
+				headers: headers,
+				body: formData,
+			};
+
+			try {
+				const response = await fetch("https://backend.immigpt.ai/updateUserProfile", config);
+
+				if (response.ok) {
+					const data = await response.json();
+					console.log(JSON.stringify(data));
+					saveChangesLoader = false;
+					showUpdateDetailsSuccess = true;
+					setTimeout(() => {
+						showUpdateDetailsSuccess = false;
+					});
+					// apiSuccessFlag = true;
+				} else {
+					const error = await response.json();
+					console.log(error);
+					saveChangesLoader = false;
+					showUpdateDetailsError = true;
+					updateDetailsError = error.message ? error.message : "Something went wrong!! Try again";
+					// apiErrorFlag = true;
+				}
+			} catch (error) {
+				console.error(error);
+				saveChangesLoader = false;
+				showUpdateDetailsError = true;
+				updateDetailsError = "Something went wrong!! Try again";
+				// apiErrorFlag = true;
+			}
 		}
 	};
 
@@ -229,7 +262,7 @@
 		saveChangesLoader = true;
 		let headers = new Headers({
 			Authorization: "Bearer " + Cookies.get("token"),
-			"Content-Type": "application/json",
+			// "Content-Type": "application/json",
 		});
 		let gauth = Cookies.get("Google-Auth");
 		if (gauth) {
@@ -242,10 +275,13 @@
 			removeProfilePic: "true",
 		};
 
+		let formData = new FormData();
+		formData.append("request", JSON.stringify(bodyData));
+
 		let config = {
 			method: "POST",
 			headers: headers,
-			body: JSON.stringify(bodyData),
+			body: formData,
 		};
 
 		try {
@@ -255,6 +291,7 @@
 				const data = await response.json();
 				console.log(JSON.stringify(data));
 				saveChangesLoader = false;
+				getUserDetails();
 				showUpdateDetailsSuccess = true;
 				setTimeout(() => {
 					showUpdateDetailsSuccess = false;
