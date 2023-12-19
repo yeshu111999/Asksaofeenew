@@ -77,6 +77,10 @@
 		dispatch("closeSettingsPopup");
 	}
 
+	function gotoPayment() {
+		goto("/home/payment");
+	}
+
 	function changeActiveTab(index) {
 		activeTab = index;
 		if (activeTab == 0) {
@@ -825,7 +829,7 @@
 									</div>
 									<div class="pro-right">
 										<p class="pro-title end">$10/Month</p>
-										<p class="downgrade">Upgrade Plan</p>
+										<button class="downgrade" on:click={gotoPayment}>Upgrade Plan</button>
 									</div>
 								{/if}
 							</div>
