@@ -27,6 +27,10 @@
 	color: var(--primary-text-color);
 }
 
+.svelteui-Popper-root {
+	z-index: 2000;
+}
+
 .wrapper .svelteui-InputWrapper-root .svelteui-Input-root .svelteui-Input-input {
 	background-color: #fff !important;
 	border: 1px solid #605f5f !important;
