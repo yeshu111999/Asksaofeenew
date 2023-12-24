@@ -605,6 +605,7 @@
 		color: var(--primary-text-color);
 		font-weight: 600;
 		font-size: 12px;
+		background: var(--profile-bg-color);
 	}
 
 	.responseTextStyle {

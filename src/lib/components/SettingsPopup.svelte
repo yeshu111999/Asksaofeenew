@@ -967,7 +967,9 @@
 					You can’t undo this action.
 				</p>
 				<div class="buttons-wrapper">
-					<Button color="#e4e4e4" on:click={clearChat} ripple>Confirm</Button>
+					<Button color={$currentTheme == "light" ? "black" : "#e4e4e4"} on:click={clearChat} ripple
+						>Confirm</Button
+					>
 					<Button color="#e4e4e4" on:click={closeClearChatPopup} ripple style="color:black;"
 						>Cancel</Button
 					>
