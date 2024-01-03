@@ -88,15 +88,15 @@
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Basic model updates</p>
-					</div>
-					<div class="features">
-						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to templates</p>
+						<p>Access to Search Web Functionality</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Visa Preparation Centre</p>
+					</div>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to Visa immigration Help</p>
 					</div>
 				</div>
 				<div class="plan-content">
@@ -123,11 +123,7 @@
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Faster response speed</p>
-					</div>
-					<div class="features">
-						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to templates</p>
+						<p>Access to Search Web Functionality</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
@@ -135,7 +131,11 @@
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access Beta features</p>
+						<p>Access to Immigration Help</p>
+					</div>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to Templates and Document Generation </p>
 					</div>
 				</div>
 			</div>

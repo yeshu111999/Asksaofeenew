@@ -676,7 +676,7 @@
 										stroke-linecap="round"
 										stroke-linejoin="round"
 									/>
-								</svg> Access to Templates
+								</svg> Access to Templates and Document Generation
 							</div>
 						</div>
 						<!-- <Button fullSize color="dark" radius="md"
