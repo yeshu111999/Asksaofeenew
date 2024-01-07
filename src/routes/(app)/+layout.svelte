@@ -151,7 +151,7 @@
 	}
 
 	function logOut() {
-		var cookiesToRemove = ["token", "name", "email", "userId"];
+		var cookiesToRemove = ["token", "name", "email", "userId", "Google-Auth"];
 
 		cookiesToRemove.forEach(function (cookieName) {
 			document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

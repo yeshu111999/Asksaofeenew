@@ -50,7 +50,7 @@
 	}
 
 	function gotoPayment() {
-		goto("/home/payment");
+		goto("/home/razorpay");
 	}
 
 	onMount(() => {
