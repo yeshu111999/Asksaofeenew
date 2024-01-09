@@ -281,17 +281,22 @@
 					console.log("latitude, longitude", latitude, longitude);
 
 					// Use a reverse geocoding API to get country information
-					// const reverseGeocodingApi = `https://geocode.xyz/${latitude},${longitude}?json=1`;
+					const reverseGeocodingApi = `https://geocode.xyz/${latitude},${longitude}?json=1`;
 
-					// try {
-					//     const response = await fetch(reverseGeocodingApi);
-					//     const data = await response.json();
+					try {
+						const response = await fetch(reverseGeocodingApi);
+						const countryData = await response.json();
 
-					//     // Display the country information
-					//     const country = data.country;
-					// } catch (error) {
-					//     console.error('Error fetching country information:', error);
-					// }
+						// Display the country information
+						console.log("response", response);
+						console.log("countryData", countryData);
+						const country = countryData.country;
+						const expirationTime = new Date();
+						expirationTime.setTime(expirationTime.getTime() + 7 * 24 * 60 * 60 * 1000);
+						Cookies.set("country", country ? country : "USA", { expires: expirationTime });
+					} catch (error) {
+						console.error("Error fetching country information:", error);
+					}
 				},
 				(error) => {
 					console.error("Error getting geolocation:", error);

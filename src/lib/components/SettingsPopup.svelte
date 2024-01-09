@@ -672,7 +672,7 @@
 													<span class="initial">{profileImg}</span>
 												</div>
 											{/if}
-											<input
+											<!-- <input
 												type="file"
 												accept="image/*"
 												on:change={handleImageSelect}
@@ -686,7 +686,7 @@
 											>
 											<Button on:click={removeProfilePic} variant="default" class="upload-btn"
 												><p>Remove Image</p></Button
-											>
+											> -->
 										</div>
 									</div>
 									<p class="description">

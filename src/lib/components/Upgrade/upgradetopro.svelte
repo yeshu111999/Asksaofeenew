@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher, onMount } from "svelte";
 	import { Button } from "@svelteuidev/core";
-
+	import Cookies from "js-cookie";
 	import { currentTheme } from "$lib/stores/themeStore";
 	import { retryPayment } from "$lib/stores/paymentStore";
 	import { goto } from "$app/navigation";
@@ -49,8 +49,94 @@
 		}
 	}
 
+	async function createSubscription() {
+		console.log("createSubscription");
+		const headers = {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+			Authorization: "Bearer " + Cookies.get("token"),
+		};
+		const gauth = Cookies.get("Google-Auth");
+		if (gauth) {
+			headers["Google-Auth"] = "True";
+		}
+		console.log("headers", headers);
+		const response = await fetch("https://backend.immigpt.ai/create-subscription", {
+			method: "POST",
+			headers: headers,
+			body: JSON.stringify({ planId: "plan_NIf6lW1EopNhsx" }),
+		});
+		// console.log('response', response)
+		// console.log('response-statu', response.ok)
+		if (response.ok) {
+			const data = await response.json();
+			console.log("data", data.id);
+			openRazorpay(data.id);
+		} else {
+			const data = await response.json();
+			console.error("Subscription creation failed:", data);
+		}
+	}
+
+	async function upgradePlanUpdate(subscriptionId) {
+		const apiUrl = "https://backend.immigpt.ai/planUpgradeRazorPay";
+		let gauth = Cookies.get("Google-Auth");
+
+		let requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"X-ImmiGPT-Id": subscriptionId,
+				// "Google-Auth": "True",
+				Authorization: "Bearer " + Cookies.get("token"),
+			},
+		};
+		console.log("request", requestOptions);
+		if (gauth) {
+			requestOptions.headers["Google-Auth"] = "True";
+		}
+		console.log("request", requestOptions);
+
+		try {
+			const response = await fetch(apiUrl, requestOptions);
+			if (response.ok) {
+				showTemplatesPopup = false;
+				goto("/home");
+			}
+
+			// You can update the component state or perform further actions based on the response
+		} catch (err) {
+			console.error("Error making API request:", err.message);
+		}
+	}
+
+	function openRazorpay(subscriptionId) {
+		console.log("openRazorpay");
+		const options = {
+			key: "rzp_test_HV4tUhpyqqO38s",
+			subscription_id: subscriptionId,
+			prefill: {
+				name: Cookies.get("name"),
+				email: Cookies.get("email"),
+			},
+			handler: function (response) {
+				console.log(response);
+				// Handle post-payment logic here
+				upgradePlanUpdate(response.razorpay_subscription_id);
+			},
+		};
+		const rzp1 = new Razorpay(options);
+		console.log("rzp1", rzp1);
+
+		rzp1.open();
+	}
 	function gotoPayment() {
-		goto("/home/razorpay");
+		let country = Cookies.get("country");
+		if (country?.toUpperCase() == "INDIA") {
+			createSubscription();
+		} else {
+			goto("/home/payment");
+		}
 	}
 
 	onMount(() => {
@@ -135,7 +221,7 @@
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to Templates and Document Generation </p>
+						<p>Access to Templates and Document Generation</p>
 					</div>
 				</div>
 			</div>
