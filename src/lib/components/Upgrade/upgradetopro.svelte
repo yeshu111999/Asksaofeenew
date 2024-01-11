@@ -132,10 +132,10 @@
 	}
 	function gotoPayment() {
 		let country = Cookies.get("country");
-		if (country?.toUpperCase() == "INDIA") {
-			createSubscription();
-		} else {
+		if (country?.toUpperCase() == "UNITED STATES OF AMERICA") {
 			goto("/home/payment");
+		} else {
+			createSubscription();
 		}
 	}
 
