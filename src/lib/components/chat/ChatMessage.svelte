@@ -375,15 +375,13 @@
 						</svg>
 					</button>
 				</Tooltip>
-				<Tooltip label="Copied" position="bottom">
-					<CopyToClipBoardBtn
-						on:click={() => {
-							isCopied = true;
-						}}
-						classNames="ml-1.5 !rounded-sm !p-1 !text-sm !text-gray-400 focus:!ring-0 hover:!text-gray-500 dark:!text-gray-400 dark:hover:!text-gray-300 !border-none !shadow-none"
-						value={message.content}
-					/>
-				</Tooltip>
+				<CopyToClipBoardBtn
+					on:click={() => {
+						isCopied = true;
+					}}
+					classNames="ml-1.5 !rounded-sm !p-1 !text-sm !text-gray-400 focus:!ring-0 hover:!text-gray-500 dark:!text-gray-400 dark:hover:!text-gray-300 !border-none !shadow-none"
+					value={message.content}
+				/>
 			</div>
 		{/if}
 	</div>

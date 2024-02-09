@@ -129,9 +129,9 @@
 			/>
 		</svg>
 		<!-- <span style="color: #323232; font-size: 14px; font-weight: 500;">Copy Results</span> -->
-		<!-- <Tooltip classNames={isSuccess ? "opacity-100" : "opacity-0"} /> -->
 	</span>
 	<span class="copy-results">Copy Results</span>
+	<Tooltip classNames={isSuccess ? "opacity-100" : "opacity-0"} />
 </button>
 
 <style>
