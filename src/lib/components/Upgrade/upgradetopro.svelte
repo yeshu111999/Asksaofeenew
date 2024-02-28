@@ -224,6 +224,43 @@
 						<p>Access to Templates and Document Generation</p>
 					</div>
 				</div>
+				<div class="plan-content">
+					<p>Corporate</p>
+					<p class="description-amount">$20/Month</p>
+					<div class="plan-button">
+						<!-- <Button fullSize style="background-color:var(--primary-btn-color);">Coming Soon</Button> -->
+						<!-- <form bind:this={upgradeForm} method="POST" action="?/checkout">
+							<input type="hidden" name="price-id" value="price_1OELxvLDxrOrP8vt6aoIyZxU" />
+							<Button fullSize style="background-color:var(--primary-btn-color);"
+								>Upgrade Plan</Button
+							>
+						</form> -->
+						<Button on:click={contactUs} fullSize style="background-color:var(--primary-btn-color);"
+							>Contact Us</Button
+						>
+					</div>
+					<p>Plan includes:</p>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to our ImmiGPT Pro Model</p>
+					</div>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to Search Web Functionality</p>
+					</div>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to Visa Preparation Centre</p>
+					</div>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to Immigration Help</p>
+					</div>
+					<div class="features">
+						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
+						<p>Access to Templates and Document Generation</p>
+					</div>
+				</div>
 			</div>
 			<div class="footer">
 				<p class="description">Need more Enterprise capabilities?</p>
@@ -257,7 +294,7 @@
 		border-radius: 4px;
 		/* background: var(--brand-colors-pure-white, #fff); */
 		background: var(--secondary-background-color);
-		width: 45%;
+		width: 65%;
 		/* height: 620px; */
 	}
 
