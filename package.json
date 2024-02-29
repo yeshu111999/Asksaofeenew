@@ -67,7 +67,7 @@
 		"parquetjs": "^0.11.2",
 		"postcss": "^8.4.21",
 		"radix-icons-svelte": "^1.2.1",
-		"razorpay": "^2.9.2",
+		"razorpay": "^0.0.0",
 		"serpapi": "^1.1.1",
 		"stripe": "^14.5.0",
 		"svelte-materialify": "^0.3.11",
