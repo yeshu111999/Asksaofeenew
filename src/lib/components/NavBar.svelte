@@ -25,6 +25,7 @@
 	import ConfirmationModal from "$lib/components/ConfirmationModal.svelte";
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 	import RaiseAnIssuePopup from "$lib/components/RaiseAnIssuePopup.svelte";
+	import CorporateContactUs from "./CorporateContactUs.svelte";
 	import BrowseTemplatesPopup from "$lib/components/BrowseTemplatesPopup.svelte";
 	import AboutUsPopup from "./AboutUsPopup.svelte";
 	import Upgradetopro from "$lib/components/Upgrade/upgradetopro.svelte";
@@ -47,6 +48,7 @@
 	let issueDescription = "";
 
 	let showRaiseAnIssuePopup = false;
+	let showCorporateContactPopup = false;
 
 	let showSettingsPopup = false;
 	let showBrowseTemplatesPopup = false;
@@ -150,6 +152,16 @@
 
 	function closeRaiseAnIssuePopup() {
 		showRaiseAnIssuePopup = false;
+	}
+
+	function openCorporateContactPopUp() {
+		console.log("$$$$$$$$$$$$reached till here");
+		showUpgardetoProPopup = false;
+		showCorporateContactPopup = true;
+	}
+
+	function closeCorporateContactPopup() {
+		showCorporateContactPopup = false;
 	}
 
 	let showAboutUsPopup = false;
@@ -656,6 +668,10 @@
 
 <SettingsPopup on:closeSettingsPopup={toggleSettingsPopup} {showSettingsPopup} />
 <RaiseAnIssuePopup {showRaiseAnIssuePopup} on:closeRaiseAnIssuePopup={closeRaiseAnIssuePopup} />
+<CorporateContactUs
+	{showCorporateContactPopup}
+	on:closeCorporateContactUsPopup={closeCorporateContactPopup}
+/>
 <AboutUsPopup {showAboutUsPopup} on:closeAboutUsPopup={closeAboutUsPopup} />
 <BrowseTemplatesPopup
 	showTemplatesPopup={showBrowseTemplatesPopup}
@@ -665,6 +681,7 @@
 	showTemplatesPopup={showUpgardetoProPopup}
 	on:closeTemplatesPopup={toggleUpgardetoProPopup}
 	on:contactUs={openRaiseAnIssuePopup}
+	on:corporateContact={openCorporateContactPopUp}
 />
 
 <style>

@@ -6,11 +6,11 @@
 	import Notification from "./Notification.svelte";
 
 	let dispatch = createEventDispatcher();
-	export let showRaiseAnIssuePopup = false;
+	export let showCorporateContactPopup = false;
 
 	let issue = "";
 	let issueDescription = "";
-
+	let email = "";
 	let showNotification = false;
 	let notificationType = "success";
 	let notificationMsg = "";
@@ -20,7 +20,7 @@
 	}
 
 	function closePopup() {
-		dispatch("closeRaiseAnIssuePopup");
+		dispatch("closeCorporateContactUsPopup");
 	}
 
 	async function submitContactForm() {
@@ -82,7 +82,7 @@
 	message={notificationMsg}
 />
 
-{#if showRaiseAnIssuePopup}
+{#if showCorporateContactPopup}
 	<div class="overlay">
 		<div class="popup">
 			<div class="header">
@@ -101,18 +101,21 @@
 					<TextInput
 						required
 						bind:value={issue}
-						label="What issue are you facing?"
-						placeholder="Template"
+						label="Let us know your corporate name?"
+						placeholder="Company name"
 					/>
 				</div>
 				<div class="input-wrapper">
 					<Textarea
 						bind:value={issueDescription}
-						placeholder="Add description"
-						label="Describe your issue"
+						placeholder="Describe your interests"
+						label="Please describe more about your interest on this package"
 						required
 						rows={6}
 					/>
+				</div>
+				<div class="input-wrapper">
+					<TextInput required bind:value={email} label="Enter your mail" placeholder="Template" />
 				</div>
 				<div class="contact-details">
 					<p>
@@ -122,7 +125,7 @@
 				</div>
 				<div class="buttons-wrapper">
 					<Button color="#e4e4e4" on:click={closePopup} ripple style="color:black;">Cancel</Button>
-					{#if issue && issueDescription}
+					{#if issue && issueDescription && email}
 						<!-- style="background-color:  var(--primary-btn-color)" -->
 						<Button
 							on:click={submitContactForm}

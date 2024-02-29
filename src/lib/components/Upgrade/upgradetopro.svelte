@@ -19,6 +19,10 @@
 		dispatch("contactUs");
 	}
 
+	function CorporateContactUs() {
+		dispatch("corporateContact");
+	}
+
 	async function handleUpgrade() {
 		const formData = new FormData();
 		formData.append("price-id", "price_1OELxvLDxrOrP8vt6aoIyZxU");
@@ -235,8 +239,10 @@
 								>Upgrade Plan</Button
 							>
 						</form> -->
-						<Button on:click={contactUs} fullSize style="background-color:var(--primary-btn-color);"
-							>Contact Us</Button
+						<Button
+							on:click={CorporateContactUs}
+							fullSize
+							style="background-color:var(--primary-btn-color);">Contact Us</Button
 						>
 					</div>
 					<p>Plan includes:</p>
