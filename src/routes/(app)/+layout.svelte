@@ -510,47 +510,6 @@
 						{/if}
 					</div>
 				</div>
-				<div class="left-menu-bottom">
-					<button class="icon-text" on:click={toggleBrowseTemplatesPopup}>
-						{#if $currentTheme == "light"}
-							<img src="/assets/icons/template-icon-black.svg" alt="" />
-						{:else}
-							<img src="/assets/icons/template-icon-white.svg" alt="" />
-						{/if}
-						<p>Browse Templates</p>
-					</button>
-					<!-- <button class="icon-text">
-						<img src="/assets/icons/chat-icon-black.svg" alt="" />
-						<p>P2P Chatter</p>
-					</button> -->
-					<button class="icon-text" on:click={toggleVisaPreperationPopUp}>
-						{#if $currentTheme == "light"}
-							<img src="/assets/icons/visa-icon-black.svg" alt="" />
-						{:else}
-							<img src="/assets/icons/visa-icon-white.svg" alt="" />
-						{/if}
-						<p>Visa Preparation</p>
-					</button>
-					<button class="icon-text" on:click={toggleImmigrationHelpPopUp}>
-						{#if $currentTheme == "light"}
-							<img src="/assets/icons/help-icon-black.svg" alt="" />
-						{:else}
-							<img src="/assets/icons/help-icon-white.svg" alt="" />
-						{/if}
-						<p>Immigration Help</p>
-					</button>
-					<button on:click={openBlogs} class="icon-text">
-						{#if $currentTheme == "light"}
-							<img src="/assets/icons/visa-icon-black.svg" alt="" />
-						{:else}
-							<img src="/assets/icons/visa-icon-white.svg" alt="" />
-						{/if}
-						<p>Blogs</p>
-					</button>
-					<!-- <div class="button-wrapper">
-						<button class="upgrade-btn"> Upgrade to Pro </button>
-					</div> -->
-				</div>
 			</div>
 		</div>
 		{#if menuToggleFlag}
@@ -981,7 +940,7 @@
 		/* height: calc(100vh -390px); */
 		min-height: auto;
 		overflow-y: auto;
-		max-height: calc(100% - 228px);
+		/* max-height: calc(100% - 228px); */
 	}
 
 	.recent-search-btn p {

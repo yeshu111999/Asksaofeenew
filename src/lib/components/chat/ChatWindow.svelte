@@ -177,7 +177,7 @@
 					href="https://immigpt.blog/"
 					target="_blank"
 					rel="noreferrer"
-					class="hover:underline">{currentModel.displayName}</a
+					class="hover:underline">asksoafee</a
 				> <span class="max-sm:hidden">·</span><br class="sm:hidden" /> Generated content should be evaluated
 				for validity and accuracy when used legally.
 			</p>

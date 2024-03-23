@@ -106,16 +106,14 @@
 				<div class="question top">
 					<span class="tabDetailsSubTitle">Student</span>
 					<span class="tabDetailsDescription">
-						ImmiGPT offers a concise guide, aiding in document generation and interview preparation
-						through our AI model for student visa requirements worldwide.
+						AskSoafee can assist medical students in understanding complex medical concepts by explaining them in simpler terms, providing examples, and offering mnemonic devices to aid in memorization.
 					</span>
 				</div>
 				<!-- <Divider /> -->
 				<div class="question">
-					<span class="tabDetailsSubTitle"> What is SOP ? </span>
+					<span class="tabDetailsSubTitle"> What is the role of insulin in the body? </span>
 					<span class="tabDetailsDescription">
-						A Statement of Purpose or SOP lives up to its name by clearly outlining the student's
-						purpose of applying to a particular university for admission into a specific course.
+						Insulin helps regulate blood sugar levels by allowing cells to absorb glucose from the bloodstream, thus providing energy for the body's cells.
 					</span>
 				</div>
 			</div>
@@ -124,16 +122,13 @@
 				<div class="question top">
 					<span class="tabDetailsSubTitle">Professionals</span>
 					<span class="tabDetailsDescription">
-						ImmiGPT offers detailed guidance on work visa options, eligibility, and application
-						processes like US H1B for over 10 countries.
-					</span>
+						AskSoafee can assist doctors in diagnosing illnesses, suggesting differential diagnoses based on symptoms, recommending appropriate tests, and offering treatment options tailored to individual patient needs.					</span>
 				</div>
 				<!-- <Divider /> -->
 				<div class="question">
-					<span class="tabDetailsSubTitle"> Can Indians apply for H1B? </span>
+					<span class="tabDetailsSubTitle"> What are the potential diagnoses and initial management strategies for a 45-year-old female with fever, cough, and crackles on lung examination? </span>
 					<span class="tabDetailsDescription">
-						Yes, you will have to meet the H1B visa requirements for Indian citizens and provide the
-						required documents.
+Potential diagnoses include pneumonia, COPD exacerbation, pulmonary embolism, or lung cancer; initial management may involve antibiotics, bronchodilators, oxygen therapy, and diagnostic tests such as chest X-ray and CBC.
 					</span>
 				</div>
 			</div>
@@ -142,16 +137,14 @@
 				<div class="question top">
 					<span class="tabDetailsSubTitle">Tourists</span>
 					<span class="tabDetailsDescription">
-						ImmiGPT guides users through family-sponsored and business immigration steps, ensuring
-						all criteria are met for visas and entrepreneurial opportunities.
+						Tourists can use AskSoafee for medical questions to seek immediate guidance and clarification on health concerns while traveling, helping them make informed decisions about seeking local medical care, managing minor ailments, understanding medication usage, and accessing emergency assistance if needed.
 					</span>
 				</div>
 				<!-- <Divider /> -->
 				<div class="question">
-					<span class="tabDetailsSubTitle"> What is Dallas popular for? </span>
+					<span class="tabDetailsSubTitle"> I have a rash after hiking in a tropical forest, what should I do? </span>
 					<span class="tabDetailsDescription">
-						Dallas is known for being the home base of the Dallas Cowboys, its delectable southern
-						cuisines, major global companies, and its vibrant art and music scene.
+						Clean the affected area with soap and water, apply an antiseptic cream, and monitor for worsening symptoms; seek medical attention if the rash spreads or you develop fever.
 					</span>
 				</div>
 			</div>

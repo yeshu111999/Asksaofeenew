@@ -174,20 +174,20 @@
 					<p>Plan includes:</p>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to ImmiGPT Basic model</p>
+						<p>Access to AskSoafee Basic model</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Search Web Functionality</p>
 					</div>
-					<div class="features">
+					<!-- <div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Visa Preparation Centre</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Visa immigration Help</p>
-					</div>
+					</div> -->
 				</div>
 				<div class="plan-content">
 					<p>Pro</p>
@@ -209,7 +209,7 @@
 					<p>Plan includes:</p>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to our ImmiGPT Pro Model</p>
+						<p>Access to our AskSoafee Pro Model</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
@@ -217,16 +217,16 @@
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to Visa Preparation Centre</p>
+						<p>Access to Answer Case Scenario</p>
 					</div>
-					<div class="features">
+					<!-- <div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Immigration Help</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Templates and Document Generation</p>
-					</div>
+					</div> -->
 				</div>
 				<div class="plan-content">
 					<p>Corporate</p>
@@ -248,7 +248,7 @@
 					<p>Plan includes:</p>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to our ImmiGPT Pro Model</p>
+						<p>Access to our AskSoafee Pro Model</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
@@ -256,16 +256,16 @@
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
-						<p>Access to Visa Preparation Centre</p>
+						<p>Access to Organizational Usage for report generations</p>
 					</div>
-					<div class="features">
+					<!-- <div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Immigration Help</p>
 					</div>
 					<div class="features">
 						<img class="tick-gap" src="/chatui/tick-icon.svg" alt="" />
 						<p>Access to Templates and Document Generation</p>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="footer">

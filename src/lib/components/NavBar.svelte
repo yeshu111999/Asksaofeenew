@@ -323,7 +323,7 @@
 			<!-- {:else}
 			<img src="/assets/images/logo.svg" width="25px" /> -->
 		{/if}
-		<p class="title">ImmiGPT</p>
+		<p class="title">Ask Soafee</p>
 	</button>
 	<div class="user-profile">
 		<div class="dropdown">
@@ -476,113 +476,6 @@
 							size="md"
 							on:click={changeTheme}
 						/>
-					</button>
-					<button
-						class="menuBtnWrap"
-						on:click={() => {
-							window.open("/faq", "_blank");
-						}}
-					>
-						<svg
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<circle
-								cx="12.0001"
-								cy="12"
-								r="9.00375"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M10.9998 15.5015H13.3101"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M12.1593 15.5015V11.2497H11.0088"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M12.1002 8.24569C12.1002 8.38382 11.9882 8.4958 11.8501 8.4958C11.7119 8.4958 11.6 8.38382 11.6 8.24569C11.6 8.10756 11.7119 7.99559 11.8501 7.99559"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M11.85 7.99559C11.9881 7.99559 12.1001 8.10757 12.1001 8.2457"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-						<span class="menuBtnTxt">Help & FAQ</span>
-					</button>
-					<button on:click={openBlogs} class="menuBtnWrap">
-						<svg
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<rect
-								x="3"
-								y="3"
-								width="18"
-								height="18"
-								rx="5"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								fill-rule="evenodd"
-								clip-rule="evenodd"
-								d="M17 8.50078V14.6667C17 15.0971 16.7246 15.4792 16.3162 15.6154L12.3162 16.9487C12.111 17.0171 11.889 17.0171 11.6838 16.9487L7.68377 15.6154C7.27543 15.4792 7 15.0971 7 14.6667V8.50078C7 8.17933 7.15452 7.87748 7.41529 7.68953C7.67606 7.50158 8.01128 7.45044 8.31623 7.55209L11.6838 8.67461C11.889 8.74303 12.111 8.74303 12.3162 8.67461L15.6838 7.55209C15.9887 7.45044 16.3239 7.50158 16.5847 7.68953C16.8455 7.87748 17 8.17933 17 8.50078Z"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M12 8.72507V17"
-								stroke="black"
-								stroke-opacity="0.65"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-						<span class="menuBtnTxt">Blogs</span>
-					</button>
-					<button class="menuBtnWrap" on:click={gotoPolicies}>
-						<img class="icon" src="/assets/icons/policy-icon-black.svg" alt="" />
-						<span class="menuBtnTxt">Terms & Policies</span>
-					</button>
-					<button class="menuBtnWrap" on:click={openAboutUsPopup}>
-						<img class="icon" src="/assets/icons/policy-icon-black.svg" alt="" />
-						<span class="menuBtnTxt">About Us</span>
 					</button>
 					<button class="menuBtnWrap" on:click={openRaiseAnIssuePopup}>
 						<svg

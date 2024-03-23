@@ -853,12 +853,12 @@
 		<div class="header">
 			<div class="app-title-top">
 				<button on:click={gotoHome}><img src="/assets/icons/back-icon-black.svg" alt="" /></button>
-				<p class="app-title">ImmiGPT</p>
+				<p class="app-title">Ask Soafee</p>
 			</div>
 
 			{#if showSignUp && !showForgotPwd && !resetMailSent}
 				<p class="login-text">Create your account</p>
-				<p class="welcome-text">Enjoy benefits of ImmiGPT in seconds</p>
+				<p class="welcome-text">Enjoy benefits of Ask Soafee in seconds</p>
 			{:else if !showSignUp && !showForgotPwd && !resetMailSent}
 				<p class="login-text">Login to your account</p>
 				<p class="welcome-text">Welcome back! Please Enter your details</p>

@@ -25,9 +25,9 @@
 			<div class="landBarWidthWrap">
 				<div class="logoTitleWrap">
 					<div class="logoWrap">
-						<img width="40px" src="/assets/images/statue-liberty.jpg" alt="immigpt" />
+						<img width="40px" src="/assets/images/statue-liberty.jpg" alt="Ask Soafee" />
 					</div>
-					<div class="logoTitle">ImmiGPT</div>
+					<div class="logoTitle">Ask Soafee</div>
 				</div>
 				<div class="authBtnWrap">
 					<Button
@@ -608,10 +608,10 @@
 								</defs>
 							</svg>
 						</div>
-						<div class="logoTitle">ImmiGPT</div>
+						<div class="logoTitle">Ask Soafee</div>
 					</div>
 					<div class="footerAboutDesc">
-						Your AI Companion for Travel and Immigration - Explore, Migrate, Thrive.
+						Your AI Companion for Healthcare 
 					</div>
 				</div>
 				<div class="footerLinksWrap">
